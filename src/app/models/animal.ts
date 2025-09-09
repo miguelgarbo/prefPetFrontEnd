@@ -19,5 +19,4 @@ export class Animal {
     imagemUrl!: string;
     vacinas!: Vacina[];
     idade!: number;
-
 }
