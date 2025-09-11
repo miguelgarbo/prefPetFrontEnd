@@ -11,12 +11,14 @@ img{
 }
 
 .card{
-    width: 50vw !important;
+    width: 100%;
     border: 1px solid  rgb(192, 192, 192);
     box-shadow: 7px 7px 7px 7px rgba(0, 0, 0, 0.3);
     overflow: hidden; /* garante que nada saia do card */
 
 }
+
+
 
 .gap20{
 
@@ -61,7 +63,7 @@ flex-direction: row;
 .container-tipos{
 
     display: flex;
-    margin-left: 170px;
+    margin-left: 80px;
     gap:10px;
 }
 
@@ -82,4 +84,3 @@ flex-direction: row;
     border: 1px solid  rgb(192, 192, 192);
  
 }
-

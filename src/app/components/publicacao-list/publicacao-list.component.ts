@@ -3,10 +3,12 @@ import { Publicacao } from '../../models/publicacao';
 import { Observable } from 'rxjs';
 import { PublicacaoService } from '../../services/publicacao.service';
 import { Router } from '@angular/router';
+import { NavBarPublicacaoComponent } from "../nav-bar-publicacao/nav-bar-publicacao.component";
+import { DropdownFilterComponent } from "../dropdown-filter/dropdown-filter.component";
 
 @Component({
   selector: 'app-publicacao-list',
-  imports: [],
+  imports: [NavBarPublicacaoComponent, DropdownFilterComponent],
   templateUrl: './publicacao-list.component.html',
   styleUrl: './publicacao-list.component.scss'
 })
