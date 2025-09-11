@@ -1,5 +1,5 @@
+import { Entidade } from "./entidade";
 import { Imagem } from "./imagem";
-import { UsuarioComum } from "./usuario-comum";
 
 export class Publicacao {
     
@@ -8,5 +8,5 @@ export class Publicacao {
     descricao!: string;
     dataCriacao!: string;
     imagens!: Imagem[];
-    usuario!: UsuarioComum;
+    entidade!: Entidade;
 }

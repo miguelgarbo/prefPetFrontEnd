@@ -1,14 +1,13 @@
-import { Especie } from "./especie";
-import { UsuarioComum } from "./usuario-comum";
+import { Tutor } from "./tutor";
 import { Vacina } from "./vacina";
+
 
 export class Animal {
 
     id!: number;
     nome!: string;
     registroGeral!: string;
-    especie!: Especie;
-    usuario!: UsuarioComum;
+    especie!: string;
     castrado!: boolean;
     cor!: string;
     sexo!: string; 
@@ -18,5 +17,6 @@ export class Animal {
     naturalidade!: string;
     imagemUrl!: string;
     vacinas!: Vacina[];
+    tutor!: Tutor;
     idade!: number;
 }
