@@ -1,7 +1,47 @@
+
+<div class="row margintop">
+<div class="col-md-3"></div>
+<div class="col-md-4 gap20 ">
+
+@for (post of publicacoes; track post.id) {
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <button type="button" class="btn btn-primary">Button</button>
+
+    <div class="container-info-user">
+      <div class="container-main-info">
+
+        <img [src]="post.entidade.imagemUrlPerfil"
+     class="rounded-circle shadow-4 "
+     alt="Avatar" />
+
+     <div class="details-publicacao">
+    <p class="nomeEntidade">{{post.entidade.nome}}</p>
+    <p class="dataPublicacao">{{post.dataCriacao}}</p>
+
+     <div class="container-tipos">
+      <p class="tipoPublicacao">{{post.tipoPublicacao}}</p>
+      <p class="tipoEntidade">{{post.entidade.tipoEntidade}}</p>
+    </div>
+    </div>
+    </div>
+    
+
+    </div>
+
+      <div class="container-descricao">
+        <p class="descricaoPublicacao">{{post.descricao}}</p>
+        <div class="container-img">
+          <img class="imgPublicacao" [src]="post.imagens[0].url" alt="" srcset="">
+        </div>
+      </div>
+
+
+   
+    </div>
+    <!-- fim do card -->
   </div>
+  }
 </div>
+</div>
+
+<div class="col-md-3"></div>

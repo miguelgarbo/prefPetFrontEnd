@@ -4,7 +4,7 @@ import { Imagem } from "./imagem";
 export class Publicacao {
     
     id!: number;
-    titulo!: string;
+    tipoPublicacao!:string;
     descricao!: string;
     dataCriacao!: string;
     imagens!: Imagem[];
