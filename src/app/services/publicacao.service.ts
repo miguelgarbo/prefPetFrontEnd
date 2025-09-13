@@ -29,7 +29,7 @@ export class PublicacaoService {
   }
 
   save(publicacao:Publicacao): Observable<Publicacao>{
-    return this.http.post<Publicacao>(this.API, Publicacao)
+    return this.http.post<Publicacao>(this.API, publicacao)
   }
 
 
