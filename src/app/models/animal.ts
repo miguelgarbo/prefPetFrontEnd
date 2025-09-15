@@ -1,3 +1,4 @@
+import { AplicacaoVacina } from "./aplicacao-vacina";
 import { Tutor } from "./tutor";
 import { Vacina } from "./vacina";
 
@@ -16,7 +17,7 @@ export class Animal {
     dataNascimento!: string;
     naturalidade!: string;
     imagemUrl!: string;
-    vacinas!: Vacina[];
+    aplicacoes!: AplicacaoVacina[];
     tutor!: Tutor;
     idade!: number;
 }
