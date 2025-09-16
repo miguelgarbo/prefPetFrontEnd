@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Animal } from '../../models/animal';
+import { AnimalService } from '../../services/animal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carteira-vacinacao',
@@ -7,5 +10,12 @@ import { Component } from '@angular/core';
   styleUrl: './carteira-vacinacao.component.scss'
 })
 export class CarteiraVacinacaoComponent {
+
+  animal: Animal = new Animal();
+  animalService = inject(AnimalService) 
+  router= inject(Router)
+
+  
+
 
 }

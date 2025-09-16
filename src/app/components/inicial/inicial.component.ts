@@ -1,6 +1,7 @@
 import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { LoginComponent } from "../login/login.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicial',
@@ -19,4 +20,14 @@ export class InicialComponent {
     this.modalRef = this.modalService.open(this.modalLogin);
     // this.modalRef.close();
   }
+
+  acessarEmergencia() {
+    this.router.navigate(['/emergencia']);
+  }
+
+  buscarChip() {
+    this.router.navigate(['/buscar-chip']);
+  }
+
+  private router = inject(Router);
 }
