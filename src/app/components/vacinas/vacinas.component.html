@@ -1,0 +1,30 @@
+
+<div class="container-vacinas">
+    <h2>Vacinas</h2>
+
+   <div class="pets-carousel">
+        @for (pet of pets; track $index) {
+            <div class="pet">
+                <img [src]="pet.imagemUrl" [alt]="pet.nome">
+                <span>{{ pet.nome }}</span>
+            </div>
+        }   
+    <div>
+
+
+    <mdb-tabs class="tabs-vacinas">
+    <mdb-tab title="Aplicadas">  
+        <hr>
+    <br>
+    <br>
+    <div class="container-list">
+        <app-vacinaslist></app-vacinaslist>
+    </div></mdb-tab>
+    <mdb-tab title="Pendentes">Tab content 2</mdb-tab>
+    <mdb-tab title="Proximas Vacinas">Tab content 3</mdb-tab>
+    </mdb-tabs>
+</div>
+
+
+
+<router-outlet></router-outlet> 

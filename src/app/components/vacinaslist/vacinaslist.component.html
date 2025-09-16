@@ -1,0 +1,10 @@
+<ul class="list-group list-group-light">
+  @for (aplicacao of lista; track $index) {
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <div class="fw-bold">{{ aplicacao.vacina.nome }}</div>
+        <div class="text-muted">Data de Aplicacao: {{ aplicacao.dataAplicacao }}</div>
+      </div>
+      <span class="badge rounded-pill badge-success">Aplicada</span>
+    </li>
+  }
