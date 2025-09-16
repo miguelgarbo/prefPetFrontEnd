@@ -8,18 +8,19 @@ import { PublicacaoListComponent } from './components/publicacao-list/publicacao
 import { NavBarPublicacaoComponent } from './components/nav-bar-publicacao/nav-bar-publicacao.component';
 import { InicialComponent } from './components/inicial/inicial.component';
 import { CadastroPublicacaoComponent } from './components/cadastro-publicacao/cadastro-publicacao.component';
+import { CarteiraVacinacaoComponent } from './components/carteira-vacinacao/carteira-vacinacao.component';
 
 export const routes: Routes = [
-{path: '', redirectTo:'publicacoes', pathMatch:'full'},
+{path: '', redirectTo:'carteira-vacinacao', pathMatch:'full'},
 {path: "cadastro-publicacao", component: CadastroPublicacaoComponent},
 {path: 'publicacoes', component: PublicacaoListComponent},
 {path:'login', component: LoginComponent},
 {path:'cadastro', component: CadastroUsuarioComponent},
+{path: "carteira-vacinacao", component: CarteiraVacinacaoComponent},
 {path: 'inicial', component: InicialComponent},
 {path:'principal', component: PrincipalComponent, 
     children:[
         {path:"menu", component:MenuComponent},
     ]
 }
-
 ];
