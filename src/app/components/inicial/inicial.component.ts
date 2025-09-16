@@ -17,5 +17,6 @@ export class InicialComponent {
 
   loginNovo(){//chama o modal
     this.modalRef = this.modalService.open(this.modalLogin);
+    // this.modalRef.close();
   }
 }

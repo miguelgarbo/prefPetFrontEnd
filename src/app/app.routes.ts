@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import path from 'path';
-import { MenuComponent } from './components/menu/menu.component';
 import { LoginComponent } from './components/login/login.component';
 import { PrincipalComponent } from './components/principal/principal.component';
 import { CadastroUsuarioComponent } from './components/cadastro-usuario/cadastro-usuario.component';
@@ -8,6 +6,8 @@ import { PublicacaoListComponent } from './components/publicacao-list/publicacao
 import { NavBarPublicacaoComponent } from './components/nav-bar-publicacao/nav-bar-publicacao.component';
 import { InicialComponent } from './components/inicial/inicial.component';
 import { CadastroPublicacaoComponent } from './components/cadastro-publicacao/cadastro-publicacao.component';
+import { Nav1Component } from './components/nav1/nav1.component';
+import { Nav2Component } from './components/nav2/nav2.component';
 
 export const routes: Routes = [
 {path: '', redirectTo:'publicacoes', pathMatch:'full'},
@@ -18,7 +18,8 @@ export const routes: Routes = [
 {path: 'inicial', component: InicialComponent},
 {path:'principal', component: PrincipalComponent, 
     children:[
-        {path:"menu", component:MenuComponent},
+        {path:"nav1", component:Nav1Component},
+        {path: "nav2", component: Nav2Component}
     ]
 }
 
