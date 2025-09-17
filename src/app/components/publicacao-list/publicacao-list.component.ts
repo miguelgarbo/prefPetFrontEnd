@@ -4,11 +4,10 @@ import { Observable } from 'rxjs';
 import { PublicacaoService } from '../../services/publicacao.service';
 import { Router } from '@angular/router';
 import { NavBarPublicacaoComponent } from "../nav-bar-publicacao/nav-bar-publicacao.component";
-import { DropdownFilterComponent } from "../dropdown-filter/dropdown-filter.component";
 
 @Component({
   selector: 'app-publicacao-list',
-  imports: [NavBarPublicacaoComponent, DropdownFilterComponent],
+  imports: [NavBarPublicacaoComponent],
   templateUrl: './publicacao-list.component.html',
   styleUrl: './publicacao-list.component.scss'
 })
@@ -21,8 +20,6 @@ export class PublicacaoListComponent {
   ngOnInit(){
     this.findAll();
   }
-
-  
 
   findAll(){
     this.publicacaoService.findAll().subscribe({

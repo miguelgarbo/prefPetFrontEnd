@@ -1,0 +1,57 @@
+<div class="row topo margin">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <h2>Publicação</h2>
+    <br />
+
+   <form (ngSubmit)="salvar()">
+  <mdb-form-control class="mb-4">
+    <select
+      mdbInput
+      id="tipoPostagem"
+      class="form-select"
+      required
+      [(ngModel)]="publicacao.tipoPublicacao"
+      name="tipoPublicacao"
+    >
+      <option value="" disabled selected>Escolha o tipo da postagem</option>
+      <option value="CAMPANHA DE VACINAÇÃO">CAMPANHA DE VACINAÇÃO</option>
+      <option value="CAMPANHA DE CASTRAÇÃO">CAMPANHA DE CASTRAÇÃO</option>
+      <option value="CAMPANHA EDUCACIONAL">CAMPANHA EDUCACIONAL</option>
+      <option value="ESTUDO COM ANIMAIS">ESTUDO COM ANIMAIS</option>
+      <option value="INFORMATIVO">INFORMATIVO</option>
+      <option value="OUTROS">OUTROS</option>
+    </select>
+  </mdb-form-control>
+
+  <mdb-form-control class="mb-4">
+    <input
+      mdbInput
+      type="text"
+      id="imagemUrl"
+      class="form-control"
+      [(ngModel)]="publicacao.imagens[0].url"
+      name="imagemUrl"
+      required
+    />
+    <label mdbLabel class="form-label" for="imagemUrl">URL Imagem</label>
+  </mdb-form-control>
+
+  <mdb-form-control class="mb-4">
+    <textarea
+      mdbInput
+      id="descricao"
+      class="form-control"
+      rows="4"
+      [(ngModel)]="publicacao.descricao"
+      name="descricao"
+      required
+    ></textarea>
+    <label mdbLabel class="form-label" for="descricao">Descrição</label>
+  </mdb-form-control>
+
+  <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+  </div>
+  <div class="col-md-3"></div>
+</div>
