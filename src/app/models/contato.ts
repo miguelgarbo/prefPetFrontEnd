@@ -1,7 +1,7 @@
-export interface Contato {
+export class Contato {
   id?: number;
-  nomeOrgao: string;
-  telefone: string;
-  email: string;
+  nomeOrgao!: string;
+  telefone!: string;
+  email!: string;
   ativo?: boolean;
 }

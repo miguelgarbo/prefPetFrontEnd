@@ -1,7 +1,7 @@
 import { Contato } from './contato';
 
-export interface Emergencia {
+export class Emergencia {
   id?: number;
-  nome: string;
-  contatos?: Contato[];
+  nome!: string;
+  contatos?: Contato[] = [];
 }

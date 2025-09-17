@@ -1,5 +1,5 @@
-<h2>Emergências</h2>
 <br><br><br>
+<h2>Emergências</h2>
 <div *ngFor="let emergencia of emergencias" class="card mb-3 p-2">
   <h4>{{ emergencia.nome }}</h4>
   <ul>
@@ -8,3 +8,17 @@
     </li>
   </ul>
 </div>
+
+<h2>Adicionar Emergência</h2>
+<form (ngSubmit)="adicionarEmergencia()" #emergenciaForm="ngForm" class="mb-4">
+  <input type="text" placeholder="Nome da Emergência" name="nome" [(ngModel)]="novaEmergencia.nome" required>
+  <button type="submit">Adicionar Emergência</button>
+</form>
+
+<h2>Adicionar Contato</h2>
+<form (ngSubmit)="adicionarContato()" #contatoForm="ngForm" class="mb-4">
+  <input type="text" placeholder="Nome do Órgão" [(ngModel)]="novoContato.nomeOrgao" name="nomeOrgao" required>
+  <input type="text" placeholder="Telefone" [(ngModel)]="novoContato.telefone" name="telefone" required>
+  <input type="email" placeholder="Email" [(ngModel)]="novoContato.email" name="email" required>
+  <button type="submit">Adicionar Contato</button>
+</form>
