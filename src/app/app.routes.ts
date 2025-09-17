@@ -23,10 +23,5 @@ export const routes: Routes = [
 {path: 'inicial', component: InicialComponent},
 { path: 'emergencia', component: EmergenciaComponent },
 { path: 'buscar-chip', component: BuscarChipComponent },
-{path:'principal', component: PrincipalComponent, 
-    children:[
-        {path:"nav1", component:Nav1Component},
-        {path: "nav2", component: Nav2Component}
-    ]
-}
+{path:'principal', component: PrincipalComponent}
 ];
