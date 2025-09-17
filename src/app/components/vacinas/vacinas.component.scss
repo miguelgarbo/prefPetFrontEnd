@@ -6,7 +6,7 @@ h2{
 }
 hr {
   border: none;
-  border-top: 2px solid #706c6c;
+  border-top: 2px solid #3a3939;
   margin: 0.5rem 0 1rem 0;
   width: 100%;
 }
@@ -17,6 +17,8 @@ hr {
   overflow-x: auto;
   padding: 1rem 0;
   scroll-snap-type: x mandatory;
+  background-color: gray;
+  border-radius: 50px;
 }
 
 .pets-carousel .pet {
@@ -54,6 +56,8 @@ hr {
   height: auto;       /* altura dinâmica */
   padding: 1rem;      /* espaço interno */
   margin: 0 auto;     /* centraliza horizontalmente */
+  justify-content: center;
+  display: flex;
 
   background-color: #fff;   /* cor de fundo */
   border: 1px solid #ddd;   /* borda leve */
@@ -61,3 +65,8 @@ hr {
   box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* sombra */
 }
 
+.Tab-Apli{
+
+border-bottom: 1px solid #706c6c;
+
+}

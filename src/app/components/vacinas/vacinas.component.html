@@ -3,18 +3,19 @@
     <h2>Vacinas</h2>
 
    <div class="pets-carousel">
-        @for (pet of pets; track $index) {
+        
+        @for (pet of pets; track pet.id) {
             <div class="pet">
                 <img [src]="pet.imagemUrl" [alt]="pet.nome">
                 <span>{{ pet.nome }}</span>
             </div>
         }   
-    <div>
-
+    </div>
+        <br>
 
     <mdb-tabs class="tabs-vacinas">
-    <mdb-tab title="Aplicadas">  
-        <hr>
+    <mdb-tab  title="Aplicadas">  
+    <hr>
     <br>
     <br>
     <div class="container-list">
