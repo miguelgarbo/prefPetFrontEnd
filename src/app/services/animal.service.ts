@@ -1,8 +1,30 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Animal } from '../models/animal';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AnimalService {
-  constructor() { }
+  private apiUrl = 'http://localhost:8080/animais'; 
+
+  private http = inject(HttpClient);
+
+  findAll(): Observable<Animal[]> {
+    return this.http.get<Animal[]>(this.apiUrl);
+  }
+
+  findByTutor(tutorId: number): Observable<Animal[]> {
+    return this.http.get<Animal[]>(`${this.apiUrl}/tutor/${tutorId}`);
+  }
+
+  findByMicrochip(numeroMicrochip: string): Observable<Animal>{
+
+    return this.http.get<Animal>(this.apiUrl+"/findByMicrochip",{
+        params: {numeroMicrochip: numeroMicrochip}
+      } )
+  }
+
 }

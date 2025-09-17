@@ -1,1 +1,43 @@
-<p>buscar-chip works!</p>
+<div class="row marginTop" >
+
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h2 class="above">Buscar Por Microchip</h2>
+
+  <mdb-form-control class="mb-4">
+    <input mdbInput type="text" id="numeroMicrochip" class="form-control" [(ngModel)]="animal.numeroMicrochip"/>
+    <label mdbLabel class="form-label" for="numeroMicrochip" name="numeroMicrochip">Informe o Código do Microchip</label>
+  </mdb-form-control>
+
+  <button mdbRipple type="button" class="btn btn-primary btn-block" (click)="findByMicrochip()"
+>Procurar</button>
+
+<app-message-error [texto]="'Erro ao buscar animal !'" [mostrar]="animalEncontrado == false"></app-message-error>
+
+    </div>
+    <div class="col-md-4"></div>
+
+    
+</div>
+
+
+<div class="marginTop hiddendiv"  *ngIf="animalEncontrado">
+
+
+
+          <div class="container-info">
+          <div class="block-user">
+              <h4>Nome do Tutor: {{ tutor.nome.split(' ')[0] }}</h4>
+              <h5>Contato: {{ tutor.telefone }}</h5>
+              </div> 
+          <div class="block-animal">
+            <h4>Nome do Animal: {{animal.nome}}</h4>
+            <img [src]="animal.imagemUrl" alt="imagem animal estimação">
+          </div>    
+        </div>
+        </div>
+
+
+
+
+

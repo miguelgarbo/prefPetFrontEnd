@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Tutor } from '../../models/tutor';
 
 @Component({
   selector: 'app-nav2',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './nav2.component.scss'
 })
 export class Nav2Component {
+
+  tutor: Tutor = new Tutor;
+
+  
 
 }
