@@ -11,6 +11,10 @@ import { Nav2Component } from './components/nav2/nav2.component';
 import { CarteiraVacinacaoComponent } from './components/carteira-vacinacao/carteira-vacinacao.component';
 import { EmergenciaComponent } from './components/emergencia/emergencia.component';
 import { BuscarChipComponent } from './components/buscar-chip/buscar-chip.component';
+import { AnimalListComponent } from './components/animal-list/animal-list.component';
+import { CadastroAnimalComponent } from './components/cadastro-animal/cadastro-animal.component';
+import { AnimalDetailsComponent } from './components/animal-details/animal-details.component';
+
 
 
 export const routes: Routes = [
@@ -21,7 +25,16 @@ export const routes: Routes = [
 {path:'cadastro', component: CadastroUsuarioComponent},
 {path: "carteira-vacinacao", component: CarteiraVacinacaoComponent},
 {path: 'inicial', component: InicialComponent},
-{ path: 'emergencia', component: EmergenciaComponent },
-{ path: 'buscar-chip', component: BuscarChipComponent },
-{path:'principal', component: PrincipalComponent}
+{path:'animal', component: AnimalListComponent,
+    children:[
+        {path:"cadastro", component: CadastroAnimalComponent},
+        {path:":id", component: AnimalDetailsComponent}
+    ]
+},
+{path:'principal', component: PrincipalComponent, 
+    children:[
+        {path:"menu", component:MenuComponent},
+    ]
+}
+
 ];
