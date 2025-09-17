@@ -17,6 +17,6 @@ export class Animal {
     naturalidade!: string;
     imagemUrl!: string;
     vacinas!: Vacina[];
-    tutor!: Tutor;
+    tutor!: Tutor;  
     idade!: number;
 }
