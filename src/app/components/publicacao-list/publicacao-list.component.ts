@@ -21,8 +21,6 @@ export class PublicacaoListComponent {
     this.findAll();
   }
 
-  
-
   findAll(){
     this.publicacaoService.findAll().subscribe({
       next: (publicacoes) =>{
