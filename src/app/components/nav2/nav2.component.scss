@@ -1,5 +1,7 @@
 .navbar{
-    margin-top: 7vh;
+    margin-top: 6vh;
+    height: 14vh;
+    width: auto;
 }
 
 .me-2{
@@ -12,4 +14,14 @@
 .navbar-brand{
     display: flex;
     flex-direction: column;
+    object-fit: cover;
+}
+
+.nome{
+    font-size: medium;
+}   
+
+.active-link {
+  background-color: #000000 !important; /* amarelinho */
+  color: #ffffff !important;               /* texto preto */
 }
