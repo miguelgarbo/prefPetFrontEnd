@@ -22,8 +22,8 @@
         role="group"
         aria-label="Basic example"
       >
-        <button type="button" class="btn btn-primary" >Meus Animais</button>
-        <button type="button" class="btn btn-primary" >Vacinas</button>
+        <button type="button" class="btn btn-primary" routerLink="animal" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Meus Animais</button>
+        <button type="button" class="btn btn-primary" routerLink="vacinas" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Vacinas</button>
         <button type="button" class="btn btn-primary" routerLink="publicacoes" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Publicações</button>
         <button type="button" class="btn btn-primary" routerLink="emergencia" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Emergências</button>
         <button type="button" class="btn btn-primary" routerLink="buscar-chip" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Buscar por Microchip</button>
