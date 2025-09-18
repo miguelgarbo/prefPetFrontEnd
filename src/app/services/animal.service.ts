@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Animal } from '../models/animal';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root'  
 })
 
 export class AnimalService {
@@ -16,14 +16,13 @@ export class AnimalService {
     return this.http.get<Animal[]>(this.apiUrl+"/findAll");
   }
 
-  findByTutor(tutorId: number): Observable<Animal[]> {
-    return this.http.get<Animal[]>(`${this.apiUrl}/tutor/${tutorId}`);
-  }
+    findByTutor(tutorId: number): Observable<Animal[]> {
+      return this.http.get<Animal[]>(`${this.apiUrl}/findByTutor?tutorId=${tutorId}`);
+    }
 
   findByMicrochip(numeroMicrochip: string): Observable<Animal>{
     return this.http.get<Animal>(this.apiUrl+"/findByMicrochip",{
         params: {numeroMicrochip: numeroMicrochip}
       } )
   }
-
 }

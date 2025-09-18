@@ -4,18 +4,24 @@
     <div class="col-8 d-flex flex-column justify-content-center align-items-center animal-menu p-4">
         <h1>Meus Animais</h1>
         <div class="row g-3 w-100 my-3 animal-list">
-            <!-- @for -->
+            @for (animal of animais; track animal.id) {
             <div class="col-md-6">
                 <div class="card h-100">
                     <div class="card-body d-flex flex-row align-items-center">
-                        <img class="img-animal" src="   " alt="faisca">
-                        <div class="container-info m-3">
-                            <h5 class="card-title">Pneumoultramic | Canino</h5>
+                        <img class="img-animal" [src]="animal.imagemUrl" alt="{{ animal.nome }}">
+                        <div class="container-info m-3 d-flex flex-column">
+                            <h6 class="animal-name">{{ animal.nome }} | {{ animal.especie }}</h6>
+                            @if (animal.microchip) {
+                                <h6 class="animal-microchip">microchip: {{ animal.numeroMicrochip }}</h6>
+                            }
+                            @else {
+                                <h6 class="animal-microchip">microchip:<mark>SEM MICROCHIP</mark></h6>
+                            }
                         </div>
                     </div>
                 </div>
             </div>
-
+        }
         </div>
         <div class="button-add d-flex justify-content-end w-100">
             <button type="button" class="btn btn-outline-dark bg-white" mdbRipple rippleColor="dark">ADICIONAR</button>
