@@ -9,10 +9,9 @@ import { CommonModule, NgIf } from '@angular/common';
 })
 export class MessageErrorComponent {
 
-  @Input() texto: string = ''; // recebe o texto de erro do pai
-  @Input() mostrar: boolean = false; // controla se exibe ou não
+  @Input() texto: string = ''; 
+  @Input() mostrar: boolean = false; 
 
-  // opcional: método para fechar o erro
   fechar() {
     this.mostrar = false;
   }

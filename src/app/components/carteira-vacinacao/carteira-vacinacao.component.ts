@@ -15,6 +15,8 @@ export class CarteiraVacinacaoComponent {
   animalService = inject(AnimalService) 
   router= inject(Router)
 
+
+  
   
 
 

@@ -7,7 +7,7 @@ import { AplicacaoVacina } from '../models/aplicacao-vacina';
   providedIn: 'root'
 })
 export class AplicacaoVacinaService {
-  private apiUrl = 'http://localhost:8080/aplicacoes'; // ajuste a URL da sua API
+  private apiUrl = 'http://localhost:8080/aplicacao'; // ajuste a URL da sua API
 
   constructor(private http: HttpClient) {}
 
