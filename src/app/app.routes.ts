@@ -31,10 +31,6 @@ export const routes: Routes = [
         {path:":id", component: AnimalDetailsComponent}
     ]
 },
-{path:'principal', component: PrincipalComponent, 
-    children:[
-        {path:"menu", component:MenuComponent},
-    ]
-}
+{path:'principal', component: PrincipalComponent}
 
 ];
