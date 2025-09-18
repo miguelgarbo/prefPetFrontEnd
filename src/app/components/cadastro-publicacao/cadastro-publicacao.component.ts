@@ -10,7 +10,7 @@ import { Imagem } from '../../models/imagem';
 
 @Component({
   selector: 'app-cadastro-publicacao',
-  standalone: true, // <-- Adicione essa linha
+  standalone: true,
   imports: [FormsModule, MdbFormsModule],
   templateUrl: './cadastro-publicacao.component.html',
   styleUrl: './cadastro-publicacao.component.scss'

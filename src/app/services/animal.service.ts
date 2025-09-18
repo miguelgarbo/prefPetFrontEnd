@@ -13,7 +13,7 @@ export class AnimalService {
   private http = inject(HttpClient);
 
   findAll(): Observable<Animal[]> {
-    return this.http.get<Animal[]>(this.apiUrl);
+    return this.http.get<Animal[]>(this.apiUrl+"/findAll");
   }
 
   findByTutor(tutorId: number): Observable<Animal[]> {

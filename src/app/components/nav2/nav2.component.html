@@ -1,5 +1,5 @@
 <!-- Image and text -->
-<nav class="navbar bg-body-tertiary">
+<nav class="navbar bg-body-tertiary fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <img
@@ -9,10 +9,27 @@
         alt="MDB Logo"
         loading="lazy"
       />
-      <div>
-        <small>Paulo Kogos </small>
+      <div class="nome">
+        <small class="nome">admin </small>
         <i class="fa-solid fa-pen"></i>
       </div>
     </a>
+
+
+    <div class="opcoes mx-auto">
+      <div
+        class="d-flex justify-content-center gap-5 btn-group-lg"
+        role="group"
+        aria-label="Basic example"
+      >
+        <button type="button" class="btn btn-primary" routerLink="animal" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Meus Animais</button>
+        <button type="button" class="btn btn-primary" routerLink="vacinas" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Vacinas</button>
+        <button type="button" class="btn btn-primary" routerLink="publicacoes" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Publicações</button>
+        <button type="button" class="btn btn-primary" routerLink="emergencia" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Emergências</button>
+        <button type="button" class="btn btn-primary" routerLink="buscar-chip" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Buscar por Microchip</button>
+      </div>
+    </div>
+
+
   </div>
 </nav>
