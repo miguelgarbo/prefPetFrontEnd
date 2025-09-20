@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
 
 @Component({
@@ -8,5 +9,12 @@ import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
   styleUrl: './nav1.component.scss'
 })
 export class Nav1Component {
+
+  router = inject(Router)
+
+  notificacoesTela(){
+        this.router.navigate(['/notificacoes']);
+        console.log("TESTE")
+  }
 
 }

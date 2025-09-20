@@ -26,4 +26,8 @@ export class AnimalService {
       } )
   }
 
+  findById(id:number): Observable<Animal>{
+      return this.http.get<Animal>(this.apiUrl+"/findById/"+id)
+    }
+
 }

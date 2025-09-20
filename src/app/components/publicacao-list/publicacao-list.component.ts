@@ -16,6 +16,7 @@ export class PublicacaoListComponent {
   publicacoes: Publicacao[] = []
   router = inject(Router)
   publicacaoService =  inject(PublicacaoService)
+  id: number = 0;
 
   ngOnInit(){
     this.findAll();
@@ -32,6 +33,21 @@ export class PublicacaoListComponent {
         console.log(err)
       }
     })
+  }
+
+  findById(id:number){
+    this.publicacaoService.findById(id).subscribe({
+        
+      next(value) {
+          
+    
+        console.log("Deu Certo Fds",value)
+      },error(err) {
+        console.log(err)
+
+      },
+    })
+
   }
 
 

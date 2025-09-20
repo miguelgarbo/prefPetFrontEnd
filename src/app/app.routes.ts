@@ -16,11 +16,13 @@ import { CadastroAnimalComponent } from './components/cadastro-animal/cadastro-a
 import { AnimalDetailsComponent } from './components/animal-details/animal-details.component';
 
 import { NotificacoesComponent } from './components/notificacoes/notificacoes.component';
+import { BuscarTutorComponent } from './components/buscar-tutor/buscar-tutor.component';
 
 
 
 export const routes: Routes = [
 {path: '', redirectTo:'inicial', pathMatch:'full'},
+{path: "buscar-tutor", component: BuscarTutorComponent},
 {path: "cadastro-publicacao", component: CadastroPublicacaoComponent},
 {path: 'publicacoes', component: PublicacaoListComponent},
 {path:'login', component: LoginComponent},

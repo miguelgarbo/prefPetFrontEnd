@@ -5,7 +5,7 @@
    <div class="pets-carousel">
         
         @for (pet of pets; track pet.id) {
-            <div class="pet">
+            <div class="pet" (click)="findById(pet.id)" >
                 <img [src]="pet.imagemUrl" [alt]="pet.nome">
                 <span>{{ pet.nome }}</span>
             </div>
@@ -19,7 +19,22 @@
     <br>
     <br>
     <div class="container-list">
-        <app-vacinaslist></app-vacinaslist>
+
+        <div class="container-vacinas2">
+  <ul class="list-group list-group-light w-50">
+    @for (aplicacao of aplicacoes; track aplicacao.id) {
+      <li class="list-group-item text-center">
+        <div class="fw-bold">{{aplicacao.vacina.nome}}</div>
+        <div class="text-muted">Data de Aplicacao: {{ aplicacao.dataAplicacao }}</div>
+        <span class="badge rounded-pill badge-success mt-2">Aplicada</span>
+      </li>
+    }
+  </ul>
+</div>
+
+
+
+        <!-- <app-vacinaslist></app-vacinaslist> -->
     </div></mdb-tab>
     <mdb-tab title="Pendentes">Tab content 2</mdb-tab>
     <mdb-tab title="Proximas Vacinas">Tab content 3</mdb-tab>

@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AplicacaoVacina } from '../models/aplicacao-vacina';
+import { Animal } from '../models/animal';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,9 @@ export class AplicacaoVacinaService {
     return this.http.get<AplicacaoVacina[]>(this.apiUrl+"/findAll");
   }
 
-  findByAnimal(animalId: number): Observable<AplicacaoVacina[]> {
+  findByAnimalId(animal_id: number): Observable<AplicacaoVacina[]> {
     return this.http.get<AplicacaoVacina[]>(
-      `http://localhost:8080/animais/${animalId}/aplicacao`
-    );
+      `${this.apiUrl}/findByAnimalId/${animal_id}`);
   }
 }
+

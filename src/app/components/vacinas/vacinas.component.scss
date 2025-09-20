@@ -70,3 +70,12 @@ hr {
 border-bottom: 1px solid #706c6c;
 
 }
+
+.container-vacinas2 {
+  display: flex;
+  justify-content: center; // centraliza a lista na tela
+}
+
+.container-vacinas2 ul {
+  text-align: center; // centraliza o conteúdo de cada li
+}

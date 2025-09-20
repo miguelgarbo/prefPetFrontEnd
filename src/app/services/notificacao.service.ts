@@ -15,14 +15,18 @@ export class NotificacaoService {
 
 
   findByTutorId(id: number): Observable<Notificacao[]>{
-
    return this.http.get<Notificacao[]>(this.api+"/findByTutorId",
       {params: {id: id}})
-
   }
 
-  gerar(): Observable<String>{
-    return this.http.get<String>(this.api+"/gerar")
+  gerarConvite(iddestinario:number,idtutor: number, idanimal: number): Observable<string>{
+    return this.http.get<string>(this.api+"/gerarConvite",{
+      params: {'tutorDestinatario_id': iddestinario,'tutor_id': idtutor, 'animal_id': idanimal}
+    })
+  }
+
+  gerar(): Observable<string>{
+    return this.http.get<string>(this.api+"/gerar")
   }
 
 
