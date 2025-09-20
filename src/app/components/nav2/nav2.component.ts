@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Tutor } from '../../models/tutor';
 import { FormsModule } from "@angular/forms";
 import { Router, RouterLink } from '@angular/router';
 import { RouterModule } from '@angular/router';
-
+import { TutorService } from '../../services/tutor.service';
 
 
 @Component({
@@ -14,8 +14,26 @@ import { RouterModule } from '@angular/router';
 })
 export class Nav2Component {
 
-  tutor: Tutor = new Tutor;
+  tutor: Tutor = new Tutor();
+  tutorService = inject(TutorService)
 
+
+  findById(id:number){
+    this.tutorService.findById(id).subscribe({
+        
+      next:(value) => {
+        console.log("Pessoa Encontrada",value);
+        this.tutor = value
+
+      },error(err) {
+        console.log("Erro Ao pegar animal", err)
+      },
+    })
+  }
+
+  ngOnInit(){
+   this.findById(1)
   
+  }
 
 }

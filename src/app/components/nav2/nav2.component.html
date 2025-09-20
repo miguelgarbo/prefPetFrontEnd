@@ -3,14 +3,14 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <img
-        src="https://media.licdn.com/dms/image/v2/C4E03AQHoaorBwux8Iw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1561105114253?e=2147483647&v=beta&t=G8_RiqnCw44P4L0dL5Awsjqn4-WUi8wHLMh7C8WwTpg"
+        [src]="tutor.imagemUrlPerfil"
         class="me-2"
         height="20"
         alt="MDB Logo"
         loading="lazy"
       />
       <div class="nome">
-        <small class="nome">admin </small>
+        <small class="nome">{{tutor.nome}}</small>
         <i class="fa-solid fa-pen"></i>
       </div>
     </a>

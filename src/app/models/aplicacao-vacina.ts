@@ -1,5 +1,6 @@
 import { Animal } from "./animal";
 import { Vacina } from "./vacina";
+import { Veterinario } from "./veterinario";
 
 export class AplicacaoVacina {
 
@@ -9,5 +10,6 @@ export class AplicacaoVacina {
     numeroDose!: string
     vacina!: Vacina;
     animal!: Animal;
+    veterinario!:Veterinario;
 
 }

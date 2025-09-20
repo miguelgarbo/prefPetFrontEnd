@@ -27,7 +27,7 @@ export const routes: Routes = [
 {path: 'publicacoes', component: PublicacaoListComponent},
 {path:'login', component: LoginComponent},
 {path:'cadastro', component: CadastroUsuarioComponent},
-{path: "carteira-vacinacao", component: CarteiraVacinacaoComponent},
+{path: "carteira-vacinacao/:id", component: CarteiraVacinacaoComponent},
 {path: 'inicial', component: InicialComponent},
 {path: 'notificacoes', component: NotificacoesComponent},
 {path: 'vacinas', component: VacinasComponent},

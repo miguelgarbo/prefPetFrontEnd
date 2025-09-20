@@ -4,6 +4,7 @@ import { AnimalService } from '../../services/animal.service';
 import { Animal } from '../../models/animal';
 import { AplicacaoVacina } from '../../models/aplicacao-vacina';
 import { AplicacaoVacinaService } from '../../services/aplicacao-vacina.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vacinas',
@@ -17,7 +18,7 @@ export class VacinasComponent implements OnInit {
   animalIdCapturado: number = 0; 
   aplicacoes: AplicacaoVacina[] = [];
   aplicacaoService = inject(AplicacaoVacinaService);
-  
+  router = inject(Router)
 
 
   ngOnInit(): void {
@@ -57,5 +58,14 @@ export class VacinasComponent implements OnInit {
     })
 
   }
+
+  gerarPdf() {
+  if (this.animalIdCapturado) {
+    this.router.navigate(['/carteira-vacinacao', this.animalIdCapturado]);
+  } else {
+    alert('Selecione um animal primeiro!');
+  }
+}
+
 
 }

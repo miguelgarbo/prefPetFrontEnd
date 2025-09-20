@@ -1,22 +1,22 @@
 <div class="row marginTop">
     <div class="col-md-3">
-        <img src="https://www.patasdacasa.com.br/sites/default/files/styles/article_detail_1200/public/noticias/2023/01/microchip-rastreador-para-cachorro-quanto-custa.jpg.webp?itok=uIV4T4ha" class="fotoPerfilAnimal">
+        <img [src]="animal.imagemUrl" class="fotoPerfilAnimal">
     </div>
     <div class="col-md-3">
 
         <div class="atributo-block">
         <p class="titleAtributo">nome do animal</p>
-        <p>{{animal.nome}}Bob</p>
+        <p>{{animal.nome}}</p>
         </div>
 
         <div class="atributo-block">
         <p class="titleAtributo">registro do animal</p>
-        <p>{{animal.registroGeral}}RC1002.09324</p>
+        <p>{{animal.registroGeral}}</p>
         </div>
 
         <div class="atributo-block">
         <p class="titleAtributo">castrado</p>
-        <p>{{animal.castrado}}Sim</p>
+        <p>{{animal.castrado}}</p>
         </div>
         
 
@@ -25,17 +25,17 @@
 
          <div class="atributo-block">
         <p class="titleAtributo">espécie</p>
-        <p>{{animal.especie}}Canino</p>
+        <p>{{animal.especie}}</p>
         </div>
 
         <div class="atributo-block">
         <p class="titleAtributo">cor</p>
-        <p>{{animal.cor}}Preto</p>
+        <p>{{animal.cor}}</p>
         </div>
 
         <div class="atributo-block">
         <p class="titleAtributo">sexo</p>
-        <p>{{animal.castrado}}macho</p>
+        <p>{{animal.sexo}}</p>
         </div>
 
 
@@ -45,17 +45,17 @@
        
          <div class="atributo-block">
         <p class="titleAtributo">microchip</p>
-        <p>{{animal.microchip}}93949829</p>
+        <p>{{animal.microchip}}</p>
         </div>
 
         <div class="atributo-block">
         <p class="titleAtributo">data nascimento</p>
-        <p>{{animal.dataNascimento}}12/09/2020</p>
+        <p>{{animal.dataNascimento}}</p>
         </div>
 
         <div class="atributo-block">
         <p class="titleAtributo">naturalidade</p>
-        <p>{{animal.castrado}}São Paulo - SP</p>
+        <p>{{animal.naturalidade}}</p>
         </div>
 
     </div>
@@ -66,7 +66,7 @@
     <div class="col-md-3">
         <div class="atributo-block">
                 <p class="titleAtributo">nome do tutor</p>
-                <p>Lorem Ipsum Ipsum</p>
+                <p>{{animal.tutor.nome}}</p>
          </div>
 
 
@@ -75,21 +75,21 @@
 
          <div class="atributo-block">
                 <p class="titleAtributo">cpf</p>
-                <p>123.456.78-01</p>
+                <p>{{animal.tutor.cpf}}</p>
          </div>
     </div>
     <div class="col-md-3">
 
         <div class="atributo-block">
                 <p class="titleAtributo">contato</p>
-                <p>45 99999-9999</p>
+                <p>{{animal.tutor.telefone}}</p>
          </div>
     </div>
     <div class="col-md-3">
 
          <div class="atributo-block">
                 <p class="titleAtributo">local</p>
-                <p>São Paulo</p>
+                <p>{{animal.tutor.cidade}}</p>
          </div>
     </div>
 
@@ -102,13 +102,14 @@
         </div>
 </div>
 
+@for (aplicacao of aplicacoes; track aplicacao.id) {
 <div class="row topo card-vacina">
 
         <div class="col-md-4">
 
             <div class="atributo-block">
                 <p class="titleAtributo">nome da vacina</p>
-                <p>V10</p>
+                <p>{{aplicacao.vacina.nome}}</p>
          </div>
         
         </div>
@@ -117,7 +118,7 @@
 
              <div class="atributo-block">
                 <p class="titleAtributo">veterinário</p>
-                <p>Lorem Ipsum Ipsum</p>
+                <p>{{aplicacao.veterinario.nome}}</p>
          </div>
             
         </div>
@@ -125,7 +126,7 @@
 
              <div class="atributo-block">
                 <p class="titleAtributo">dose</p>
-                <p>1 º</p>
+                <p>{{aplicacao.numeroDose}}º</p>
          </div>
         </div>
 
@@ -133,7 +134,7 @@
         <div class="col-md-4">
              <div class="atributo-block">
                 <p class="titleAtributo">data de aplicação</p>
-                <p>15/09/2025</p>
+                <p>{{aplicacao.dataAplicacao}}</p>
          </div>
 
         </div>
@@ -142,10 +143,11 @@
 
             <div class="atributo-block">
                 <p class="titleAtributo">data de validade</p>
-                <p>15/09/2027</p>
+                <p>{{aplicacao.dataValidade}}</p>
          </div>
         </div>        
 </div>
+}
 
 
 

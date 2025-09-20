@@ -12,6 +12,7 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { TutorService } from '../../services/tutor.service';
 import { Tutor } from '../../models/tutor';
 
+
 @Component({
   selector: 'app-login',
   imports: [MdbFormsModule, FormsModule],
@@ -21,8 +22,7 @@ import { Tutor } from '../../models/tutor';
 export class LoginComponent {
   modalService = inject(MdbModalService);
   tutorService = inject(TutorService);
-  public current_user: Tutor = new Tutor(); 
-
+  public current_user: Tutor = new Tutor();
 
   @ViewChild('modalLogin') modalLogin!: TemplateRef<any>;
   modalRef!: MdbModalRef<any>;
@@ -42,7 +42,6 @@ export class LoginComponent {
               
                 console.log("Opa Achei: ",userLogado)
                 this.current_user = userLogado;
-
               },error:(err)=>{
                 console.error(err)
 
