@@ -20,16 +20,26 @@ export class VacinasComponent implements OnInit {
   aplicacaoService = inject(AplicacaoVacinaService);
   router = inject(Router)
 
-
-  ngOnInit(): void {
-    this.animalService.findAll().subscribe({
-      next: animais => {
-        console.log(animais)
-        this.pets = animais
-      },
-      error: (e) => console.log(e)
-    });
+ ngOnInit(){
+   this.findAnimaisByTutorId();
   }
+
+  findAnimaisByTutorId(){
+
+    this.animalService.findByTutorId(2).subscribe({
+
+      next: (animais) =>{
+          console.log("Animais Do tutor: ",animais)
+          this.pets = animais
+      },
+      error:(err)=> {
+          console.error(err)
+      }
+    })
+  }
+
+  
+
 
  findById(id:number){
     this.animalService.findById(id).subscribe({

@@ -1,3 +1,4 @@
+import { Animal } from "./animal";
 import { Tutor } from "./tutor";
 
 export class Notificacao {
@@ -5,5 +6,7 @@ export class Notificacao {
     id!: number;
     texto!: string;
     nivel!: number;
-    tutor!: Tutor;
-}
+    tutorDestinatario!: Tutor;  
+    tutorRemetente?: Tutor;     
+    animal?:Animal;       
+}     

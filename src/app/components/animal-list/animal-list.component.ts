@@ -21,7 +21,7 @@ export class AnimalListComponent {
   }
 
   findByTutor() {
-    this.animalService.findByTutor(1).subscribe({
+    this.animalService.findByTutorId(2).subscribe({
       next: (dados) => {
         this.animais = dados;
       },

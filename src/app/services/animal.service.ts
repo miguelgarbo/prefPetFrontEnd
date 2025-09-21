@@ -16,9 +16,10 @@ export class AnimalService {
     return this.http.get<Animal[]>(this.apiUrl+"/findAll");
   }
 
-    findByTutor(tutorId: number): Observable<Animal[]> {
-      return this.http.get<Animal[]>(`${this.apiUrl}/findByTutor?tutorId=${tutorId}`);
-    }
+    findByTutorId(tutorId: number): Observable<Animal[]> {
+  return this.http.get<Animal[]>(`${this.apiUrl}/findByTutorId/${tutorId}`);
+}
+
 
   findByMicrochip(numeroMicrochip: string): Observable<Animal>{
     return this.http.get<Animal>(this.apiUrl+"/findByMicrochip",{
@@ -29,5 +30,6 @@ export class AnimalService {
   findById(id:number): Observable<Animal>{
       return this.http.get<Animal>(this.apiUrl+"/findById/"+id)
     }
+
 
 }

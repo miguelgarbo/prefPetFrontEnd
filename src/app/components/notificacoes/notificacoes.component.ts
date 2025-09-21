@@ -23,17 +23,14 @@ export class NotificacoesComponent {
   }
 
   buscarNotificacoesUsuario(){
-    this.notificacaoService.findByTutorId(1).subscribe({
+    this.notificacaoService.findByTutorId(2).subscribe({
       next: (notificacoes) =>{
         console.log(notificacoes)
         this.notificacoes= notificacoes;
       },
       error: (err) =>{
-
         console.log("Erro ao Buscar Notificacoes", err)
       }
-
-
     })
 
   }
