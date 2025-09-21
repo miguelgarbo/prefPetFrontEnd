@@ -8,8 +8,6 @@ import { Tutor } from '../../models/tutor';
 import { MessageErrorComponent } from "../message-error/message-error.component";
 import { CommonModule, NgIf } from '@angular/common';
 
-
-
 @Component({
   selector: 'app-buscar-chip',
   imports: [FormsModule, MdbFormsModule, MessageErrorComponent, CommonModule],
@@ -31,8 +29,7 @@ animalEncontrado: boolean | null = null;
 
       next: (animal)=>{
 
-         console.log("Animal encontrado:", animal);
-
+        console.log("Animal encontrado:", animal);
          this.animalEncontrado = true
          this.animal = animal;
          this.tutor = animal.tutor;

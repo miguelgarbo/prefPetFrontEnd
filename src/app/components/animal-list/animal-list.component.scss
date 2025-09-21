@@ -1,0 +1,34 @@
+.animal-menu{
+    box-shadow: 10vh 10vh 0vh 0vh rgba(118,181,129,0.75);
+    -webkit-box-shadow: 10vh 10vh 0vh 0vh rgba(118,181,129,0.75);
+    -moz-box-shadow: 10vh 10vh 0vh 0vh rgba(118,181,129,0.75);
+    background-color: #daf0db;
+    margin-bottom: 20vh;
+}
+
+.img-animal{
+    width: 10vh;
+    aspect-ratio: 1 / 1;
+    background-size: cover;
+    object-fit: cover;      
+}
+
+.animal-list{
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+
+mark {
+  background-color: transparent; /* remove o amarelo padrão */
+  color: red; /* deixa o texto em vermelho */
+  font-weight: bold; /* opcional, para destacar */
+}
+
+.row{
+    margin-top: 14vh;
+}
+
+.card:hover{
+    cursor: pointer;
+}
+

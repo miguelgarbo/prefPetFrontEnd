@@ -8,23 +8,34 @@ import { Animal } from '../models/animal';
 })
 
 export class AnimalService {
-  private apiUrl = 'http://localhost:8080/animais'; 
+  private apiUrl = 'http://localhost:8080/animais';
 
   private http = inject(HttpClient);
 
   findAll(): Observable<Animal[]> {
-    return this.http.get<Animal[]>(this.apiUrl);
+    return this.http.get<Animal[]>(this.apiUrl + "/findAll");
   }
 
-  findByTutor(tutorId: number): Observable<Animal[]> {
-    return this.http.get<Animal[]>(`${this.apiUrl}/tutor/${tutorId}`);
-  }
+    findByTutorId(tutorId: number): Observable<Animal[]> {
+  return this.http.get<Animal[]>(`${this.apiUrl}/findByTutorId/${tutorId}`);
+}
+
 
   findByMicrochip(numeroMicrochip: string): Observable<Animal>{
-
     return this.http.get<Animal>(this.apiUrl+"/findByMicrochip",{
         params: {numeroMicrochip: numeroMicrochip}
-      } )
+      } )}
+
+    findById(id: number): Observable<Animal> {
+      return this.http.get<Animal>(`${this.apiUrl}/findById/${id}`)
+    }
+
+  findByTutor(tutorId: number): Observable<Animal[]> {
+    return this.http.get<Animal[]>(`${this.apiUrl}/findByTutor?tutorId=${tutorId}`);
   }
 
+
+  save(animal: Partial<Animal>): Observable<Animal> {
+    return this.http.post<Animal>(`${this.apiUrl}/save`, animal);
+  }
 }

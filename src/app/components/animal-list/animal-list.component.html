@@ -1,0 +1,129 @@
+btn-close<div class="row">
+  <div class="col"></div>
+
+  <div class="col-8 d-flex flex-column justify-content-center align-items-center animal-menu p-4">
+    <h1>Meus Animais</h1>
+
+    <div class="row g-3 w-100 my-3 animal-list">
+      @for (animal of animais; track animal.id) {
+      <div class="col-md-6">
+        <div class="card h-100" (click)="findById(animal.id)">
+          <div class="card-body d-flex flex-row align-items-center">
+            <img class="img-animal" [src]="animal.imagemUrl" alt="{{ animal.nome }}">
+            <div class="container-info m-3 d-flex flex-column">
+              <h6 class="animal-name">{{ animal.nome }} | {{ animal.especie }}</h6>
+              @if (animal.microchip) {
+              <h6 class="animal-microchip">microchip: {{ animal.numeroMicrochip }}</h6>
+              }
+              @else {
+              <h6 class="animal-microchip">microchip:<mark>SEM MICROCHIP</mark></h6>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    <div class="button-add d-flex justify-content-end w-100">
+      <button type="button" class="btn btn-outline-dark bg-white" (click)="openModal(addAnimalModal)">
+        ADICIONAR
+      </button>
+
+    </div>
+  </div>
+
+  <div class="col"></div>
+</div>
+
+<!-- Modal para adicionar animal -->
+<ng-template #addAnimalModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Adicionar Animal</h5>
+    <button type="button" class="btn-close" (click)="closeModal()"></button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="save()" #animalForm="ngForm">
+      <div class="row g-3">
+
+
+        <div class="col-md-6">
+          <label class="form-label">Nome</label>
+          <input type="text" class="form-control" name="nome" [(ngModel)]="novoAnimal.nome" required>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Espécie</label>
+          <select class="form-select" name="especie" [(ngModel)]="novoAnimal.especie" required>
+            <option value="">Selecione</option>
+            <option value="Canino">Canino</option>
+            <option value="Felino">Felino</option>
+          </select>
+        </div>
+
+
+        <div class="col-md-6">
+          <label class="form-label">Registro Geral</label>
+          <input type="text" class="form-control" name="registroGeral" [(ngModel)]="novoAnimal.registroGeral" required>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Cor</label>
+          <input type="text" class="form-control" name="cor" [(ngModel)]="novoAnimal.cor" required>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Sexo</label>
+          <select class="form-select" name="sexo" [(ngModel)]="novoAnimal.sexo" required>
+            <option value="">Selecione</option>
+            <option value="Macho">Macho</option>
+            <option value="Fêmea">Fêmea</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Castrado</label>
+          <select class="form-select" name="castrado" [(ngModel)]="novoAnimal.castrado" required>
+            <option value="">Selecione</option>
+            <option [ngValue]="true">Sim</option>
+            <option [ngValue]="false">Não</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Microchip</label>
+          <select class="form-select" name="microchip" [(ngModel)]="novoAnimal.microchip">
+            <option [ngValue]="null">Não informado</option>
+            <option [ngValue]="true">Sim</option>
+            <option [ngValue]="false">Não</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Número do Microchip</label>
+          <input type="text" class="form-control" name="numeroMicrochip" [(ngModel)]="novoAnimal.numeroMicrochip">
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Data de Nascimento</label>
+          <input type="date" class="form-control" name="dataNascimento" [(ngModel)]="novoAnimal.dataNascimento"
+            required>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Naturalidade</label>
+          <input type="text" class="form-control" name="naturalidade" [(ngModel)]="novoAnimal.naturalidade" required>
+        </div>
+
+        <div class="col-md-12">
+          <label class="form-label">Imagem (URL)</label>
+          <input type="text" class="form-control" name="imagemUrl" [(ngModel)]="novoAnimal.imagemUrl">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!animalForm.valid">Salvar</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

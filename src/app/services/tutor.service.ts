@@ -31,9 +31,9 @@ export class TutorService {
     return this.http.post<Tutor>(this.API, tutor)
   }
 
-  findByNome(nome:string): Observable<Tutor[]>{
+  findByNome(nome:string): Observable<Tutor>{
 
-    return this.http.get<Tutor[]>(`${this.API}/findByNome`, 
+    return this.http.get<Tutor>(`${this.API}/findByNome`, 
       { params: { nome: nome } });
   }
 
@@ -42,8 +42,8 @@ export class TutorService {
       { params: { cpf: cpf } });
   }
 
-  findByEmail(email:string): Observable<Tutor[]>{
-    return this.http.get<Tutor[]>(this.API, {
+  findByEmail(email:string): Observable<Tutor>{
+    return this.http.get<Tutor>(this.API+"/findByEmail", {
       params: {email: email}
     })
   }
@@ -60,6 +60,13 @@ export class TutorService {
 
     return this.http.get<Tutor[]>(this.API,{
       params: {cnpj: cnpj}
+    })
+  }
+
+  login(email: string, password: string): Observable<Boolean>{
+
+    return this.http.get<Boolean>(this.API+"/login", {
+      params: {email: email, senha: password}
     })
   }
 

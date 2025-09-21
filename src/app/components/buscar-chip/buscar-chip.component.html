@@ -19,17 +19,13 @@
 
     
 </div>
-
-
 <div class="marginTop hiddendiv"  *ngIf="animalEncontrado">
-
-
-
           <div class="container-info">
           <div class="block-user">
               <h4>Nome do Tutor: {{ tutor.nome.split(' ')[0] }}</h4>
               <h5>Contato: {{ tutor.telefone }}</h5>
               </div> 
+              
           <div class="block-animal">
             <h4>Nome do Animal: {{animal.nome}}</h4>
             <img [src]="animal.imagemUrl" alt="imagem animal estimação">

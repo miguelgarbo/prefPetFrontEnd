@@ -1,0 +1,46 @@
+
+@if (notificacao.nivel == 1) {
+<div class="alert alert-primary" role="alert">
+  {{notificacao.texto}}
+    <!-- <i  (click)="fechar()" class="fa-regular fa-circle-xmark close cursor"></i> -->
+</div>
+}
+
+@if (notificacao.nivel == 2) {
+<div class="alert alert-warning" role="alert">
+  {{notificacao.texto}}
+    <!-- <i  (click)="fechar()" class="fa-regular fa-circle-xmark close cursor"></i> -->
+</div>
+}
+
+@if (notificacao.nivel == 3) {
+<div class="alert alert-danger" role="alert">
+  {{notificacao.texto}}
+    <!-- <i  (click)="fechar()" class="fa-regular fa-circle-xmark close cursor"></i> -->
+</div>
+}
+
+@if (notificacao.nivel == 4) {
+<div class="alert alert-success" role="alert">
+  {{notificacao.texto}}
+</div>
+}
+
+
+@if (notificacao.nivel == 1 && notificacao.tutorRemetente != null) {
+<div class="alert alert-primary" role="alert">
+  {{notificacao.texto}}
+     <button class="accept" [disabled]="isButtonDisabled" (click)="aceitarConvite()">
+      <i class="fa-solid fa-check"></i>
+    </button>
+</div>
+}
+
+
+
+
+
+
+
+
+
