@@ -12,12 +12,14 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { TutorService } from '../../services/tutor.service';
 import { Tutor } from '../../models/tutor';
 
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [MdbFormsModule, FormsModule],
+  standalone: true,
+  imports: [MdbFormsModule, FormsModule, RouterModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   modalService = inject(MdbModalService);
@@ -31,6 +33,7 @@ export class LoginComponent {
   senha!: string;
 
   router = inject(Router);
+  // modalRef = inject(MdbModalRef<CadastroUsuarioComponent>); fechar modal
 
   login(){
     this.tutorService.login(this.usuario, this.senha).subscribe({
@@ -70,5 +73,9 @@ export class LoginComponent {
     } else {
       alert('USUÁRIO E/OU SENHA INCORRETOS!!!');
     }
+  }
+
+  cadastrarRota(){
+    this.router.navigate(['cadastro-usuario']);
   }
 }

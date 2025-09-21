@@ -34,6 +34,7 @@ export const routes: Routes = [
 {path:'principal', component: PrincipalComponent},
 {path: 'buscar-chip', component: BuscarChipComponent} ,
 {path: 'emergencia', component: EmergenciaComponent},
+{path: 'cadastro-usuario', component: CadastroUsuarioComponent},
 {path:'animal', component: AnimalListComponent,
     children:[
         {path:"cadastro", component: CadastroAnimalComponent},
