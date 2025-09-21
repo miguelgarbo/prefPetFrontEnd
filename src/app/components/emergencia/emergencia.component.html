@@ -1,23 +1,96 @@
-<h2 class="marginTop">Emergências</h2>
+<br><br><br>
+<h2>Emergências</h2>
 <div *ngFor="let emergencia of emergencias" class="card mb-3 p-2">
   <h4>{{ emergencia.nome }}</h4>
-  <ul>
+  <ul class="list-unstyled mb-0">
     <li *ngFor="let contato of emergencia.contatos">
-      {{ contato.nomeOrgao }} - Tel: {{ contato.telefone }} - Email: {{ contato.email }}
+      <strong>{{ contato.nomeOrgao }}</strong> - Tel: {{ contato.telefone }} - Email: {{ contato.email }}
     </li>
   </ul>
 </div>
 
-<h2>Adicionar Emergência</h2>
-<form (ngSubmit)="adicionarEmergencia()" #emergenciaForm="ngForm" class="mb-4">
-  <input type="text" placeholder="Nome da Emergência" name="nome" [(ngModel)]="novaEmergencia.nome" required>
-  <button type="submit">Adicionar Emergência</button>
-</form>
+<div class="form-container d-flex gap-4 mt-4">
+  <!-- Formulário de Adicionar Emergência -->
+  <div class="card p-3 flex-fill shadow-sm">
+    <h3 class="mb-3">Adicionar Emergência</h3>
+    <form (ngSubmit)="adicionarEmergencia()" #emergenciaForm="ngForm">
 
-<h2>Adicionar Contato</h2>
-<form (ngSubmit)="adicionarContato()" #contatoForm="ngForm" class="mb-4">
-  <input type="text" placeholder="Nome do Órgão" [(ngModel)]="novoContato.nomeOrgao" name="nomeOrgao" required>
-  <input type="text" placeholder="Telefone" [(ngModel)]="novoContato.telefone" name="telefone" required>
-  <input type="email" placeholder="Email" [(ngModel)]="novoContato.email" name="email" required>
-  <button type="submit">Adicionar Contato</button>
-</form>
+      <!-- Nome da Emergência -->
+      <div class="form-group mb-3">
+        <input type="text" 
+               placeholder="Nome da Emergência" 
+               name="nome" 
+               [(ngModel)]="novaEmergencia.nome" 
+               required
+               class="form-control">
+      </div>
+
+      <!-- Botão para mostrar/ocultar contatos -->
+      <div class="form-group mb-3">
+        <button type="button" class="btn btn-secondary w-100" (click)="mostrarContatos = !mostrarContatos">
+          {{ mostrarContatos ? 'Esconder Contatos' : 'Selecionar Contatos' }}
+        </button>
+      </div>
+
+      <!-- Dropdown de contatos -->
+      <div *ngIf="mostrarContatos" class="form-group mb-3">
+        <select multiple [(ngModel)]="contatosSelecionadosIds" name="contatos" class="form-control">
+          <option *ngFor="let contato of todosContatos" [value]="contato.id">
+            {{ contato.nomeOrgao }} - {{ contato.telefone }}
+          </option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Adicionar Emergência</button>
+
+      <!-- Botão de exclusão (apenas visual) -->
+      <button type="button" class="btn btn-danger w-100 mt-2">
+        Excluir Emergência
+      </button>
+    </form>
+  </div>
+
+  <!-- Formulário de Adicionar Contato -->
+  <div class="card p-3 flex-fill shadow-sm">
+    <h3 class="mb-3">Adicionar Contato</h3>
+    <form (ngSubmit)="adicionarContato()" #contatoForm="ngForm">
+
+      <div class="form-group mb-3">
+        <input type="text" 
+               placeholder="Nome do Órgão" 
+               name="nomeOrgao" 
+               [(ngModel)]="novoContato.nomeOrgao" 
+               required
+               class="form-control">
+      </div>
+
+      <div class="form-group mb-3">
+        <input type="text" 
+               placeholder="Telefone" 
+               name="telefone" 
+               [(ngModel)]="novoContato.telefone" 
+               pattern="^\+?\d{10,15}$" 
+               required
+               class="form-control">
+      </div>
+
+      <div class="form-group mb-3">
+        <input type="email" 
+               placeholder="Email" 
+               name="email" 
+               [(ngModel)]="novoContato.email" 
+               required
+               class="form-control">
+      </div>
+
+      <button type="submit" class="btn btn-success w-100" [disabled]="!contatoForm.form.valid">
+        Adicionar Contato
+      </button>
+
+      <!-- Botão de exclusão (apenas visual) -->
+      <button type="button" class="btn btn-danger w-100 mt-2">
+        Excluir Contato
+      </button>
+    </form>
+  </div>
+</div>
