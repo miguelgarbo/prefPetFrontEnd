@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { error } from 'console';
 import { ContatoService } from '../../services/contato.service';
+import { Contato } from '../../models/contato';
 
 @Component({
   selector: 'app-emergencia',
@@ -19,6 +20,9 @@ export class EmergenciaComponent implements OnInit {
   novaEmergencia = { nome: '' };
   novoContato = { nomeOrgao: '', telefone: '', email: '', ativo: true };
   contatoSelecionado = { emergenciaId: null };
+  todosContatos: Contato[] =[];
+  contatosSelecionadosIds: number[] = [];
+  mostrarContatos = false;
 
   constructor(
     private emergenciaService: EmergenciaService, 
@@ -26,7 +30,10 @@ export class EmergenciaComponent implements OnInit {
 
   ngOnInit(): void {
     this.listarEmergencias();
+    this.listarContato();
   }
+
+
 
   listarEmergencias() {
     this.emergenciaService.findAll().subscribe({
@@ -34,28 +41,54 @@ export class EmergenciaComponent implements OnInit {
       error: (err) => console.error('Erro ao carregar emergências', err)
     });
   }
-
-  adicionarEmergencia(){
-    this.emergenciaService.save(this.novaEmergencia).subscribe({
-      next: (data) => {
-        this.emergencias.push(data);
-        this.novaEmergencia = { nome: '' };
-       console.log('Emergência adicionada com sucesso!', data);}
-      }
-    )
+  listarContato(){
+    this.contatoService.findAll().subscribe({
+      next: (data) => this.todosContatos = data,
+      error: (err) => console.error('Erro ao carregar os contatos', err)
+    });
   }
 
-  adicionarContato() {
-  const contato = { ...this.novoContato }; // apenas o contato em si
-  this.contatoService.save(contato).subscribe({
-    next: (data) => {
-      console.log('Contato adicionado com sucesso!', data);
 
-      // limpa os campos do formulário
-      this.novoContato = { nomeOrgao: '', telefone: '', email: '', ativo: true };
-    },
-    error: (err) => console.error('Erro ao adicionar contato', err)
-  });
+
+  adicionarEmergencia(): void {
+    const emergenciaParaSalvar = {
+      nome: this.novaEmergencia.nome,
+      contatos: this.contatosSelecionadosIds.map(id => ({ id } as Contato))
+    } as Emergencia;
+
+    this.emergenciaService.save(emergenciaParaSalvar).subscribe({
+      next: () => {
+        this.listarEmergencias();
+        this.novaEmergencia.nome = '';
+        this.contatosSelecionadosIds = [];
+      },
+      error: err => console.error('Erro ao salvar emergência', err)
+    });
+  }
+
+  adicionarContato(): void {
+
+    const c = this.novoContato;
+    if (!c.nomeOrgao?.trim() || !c.telefone?.trim() || !c.email?.trim()) {
+    console.warn("Preencha todos os campos corretamente");
+    return;
+  }
+  
+    console.log("Enviando contato:", JSON.stringify(c));
+    this.contatoService.save(c).subscribe({
+      next: (res) => {
+        console.log('Contato salvo com sucesso:', res);
+        this.listarContato(); // já aproveita sua função existente
+        this.novoContato = { nomeOrgao: '', telefone: '', email: '', ativo: true}; // limpa form
+      },
+      error: (err) => console.error('Erro ao salvar contato', err)
+    });
+  }
 }
 
-}
+  
+
+
+
+
+

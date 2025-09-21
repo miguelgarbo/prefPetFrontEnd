@@ -7,15 +7,16 @@ import { Contato } from '../models/contato';
   providedIn: 'root'
 })
 export class ContatoService {
+
   private apiUrl = 'http://localhost:8080/contatos'; // ajuste se necessário
 
   constructor(private http: HttpClient) {}
 
-  save(contato: Contato): Observable<Contato> {
-    return this.http.post<Contato>(this.apiUrl, contato);
+  findAll(): Observable<Contato[]> {
+    return this.http.get<Contato[]>(`${this.apiUrl}/findAll`);
   }
 
-  findAll(): Observable<Contato[]> {
-    return this.http.get<Contato[]>(this.apiUrl);
-  }
+  save(contato: Contato): Observable<Contato> {
+    return this.http.post<Contato>(`${this.apiUrl}/save`, contato);
+  } 
 }
