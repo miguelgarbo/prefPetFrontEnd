@@ -26,7 +26,7 @@ export class VacinasComponent implements OnInit {
 
   findAnimaisByTutorId(){
 
-    this.animalService.findByTutorId(2).subscribe({
+    this.animalService.findByTutorId(1).subscribe({
 
       next: (animais) =>{
           console.log("Animais Do tutor: ",animais)

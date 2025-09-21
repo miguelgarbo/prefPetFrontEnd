@@ -28,13 +28,17 @@
 
         <div class="container-vacinas2">
   <ul class="list-group list-group-light w-50">
-    @for (aplicacao of aplicacoes; track aplicacao.id) {
-      <li class="list-group-item text-center">
-        <div class="fw-bold">{{aplicacao.vacina.nome}}</div>
-        <div class="text-muted">Data de Aplicacao: {{ aplicacao.dataAplicacao }}</div>
-        <span class="badge rounded-pill badge-success mt-2">Aplicada</span>
-      </li>
-    }
+  @if (aplicacoes.length === 0) {
+  <h2>Não Possui Aplicações De Vacinas Cadastradas</h2>
+} @else {
+  @for (aplicacao of aplicacoes; track aplicacao.id) {
+    <li class="list-group-item text-center">
+      <div class="fw-bold">{{ aplicacao.vacina.nome }}</div>
+      <div class="text-muted">Data de Aplicacao: {{ aplicacao.dataAplicacao }}</div>
+      <span class="badge rounded-pill badge-success mt-2">Aplicada</span>
+    </li>
+  }
+}
   </ul>
 </div>
 

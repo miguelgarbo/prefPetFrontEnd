@@ -62,7 +62,7 @@ export class AnimalListComponent implements OnInit {
   }
 
   findByTutor() {
-    this.animalService.findByTutorId(2).subscribe({
+    this.animalService.findByTutorId(1).subscribe({
       next: (dados) => {
         this.animais = dados;
       },
