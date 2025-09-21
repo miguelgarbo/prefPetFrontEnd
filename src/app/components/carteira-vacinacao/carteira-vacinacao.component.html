@@ -102,6 +102,16 @@
         </div>
 </div>
 
+
+@if (aplicacoes.length === 0) {
+
+    <div class="row topo card-vacina">
+
+<h4>Não Possui Aplicação De Vacina Cadastrada</h4>
+</div>
+
+}@else {
+
 @for (aplicacao of aplicacoes; track aplicacao.id) {
 <div class="row topo card-vacina">
 
@@ -148,6 +158,6 @@
         </div>        
 </div>
 }
-
+}
 
 

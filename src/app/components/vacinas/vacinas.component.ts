@@ -31,6 +31,11 @@ export class VacinasComponent implements OnInit {
       next: (animais) =>{
           console.log("Animais Do tutor: ",animais)
           this.pets = animais
+          
+          if (this.pets.length > 0) {
+        this.findById(this.pets[0].id);
+      }
+          
       },
       error:(err)=> {
           console.error(err)
@@ -43,7 +48,6 @@ export class VacinasComponent implements OnInit {
 
  findById(id:number){
     this.animalService.findById(id).subscribe({
-        
       next:(value) => {
         console.log("Aqui o Animal Selecionado",value);
         this.animalIdCapturado = value.id;

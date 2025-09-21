@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { TutorService } from '../../services/tutor.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-animal-list',
@@ -27,6 +28,7 @@ export class AnimalListComponent implements OnInit {
   animalService = inject(AnimalService);
   tutorService = inject(TutorService);
   modalService = inject(MdbModalService)
+  router = inject(Router)
 
   tutor?: Tutor
   animais: Animal[] = [];
@@ -84,6 +86,15 @@ export class AnimalListComponent implements OnInit {
     });
   }
 
+  transferirTutela(){
+     if (this.animald) {
+    this.router.navigate(['buscar-tutor', this.animald.id])
+
+  } else {
+    alert('Selecione um animal primeiro!');
+  }
+  }
+
   save() {
     this.animalParaSalvar = {
       id: undefined!,
@@ -107,10 +118,8 @@ export class AnimalListComponent implements OnInit {
       next: (animalSalvo) => {
         console.log("Animal salvo com sucesso:", animalSalvo);
 
-        // Atualiza lista de animais do tutor
         this.findByTutor();
 
-        // Fecha o modal
         if (this.modalRef) {
           this.modalRef.close();
         }

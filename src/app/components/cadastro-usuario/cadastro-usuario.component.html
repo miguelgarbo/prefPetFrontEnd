@@ -4,59 +4,99 @@
     <div class="col-lg-4 centralizar marginTop">
       <div class="card">
         <div class="card-body">
-          <h3>Cadastro</h3>
+          <h3>Cadastro de Tutor</h3>
           <br />
+
+          <!-- Nome -->
           <mdb-form-control>
-            <input
-              mdbInput
-              type="text"
-              id="usuario"
-              class="form-control"
-              [(ngModel)]="usuario"
-            />
-            <label mdbLabel class="form-label" for="usuario">Usuário</label>
+            <input mdbInput type="text" id="nome" class="form-control" [(ngModel)]="tutor.nome" name="nome" required/>
+            <label mdbLabel class="form-label" for="nome">Nome</label>
           </mdb-form-control>
           <br />
+
+          <!-- Telefone -->
           <mdb-form-control>
-            <input
-              mdbInput
-              type="password"
-              id="senha"
-              class="form-control"
-              [(ngModel)]="senha"
-            />
+            <input mdbInput type="text" id="telefone" class="form-control" [(ngModel)]="tutor.telefone" name="telefone" required/>
+            <label mdbLabel class="form-label" for="telefone">Telefone</label>
+          </mdb-form-control>
+          <br />
+
+          <!-- CEP -->
+          <mdb-form-control>
+            <input mdbInput type="text" id="cep" class="form-control" [(ngModel)]="tutor.cep" name="cep" (blur)="buscarCep()" required/>
+            <label mdbLabel class="form-label" for="cep">CEP</label>
+          </mdb-form-control>
+          <br />
+
+          <!-- CPF -->
+          <mdb-form-control>
+            <input mdbInput type="text" id="cpf" class="form-control" [(ngModel)]="tutor.cpf" name="cpf" required/>
+            <label mdbLabel class="form-label" for="cpf">CPF</label>
+          </mdb-form-control>
+          <br />
+
+          <!-- CNPJ (opcional)
+          <mdb-form-control>
+            <input mdbInput type="text" id="cnpj" class="form-control" [(ngModel)]="tutor.cnpj" name="cnpj"/>
+            <label mdbLabel class="form-label" for="cnpj">CNPJ (opcional)</label>
+          </mdb-form-control>
+          <br /> -->
+
+          <!-- Cidade -->
+          <mdb-form-control>
+            <input mdbInput type="text" id="cidade" class="form-control" [(ngModel)]="tutor.cidade" name="cidade" required/>
+            <label mdbLabel class="form-label" for="cidade">Cidade</label>
+          </mdb-form-control>
+          <br />
+
+          <!-- Estado -->
+          <mdb-form-control>
+            <input mdbInput type="text" id="estado" class="form-control" [(ngModel)]="tutor.estado" name="estado" required/>
+            <label mdbLabel class="form-label" for="estado">Estado</label>
+          </mdb-form-control>
+          <br />
+
+          <!-- Email -->
+          <mdb-form-control>
+            <input mdbInput type="email" id="email" class="form-control" [(ngModel)]="tutor.email" name="email" required/>
+            <label mdbLabel class="form-label" for="email">Email</label>
+          </mdb-form-control>
+          <br />
+
+          <!-- Senha -->
+          <mdb-form-control>
+            <input mdbInput type="password" id="senha" class="form-control" [(ngModel)]="tutor.senha" name="senha" required/>
             <label mdbLabel class="form-label" for="senha">Senha</label>
           </mdb-form-control>
           <br />
+
+          <!-- Confirmar senha -->
           <mdb-form-control>
-            <input
-              mdbInput
-              type="password"
-              id="senha2"
-              class="form-control"
-              [(ngModel)]="senha2"
-            />
-            <label mdbLabel class="form-label" for="senha">Confirmar senha</label>
+            <input mdbInput type="password" id="senha2" class="form-control" [(ngModel)]="senha2" name="senha2" required/>
+            <label mdbLabel class="form-label" for="senha2">Confirmar Senha</label>
           </mdb-form-control>
           <br />
-          <button
-            type="button"
-            class="btn btn-rounded"
-            mdbRipple
-            (click)="cadastrar()"
-          >
-            cadastrar
+
+          <!-- Imagem de perfil -->
+          <mdb-form-control>
+            <input mdbInput type="text" id="imagemUrlPerfil" class="form-control" [(ngModel)]="tutor.imagemUrlPerfil" name="imagemUrlPerfil"/>
+            <label mdbLabel class="form-label" for="imagemUrlPerfil">URL da Imagem de Perfil</label>
+          </mdb-form-control>
+          <br />
+
+          <button type="button" class="btn btn-rounded" mdbRipple (click)="cadastrar()">
+            Cadastrar
           </button>
 
-          <!-- Register buttons -->
           <div class="text-center">
             <p style="margin-top: 20px">
               Já possui uma conta? <a href="#!">Entrar</a>
             </p>
           </div>
+
         </div>
       </div>
     </div>
+    <div class="col-lg-4"></div>
   </div>
-  <div class="col-lg-4"></div>
-  </div>
+</div>

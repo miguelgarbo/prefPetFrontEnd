@@ -22,7 +22,7 @@ import { BuscarTutorComponent } from './components/buscar-tutor/buscar-tutor.com
 
 export const routes: Routes = [
 {path: '', redirectTo:'inicial', pathMatch:'full'},
-{path: "buscar-tutor", component: BuscarTutorComponent},
+{path: "buscar-tutor/:id}", component: BuscarTutorComponent},
 {path: "cadastro-publicacao", component: CadastroPublicacaoComponent},
 {path: 'publicacoes', component: PublicacaoListComponent},
 {path:'login', component: LoginComponent},

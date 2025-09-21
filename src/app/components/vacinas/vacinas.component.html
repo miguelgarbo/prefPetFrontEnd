@@ -5,9 +5,11 @@
    <div class="pets-carousel">
         
         @for (pet of pets; track pet.id) {
-            <div class="pet" (click)="findById(pet.id)" >
-                <img [src]="pet.imagemUrl" [alt]="pet.nome">
-                <span>{{ pet.nome }}</span>
+            <div class="pet" (click)="findById(pet.id)">
+
+                <img [src]="pet.imagemUrl" [alt]="pet.nome"
+                [class.selected-shadow]="animalIdCapturado === pet.id">
+                <span class="nomeAnimal">{{ pet.nome }}</span>
             </div>
         }   
     </div>

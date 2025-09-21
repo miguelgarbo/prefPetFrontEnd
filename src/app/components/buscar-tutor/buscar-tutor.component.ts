@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MessageErrorComponent } from "../message-error/message-error.component";
 import { Tutor } from '../../models/tutor';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TutorService } from '../../services/tutor.service';
 import { CommonModule, NgIf } from '@angular/common';
 import { NotificacaoService } from '../../services/notificacao.service';
@@ -22,9 +22,20 @@ export class BuscarTutorComponent {
   tutor: Tutor = new Tutor();
   router = inject(Router)
   tutorService = inject(TutorService)
+  activedRoute = inject(ActivatedRoute)
+  animal_id: number = 0
+
   notificacaoService = inject(NotificacaoService)
 
   tutorEncontrado: boolean | null = null;
+
+
+  constructor() {
+  this.animal_id = +this.activedRoute.snapshot.params['id'] || 0;
+  console.log(this.animal_id)
+}
+
+
 
 
   findByNome(){
@@ -44,13 +55,17 @@ export class BuscarTutorComponent {
     })
   }
 
-  gerarConvite(destinatario_id:number,tutor_id: number, animal_id: number){
-    this.notificacaoService.gerarConvite(destinatario_id,tutor_id, animal_id).subscribe({
+  //Transferindo o Animal de João para Maria
+  //ID 2 Maria, ID 1 João
+  gerarConvite(){
+    this.notificacaoService.gerarConvite(2,1, this.animal_id).subscribe({
         next:(value)=> {
          console.log("Gerou O Convite", value)   
+         alert("Convite Enviado Com Sucesso! ")
         },
         error: (err)=> {
             console.log(err)
+            alert("Erro Ao Enviar Convite ! ")
         },
 
 

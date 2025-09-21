@@ -29,17 +29,18 @@ export class LoginComponent {
   @ViewChild('modalLogin') modalLogin!: TemplateRef<any>;
   modalRef!: MdbModalRef<any>;
 
-  usuario!: string;
+  email!: string;
   senha!: string;
 
   router = inject(Router);
   // modalRef = inject(MdbModalRef<CadastroUsuarioComponent>); fechar modal
 
   login(){
-    this.tutorService.login(this.usuario, this.senha).subscribe({
+    this.tutorService.login(this.email, this.senha).subscribe({
         next: (bool) =>{
           if(bool == true){
-            this.tutorService.findByEmail(this.usuario).subscribe({
+            console.log(bool)
+            this.tutorService.findByEmail(this.email).subscribe({
 
               next:(userLogado)=> {
               
@@ -47,15 +48,12 @@ export class LoginComponent {
                 this.current_user = userLogado;
               },error:(err)=>{
                 console.error(err)
-
               }
-
-
             })
 
         this.router.navigate(['principal']);
           }else{
-              alert('USUÁRIO E/OU SENHA INCORRETOS!!!');
+              alert('USUÁRIO OU SENHA INCORRETOS!');
           }
         },
         error: (err)=>{
@@ -66,16 +64,17 @@ export class LoginComponent {
 
 
   }
-
-  logar() {
-    if (this.usuario == 'admin' && this.senha == '12345') {
-      this.router.navigate(['principal']);
-    } else {
-      alert('USUÁRIO E/OU SENHA INCORRETOS!!!');
-    }
-  }
-
   cadastrarRota(){
     this.router.navigate(['cadastro-usuario']);
   }
+
+  // logar() {
+  //   if (this.usuario == 'admin' && this.senha == '12345') {
+  //     this.router.navigate(['principal']);
+  //   } else {
+  //     alert('USUÁRIO E/OU SENHA INCORRETOS!!!');
+  //   }
+  // }
+
+  
 }

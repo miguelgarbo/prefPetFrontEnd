@@ -84,3 +84,20 @@ border-bottom: 1px solid #706c6c;
 
   margin-left: 56vw;
 }
+
+.pet{
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.nomeAnimal{
+
+  color: white;
+}
+
+
+img.selected-shadow {
+  box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.7);
+  border-radius: 10px; 
+  transition: box-shadow 0.3s ease;
+}
