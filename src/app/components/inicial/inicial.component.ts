@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   selector: 'app-inicial',
   imports: [MdbModalModule, LoginComponent],
   templateUrl: './inicial.component.html',
-  styleUrl: './inicial.component.scss'
+  styleUrls: ['./inicial.component.scss']
 })
 export class InicialComponent {
 

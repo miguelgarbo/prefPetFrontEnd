@@ -1,1 +1,62 @@
-<p class="marginTop">cadastro-usuario works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4 centralizar marginTop">
+      <div class="card">
+        <div class="card-body">
+          <h3>Cadastro</h3>
+          <br />
+          <mdb-form-control>
+            <input
+              mdbInput
+              type="text"
+              id="usuario"
+              class="form-control"
+              [(ngModel)]="usuario"
+            />
+            <label mdbLabel class="form-label" for="usuario">Usuário</label>
+          </mdb-form-control>
+          <br />
+          <mdb-form-control>
+            <input
+              mdbInput
+              type="password"
+              id="senha"
+              class="form-control"
+              [(ngModel)]="senha"
+            />
+            <label mdbLabel class="form-label" for="senha">Senha</label>
+          </mdb-form-control>
+          <br />
+          <mdb-form-control>
+            <input
+              mdbInput
+              type="password"
+              id="senha2"
+              class="form-control"
+              [(ngModel)]="senha2"
+            />
+            <label mdbLabel class="form-label" for="senha">Confirmar senha</label>
+          </mdb-form-control>
+          <br />
+          <button
+            type="button"
+            class="btn btn-rounded"
+            mdbRipple
+            (click)="cadastrar()"
+          >
+            cadastrar
+          </button>
+
+          <!-- Register buttons -->
+          <div class="text-center">
+            <p style="margin-top: 20px">
+              Já possui uma conta? <a href="#!">Entrar</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4"></div>
+  </div>

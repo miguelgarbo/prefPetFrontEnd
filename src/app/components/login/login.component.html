@@ -1,26 +1,49 @@
-<div class="container">
-  <div class="row">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 centralizar topo">
+        <div class="card">
+          <div class="card-body">
+            <h3>Login</h3>
+            <br />
+            <mdb-form-control>
+              <input
+                mdbInput
+                type="text"
+                id="usuario"
+                class="form-control"
+                [(ngModel)]="usuario"
+              />
+              <label mdbLabel class="form-label" for="usuario">Usuário</label>
+            </mdb-form-control>
+            <br />
+            <mdb-form-control>
+              <input
+                mdbInput
+                type="password"
+                id="senha"
+                class="form-control"
+                [(ngModel)]="senha"
+              />
+              <label mdbLabel class="form-label" for="senha">Senha</label>
+            </mdb-form-control>
+            <br />
+            <button
+              type="button"
+              class="btn btn-rounded"
+              mdbRipple
+              (click)="logar()"
+            >
+              Acessar
+            </button>
 
-    <div class="col-lg-12 centralizar topo">
-      <div class="card">
-        <div class="card-body">
-          <h3>Login</h3>
-          <br>
-          <mdb-form-control>
-            <input mdbInput type="text" id="usuario" class="form-control" [(ngModel)]="usuario"/>
-            <label mdbLabel class="form-label" for="usuario">Usuário</label>
-          </mdb-form-control>
-          <br />
-          <mdb-form-control>
-            <input mdbInput type="password" id="senha" class="form-control" [(ngModel)]="senha"/>
-            <label mdbLabel class="form-label" for="senha">Senha</label>
-          </mdb-form-control>
-          <br />
-          <button type="button" class="btn btn-rounded" mdbRipple (click)="logar()">
-            Acessar
-          </button>
+            <!-- Register buttons -->
+            <div class="text-center">
+              <p style="margin-top: 20px">
+                Ainda não possui uma conta? <a (click)="cadastrarRota()">Cadastrar</a>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
