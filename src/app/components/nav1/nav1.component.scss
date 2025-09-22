@@ -5,18 +5,23 @@
 .btn{
     background: none;
     border: none;
-    color: #a7a7a7;
+    color: rgb(255, 244, 209);
 
     &:hover {
-      color: #000000; // cor ao passar o mouse
+      color: rgb(217, 201, 150); // cor ao passar o mouse
     }
 }
 
-.navbar{
+.navbar{  
   height: 6vh;
+  background-color: rgb(249, 136, 102);
 }
 
 .patinha{
   margin-left: 1vh;
+  color: rgb(255, 244, 209);
 }
 
+.titulo{
+  color: rgb(255, 244, 209);
+}
