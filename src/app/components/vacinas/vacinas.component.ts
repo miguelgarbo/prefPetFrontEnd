@@ -75,7 +75,7 @@ export class VacinasComponent implements OnInit {
 
   gerarPdf() {
   if (this.animalIdCapturado) {
-    this.router.navigate(['/carteira-vacinacao', this.animalIdCapturado]);
+    this.router.navigate(['principal/carteira-vacinacao', this.animalIdCapturado]);
   } else {
     alert('Selecione um animal primeiro!');
   }

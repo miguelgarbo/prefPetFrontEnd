@@ -64,3 +64,14 @@
   width: 180px;
 }
 
+.block{
+
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.direction{
+  display: flex;
+  flex-direction: column;
+}

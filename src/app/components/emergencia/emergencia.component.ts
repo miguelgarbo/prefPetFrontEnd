@@ -23,6 +23,7 @@ export class EmergenciaComponent implements OnInit {
   todosContatos: Contato[] =[];
   contatosSelecionadosIds: number[] = [];
   mostrarContatos = false;
+  
 
   constructor(
     private emergenciaService: EmergenciaService, 
@@ -32,8 +33,6 @@ export class EmergenciaComponent implements OnInit {
     this.listarEmergencias();
     this.listarContato();
   }
-
-
 
   listarEmergencias() {
     this.emergenciaService.findAll().subscribe({
