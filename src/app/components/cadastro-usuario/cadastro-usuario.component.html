@@ -87,17 +87,35 @@
           </mdb-form-control>
           <br />
 
+          <div class="couple-buttons">
           <button type="button" class="btn btn-rounded" mdbRipple (click)="save()">
-            Cadastrar
+            Salvar
+          </button>
+          <br>
+
+          @if (tutor.id >0) {
+
+          <button type="button" class="btn btn-danger" mdbRipple (click)="deletar()">
+            Deletar Conta
           </button>
 
+
+
+          }
+                    </div>
+
+
+        
+          @if (tutor.id == null) {
           <div class="text-center">
             <p style="margin-top: 20px">
               Já possui uma conta? <a href="#!">Entrar</a>
             </p>
           </div>
+          }
 
         </div>
+        
       </div>
     </div>
     <div class="col-lg-4"></div>

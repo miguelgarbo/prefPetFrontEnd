@@ -1,4 +1,4 @@
-.btn{
+.btn-rounded{
     background-color: rgb(255, 127, 70);
     color: white;
 }
@@ -12,4 +12,11 @@ h3{
 }
 .margin{
   margin-top: 10vh;
+}
+
+.couple-buttons{
+
+  display: flex;
+  gap: 15px;
+
 }

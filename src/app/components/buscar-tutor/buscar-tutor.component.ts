@@ -78,9 +78,9 @@ export class BuscarTutorComponent {
   }
 
   //Transferindo o Animal de João para Maria
-  //ID 2 Maria, ID 1 João
+  //Primeiro Id é da pessoa que foi encontrada no input, ID 1 João nosso current user
   gerarConvite(){
-    this.notificacaoService.gerarConvite(2,1, this.animal_id).subscribe({
+    this.notificacaoService.gerarConvite(this.tutor.id,1, this.animal_id).subscribe({
         next:(value)=> {
          console.log("Gerou O Convite", value)   
 

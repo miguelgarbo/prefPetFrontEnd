@@ -53,29 +53,24 @@ export class CadastroUsuarioComponent {
 
   }
 
-  cadastrar(){
-    if (this.senha2 ==this.tutor.senha) {
-      this.save()
-      this.router.navigate(['principal']);
+  cadastrar() {
+    if (this.senha2 === this.tutor.senha) {
+      this.save();
     } else {
-        Swal.fire({
-    icon: "error",
-    title: "Erro ao Cadastrar",
-    text: "As Senhas Devem Ser Iguais",
-  });
+      Swal.fire({
+        icon: "error",
+        title: "Erro ao Cadastrar",
+        text: "As Senhas Devem Ser Iguais",
+      });
     }
   }
 
-  save(){
-
-    if(this.tutor.id > 0 ){
-
-      console.log("Editar Perfil")
-
-       // editar tutor
-        this.tutorService.update(this.tutor).subscribe({
+  save() {
+    if (this.tutor.id > 0) {
+      // editar tutor
+      this.tutorService.update(this.tutor).subscribe({
         next: () => {
-        Swal.fire({
+          Swal.fire({
             title: "Usuário Editado com Sucesso!",
             icon: "success",
             confirmButtonText: 'Ok'
@@ -83,63 +78,96 @@ export class CadastroUsuarioComponent {
           this.router.navigate(['/principal/animal']);
         },
         error: erro => {
-
           Swal.fire({
-                          icon: "error",
-                          title: "Erro ao Atualizar",
-                          text: `${erro}`,
-                        });
-                      
+            icon: "error",
+            title: "Erro ao Atualizar",
+            text: `${erro}`,
+          });
           console.error(erro);
         }
-      })
+      });
+    } else {
+      // salvar novo tutor
+      this.tutorService.save(this.tutor).subscribe({
+        next: (value) => {
+          console.log("Cadastrou", value);
 
-    }else{
-
-    this.tutorService.save(this.tutor).subscribe({
-      next:(value)=> {
-        console.log("Cadastrou", value)
-        this.cadastrar()
-
-         Swal.fire({
+          Swal.fire({
             title: "Usuário Salvo com Sucesso!",
             icon: "success",
             confirmButtonText: 'Ok'
           });
-          this.router.navigate(['/principal/animal']);
-          
-      },
-      error:(err)=> {
-          
-        console.error("Erro Ao Cadastrar", err)
-        Swal.fire({
-                          icon: "error",
-                          title: "Erro ao Atualizar",
-                          text: `${err}`,
-          });
-                      
 
-      },
-    })
+          this.router.navigate(['/principal/animal']);
+        },
+        error: (err) => {
+          console.error("Erro Ao Cadastrar", err);
+          Swal.fire({
+            icon: "error",
+            title: "Erro ao Cadastrar",
+            text: `${err}`,
+          });
+        },
+      });
+    }
   }
+
+  deletar() {
+    Swal.fire({
+      text: "Certeza Que Deseja Deletar Sua Conta?",
+      icon: "warning",
+      showConfirmButton: true,
+      confirmButtonText: 'Sim',
+      denyButtonText: "Não",
+      showDenyButton: true
+    }).then((response) => {
+      if (response.isConfirmed) {
+        this.tutorService.deleteById(this.tutor.id).subscribe({
+          next: (value) => {
+            console.log(value);
+            Swal.fire({
+              title: "Usuário Excluído com Sucesso!",
+              icon: "success",
+              confirmButtonText: 'Ok',
+              timer: 1000
+            });
+            this.router.navigate(['/']); // volta para login ou página inicial
+          },
+          error: (err) => {
+            console.error("Erro AO Deletar", err);
+            Swal.fire({
+              icon: "error",
+              title: "Erro ao Deletar",
+              text: `${err}`,
+            });
+          },
+        });
+      }
+    });
   }
 
   buscarCep() {
-    const cep = this.tutor.cep.replace(/\D/g, ''); 
+    const cep = this.tutor.cep.replace(/\D/g, '');
     if (cep.length === 8) {
       this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`).subscribe(res => {
-          if (!res.erro) {
-            this.tutor.cidade = res.localidade;
-            this.tutor.estado = res.uf;
-          } else {
-            alert('CEP não encontrado!');
-            this.tutor.cidade = '';
-            this.tutor.estado = '';
-          }
-        }, err => {
-          console.error(err);
-          alert('Erro ao consultar CEP');
+        if (!res.erro) {
+          this.tutor.cidade = res.localidade;
+          this.tutor.estado = res.uf;
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "CEP não encontrado!",
+          });
+          this.tutor.cidade = '';
+          this.tutor.estado = '';
+        }
+      }, err => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          title: "Erro ao consultar CEP",
         });
+      });
     }
   }
 

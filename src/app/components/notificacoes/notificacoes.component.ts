@@ -23,7 +23,7 @@ export class NotificacoesComponent {
   }
 
   buscarNotificacoesUsuario(){
-    this.notificacaoService.findByTutorId(2).subscribe({
+    this.notificacaoService.findByTutorId(4).subscribe({
       next: (notificacoes) =>{
         console.log(notificacoes)
         this.notificacoes= notificacoes;

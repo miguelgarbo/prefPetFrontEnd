@@ -31,9 +31,12 @@ export class NotificacaoService {
   }
 
   // Aceitar convite
-  conviteAceito(notificacaoId: number): Observable<string> {
-    return this.http.post<string>(`${this.api}/conviteAceito/${notificacaoId}`, null);
-  }
+conviteAceito(notificacaoId: number): Observable<string> {
+  return this.http.post(`${this.api}/conviteAceito/${notificacaoId}`, null, {
+    responseType: 'text'
+  });
+}
+
 
   // Gerar notificações de vacinas data validade
   gerar(): Observable<string> {
