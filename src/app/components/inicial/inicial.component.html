@@ -4,6 +4,7 @@
   Escolha uma das opções abaixo:
 </p>
 
+<<<<<<< HEAD
 <!-- Botão para abrir o Login -->
 <button 
   type="button" 
@@ -40,6 +41,30 @@
       aria-label="Close"
       (click)="modalRef.close()"
     ></button>
+=======
+  <!-- Retângulo 1: Bem-vindo + Login dividido -->
+  <div class="home-card home-card-large d-flex marginTop">
+    <!-- Lado esquerdo: Texto -->
+    <div class="home-left">
+      <h2>Bem-vindo ao PrefPet</h2>
+      <p>
+        Conectando tutores, pets e campanhas de vacinação e adoção.  
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+    </div>
+
+    <!-- Lado direito: Botão de Login -->
+    <div class="home-right d-flex justify-content-center align-items-center">
+      <button 
+        type="button" 
+        class="btn btn-rounded btn-home bgLaranja" 
+        mdbRipple 
+        (click)="loginNovo()">
+        Acessar Login
+      </button>
+    </div>
+>>>>>>> ab36340 (cores nav1, nav2 e footer)
   </div>
   <div class="modal-body">
     <app-login></app-login>

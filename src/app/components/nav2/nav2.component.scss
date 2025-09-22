@@ -2,6 +2,7 @@
     margin-top: 6vh;
     height: 14vh;
     width: auto;
+    background-color: rgb(162, 190, 149);
 }
 
 .me-2{
@@ -19,9 +20,15 @@
 
 .nome{
     font-size: medium;
+    color: rgb(255, 244, 209);
 }   
 
 .active-link {
-  background-color: #000000 !important; /* amarelinho */
-  color: #ffffff !important;               /* texto preto */
+  background-color: rgb(109, 131, 98) !important; /* amarelinho */
+  color: rgb(220, 209, 172) !important;               /* texto preto */
+}
+
+.btn{
+    background-color: rgb(255, 244, 209);
+    color: rgb(162, 190, 149);
 }
