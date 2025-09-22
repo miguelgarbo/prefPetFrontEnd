@@ -70,12 +70,15 @@
           </mdb-form-control>
           <br />
 
+          @if (tutor.id == null) {
           <!-- Confirmar senha -->
           <mdb-form-control>
             <input mdbInput type="password" id="senha2" class="form-control" [(ngModel)]="senha2" name="senha2" required/>
             <label mdbLabel class="form-label" for="senha2">Confirmar Senha</label>
           </mdb-form-control>
+  
           <br />
+        }
 
           <!-- Imagem de perfil -->
           <mdb-form-control>
@@ -84,7 +87,7 @@
           </mdb-form-control>
           <br />
 
-          <button type="button" class="btn btn-rounded" mdbRipple (click)="cadastrar()">
+          <button type="button" class="btn btn-rounded" mdbRipple (click)="save()">
             Cadastrar
           </button>
 

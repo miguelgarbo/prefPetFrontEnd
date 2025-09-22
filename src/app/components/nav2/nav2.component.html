@@ -1,17 +1,20 @@
 <!-- Image and text -->
 <nav class="navbar fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand">
       <img
         [src]="tutor.imagemUrlPerfil"
         class="me-2"
         height="20"
         alt="MDB Logo"
-        loading="lazy"
       />
       <div class="nome">
         <small class="nome">{{tutor.nome}}</small>
-        <i class="fa-solid fa-pen"></i>
+        
+       <button type="button" (click)="editarPerfil()">
+  <i class="fa-solid fa-pen"></i>
+</button>
+
       </div>
     </a>
 
@@ -36,7 +39,6 @@
 
       </div>
     </div>
-
 
   </div>
 </nav>

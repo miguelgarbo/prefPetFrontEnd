@@ -48,8 +48,7 @@ export const routes: Routes = [
     {path: "carteira-vacinacao/:id", component: CarteiraVacinacaoComponent},
     {path: 'notificacoes', component: NotificacoesComponent},
     {path: "buscar-tutor/:id", component: BuscarTutorComponent},
-
-
+    {path:"cadastro-usuario/:id", component: CadastroUsuarioComponent}
 
     ], 
 

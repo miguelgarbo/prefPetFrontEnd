@@ -26,10 +26,15 @@ export class Nav2Component {
     this.findById(1)
     this.buscarNotificacoesUsuario()
   }
+
+  editarPerfil() {
+  if(this.tutor.id)
+    this.router.navigate(['/principal/cadastro-usuario', this.tutor.id]);
+}
+
     
-  
     buscarNotificacoesUsuario(){
-      this.notificacaoService.findByTutorId(2).subscribe({
+      this.notificacaoService.findByTutorId(1).subscribe({
         next: (notificacoes) =>{
           console.log(notificacoes)
           this.notificacoes= notificacoes;

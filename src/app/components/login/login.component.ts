@@ -14,6 +14,9 @@ import { Tutor } from '../../models/tutor';
 
 import { RouterModule } from '@angular/router';
 
+import Swal from 'sweetalert2'
+
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -53,7 +56,14 @@ export class LoginComponent {
 
         this.router.navigate(['principal/animal']);
           }else{
-              alert('USUÁRIO OU SENHA INCORRETOS!');
+
+             Swal.fire({
+                icon: "error",
+                title: "Erro ao Efeturar Login",
+                text: "Email ou Senha Incorretos",
+                footer: '<a href="#">Why do I have this issue?</a>'
+              });
+            
           }
         },
         error: (err)=>{
