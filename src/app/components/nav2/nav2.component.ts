@@ -16,7 +16,7 @@ export class Nav2Component {
 
   tutor: Tutor = new Tutor();
   tutorService = inject(TutorService)
-
+  router = inject(Router)
 
   findById(id:number){
     this.tutorService.findById(id).subscribe({
@@ -29,6 +29,10 @@ export class Nav2Component {
         console.log("Erro Ao pegar animal", err)
       },
     })
+  }
+   notificacoesTela(){
+        this.router.navigate(['principal/notificacoes']);
+        console.log("TESTE")
   }
 
   ngOnInit(){

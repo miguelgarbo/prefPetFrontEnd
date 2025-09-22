@@ -22,14 +22,10 @@ import { BuscarTutorComponent } from './components/buscar-tutor/buscar-tutor.com
 
 export const routes: Routes = [
 {path: '', redirectTo:'inicial', pathMatch:'full'},
-{path: "buscar-tutor/:id", component: BuscarTutorComponent},
 {path: "cadastro-publicacao", component: CadastroPublicacaoComponent},
-{path: 'publicacoes', component: PublicacaoListComponent},
 {path:'login', component: LoginComponent},
 {path:'cadastro', component: CadastroUsuarioComponent},
-{path: "carteira-vacinacao/:id", component: CarteiraVacinacaoComponent},
 {path: 'inicial', component: InicialComponent},
-{path: 'notificacoes', component: NotificacoesComponent},
 {path:'principal', component: PrincipalComponent},
 {path: 'emergencia', component: EmergenciaComponent},
 {path: 'cadastro-usuario', component: CadastroUsuarioComponent},
@@ -47,6 +43,8 @@ export const routes: Routes = [
     {path: 'vacinas', component: VacinasComponent},
     {path: 'publicacoes', component: PublicacaoListComponent},
     {path: "carteira-vacinacao/:id", component: CarteiraVacinacaoComponent},
+    {path: 'notificacoes', component: NotificacoesComponent},
+    {path: "buscar-tutor/:id", component: BuscarTutorComponent},
 
 
 
