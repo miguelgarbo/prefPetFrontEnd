@@ -1,50 +1,49 @@
-<div class="container-main">
+<div class="home-container">
 
-<h2 class="marginTop">Bem-vindo ao PrefPet</h2>
-<p>
-  Conectando tutores, pets e campanhas de vacinação e adoção.  
-  Escolha uma das opções abaixo:
-</p>
+  <!-- Retângulo 1: Bem-vindo + Login dividido -->
+  <div class="home-card home-card-large d-flex">
+    <!-- Lado esquerdo: Texto -->
+    <div class="home-left">
+      <h2>Bem-vindo ao PrefPet</h2>
+      <p>
+        Conectando tutores, pets e campanhas de vacinação e adoção.  
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+    </div>
 
-<!-- Botão para abrir o Login -->
-<button 
-  type="button" 
-  class="btn btn-primary btn-rounded" 
-  mdbRipple 
-  (click)="loginNovo()">
-  Acessar Login
-</button>
-
-<!-- Botão Emergência (sem necessidade de login) -->
-<button 
-  type="button" 
-  class="btn btn-danger btn-rounded" 
-  mdbRipple 
-  (click)="acessarEmergencia()">
-  Emergência
-</button>
-
-<!-- Botão Buscar Chip -->
-<button 
-  type="button" 
-  class="btn btn-success btn-rounded" 
-  mdbRipple 
-  (click)="buscarChip()">
-  Buscar Chip
-</button>
-
-<!-- Modal de Login -->
-<ng-template #modalLogin>
-  <div class="modal-header">
-    <button
-      type="button"
-      class="btn-close"
-      aria-label="Close"
-      (click)="modalRef.close()"
-    ></button>
+    <!-- Lado direito: Botão de Login -->
+    <div class="home-right d-flex justify-content-center align-items-center">
+      <button 
+        type="button" 
+        class="btn btn-primary btn-rounded btn-home" 
+        mdbRipple 
+        (click)="loginNovo()">
+        Acessar Login
+      </button>
+    </div>
   </div>
-  <div class="modal-body">
-    <app-login></app-login>
+
+  <!-- Retângulo 2: Emergência -->
+  <div class="home-card home-card-small bg-danger">
+    <button 
+      type="button" 
+      class="btn btn-light btn-rounded btn-home" 
+      mdbRipple 
+      (click)="acessarEmergencia()">
+      Emergência
+    </button>
   </div>
-</ng-template>
+
+  <!-- Retângulo 3: Buscar Chip -->
+  <div class="home-card home-card-small bg-success">
+    <button 
+      type="button" 
+      class="btn btn-light btn-rounded btn-home" 
+      mdbRipple 
+      (click)="buscarChip()">
+      Buscar Chip
+    </button>
+  </div>
+
 </div>

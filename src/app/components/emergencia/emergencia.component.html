@@ -1,4 +1,4 @@
-<br><br><br>
+<br><br><br><br>
 <h2>Emergências</h2>
 <div *ngFor="let emergencia of emergencias" class="card mb-3 p-2">
   <h4>{{ emergencia.nome }}</h4>
@@ -10,7 +10,7 @@
 </div>
 
 <div class="form-container d-flex gap-4 mt-4">
-  <!-- Formulário de Adicionar Emergência -->
+  <!-- Forms de adicionar amergência -->
   <div class="card p-3 flex-fill shadow-sm">
     <h3 class="mb-3">Adicionar Emergência</h3>
     <form (ngSubmit)="adicionarEmergencia()" #emergenciaForm="ngForm">
@@ -25,7 +25,7 @@
                class="form-control">
       </div>
 
-      <!-- Botão para mostrar/ocultar contatos -->
+      <!-- mostrar ou esconder contatos -->
       <div class="form-group mb-3">
         <button type="button" class="btn btn-secondary w-100" (click)="mostrarContatos = !mostrarContatos">
           {{ mostrarContatos ? 'Esconder Contatos' : 'Selecionar Contatos' }}
@@ -43,14 +43,14 @@
 
       <button type="submit" class="btn btn-primary w-100">Adicionar Emergência</button>
 
-      <!-- Botão de exclusão (apenas visual) -->
+      <!-- botão pra excluir so pra constar, ainda não fucniona -->
       <button type="button" class="btn btn-danger w-100 mt-2">
         Excluir Emergência
       </button>
     </form>
   </div>
 
-  <!-- Formulário de Adicionar Contato -->
+  <!-- Formi de Adicionar Contato -->
   <div class="card p-3 flex-fill shadow-sm">
     <h3 class="mb-3">Adicionar Contato</h3>
     <form (ngSubmit)="adicionarContato()" #contatoForm="ngForm">
@@ -87,7 +87,7 @@
         Adicionar Contato
       </button>
 
-      <!-- Botão de exclusão (apenas visual) -->
+      <!-- botão de ecluir só pra constar -->
       <button type="button" class="btn btn-danger w-100 mt-2">
         Excluir Contato
       </button>

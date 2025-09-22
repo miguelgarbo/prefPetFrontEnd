@@ -53,7 +53,7 @@ export class EmergenciaComponent implements OnInit {
   adicionarEmergencia(): void {
     const emergenciaParaSalvar = {
       nome: this.novaEmergencia.nome,
-      contatos: this.contatosSelecionadosIds.map(id => ({ id } as Contato))
+      contatos: this.contatosSelecionadosIds.map(id => ({ id } as Contato)) // ele referencia pelo id, pois ja existem contatos no banco
     } as Emergencia;
 
     this.emergenciaService.save(emergenciaParaSalvar).subscribe({
@@ -69,12 +69,12 @@ export class EmergenciaComponent implements OnInit {
   adicionarContato(): void {
 
     const c = this.novoContato;
-    if (!c.nomeOrgao?.trim() || !c.telefone?.trim() || !c.email?.trim()) {
+    if (!c.nomeOrgao?.trim() || !c.telefone?.trim() || !c.email?.trim()) { //faz a verificação se ta tudo preenchido
     console.warn("Preencha todos os campos corretamente");
     return;
   }
   
-    console.log("Enviando contato:", JSON.stringify(c));
+    console.log("Enviando contato:", JSON.stringify(c));   // só pra ver o que ta sendo salvo
     this.contatoService.save(c).subscribe({
       next: (res) => {
         console.log('Contato salvo com sucesso:', res);
