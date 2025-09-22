@@ -1,8 +1,9 @@
 btn-close<div class="row">
   <div class="col"></div>
 
-  <div class="col-8 d-flex flex-column justify-content-center align-items-center animal-menu p-4">
+  <div class="col-8 d-flex flex-column justify-content-center align-items-center animal-menu pt-5 p-4">
     <h1>Meus Animais</h1>
+    <app-animal-details *ngIf="animalSelecionado" [animal]="animalSelecionado"></app-animal-details>
 
     <div class="row g-3 w-100 my-3 animal-list">
       @for (animal of animais; track animal.id) {
@@ -19,9 +20,6 @@ btn-close<div class="row">
               <h6 class="animal-microchip">microchip:<mark>SEM MICROCHIP</mark></h6>
               }
             </div>
-            <button type="button" class="button-icon" title="Transfêrencia de Tutela" (click)="transferirTutela()">
-                <i class="fas fa-exchange-alt"></i>
-            </button>
           </div>
         </div>
       </div>

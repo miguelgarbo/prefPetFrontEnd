@@ -7,16 +7,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { TutorService } from '../../services/tutor.service';
-import { Router } from '@angular/router';
+import { AnimalDetailsComponent } from '../animal-details/animal-details.component';
 
 @Component({
   selector: 'app-animal-list',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,          // para ngModel, ngForm, ngValue
-    MdbModalModule,       // para mdbModal
-    MdbFormsModule        // para estilos e componentes MDB Forms
+    FormsModule,
+    MdbModalModule,       
+    MdbFormsModule,
+    AnimalDetailsComponent        
   ],
   templateUrl: './animal-list.component.html',
   styleUrls: ['./animal-list.component.scss']
@@ -28,12 +29,12 @@ export class AnimalListComponent implements OnInit {
   animalService = inject(AnimalService);
   tutorService = inject(TutorService);
   modalService = inject(MdbModalService)
-  router = inject(Router)
 
-  tutor?: Tutor
+  tutor: Tutor = new Tutor;
   animais: Animal[] = [];
   animald?: Animal;
   animalParaSalvar!: Animal
+  animalSelecionado: any = null;
 
   novoAnimal: Partial<Animal> = {
     nome: '',
@@ -52,7 +53,7 @@ export class AnimalListComponent implements OnInit {
   @ViewChild('addAnimalModal', { static: true }) modalTemplate: any;
 
   ngOnInit() {
-    this.findByTutor();
+    this.findByTutorId();
     this.tutorService.findById(1).subscribe({
       next: (tutordados) => {
         this.tutor = tutordados;
@@ -63,7 +64,7 @@ export class AnimalListComponent implements OnInit {
     })
   }
 
-  findByTutor() {
+  findByTutorId() {
     this.animalService.findByTutorId(1).subscribe({
       next: (dados) => {
         this.animais = dados;
@@ -74,25 +75,20 @@ export class AnimalListComponent implements OnInit {
     });
   }
 
-  findById(id: number) {
-    this.animalService.findById(id).subscribe({
-      next: (dados) => {
-        this.animald = dados;
-        console.log(this.animald);
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    });
-  }
+  // findById(id: number) {
+  //   this.animalService.findById(id).subscribe({
+  //     next: (dados) => {
+  //       this.animald = dados;
+  //       console.log(this.animald);
+  //     },
+  //     error: (err) => {
+  //       console.error(err);
+  //     }
+  //   });
+  // }
 
-  transferirTutela(){
-     if (this.animald) {
-    this.router.navigate(['buscar-tutor', this.animald.id])
-
-  } else {
-    alert('Selecione um animal primeiro!');
-  }
+  findById(id: number){
+    this.animalSelecionado = this.animais.find(animalSelecionado => animalSelecionado.id === id);
   }
 
   save() {
@@ -118,7 +114,7 @@ export class AnimalListComponent implements OnInit {
       next: (animalSalvo) => {
         console.log("Animal salvo com sucesso:", animalSalvo);
 
-        this.findByTutor();
+        this.findByTutorId();
 
         if (this.modalRef) {
           this.modalRef.close();
