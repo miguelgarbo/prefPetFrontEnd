@@ -9,6 +9,10 @@ import { TutorService } from '../../services/tutor.service';
 import { CommonModule, NgIf } from '@angular/common';
 import { NotificacaoService } from '../../services/notificacao.service';
 import { LoginComponent } from '../login/login.component';
+import { AnimalService } from '../../services/animal.service';
+import { Animal } from '../../models/animal';
+import Swal from 'sweetalert2'
+
 
 
 @Component({
@@ -20,8 +24,10 @@ import { LoginComponent } from '../login/login.component';
 export class BuscarTutorComponent {
 
   tutor: Tutor = new Tutor();
+  animal: Animal = new Animal();
   router = inject(Router)
   tutorService = inject(TutorService)
+  animalService = inject(AnimalService)
   activedRoute = inject(ActivatedRoute)
   animal_id: number = 0
 
@@ -35,7 +41,23 @@ export class BuscarTutorComponent {
   console.log(this.animal_id)
 }
 
+  ngOnInit(){
+      this.findAnimalById();
+  }
 
+
+  findAnimalById(){
+    this.animalService.findById(this.animal_id).subscribe({
+
+      next:(value)=> {
+        console.log("Animal Encontrado ", value)
+        this.animal = value
+      },
+      error:(err)=> {
+        console.error(err)
+      },
+    })
+  }
 
 
   findByNome(){
@@ -61,7 +83,14 @@ export class BuscarTutorComponent {
     this.notificacaoService.gerarConvite(2,1, this.animal_id).subscribe({
         next:(value)=> {
          console.log("Gerou O Convite", value)   
-         alert("Convite Enviado Com Sucesso! ")
+
+         Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Convite Enviado Com Sucesso!",
+            showConfirmButton: false,
+            timer: 1000
+          });
         },
         error: (err)=> {
             console.log(err)

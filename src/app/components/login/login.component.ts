@@ -51,7 +51,7 @@ export class LoginComponent {
               }
             })
 
-        this.router.navigate(['principal']);
+        this.router.navigate(['principal/animal']);
           }else{
               alert('USUÁRIO OU SENHA INCORRETOS!');
           }

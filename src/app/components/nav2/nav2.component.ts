@@ -4,6 +4,8 @@ import { FormsModule } from "@angular/forms";
 import { Router, RouterLink } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { TutorService } from '../../services/tutor.service';
+import { Notificacao } from '../../models/notificacao';
+import { NotificacaoService } from '../../services/notificacao.service';
 
 
 @Component({
@@ -17,6 +19,28 @@ export class Nav2Component {
   tutor: Tutor = new Tutor();
   tutorService = inject(TutorService)
   router = inject(Router)
+  notificacoes: Notificacao[] = []
+  notificacaoService = inject(NotificacaoService)
+
+  ngOnInit(){
+    this.findById(1)
+    this.buscarNotificacoesUsuario()
+  }
+    
+  
+    buscarNotificacoesUsuario(){
+      this.notificacaoService.findByTutorId(2).subscribe({
+        next: (notificacoes) =>{
+          console.log(notificacoes)
+          this.notificacoes= notificacoes;
+        },
+        error: (err) =>{
+          console.log("Erro ao Buscar Notificacoes", err)
+        }
+      })
+  
+    }
+
 
   findById(id:number){
     this.tutorService.findById(id).subscribe({
@@ -35,9 +59,6 @@ export class Nav2Component {
         console.log("TESTE")
   }
 
-  ngOnInit(){
-   this.findById(1)
-  
-  }
+
 
 }

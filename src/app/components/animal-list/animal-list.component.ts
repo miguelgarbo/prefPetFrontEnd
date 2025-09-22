@@ -9,6 +9,8 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { TutorService } from '../../services/tutor.service';
 import { AnimalDetailsComponent } from '../animal-details/animal-details.component';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
+
 
 @Component({
   selector: 'app-animal-list',
@@ -93,9 +95,9 @@ export class AnimalListComponent implements OnInit {
     this.animalSelecionado = this.animais.find(animalSelecionado => animalSelecionado.id === id);
   }
 
-  transferirTutela(){
-     if (this.animalSelecionado) {
-    this.router.navigate(['principal/buscar-tutor', this.animalSelecionado.id])
+  transferirTutela(animalId: number){
+     if (animalId) {
+    this.router.navigate(['principal/buscar-tutor', animalId])
 
   } else {
     alert('Selecione um animal primeiro!');
@@ -124,6 +126,13 @@ export class AnimalListComponent implements OnInit {
     this.animalService.save(this.animalParaSalvar).subscribe({
       next: (animalSalvo) => {
         console.log("Animal salvo com sucesso:", animalSalvo);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Animal salvo com sucesso !",
+          showConfirmButton: false,
+          timer: 1000
+        });
 
         this.findByTutorId();
 

@@ -4,9 +4,23 @@
     <div class="col-md-4">
         <h2 class="above">Transfêrencia de Tutor</h2>
 
+
+        @if(animal){
+          <div class="container-animal-selected">
+          <div class="combo-text">
+          <h4>Animal Selecionado:</h4>
+          <h4>{{animal.nome}}</h4>
+          </div>
+        <img [src]="animal.imagemUrl" alt="imagem do animal selecionado">
+        </div>
+        }
+
+        <br>
+
+
   <mdb-form-control class="mb-4">
     <input mdbInput type="text" id="nomeTutor" class="form-control" [(ngModel)]="tutor.nome"/>
-    <label mdbLabel class="form-label" for="nomeTutor" name="nomeTutor">Informe o Nome Do Tutor</label>
+    <label mdbLabel class="form-label" for="nomeTutor" name="nomeTutor">Informe o Nome Do Tutor Destinatário</label>
   </mdb-form-control>
 
   <button mdbRipple type="button" class="btn btn-primary btn-block" (click)="findByNome()"

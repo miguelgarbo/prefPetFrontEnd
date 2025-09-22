@@ -29,9 +29,12 @@ export const routes: Routes = [
 {path:'principal', component: PrincipalComponent},
 {path: 'emergencia', component: EmergenciaComponent},
 {path: 'cadastro-usuario', component: CadastroUsuarioComponent},
+{path: 'buscar-chip', component: BuscarChipComponent} ,
 
 {path:'principal', component: PrincipalComponent, 
+    
     children:[
+    { path: '', redirectTo: 'animal', pathMatch: 'full' }, 
     {path:'animal', component: AnimalListComponent,
     children:[
         {path:"cadastro", component: CadastroAnimalComponent},
