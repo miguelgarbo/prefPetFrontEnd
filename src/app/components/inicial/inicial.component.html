@@ -13,19 +13,27 @@
     </div>
 
     <!-- Lado direito: Botão de Login -->
-    <div class="home-right d-flex justify-content-center align-items-center">
+    <div class="home-right d-flex justify-content-center align-items-center direction">
       <button 
         type="button" 
         class="btn btn-rounded btn-home bgLaranja" 
         mdbRipple 
         (click)="loginNovo()">
-        Acessar Login
+        Login
+      </button>
+
+      <button 
+        type="button" 
+        class="btn btn-primary btn-rounded btn-home" 
+        mdbRipple 
+        (click)="cadastro()">
+        Cadastrar-se
       </button>
     </div>
   </div>
 
   <!-- Retângulo 2: Emergência -->
-  <div class="home-card home-card-small bg-danger">
+  <div class="home-card home-card-small bg-danger block">
     <button 
       type="button" 
       class="btn btn-light btn-rounded btn-home" 
@@ -36,14 +44,24 @@
   </div>
 
   <!-- Retângulo 3: Buscar Chip -->
-  <div class="home-card home-card-small bg-success">
+  <div class="home-card home-card-small bg-success block">
     <button 
       type="button" 
       class="btn btn-light btn-rounded btn-home" 
       mdbRipple 
       (click)="buscarChip()">
-      Buscar Chip
+      Buscar Animal Por Microchip
     </button>
   </div>
 
 </div>
+
+<ng-template #modalLogin let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Login</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.close()"></button>
+  </div>
+  <div class="modal-body">
+    <app-login></app-login>
+  </div>
+</ng-template>

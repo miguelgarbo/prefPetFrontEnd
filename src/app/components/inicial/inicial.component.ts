@@ -21,6 +21,11 @@ export class InicialComponent {
     // this.modalRef.close();
   }
 
+  cadastro(){
+    this.router.navigate(['/cadastro-usuario'])
+
+  }
+
   acessarEmergencia() {
     this.router.navigate(['/emergencia']);
   }

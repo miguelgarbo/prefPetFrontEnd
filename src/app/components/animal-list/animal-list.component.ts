@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { TutorService } from '../../services/tutor.service';
 import { AnimalDetailsComponent } from '../animal-details/animal-details.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-animal-list',
@@ -29,6 +30,7 @@ export class AnimalListComponent implements OnInit {
   animalService = inject(AnimalService);
   tutorService = inject(TutorService);
   modalService = inject(MdbModalService)
+  router = inject(Router)
 
   tutor: Tutor = new Tutor;
   animais: Animal[] = [];
@@ -75,7 +77,7 @@ export class AnimalListComponent implements OnInit {
     });
   }
 
-  // findById(id: number) {
+  // findById2(id: number) {
   //   this.animalService.findById(id).subscribe({
   //     next: (dados) => {
   //       this.animald = dados;
@@ -89,6 +91,15 @@ export class AnimalListComponent implements OnInit {
 
   findById(id: number){
     this.animalSelecionado = this.animais.find(animalSelecionado => animalSelecionado.id === id);
+  }
+
+  transferirTutela(){
+     if (this.animalSelecionado) {
+    this.router.navigate(['principal/buscar-tutor', this.animalSelecionado.id])
+
+  } else {
+    alert('Selecione um animal primeiro!');
+  }
   }
 
   save() {
