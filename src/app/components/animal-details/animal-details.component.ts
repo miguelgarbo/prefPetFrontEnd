@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Animal } from '../../models/animal';
 
 @Component({
   selector: 'app-animal-details',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './animal-details.component.scss'
 })
 export class AnimalDetailsComponent {
-
+  @Input() animal!: Animal;
 }

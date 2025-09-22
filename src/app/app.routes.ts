@@ -34,7 +34,6 @@ export const routes: Routes = [
 {path: 'emergencia', component: EmergenciaComponent},
 {path: 'cadastro-usuario', component: CadastroUsuarioComponent},
 
-
 {path:'principal', component: PrincipalComponent, 
     children:[
     {path:'animal', component: AnimalListComponent,
@@ -55,6 +54,5 @@ export const routes: Routes = [
 
  
 },
-
 
 ];

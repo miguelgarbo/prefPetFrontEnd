@@ -1,7 +1,7 @@
 .animal-menu{
     box-shadow: 10vh 10vh 0vh 0vh rgba(118,181,129,0.75);
     -webkit-box-shadow: 10vh 10vh 0vh 0vh rgba(118,181,129,0.75);
-    -moz-box-shadow: 10vh 10vh 0vh 0vh rgba(118,181,129,0.75);
+    -moz-box-shadow: 10vh 10vh 0vh 0vh #76b581;
     background-color: #daf0db;
     margin-bottom: 20vh;
 }
@@ -32,10 +32,6 @@ mark {
     cursor: pointer;
 }
 
-.button-icon{
-
-    background: none;
-    border: none;
-
+app-animal-details{
+    width: 100%;
 }
-

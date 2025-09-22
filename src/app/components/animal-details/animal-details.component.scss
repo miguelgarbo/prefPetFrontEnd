@@ -1,0 +1,66 @@
+
+.animal-container {
+  position: relative;
+  background: transparent; /* fundo cinza */
+  
+}
+
+.animal-info {
+  background: #608a76;
+  border-radius: 15px;
+  padding: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.animal-photo {
+    width: 60%;
+    aspect-ratio: 1 / 1;
+    background-size: cover;
+    object-fit: cover;      
+}
+
+.divider {
+  width: 1px;
+  background: #333;
+  height: 100%;
+}
+
+.animal-selection {
+  position: relative;
+  top: -40px; /* faz o card "sobrepor" */
+  z-index: 1;
+}
+
+.animal-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #555;
+  padding: 0.8rem 1.5rem;
+  color: white;
+}
+
+.animal-icon {
+  width: 40px;
+  height: 40px;
+  background: #999;
+}
+
+.nome-animal{
+  color: black;
+}
+
+p{
+    color: black;
+}
+
+svg{
+  cursor: pointer;
+}
+
+mark {
+  background-color: transparent; /* remove o amarelo padrão */
+  color: #b00c1a  ; /* deixa o texto em vermelho */
+  font-weight: bold; /* opcional, para destacar */
+}
