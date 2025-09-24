@@ -1,9 +1,9 @@
 import { Component, inject, Input } from '@angular/core';
-import { Animal } from '../../models/animal';
-import { AnimalService } from '../../services/animal.service';
+import { Animal } from '../../../models/animal';
+import { AnimalService } from '../../../services/animal.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AplicacaoVacina } from '../../models/aplicacao-vacina';
-import { AplicacaoVacinaService } from '../../services/aplicacao-vacina.service';
+import { AplicacaoVacina } from '../../../models/aplicacao-vacina';
+import { AplicacaoVacinaService } from '../../../services/aplicacao-vacina.service';
 
 @Component({
   selector: 'app-carteira-vacinacao',

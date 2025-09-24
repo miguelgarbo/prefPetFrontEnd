@@ -3,9 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MdbFormsModule } from "mdb-angular-ui-kit/forms";
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import { Tutor } from '../../models/tutor';
+import { Tutor } from '../../../models/tutor';
 import { HttpClient } from '@angular/common/http';
-import { TutorService } from '../../services/tutor.service';
+import { TutorService } from '../../../services/tutor.service';
 import Swal from 'sweetalert2'
 import e from 'express';
 

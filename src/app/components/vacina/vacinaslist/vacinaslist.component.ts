@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { Animal } from '../../models/animal';
-import { AnimalService } from '../../services/animal.service';
-import { VacinaService } from '../../services/vacina.service';
-import { AplicacaoVacina } from '../../models/aplicacao-vacina';
-import { AplicacaoVacinaService } from '../../services/aplicacao-vacina.service';
+import { Animal } from '../../../models/animal';
+import { AnimalService } from '../../../services/animal.service';
+import { VacinaService } from '../../../services/vacina.service';
+import { AplicacaoVacina } from '../../../models/aplicacao-vacina';
+import { AplicacaoVacinaService } from '../../../services/aplicacao-vacina.service';
 @Component({
   selector: 'app-vacinaslist',
   standalone: true,

@@ -1,12 +1,12 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import { AnimalService } from '../../services/animal.service';
-import { Animal } from '../../models/animal';
-import { Tutor } from '../../models/tutor';
+import { AnimalService } from '../../../services/animal.service';
+import { Animal } from '../../../models/animal';
+import { Tutor } from '../../../models/tutor';
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
-import { TutorService } from '../../services/tutor.service';
+import { TutorService } from '../../../services/tutor.service';
 import { AnimalDetailsComponent } from '../animal-details/animal-details.component';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -34,6 +34,8 @@ export class AnimalListComponent implements OnInit {
   animais: Animal[] = [];
   currentUser: Tutor = new Tutor();
   animalSelecionado?: Animal;
+
+  hoje: string = new Date().toISOString().split('T')[0];
 
   novoAnimal: Partial<Animal> = {
     nome: '',

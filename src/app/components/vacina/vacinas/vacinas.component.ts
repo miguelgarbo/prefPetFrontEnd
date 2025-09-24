@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
-import { AnimalService } from '../../services/animal.service';
-import { Animal } from '../../models/animal';
-import { AplicacaoVacina } from '../../models/aplicacao-vacina';
-import { AplicacaoVacinaService } from '../../services/aplicacao-vacina.service';
+import { AnimalService } from '../../../services/animal.service';
+import { Animal } from '../../../models/animal';
+import { AplicacaoVacina } from '../../../models/aplicacao-vacina';
+import { AplicacaoVacinaService } from '../../../services/aplicacao-vacina.service';
 import { Router } from '@angular/router';
-import { TutorService } from '../../services/tutor.service';
-import { Tutor } from '../../models/tutor';
+import { TutorService } from '../../../services/tutor.service';
+import { Tutor } from '../../../models/tutor';
 
 @Component({
   selector: 'app-vacinas',

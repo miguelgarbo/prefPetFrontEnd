@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { CardNotificacaoComponent } from "../card-notificacao/card-notificacao.component";
-import { Notificacao } from '../../models/notificacao';
+import { Notificacao } from '../../../models/notificacao';
 import { Router } from '@angular/router';
-import { NotificacaoService } from '../../services/notificacao.service';
-import { Tutor } from '../../models/tutor';
-import { TutorService } from '../../services/tutor.service';
+import { NotificacaoService } from '../../../services/notificacao.service';
+import { Tutor } from '../../../models/tutor';
+import { TutorService } from '../../../services/tutor.service';
 
 @Component({
   selector: 'app-notificacoes',

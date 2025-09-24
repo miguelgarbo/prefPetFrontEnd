@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
-import { Publicacao } from '../../models/publicacao';
-import { PublicacaoService } from '../../services/publicacao.service';
+import { Publicacao } from '../../../models/publicacao';
+import { PublicacaoService } from '../../../services/publicacao.service';
 import { Router } from '@angular/router';
-import { Entidade } from '../../models/entidade';
-import { Imagem } from '../../models/imagem';
+import { Entidade } from '../../../models/entidade';
+import { Imagem } from '../../../models/imagem';
 
 import Swal from 'sweetalert2'
 

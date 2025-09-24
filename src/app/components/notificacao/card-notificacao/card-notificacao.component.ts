@@ -1,6 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
-import { Notificacao } from '../../models/notificacao';
-import { NotificacaoService } from '../../services/notificacao.service';
+import { Notificacao } from '../../../models/notificacao';
+import { NotificacaoService } from '../../../services/notificacao.service';
 import e from 'express';
 
 @Component({

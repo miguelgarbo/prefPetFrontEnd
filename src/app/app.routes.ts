@@ -1,21 +1,21 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/layout/login/login.component';
 import { PrincipalComponent } from './components/principal/principal.component';
-import { CadastroUsuarioComponent } from './components/cadastro-usuario/cadastro-usuario.component';
-import { PublicacaoListComponent } from './components/publicacao-list/publicacao-list.component';
+import { CadastroUsuarioComponent } from './components/tutor/cadastro-usuario/cadastro-usuario.component';
+import { PublicacaoListComponent } from './components/publicacao/publicacao-list/publicacao-list.component';
 import { InicialComponent } from './components/inicial/inicial.component';
-import { CadastroPublicacaoComponent } from './components/cadastro-publicacao/cadastro-publicacao.component';
-import { VacinasComponent } from './components/vacinas/vacinas.component';
+import { CadastroPublicacaoComponent } from './components/publicacao/cadastro-publicacao/cadastro-publicacao.component';
+import { VacinasComponent } from './components/vacina/vacinas/vacinas.component';
 import { Nav1Component } from './components/layout/nav1/nav1.component';
 import { Nav2Component } from './components/layout/nav2/nav2.component';
-import { CarteiraVacinacaoComponent } from './components/carteira-vacinacao/carteira-vacinacao.component';
+import { CarteiraVacinacaoComponent } from './components/animais/carteira-vacinacao/carteira-vacinacao.component';
 import { EmergenciaComponent } from './components/emergencia/emergencia.component';
 import { BuscarChipComponent } from './components/buscar-chip/buscar-chip.component';
-import { AnimalListComponent } from './components/animal-list/animal-list.component';
+import { AnimalListComponent } from './components/animais/animal-list/animal-list.component';
 // import { CadastroAnimalComponent } from './components/cadastro-animal/cadastro-animal.component';
-import { AnimalDetailsComponent } from './components/animal-details/animal-details.component';
+import { AnimalDetailsComponent } from './components/animais/animal-details/animal-details.component';
 
-import { NotificacoesComponent } from './components/notificacoes/notificacoes.component';
+import { NotificacoesComponent } from './components/notificacao/notificacoes/notificacoes.component';
 import { BuscarTutorComponent } from './components/buscar-tutor/buscar-tutor.component';
 
 
