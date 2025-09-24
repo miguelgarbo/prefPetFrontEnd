@@ -1,0 +1,47 @@
+.navbar{
+    margin-top: 6vh;
+    height: 14vh;
+    width: auto;
+    background-color: rgb(162, 190, 149);
+}
+
+.me-2{
+    height: 8vh;
+    width: 8vh;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.navbar-brand{
+    display: flex;
+    flex-direction: column;
+    object-fit: cover;
+}
+
+button{
+
+    background: none;
+    border: none;
+}
+
+i{
+
+    font-size: 16pt;
+}
+
+
+
+.nome{
+    font-size: medium;
+    color: rgb(255, 244, 209);
+}   
+
+.active-link {
+  background-color: rgb(109, 131, 98) !important; /* amarelinho */
+  color: rgb(220, 209, 172) !important;               /* texto preto */
+}
+
+.btn{
+    background-color: rgb(255, 244, 209);
+    color: rgb(162, 190, 149);
+}

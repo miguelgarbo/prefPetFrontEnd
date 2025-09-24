@@ -63,4 +63,24 @@
 .btn-home {
   width: 180px;
 }
+.bgLaranja{
+  background-color: rgb(249, 136, 102);
+  color: rgb(255, 244, 209);
+}
 
+.block{
+
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.direction{
+  display: flex;
+  flex-direction: column;
+}
+
+.marginTop{
+
+  margin-top: 10vh;
+}

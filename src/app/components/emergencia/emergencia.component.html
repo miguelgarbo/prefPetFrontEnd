@@ -1,12 +1,18 @@
-<br><br><br><br>
-<h2>Emergências</h2>
-<div *ngFor="let emergencia of emergencias" class="card mb-3 p-2">
+<main>
+
+<div class="container-emergencias">
+  
+  <h2 class="marginTop title">Emergências</h2>
+  <br>
+
+<div *ngFor="let emergencia of emergencias" class="card mb-3 p-2 card-emergencia">
   <h4>{{ emergencia.nome }}</h4>
   <ul class="list-unstyled mb-0">
     <li *ngFor="let contato of emergencia.contatos">
       <strong>{{ contato.nomeOrgao }}</strong> - Tel: {{ contato.telefone }} - Email: {{ contato.email }}
     </li>
   </ul>
+</div>
 </div>
 
 <div class="form-container d-flex gap-4 mt-4">
@@ -94,3 +100,4 @@
     </form>
   </div>
 </div>
+</main>

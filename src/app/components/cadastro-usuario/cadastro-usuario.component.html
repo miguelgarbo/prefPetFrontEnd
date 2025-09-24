@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-4"></div>
-    <div class="col-lg-4 centralizar marginTop">
+    <div class="col-lg-4 centralizar margin">
       <div class="card">
         <div class="card-body">
           <h3>Cadastro de Tutor</h3>
@@ -70,12 +70,15 @@
           </mdb-form-control>
           <br />
 
+          @if (tutor.id == null) {
           <!-- Confirmar senha -->
           <mdb-form-control>
             <input mdbInput type="password" id="senha2" class="form-control" [(ngModel)]="senha2" name="senha2" required/>
             <label mdbLabel class="form-label" for="senha2">Confirmar Senha</label>
           </mdb-form-control>
+  
           <br />
+        }
 
           <!-- Imagem de perfil -->
           <mdb-form-control>
@@ -84,17 +87,39 @@
           </mdb-form-control>
           <br />
 
-          <button type="button" class="btn btn-rounded" mdbRipple (click)="cadastrar()">
-            Cadastrar
+          <div class="couple-buttons">
+          <button type="button" class="btn btn-rounded" mdbRipple (click)="save()">
+            Salvar
+          </button>
+          <br>
+
+          @if (tutor.id >0) {
+
+             <button type="button" class="btn btn-warning" mdbRipple (click)="logout()">
+            Sair Da Conta
           </button>
 
+
+          <button type="button" class="btn btn-danger" mdbRipple (click)="deletar()">
+            Deletar Conta
+          </button>
+
+          
+          }
+                    </div>
+
+
+        
+          @if (tutor.id == null) {
           <div class="text-center">
             <p style="margin-top: 20px">
               Já possui uma conta? <a href="#!">Entrar</a>
             </p>
           </div>
+          }
 
         </div>
+        
       </div>
     </div>
     <div class="col-lg-4"></div>

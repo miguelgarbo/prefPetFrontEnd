@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Entidade } from '../../models/entidade';
 import { Imagem } from '../../models/imagem';
 
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-cadastro-publicacao',
@@ -45,8 +46,15 @@ salvar(){
   this.publicacaoService.save(this.publicacao).subscribe({
     next: (response) => {
       
-      alert("Publicação Feita Com Sucesso")
-      this.router.navigate(['publicacoes'])
+          Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "Publicacão Cadastrada Com Sucesso !",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+
+      this.router.navigate(['principal/publicacoes'])
     },
     error: (err) => {
       alert("Erro Ao Fazer Publicação")

@@ -2,13 +2,17 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
-import { MessageErrorComponent } from "../message-error/message-error.component";
+import { MessageErrorComponent } from "../layout/message-error/message-error.component";
 import { Tutor } from '../../models/tutor';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TutorService } from '../../services/tutor.service';
 import { CommonModule, NgIf } from '@angular/common';
 import { NotificacaoService } from '../../services/notificacao.service';
-import { LoginComponent } from '../login/login.component';
+import { LoginComponent } from '../layout/login/login.component';
+import { AnimalService } from '../../services/animal.service';
+import { Animal } from '../../models/animal';
+import Swal from 'sweetalert2'
+
 
 
 @Component({
@@ -20,14 +24,37 @@ import { LoginComponent } from '../login/login.component';
 export class BuscarTutorComponent {
 
   tutor: Tutor = new Tutor();
+  animal: Animal = new Animal();
+
   router = inject(Router)
   tutorService = inject(TutorService)
+  animalService = inject(AnimalService)
   activedRoute = inject(ActivatedRoute)
   animal_id: number = 0
 
   notificacaoService = inject(NotificacaoService)
 
   tutorEncontrado: boolean | null = null;
+
+  currentUser: Tutor = new Tutor();
+  
+    ngOnInit(){
+    this.getCurrentUser();
+    this.findAnimalById();
+  }
+  
+  getCurrentUser() {
+    this.tutorService.getCurrentUser().subscribe({
+      next: (user) => {
+        console.log("Usuário logado:", user);
+        this.currentUser = user;
+
+      },
+      error: (err) => {
+        console.error("Nenhum usuário logado", err);
+      }
+    });
+  }
 
 
   constructor() {
@@ -36,6 +63,18 @@ export class BuscarTutorComponent {
 }
 
 
+  findAnimalById(){
+    this.animalService.findById(this.animal_id).subscribe({
+
+      next:(value)=> {
+        console.log("Animal Encontrado ", value)
+        this.animal = value
+      },
+      error:(err)=> {
+        console.error(err)
+      },
+    })
+  }
 
 
   findByNome(){
@@ -55,13 +94,20 @@ export class BuscarTutorComponent {
     })
   }
 
-  //Transferindo o Animal de João para Maria
-  //ID 2 Maria, ID 1 João
+  
+  //Primeiro Id é da pessoa que foi encontrada no input, segundo ID do nosso current user
   gerarConvite(){
-    this.notificacaoService.gerarConvite(2,1, this.animal_id).subscribe({
+    this.notificacaoService.gerarConvite(this.tutor.id,this.currentUser.id, this.animal_id).subscribe({
         next:(value)=> {
          console.log("Gerou O Convite", value)   
-         alert("Convite Enviado Com Sucesso! ")
+
+         Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Convite Enviado Com Sucesso!",
+            showConfirmButton: false,
+            timer: 1000
+          });
         },
         error: (err)=> {
             console.log(err)

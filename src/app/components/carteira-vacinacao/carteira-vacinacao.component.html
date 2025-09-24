@@ -14,11 +14,21 @@
         <p>{{animal.registroGeral}}</p>
         </div>
 
-        <div class="atributo-block">
-        <p class="titleAtributo">castrado</p>
-        <p>{{animal.castrado}}</p>
-        </div>
-        
+
+        @if(animal.castrado == true){
+
+             <div class="atributo-block">
+                <p class="titleAtributo">castrado</p>
+                <p>Sim</p>
+            </div>
+        }@else {
+
+             <div class="atributo-block">
+                <p class="titleAtributo">castrado</p>
+                <p>Não</p>
+            </div>
+        }
+       
 
     </div>
     <div class="col-md-3">
@@ -42,11 +52,19 @@
     </div>
     <div class="col-md-3">
 
+        @if (animal.microchip == true) {
        
          <div class="atributo-block">
         <p class="titleAtributo">microchip</p>
-        <p>{{animal.microchip}}</p>
+        <p>{{animal.numeroMicrochip}}</p>
         </div>
+    }@else{
+            <div class="atributo-block">
+        <p class="titleAtributo">microchip</p>
+        <p>Não Possui</p>
+        </div>
+
+    }
 
         <div class="atributo-block">
         <p class="titleAtributo">data nascimento</p>

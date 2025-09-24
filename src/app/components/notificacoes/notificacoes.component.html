@@ -5,10 +5,17 @@
     <div class="col-md-4">
 
         <H2>Notificações</H2>
+        <br>
+        <br>
 
+        @if (notificacoes.length === 0) {
+
+            <h4>Sem Notificações, Por Enquanto</h4>
+    }@else {
         @for (not of notificacoes; track not.id) {
         <app-card-notificacao [notificacao]="not" [mostrar]="true"></app-card-notificacao>  
         }      
+        }
     </div>
 
     <div class="col-md-4"></div>

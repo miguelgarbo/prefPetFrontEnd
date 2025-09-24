@@ -3,7 +3,7 @@ import { Publicacao } from '../../models/publicacao';
 import { Observable } from 'rxjs';
 import { PublicacaoService } from '../../services/publicacao.service';
 import { Router } from '@angular/router';
-import { NavBarPublicacaoComponent } from "../nav-bar-publicacao/nav-bar-publicacao.component";
+import { NavBarPublicacaoComponent } from "../layout/nav-bar-publicacao/nav-bar-publicacao.component";
 
 @Component({
   selector: 'app-publicacao-list',

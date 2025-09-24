@@ -20,4 +20,5 @@ export class Animal {
     aplicacoes!: AplicacaoVacina[];
     tutor!: Tutor;
     idade!: number;
+    
 }

@@ -5,8 +5,9 @@ import { Animal } from '../../models/animal';
 import { Router } from '@angular/router';
 import { AnimalService } from '../../services/animal.service';
 import { Tutor } from '../../models/tutor';
-import { MessageErrorComponent } from "../message-error/message-error.component";
+import { MessageErrorComponent } from "../layout/message-error/message-error.component";
 import { CommonModule, NgIf } from '@angular/common';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-buscar-chip',
@@ -21,6 +22,8 @@ export class BuscarChipComponent {
   animalService = inject(AnimalService)
   router = inject(Router)
 
+  
+
 animalEncontrado: boolean | null = null;
 
   findByMicrochip(){
@@ -30,6 +33,13 @@ animalEncontrado: boolean | null = null;
       next: (animal)=>{
 
         console.log("Animal encontrado:", animal);
+          Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "Tutor Encontrado Com Sucesso!",
+                  showConfirmButton: false,
+                  timer: 1000
+                });
          this.animalEncontrado = true
          this.animal = animal;
          this.tutor = animal.tutor;
