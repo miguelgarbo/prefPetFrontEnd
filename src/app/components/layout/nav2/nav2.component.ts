@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { Tutor } from '../../models/tutor';
+import { Tutor } from '../../../models/tutor';
 import { FormsModule } from "@angular/forms";
 import { Router, RouterLink } from '@angular/router';
 import { RouterModule } from '@angular/router';
-import { TutorService } from '../../services/tutor.service';
-import { Notificacao } from '../../models/notificacao';
-import { NotificacaoService } from '../../services/notificacao.service';
+import { TutorService } from '../../../services/tutor.service';
+import { Notificacao } from '../../../models/notificacao';
+import { NotificacaoService } from '../../../services/notificacao.service';
 
 
 @Component({

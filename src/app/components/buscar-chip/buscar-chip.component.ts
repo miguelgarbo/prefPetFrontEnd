@@ -5,7 +5,7 @@ import { Animal } from '../../models/animal';
 import { Router } from '@angular/router';
 import { AnimalService } from '../../services/animal.service';
 import { Tutor } from '../../models/tutor';
-import { MessageErrorComponent } from "../message-error/message-error.component";
+import { MessageErrorComponent } from "../layout/message-error/message-error.component";
 import { CommonModule, NgIf } from '@angular/common';
 import Swal from 'sweetalert2'
 

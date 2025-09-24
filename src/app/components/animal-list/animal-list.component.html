@@ -94,19 +94,22 @@ btn-close<div class="row">
           </select>
         </div>
 
+
+
         <div class="col-md-6">
           <label class="form-label">Microchip</label>
           <select class="form-select" name="microchip" [(ngModel)]="novoAnimal.microchip">
-            <option [ngValue]="null">Não informado</option>
             <option [ngValue]="true">Sim</option>
             <option [ngValue]="false">Não</option>
           </select>
         </div>
 
+        @if(novoAnimal.microchip == true){
         <div class="col-md-6">
           <label class="form-label">Número do Microchip</label>
           <input type="text" class="form-control" name="numeroMicrochip" [(ngModel)]="novoAnimal.numeroMicrochip">
         </div>
+      }
 
         <div class="col-md-6">
           <label class="form-label">Data de Nascimento</label>

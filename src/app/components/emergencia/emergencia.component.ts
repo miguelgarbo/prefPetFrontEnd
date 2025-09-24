@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { EmergenciaService } from '../../services/emergencia.service';
 import { Emergencia } from '../../models/emergencia';
 import { CommonModule } from '@angular/common';
@@ -7,6 +7,7 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { error } from 'console';
 import { ContatoService } from '../../services/contato.service';
 import { Contato } from '../../models/contato';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-emergencia',
@@ -23,6 +24,7 @@ export class EmergenciaComponent implements OnInit {
   todosContatos: Contato[] =[];
   contatosSelecionadosIds: number[] = [];
   mostrarContatos = false;
+  activedRouter = inject(ActivatedRoute)
   
 
   constructor(

@@ -102,7 +102,7 @@ export class AnimalListComponent implements OnInit {
       sexo: this.novoAnimal.sexo!,
       castrado: this.novoAnimal.castrado!,
       microchip: this.novoAnimal.microchip ?? false,
-      numeroMicrochip: this.novoAnimal.numeroMicrochip?.trim() || '',
+      numeroMicrochip: this.novoAnimal.numeroMicrochip?.trim() || undefined,
       dataNascimento: this.novoAnimal.dataNascimento!, 
       naturalidade: this.novoAnimal.naturalidade!.trim(),
       imagemUrl: this.novoAnimal.imagemUrl?.trim() || '',

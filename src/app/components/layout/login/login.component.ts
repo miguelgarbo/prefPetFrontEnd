@@ -11,8 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { Router, Routes } from '@angular/router';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import { TutorService } from '../../services/tutor.service';
-import { Tutor } from '../../models/tutor';
+import { TutorService } from '../../../services/tutor.service';
+import { Tutor } from '../../../models/tutor';
 
 import { RouterModule } from '@angular/router';
 

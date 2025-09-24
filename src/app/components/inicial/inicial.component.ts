@@ -1,6 +1,6 @@
 import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import { LoginComponent } from "../login/login.component";
+import { LoginComponent } from "../layout/login/login.component";
 import { Router } from '@angular/router';
 import { Tutor } from '../../models/tutor';
 
@@ -20,9 +20,8 @@ export class InicialComponent {
 
 
 
-  loginNovo(){//chama o modal
+  loginNovo(){
     this.modalRef = this.modalService.open(this.modalLogin);
-    // this.modalRef.close();
   }
 
     close(){

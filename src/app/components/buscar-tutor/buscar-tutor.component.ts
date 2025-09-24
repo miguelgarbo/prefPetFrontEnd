@@ -2,13 +2,13 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
-import { MessageErrorComponent } from "../message-error/message-error.component";
+import { MessageErrorComponent } from "../layout/message-error/message-error.component";
 import { Tutor } from '../../models/tutor';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TutorService } from '../../services/tutor.service';
 import { CommonModule, NgIf } from '@angular/common';
 import { NotificacaoService } from '../../services/notificacao.service';
-import { LoginComponent } from '../login/login.component';
+import { LoginComponent } from '../layout/login/login.component';
 import { AnimalService } from '../../services/animal.service';
 import { Animal } from '../../models/animal';
 import Swal from 'sweetalert2'
