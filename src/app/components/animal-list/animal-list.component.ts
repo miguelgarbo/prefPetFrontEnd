@@ -9,8 +9,7 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { TutorService } from '../../services/tutor.service';
 import { AnimalDetailsComponent } from '../animal-details/animal-details.component';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2'
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-animal-list',
@@ -27,18 +26,14 @@ import Swal from 'sweetalert2'
 })
 export class AnimalListComponent implements OnInit {
 
-
-
   animalService = inject(AnimalService);
   tutorService = inject(TutorService);
-  modalService = inject(MdbModalService)
-  router = inject(Router)
+  modalService = inject(MdbModalService);
+  router = inject(Router);
 
-  tutor: Tutor = new Tutor;
   animais: Animal[] = [];
-  animald?: Animal;
-  animalParaSalvar!: Animal
-  animalSelecionado: any = null;
+  currentUser: Tutor = new Tutor();
+  animalSelecionado?: Animal;
 
   novoAnimal: Partial<Animal> = {
     nome: '',
@@ -54,22 +49,28 @@ export class AnimalListComponent implements OnInit {
     imagemUrl: ''
   };
 
+  modalRef?: MdbModalRef<any>;
   @ViewChild('addAnimalModal', { static: true }) modalTemplate: any;
 
   ngOnInit() {
-    this.findByTutorId();
-    this.tutorService.findById(1).subscribe({
-      next: (tutordados) => {
-        this.tutor = tutordados;
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    })
+    this.getCurrentUser();
   }
 
-  findByTutorId() {
-    this.animalService.findByTutorId(1).subscribe({
+  getCurrentUser() {
+    this.tutorService.getCurrentUser().subscribe({
+      next: (user) => {
+        console.log("Usuário logado:", user);
+        this.currentUser = user;
+        this.findByTutorId(user.id); // pega os animais do tutor logado
+      },
+      error: (err) => {
+        console.error("Nenhum usuário logado", err);
+      }
+    });
+  }
+
+  findByTutorId(tutorId: number) {
+    this.animalService.findByTutorId(tutorId).subscribe({
       next: (dados) => {
         this.animais = dados;
       },
@@ -79,33 +80,20 @@ export class AnimalListComponent implements OnInit {
     });
   }
 
-  // findById2(id: number) {
-  //   this.animalService.findById(id).subscribe({
-  //     next: (dados) => {
-  //       this.animald = dados;
-  //       console.log(this.animald);
-  //     },
-  //     error: (err) => {
-  //       console.error(err);
-  //     }
-  //   });
-  // }
-
   findById(id: number){
-    this.animalSelecionado = this.animais.find(animalSelecionado => animalSelecionado.id === id);
+    this.animalSelecionado = this.animais.find(animal => animal.id === id);
   }
 
   transferirTutela(animalId: number){
-     if (animalId) {
-    this.router.navigate(['principal/buscar-tutor', animalId])
-
-  } else {
-    alert('Selecione um animal primeiro!');
-  }
+    if (animalId) {
+      this.router.navigate(['principal/buscar-tutor', animalId]);
+    } else {
+      alert('Selecione um animal primeiro!');
+    }
   }
 
   save() {
-    this.animalParaSalvar = {
+    this.animalService.save({
       id: undefined!,
       nome: this.novoAnimal.nome!.trim(),
       especie: this.novoAnimal.especie!,
@@ -119,11 +107,9 @@ export class AnimalListComponent implements OnInit {
       naturalidade: this.novoAnimal.naturalidade!.trim(),
       imagemUrl: this.novoAnimal.imagemUrl?.trim() || '',
       aplicacoes: [],
-      tutor: this.tutor!,
+      tutor: this.currentUser, // 🔥 agora associa o animal ao user logado
       idade: undefined!
-    };
-
-    this.animalService.save(this.animalParaSalvar).subscribe({
+    }).subscribe({
       next: (animalSalvo) => {
         console.log("Animal salvo com sucesso:", animalSalvo);
         Swal.fire({
@@ -134,7 +120,7 @@ export class AnimalListComponent implements OnInit {
           timer: 1000
         });
 
-        this.findByTutorId();
+        this.findByTutorId(this.currentUser.id);
 
         if (this.modalRef) {
           this.modalRef.close();
@@ -146,9 +132,6 @@ export class AnimalListComponent implements OnInit {
       }
     });
   }
-
-
-  modalRef?: MdbModalRef<any>;
 
   openModal(modal: any) {
     this.modalRef = this.modalService.open(modal);

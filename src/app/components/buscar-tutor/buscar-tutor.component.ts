@@ -25,6 +25,7 @@ export class BuscarTutorComponent {
 
   tutor: Tutor = new Tutor();
   animal: Animal = new Animal();
+
   router = inject(Router)
   tutorService = inject(TutorService)
   animalService = inject(AnimalService)
@@ -35,15 +36,31 @@ export class BuscarTutorComponent {
 
   tutorEncontrado: boolean | null = null;
 
+  currentUser: Tutor = new Tutor();
+  
+    ngOnInit(){
+    this.getCurrentUser();
+    this.findAnimalById();
+  }
+  
+  getCurrentUser() {
+    this.tutorService.getCurrentUser().subscribe({
+      next: (user) => {
+        console.log("Usuário logado:", user);
+        this.currentUser = user;
+
+      },
+      error: (err) => {
+        console.error("Nenhum usuário logado", err);
+      }
+    });
+  }
+
 
   constructor() {
   this.animal_id = +this.activedRoute.snapshot.params['id'] || 0;
   console.log(this.animal_id)
 }
-
-  ngOnInit(){
-      this.findAnimalById();
-  }
 
 
   findAnimalById(){
@@ -77,10 +94,10 @@ export class BuscarTutorComponent {
     })
   }
 
-  //Transferindo o Animal de João para Maria
-  //Primeiro Id é da pessoa que foi encontrada no input, ID 1 João nosso current user
+  
+  //Primeiro Id é da pessoa que foi encontrada no input, segundo ID do nosso current user
   gerarConvite(){
-    this.notificacaoService.gerarConvite(this.tutor.id,1, this.animal_id).subscribe({
+    this.notificacaoService.gerarConvite(this.tutor.id,this.currentUser.id, this.animal_id).subscribe({
         next:(value)=> {
          console.log("Gerou O Convite", value)   
 

@@ -17,7 +17,7 @@ import { Tutor } from '../../models/tutor';
 import { RouterModule } from '@angular/router';
 
 import Swal from 'sweetalert2'
-import { EventEmitter } from '@angular/core';
+
 
 
 @Component({
@@ -30,7 +30,6 @@ import { EventEmitter } from '@angular/core';
 export class LoginComponent {
 
  
-  @Output() retorno = new EventEmitter<any>;
 
   tutorService = inject(TutorService);
   public current_user: Tutor = new Tutor();
@@ -53,11 +52,9 @@ export class LoginComponent {
 
               next:(userLogado)=> {
 
-                
-              
+        
                 console.log("Opa Achei: ",userLogado)
                 this.current_user = userLogado;
-                this.retorno.emit(this.current_user)
 
                  Swal.fire({
                                title: `Seja Bem Vindo(a), ${this.current_user.nome} `,
@@ -72,11 +69,7 @@ export class LoginComponent {
         this.router.navigate(['principal/animal']);
           }else{
 
-             Swal.fire({
-                icon: "error",
-                title: "Erro ao Efeturar Login",
-                text: "Email ou Senha Incorretos",
-              });
+            console.log("erro ao logar")
             
           }
         },
@@ -88,7 +81,7 @@ export class LoginComponent {
 
     if(this.email === 'adm' && this.senha === '123'){
 
-              // this.router.navigate(['principal/animal']);
+              this.router.navigate(['principal/animal']);
               console.log("Passou")
     }
 

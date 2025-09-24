@@ -5,6 +5,8 @@ import { Animal } from '../../models/animal';
 import { AplicacaoVacina } from '../../models/aplicacao-vacina';
 import { AplicacaoVacinaService } from '../../services/aplicacao-vacina.service';
 import { Router } from '@angular/router';
+import { TutorService } from '../../services/tutor.service';
+import { Tutor } from '../../models/tutor';
 
 @Component({
   selector: 'app-vacinas',
@@ -20,13 +22,30 @@ export class VacinasComponent implements OnInit {
   aplicacaoService = inject(AplicacaoVacinaService);
   router = inject(Router)
 
- ngOnInit(){
-   this.findAnimaisByTutorId();
+  tutorService= inject(TutorService)
+  currentUser: Tutor = new Tutor();
+  
+    ngOnInit(){
+    this.getCurrentUser();
+  }
+  
+  getCurrentUser() {
+    this.tutorService.getCurrentUser().subscribe({
+      next: (user) => {
+        console.log("Usuário logado:", user);
+        this.currentUser = user;
+  
+     this.findAnimaisByTutorId(this.currentUser.id);
+      },
+      error: (err) => {
+        console.error("Nenhum usuário logado", err);
+      }
+    });
   }
 
-  findAnimaisByTutorId(){
+  findAnimaisByTutorId(id: number){
 
-    this.animalService.findByTutorId(1).subscribe({
+    this.animalService.findByTutorId(id).subscribe({
 
       next: (animais) =>{
           console.log("Animais Do tutor: ",animais)
@@ -44,7 +63,6 @@ export class VacinasComponent implements OnInit {
   }
 
   
-
 
  findById(id:number){
     this.animalService.findById(id).subscribe({

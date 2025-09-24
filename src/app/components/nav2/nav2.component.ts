@@ -21,11 +21,30 @@ export class Nav2Component {
   router = inject(Router)
   notificacoes: Notificacao[] = []
   notificacaoService = inject(NotificacaoService)
+  currentUser: Tutor = new Tutor();
 
   ngOnInit(){
-    this.findById(1)
-    this.buscarNotificacoesUsuario()
-  }
+  this.getCurrentUser();
+}
+
+getCurrentUser() {
+  this.tutorService.getCurrentUser().subscribe({
+    next: (user) => {
+      console.log("Usuário logado:", user);
+      this.currentUser = user;
+
+      // só roda depois que currentUser for carregado
+      this.findById(this.currentUser.id);
+      this.buscarNotificacoesUsuario(this.currentUser.id);
+    },
+    error: (err) => {
+      console.error("Nenhum usuário logado", err);
+    }
+  });
+}
+
+
+  
 
   editarPerfil() {
   if(this.tutor.id)
@@ -33,8 +52,8 @@ export class Nav2Component {
 }
 
     
-    buscarNotificacoesUsuario(){
-      this.notificacaoService.findByTutorId(1).subscribe({
+    buscarNotificacoesUsuario(id: number){
+      this.notificacaoService.findByTutorId(id).subscribe({
         next: (notificacoes) =>{
           console.log(notificacoes)
           this.notificacoes= notificacoes;

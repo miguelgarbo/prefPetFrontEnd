@@ -70,6 +70,17 @@ export class TutorService {
     })
   }
 
+  getCurrentUser(): Observable<Tutor> {
+    return this.http.get<Tutor>(`${this.API}/current-user`);
+  }
+
+  logout(): Observable<string> {
+  return this.http.post(`${this.API}/logout`, '', { responseType: 'text' });
+}
+
+
+
+
 
   constructor() { }
 }

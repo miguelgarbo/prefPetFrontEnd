@@ -30,11 +30,6 @@ export class InicialComponent {
 
     }
 
-    retornoCurrentUser(tutor: Tutor){
-      this.modalRef.close()
-
-    }
-
   cadastro(){
     this.router.navigate(['/cadastro-usuario'])
 

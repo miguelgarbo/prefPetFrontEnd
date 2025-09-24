@@ -35,6 +35,31 @@ export class CadastroUsuarioComponent {
     }
   }
 
+  logout() {
+  this.tutorService.logout().subscribe({
+    next: (msg) => {
+      console.log(msg);
+      Swal.fire({
+        icon: 'success',
+        title: 'Logout realizado com sucesso!',
+        timer: 1500,
+        showConfirmButton: false
+      });
+      // Redirecionar para login
+      this.router.navigate(['/inicial']);
+    },
+    error: (err) => {
+      console.error('Erro ao fazer logout', err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro ao fazer logout',
+        text: 'Tente novamente'
+      });
+    }
+  });
+}
+
+
   findById(id: number){
 
     this.tutorService.findById(id).subscribe({

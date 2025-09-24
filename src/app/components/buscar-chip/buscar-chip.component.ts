@@ -22,6 +22,8 @@ export class BuscarChipComponent {
   animalService = inject(AnimalService)
   router = inject(Router)
 
+  
+
 animalEncontrado: boolean | null = null;
 
   findByMicrochip(){
