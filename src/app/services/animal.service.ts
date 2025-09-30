@@ -38,4 +38,8 @@ export class AnimalService {
   save(animal: Partial<Animal>): Observable<Animal> {
     return this.http.post<Animal>(`${this.apiUrl}/save`, animal);
   }
+
+  update(animal: Animal): Observable<Animal>{
+      return this.http.put<Animal>(`${this.apiUrl}/update/${animal.id}`, animal)
+    }
 }

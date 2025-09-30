@@ -162,4 +162,8 @@ export class AnimalListComponent implements OnInit {
       imagemUrl: ''
     };
   }
+  
+    onAnimalSaved() {
+    this.animalSelecionado = undefined;  // Limpar a seleção do animal
+  }
 }

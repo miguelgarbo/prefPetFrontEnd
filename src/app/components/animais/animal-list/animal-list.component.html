@@ -3,7 +3,9 @@ btn-close<div class="row">
 
   <div class="col-8 d-flex flex-column justify-content-center align-items-center animal-menu pt-5 p-4">
     <h1>Meus Animais</h1>
-    <app-animal-details *ngIf="animalSelecionado" [animal]="animalSelecionado"></app-animal-details>
+    <app-animal-details *ngIf="animalSelecionado" [animal]="animalSelecionado" (animalSaved)="onAnimalSaved()">
+    </app-animal-details>
+
 
     <div class="row g-3 w-100 my-3 animal-list">
       @for (animal of animais; track animal.id) {
@@ -13,15 +15,16 @@ btn-close<div class="row">
             <img class="img-animal" [src]="animal.imagemUrl" alt="{{ animal.nome }}">
             <div class="container-info m-3 d-flex flex-column">
               <h6 class="animal-name">{{ animal.nome }} | {{ animal.especie }}</h6>
-              @if (animal.microchip) {
+              @if (animal.microchip || !animal.numeroMicrochip==null) {
               <h6 class="animal-microchip">microchip: {{ animal.numeroMicrochip }}</h6>
               }
               @else {
               <h6 class="animal-microchip">microchip:<mark>SEM MICROCHIP</mark></h6>
               }
-               <button type="button" class="button-icon" title="Transfêrencia de Tutela" (click)="transferirTutela(animal.id)">
+              <button type="button" class="button-icon" title="Transfêrencia de Tutela"
+                (click)="transferirTutela(animal.id)">
                 <i class="fas fa-exchange-alt"></i>
-            </button>
+              </button>
             </div>
           </div>
         </div>
@@ -107,16 +110,17 @@ btn-close<div class="row">
         @if(novoAnimal.microchip == true){
         <div class="col-md-6">
           <label class="form-label">Número do Microchip</label>
-          <input type="text" class="form-control" name="numeroMicrochip" [(ngModel)]="novoAnimal.numeroMicrochip">
+          <input type="text" class="form-control" name="numeroMicrochip" [(ngModel)]="novoAnimal.numeroMicrochip"
+            required>
         </div>
-      }
+        }
 
         <div class="col-md-6">
           <label class="form-label">Data de Nascimento</label>
           <input type="date" class="form-control" name="dataNascimento" [(ngModel)]="novoAnimal.dataNascimento"
             [max]="hoje" required>
         </div>
-        
+
         <div class="col-md-6">
           <label class="form-label">Naturalidade</label>
           <input type="text" class="form-control" name="naturalidade" [(ngModel)]="novoAnimal.naturalidade" required>

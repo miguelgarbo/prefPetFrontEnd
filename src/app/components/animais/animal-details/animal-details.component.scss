@@ -1,9 +1,23 @@
-
-.animal-container {
-  position: relative;
-  background: transparent; /* fundo cinza */
-  
+.field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .5rem;
 }
+
+  label {
+    font-weight: 500;
+    color: black;
+  }
+
+  span, input, select {
+    flex: 1;
+    text-align: right;
+  }
+
+  input, select {
+    max-width: 200px; // não deixa "estourar" o layout
+  }
 
 .animal-info {
   background: #608a76;
@@ -11,56 +25,27 @@
   padding: 1.5rem;
   position: relative;
   z-index: 2;
+  color: black;
 }
 
-.animal-photo {
+.nome-animal {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  color: black;
+}
+  input {
+    max-width: 150px;
+  }
+
+  .animal-photo {
     width: 60%;
     aspect-ratio: 1 / 1;
     background-size: cover;
     object-fit: cover;      
 }
 
-.divider {
-  width: 1px;
-  background: #333;
-  height: 100%;
-}
-
-.animal-selection {
-  position: relative;
-  top: -40px; /* faz o card "sobrepor" */
-  z-index: 1;
-}
-
-.animal-option {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #555;
-  padding: 0.8rem 1.5rem;
-  color: white;
-}
-
-.animal-icon {
-  width: 40px;
-  height: 40px;
-  background: #999;
-}
-
-.nome-animal{
-  color: black;
-}
-
-p{
-    color: black;
-}
-
-svg{
-  cursor: pointer;
-}
-
-mark {
-  background-color: transparent; /* remove o amarelo padrão */
-  color: #b00c1a  ; /* deixa o texto em vermelho */
-  font-weight: bold; /* opcional, para destacar */
+.field input,
+.field select {
+  text-align: left;    // garante alinhamento
 }

@@ -3,126 +3,81 @@
     <div class="animal-info shadow">
         <div class="nome-animal w-100 d-flex justify-content-center">
             <h3><strong>{{ animal.nome }} | {{animal.especie}}</strong></h3>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="dark"
+                    class="bi bi-pencil-fill mb-2" viewBox="0 0 16 16" (click)="toggleEdit()" style="cursor: pointer">
+                    <path
+                        d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z">
+                    </path>
+                </svg>
+            </div>
         </div>
         <div class="row">
             <div class="col-3 d-flex justify-content-center flex-column">
                 <img src="{{animal.imagemUrl}}" alt="{{animal.nome}}" class="animal-photo ">
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="dark"
-                        class="bi bi-pencil-fill mt-3" viewBox="0 0 16 16">
-                        <path
-                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z">
-                        </path>
-                    </svg>
-                </div>
             </div>
-
             <div class="col-4">
-                <div class="RG-container d-flex justify-content-between align-items-center w-100">
-                    <p>Registro Geral: {{ animal.registroGeral }}</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="dark" class="bi bi-pencil-fill"
-                        viewBox="0 0 16 16">
-                        <path
-                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z">
-                        </path>
-                    </svg>
+                <!-- Registro Geral -->
+                <div class="field">
+                    <label>Registro Geral:</label>
+                    <span *ngIf="!editMode">{{ animal.registroGeral }}</span>
+                    <input *ngIf="editMode" [(ngModel)]="editedAnimal.registroGeral" />
                 </div>
 
-                <!-- Espécie -->
-                <div class="especie-container d-flex justify-content-between align-items-center w-100">
-                    <p>Sexo: {{ animal.sexo }}</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="dark" class="bi bi-pencil-fill"
-                        viewBox="0 0 16 16">
-                        <path
-                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z">
-                        </path>
-                    </svg>
+                <!-- Sexo -->
+                <div class="field">
+                    <label>Sexo:</label>
+                    <span *ngIf="!editMode">{{ animal.sexo }}</span>
+                    <select *ngIf="editMode" [(ngModel)]="editedAnimal.sexo">
+                        <option value="Macho">Macho</option>
+                        <option value="Fêmea">Fêmea</option>
+                    </select>
                 </div>
 
                 <!-- Cor -->
-                <div class="cor-container d-flex justify-content-between align-items-center w-100">
-                    <p>Cor: {{ animal.cor }}</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="dark" class="bi bi-pencil-fill"
-                        viewBox="0 0 16 16">
-                        <path
-                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z">
-                        </path>
-                    </svg>
-                </div>
-
-                <!-- Data Nascimento -->
-                <div class="data-nascimento-container d-flex justify-content-between align-items-center w-100">
-                    <p>Data Nascimento: {{ animal.dataNascimento }}</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="dark" class="bi bi-pencil-fill"
-                        viewBox="0 0 16 16">
-                        <path
-                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z">
-                        </path>
-                    </svg>
+                <div class="field">
+                    <label>Cor:</label>
+                    <span *ngIf="!editMode">{{ animal.cor }}</span>
+                    <input *ngIf="editMode" [(ngModel)]="editedAnimal.cor" />
                 </div>
             </div>
 
-            <!-- Separador -->
-            <div class="col-1 d-flex justify-content-center">
-                <div class="divider"></div>
-            </div>
-
-            <!-- Informações lado direito -->
             <div class="col-4">
                 <!-- Microchip -->
-                <div class="microchip-container d-flex justify-content-between align-items-center w-100">
-                    @if (animal.microchip) {
-                    <p>Microchip: {{ animal.numeroMicrochip }}</p>
-                    }
-                    @else {
-                    <p>Microchip: <mark>SEM MICROCHIP</mark></p>
-                    }
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="dark" class="bi bi-pencil-fill"
-                        viewBox="0 0 16 16">
-                        <path
-                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z">
-                        </path>
-                    </svg>
+                <div class="field">
+                    <label>Microchip:</label>
+                    <span *ngIf="!editMode">
+                        {{ animal.microchip ? animal.numeroMicrochip || 'SEM MICROCHIP' : 'SEM MICROCHIP' }}
+                    </span>
+                    <div *ngIf="editMode" class="d-flex gap-2">
+                        <select [(ngModel)]="editedAnimal.microchip">
+                            <option [ngValue]="true">Sim</option>
+                            <option [ngValue]="false">Não</option>
+                        </select>
+                        <input *ngIf="editedAnimal.microchip" [(ngModel)]="editedAnimal.numeroMicrochip"
+                            [placeholder]="'Digite o número do microchip'"
+                            [value]="editedAnimal.numeroMicrochip || ''" />
+                    </div>
                 </div>
+
 
                 <!-- Castrado -->
-                <div class="castrado-container d-flex justify-content-between align-items-center w-100">
-                    @if (animal.castrado) {
-                    <p>Castrado: SIM</p>
-                    }
-                    @else {
-                    <p>Castrado: NÃO</p>
-                    }
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="dark" class="bi bi-pencil-fill"
-                        viewBox="0 0 16 16">
-                        <path
-                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z">
-                        </path>
-                    </svg>
+                <div class="field">
+                    <label>Castrado:</label>
+                    <span *ngIf="!editMode">{{ animal.castrado ? 'SIM' : 'NÃO' }}</span>
+                    <select *ngIf="editMode" [(ngModel)]="editedAnimal.castrado">
+                        <option [ngValue]="true">Sim</option>
+                        <option [ngValue]="false">Não</option>
+                    </select>
+                </div>
+                <!-- Botão Salvar -->
+                <div *ngIf="editMode" class="d-flex justify-content-end mt-3">
+                    <button class="btn btn-success" (click)="saveChanges()"
+                        [disabled]="editedAnimal.microchip && !editedAnimal.numeroMicrochip">
+                        Salvar
+                    </button>
                 </div>
 
-                <!-- Naturalidade -->
-                <div class="naturalidade-container d-flex justify-content-between align-items-center w-100">
-                    <p>Naturalidade: {{ animal.naturalidade }}</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="dark" class="bi bi-pencil-fill"
-                        viewBox="0 0 16 16">
-                        <path
-                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z">
-                        </path>
-                    </svg>
-                </div>
 
-                <!-- Idade -->
-                <div class="idade-container d-flex justify-content-between align-items-center w-100">
-                    <p>Idade: {{ animal.idade }}</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="dark" class="bi bi-pencil-fill"
-                        viewBox="0 0 16 16">
-                        <path
-                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z">
-                        </path>
-                    </svg>
-                </div>
             </div>
         </div>
-    </div>
