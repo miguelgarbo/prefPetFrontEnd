@@ -1,12 +1,7 @@
-import {
-  Component,
-  inject,
-  Input,
-  model,
-  Output,
-  TemplateRef,
-  ViewChild,
-} from '@angular/core';
+
+
+import { Component, EventEmitter, Output, inject, TemplateRef, ViewChild } from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { Router, Routes } from '@angular/router';
@@ -17,6 +12,8 @@ import { Tutor } from '../../../models/tutor';
 import { RouterModule } from '@angular/router';
 
 import Swal from 'sweetalert2'
+import { LoginService } from '../../../services/login.service';
+import { Login } from '../../../models/login';
 
 
 
@@ -29,10 +26,10 @@ import Swal from 'sweetalert2'
 })
 export class LoginComponent {
 
- 
-
-  tutorService = inject(TutorService);
+  loginService = inject(LoginService);
   public current_user: Tutor = new Tutor();
+  loginData = new Login();
+  @Output() loginSucesso = new EventEmitter<void>();
 
   modalService = inject(MdbModalService);
   @ViewChild('modalLogin') modalLogin!: TemplateRef<any>;
@@ -44,48 +41,30 @@ export class LoginComponent {
   router = inject(Router);
 
   login(){
-    this.tutorService.login(this.email, this.senha).subscribe({
-        next: (bool) =>{
-          if(bool == true){
-            console.log(bool)
-            this.tutorService.findByEmail(this.email).subscribe({
+    this.loginService.logar(this.loginData).subscribe({
+        next: (token) =>{
+          if(token){
+            console.log(token)
+              this.loginService.addToken(token)
+              Swal.fire({
+                          title: `Seja Bem Vindo(a) `,
+                          icon: "success",
+                          timer: 1500
+                             });
+                            }
 
-              next:(userLogado)=> {
+                this.router.navigate(['/principal']);
 
-        
-                console.log("Opa Achei: ",userLogado)
-                this.current_user = userLogado;
+              },error:(err)=>{
 
                  Swal.fire({
-                               title: `Seja Bem Vindo(a), ${this.current_user.nome} `,
-                               icon: "success",
-                               timer: 1500
+                               title: `Email Ou Senha Incorretos `,
+                               icon: "warning",
+                               timer: 1000
                              });
-              },error:(err)=>{
                 console.error(err)
               }
             })
-
-        this.router.navigate(['principal/animal']);
-          }else{
-
-            console.log("erro ao logar")
-            
-          }
-        },
-        error: (err)=>{
-
-          console.error(err)
-        }
-    })
-
-    if(this.email === 'adm' && this.senha === '123'){
-
-              this.router.navigate(['principal/animal']);
-              console.log("Passou")
-    }
-
-
   }
   cadastrarRota(){
     this.router.navigate(['cadastro-usuario']);

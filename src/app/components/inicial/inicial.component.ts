@@ -18,8 +18,6 @@ export class InicialComponent {
   modalRef!: MdbModalRef<any>;
 
 
-
-
   loginNovo(){
     this.modalRef = this.modalService.open(this.modalLogin);
   }
