@@ -49,14 +49,12 @@ export class EmergenciaComponent implements OnInit {
     });
   }
 
-
-
   adicionarEmergencia(): void {
     const emergenciaParaSalvar = {
       nome: this.novaEmergencia.nome,
       contatos: this.contatosSelecionadosIds.map(id => ({ id } as Contato)) // ele referencia pelo id, pois ja existem contatos no banco
     } as Emergencia;
-
+    console.log("Enviando contato:", JSON.stringify(emergenciaParaSalvar));
     this.emergenciaService.save(emergenciaParaSalvar).subscribe({
       next: () => {
         this.listarEmergencias();
@@ -84,6 +82,9 @@ export class EmergenciaComponent implements OnInit {
       },
       error: (err) => console.error('Erro ao salvar contato', err)
     });
+  }
+  excluirContato(): void {
+
   }
 }
 
