@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import Swal from 'sweetalert2'
 import { LoginService } from '../../../services/login.service';
 import { Login } from '../../../models/login';
+import { Usuario } from '../../../models/usuario';
 
 
 
@@ -26,8 +27,9 @@ import { Login } from '../../../models/login';
 })
 export class LoginComponent {
 
+
   loginService = inject(LoginService);
-  public current_user: Tutor = new Tutor();
+  currentUser = new Usuario();
   loginData = new Login();
   @Output() loginSucesso = new EventEmitter<void>();
 
@@ -35,27 +37,32 @@ export class LoginComponent {
   @ViewChild('modalLogin') modalLogin!: TemplateRef<any>;
   modalRef!: MdbModalRef<any>;
 
-  email!: string;
-  senha!: string;
-
   router = inject(Router);
 
   login(){
     this.loginService.logar(this.loginData).subscribe({
         next: (token) =>{
           if(token){
-            console.log(token)
-              this.loginService.addToken(token)
+            this.currentUser = this.loginService.getCurrentUser()
+
+             console.log(token)
+             this.loginService.addToken(token)
+
+              console.log("usuario logado")
+              
+              console.log(this.currentUser.nome)
               Swal.fire({
-                          title: `Seja Bem Vindo(a) `,
+                          title: `Seja Bem Vindo(a) ${this.currentUser.nome} !`,
                           icon: "success",
                           timer: 1500
                              });
                             }
+                            this.loginSucesso.emit()
 
                 this.router.navigate(['/principal']);
 
               },error:(err)=>{
+              console.log(this.currentUser)
 
                  Swal.fire({
                                title: `Email Ou Senha Incorretos `,

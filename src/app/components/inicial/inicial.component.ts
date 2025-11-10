@@ -22,14 +22,12 @@ export class InicialComponent {
     this.modalRef = this.modalService.open(this.modalLogin);
   }
 
-    close(){
+  close(){
     this.modalRef.close();
-
-    }
+  }
 
   cadastro(){
     this.router.navigate(['/cadastro-usuario'])
-
   }
 
   acessarEmergencia() {
