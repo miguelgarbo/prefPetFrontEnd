@@ -62,6 +62,6 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
   </div>
   <div class="modal-body">
-    <app-login></app-login>
+  <app-login (loginSucesso)="close()"></app-login>
   </div>
 </ng-template>
