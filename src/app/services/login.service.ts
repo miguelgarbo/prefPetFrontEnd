@@ -15,7 +15,7 @@ export class LoginService {
 
   http = inject(HttpClient)
   API =  "http://localhost:8080/login"
-
+  
   constructor(){}
 
   logar(login: Login): Observable<string>{
@@ -23,6 +23,7 @@ export class LoginService {
   }
 
   addToken(token: string){
+    this.removeToken()
     localStorage.setItem('token', token)
   }
 
