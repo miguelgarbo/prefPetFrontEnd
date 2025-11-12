@@ -7,6 +7,7 @@ export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
 
   let router = inject(Router);
   let token = localStorage.getItem('token');
+  let rotasPublicas = ['login', 'inicial', 'cadastro-usuario', 'emergencia'];
   
   console.log('entrou aqui 1');
   if (token && !router.url.includes('/login')) {

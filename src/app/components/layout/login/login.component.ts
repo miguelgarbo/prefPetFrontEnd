@@ -5,7 +5,7 @@ import { Component, EventEmitter, Output, inject, TemplateRef, ViewChild } from 
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { Router, Routes } from '@angular/router';
-import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { MdbModalRef, MdbModalService, MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { TutorService } from '../../../services/tutor.service';
 import { Tutor } from '../../../models/tutor';
 
@@ -21,7 +21,7 @@ import { Usuario } from '../../../models/usuario';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MdbFormsModule, FormsModule, RouterModule],
+  imports: [MdbFormsModule, FormsModule, RouterModule, MdbModalModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
