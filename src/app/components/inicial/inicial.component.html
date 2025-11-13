@@ -54,6 +54,20 @@
     </button>
   </div>
 
+  <div class="home-card home-card-small vet-block">
+
+<p>Entrar Como Veterinário</p>
+  <button class="btn btn-rounded button-vet" (click)="vetCad()">
+          <i class="bi bi-heart-pulse"></i>
+      Veterinario Cadastro
+    </button>
+
+     <button class="btn btn-rounded button-vet">
+          <i class="bi bi-heart-pulse"></i>
+      Veterinario Login
+    </button>
+</div>
+
 </div>
 
 <ng-template #modalLogin let-modal>
@@ -65,3 +79,4 @@
   <app-login (loginSucesso)="close()"></app-login>
   </div>
 </ng-template>
+

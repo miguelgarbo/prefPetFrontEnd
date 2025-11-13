@@ -7,6 +7,8 @@ import { AplicacaoVacinaService } from '../../../services/aplicacao-vacina.servi
 import { Router } from '@angular/router';
 import { TutorService } from '../../../services/tutor.service';
 import { Tutor } from '../../../models/tutor';
+import { LoginService } from '../../../services/login.service';
+import { Usuario } from '../../../models/usuario';
 
 @Component({
   selector: 'app-vacinas',
@@ -23,25 +25,28 @@ export class VacinasComponent implements OnInit {
   router = inject(Router)
 
   tutorService= inject(TutorService)
-  currentUser: Tutor = new Tutor();
+  loginService = inject(LoginService)
+  currentUser: Usuario = this.loginService.getCurrentUser()
   
     ngOnInit(){
-    this.getCurrentUser();
   }
   
-  getCurrentUser() {
-    this.tutorService.getCurrentUser().subscribe({
-      next: (user) => {
-        console.log("Usuário logado:", user);
-        this.currentUser = user;
+
+
+
+  // getCurrentUser() {
+  //   this.tutorService.getCurrentUser().subscribe({
+  //     next: (user) => {
+  //       console.log("Usuário logado:", user);
+  //       this.currentUser = user;
   
-     this.findAnimaisByTutorId(this.currentUser.id);
-      },
-      error: (err) => {
-        console.error("Nenhum usuário logado", err);
-      }
-    });
-  }
+  //    this.findAnimaisByTutorId(this.currentUser.id);
+  //     },
+  //     error: (err) => {
+  //       console.error("Nenhum usuário logado", err);
+  //     }
+  //   });
+  // }
 
   findAnimaisByTutorId(id: number){
 

@@ -5,7 +5,7 @@ import { Component, EventEmitter, Output, inject, TemplateRef, ViewChild } from 
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { Router, Routes } from '@angular/router';
-import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { MdbModalRef, MdbModalService, MdbModalModule } from 'mdb-angular-ui-kit/modal'; // ✅ adicione aqui
 import { TutorService } from '../../../services/tutor.service';
 import { Tutor } from '../../../models/tutor';
 
@@ -15,19 +15,21 @@ import Swal from 'sweetalert2'
 import { LoginService } from '../../../services/login.service';
 import { Login } from '../../../models/login';
 import { Usuario } from '../../../models/usuario';
+import { MessageErrorComponent } from '../message-error/message-error.component';
 
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MdbFormsModule, FormsModule, RouterModule],
+  imports: [MdbFormsModule, FormsModule, RouterModule, MdbModalModule, MessageErrorComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
 
 
+  deuErrado!: boolean;
   loginService = inject(LoginService);
   currentUser = new Usuario();
   loginData = new Login();
@@ -51,28 +53,21 @@ export class LoginComponent {
               console.log("usuario logado")
               
               console.log(this.currentUser.nome)
-              Swal.fire({
-                          title: `Seja Bem Vindo(a) ${this.currentUser.nome} !`,
-                          icon: "success",
-                          timer: 1500
-                             });
-                            }
-                            this.loginSucesso.emit()
+              this.deuErrado = false
+              this.router.navigate(['principal/animal']);
 
-                this.router.navigate(['/principal']);
-
-              },error:(err)=>{
+            }},
+              error:(err)=>{
               console.log(this.currentUser)
 
-                 Swal.fire({
-                               title: `Email Ou Senha Incorretos `,
-                               icon: "warning",
-                               timer: 1000
-                             });
+                
                 console.error(err)
+                this.deuErrado = true
+
               }
             })
   }
+
   cadastrarRota(){
     this.router.navigate(['cadastro-usuario']);
   }

@@ -4,7 +4,7 @@
     <div class="col-lg-4 centralizar margin">
       <div class="card">
         <div class="card-body">
-          <h3>Cadastro de Tutor</h3>
+          <h3>Cadastro de {{title}}</h3>
           <br />
 
           <!-- Nome -->
@@ -70,6 +70,16 @@
           </mdb-form-control>
           <br />
 
+        @if (title=="Veterinário") {
+          <!-- CRMV -->
+          <mdb-form-control>
+            <input mdbInput type="text" id="crmv" class="form-control" [(ngModel)]="tutor.senha" name="senha" required/>
+            <label mdbLabel class="form-label" for="senha">Senha</label>
+          </mdb-form-control>
+          <br />
+          }
+
+
           @if (tutor.id == null) {
           <!-- Confirmar senha -->
           <mdb-form-control>
@@ -88,7 +98,7 @@
           <br />
 
           <div class="couple-buttons">
-          <button type="button" class="btn btn-rounded" mdbRipple (click)="save()">
+          <button type="button" class="btn btn-rounded" mdbRipple (click)="saveTutor()">
             Salvar
           </button>
           <br>

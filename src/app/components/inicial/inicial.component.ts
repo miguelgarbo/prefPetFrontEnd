@@ -16,7 +16,7 @@ export class InicialComponent {
   modalService = inject(MdbModalService); //para conseguir abrir a modal
   @ViewChild("modalLogin") modalLogin!: TemplateRef<any>;
   modalRef!: MdbModalRef<any>;
-
+  private router = inject(Router);
 
   loginNovo(){
     this.modalRef = this.modalService.open(this.modalLogin);
@@ -38,5 +38,9 @@ export class InicialComponent {
     this.router.navigate(['/buscar-chip']);
   }
 
-  private router = inject(Router);
+  vetCad(){
+    console.log("oi")
+        this.router.navigate(['/veterinario-cadastro']);
+  }
+
 }

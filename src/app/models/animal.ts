@@ -1,5 +1,6 @@
 import { AplicacaoVacina } from "./aplicacao-vacina";
 import { Tutor } from "./tutor";
+import { Usuario } from "./usuario";
 import { Vacina } from "./vacina";
 
 
@@ -18,7 +19,7 @@ export class Animal {
     naturalidade!: string;
     imagemUrl!: string;
     aplicacoes!: AplicacaoVacina[];
-    tutor!: Tutor;
+    usuario!: Usuario;
     idade!: number;
     
 }
