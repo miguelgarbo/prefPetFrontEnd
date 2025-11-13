@@ -3,7 +3,8 @@ import { EmergenciaService } from '../../services/emergencia.service';
 import { Emergencia } from '../../models/emergencia';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import { MdbFormsModule} from 'mdb-angular-ui-kit/forms';
+import { MdbModalService, MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { error } from 'console';
 import { ContatoService } from '../../services/contato.service';
 import { Contato } from '../../models/contato';
@@ -12,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-emergencia',
   templateUrl: './emergencia.component.html',
-  imports: [FormsModule, MdbFormsModule, CommonModule],
+  imports: [FormsModule, MdbFormsModule, CommonModule, MdbModalModule],
   styleUrls: ['./emergencia.component.scss']
 })
 export class EmergenciaComponent implements OnInit {
@@ -29,7 +30,8 @@ export class EmergenciaComponent implements OnInit {
 
   constructor(
     private emergenciaService: EmergenciaService, 
-    private contatoService: ContatoService) { }
+    private contatoService: ContatoService,
+    private modalService: MdbModalService) { }
 
   ngOnInit(): void {
     this.listarEmergencias();
@@ -49,14 +51,12 @@ export class EmergenciaComponent implements OnInit {
     });
   }
 
-
-
   adicionarEmergencia(): void {
     const emergenciaParaSalvar = {
       nome: this.novaEmergencia.nome,
       contatos: this.contatosSelecionadosIds.map(id => ({ id } as Contato)) // ele referencia pelo id, pois ja existem contatos no banco
     } as Emergencia;
-
+    console.log("Enviando contato:", JSON.stringify(emergenciaParaSalvar));
     this.emergenciaService.save(emergenciaParaSalvar).subscribe({
       next: () => {
         this.listarEmergencias();
@@ -84,6 +84,9 @@ export class EmergenciaComponent implements OnInit {
       },
       error: (err) => console.error('Erro ao salvar contato', err)
     });
+  }
+  excluirContato(): void {
+
   }
 }
 
