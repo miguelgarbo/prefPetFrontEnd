@@ -3,13 +3,13 @@
   <div class="container-fluid">
     <a class="navbar-brand">
       <img
-        [src]="tutor.imagemUrlPerfil"
+        [src]="currentUser.imagemUrlPerfil"
         class="me-2"
         height="20"
         alt="MDB Logo"
       />
       <div class="nome">
-        <small class="nome">{{tutor.nome}}</small>
+        <small class="nome">{{currentUser.nome}}</small>
         
        <button type="button" (click)="editarPerfil()">
   <i class="fa-solid fa-pen"></i>

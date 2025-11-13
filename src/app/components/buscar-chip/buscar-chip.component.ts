@@ -8,6 +8,7 @@ import { Tutor } from '../../models/tutor';
 import { MessageErrorComponent } from "../layout/message-error/message-error.component";
 import { CommonModule, NgIf } from '@angular/common';
 import Swal from 'sweetalert2'
+import { Usuario } from '../../models/usuario';
 
 @Component({
   selector: 'app-buscar-chip',
@@ -18,7 +19,7 @@ import Swal from 'sweetalert2'
 export class BuscarChipComponent {
 
   animal: Animal = new Animal();
-  tutor: Tutor = new Tutor();
+  usuario: Usuario = new Usuario();
   animalService = inject(AnimalService)
   router = inject(Router)
 
@@ -42,7 +43,7 @@ animalEncontrado: boolean | null = null;
                 });
          this.animalEncontrado = true
          this.animal = animal;
-         this.tutor = animal.tutor;
+         this.usuario = animal.usuario;
       },
       error: (err) => {
 

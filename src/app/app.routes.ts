@@ -17,6 +17,8 @@ import { AnimalDetailsComponent } from './components/animais/animal-details/anim
 
 import { NotificacoesComponent } from './components/notificacao/notificacoes/notificacoes.component';
 import { BuscarTutorComponent } from './components/buscar-tutor/buscar-tutor.component';
+import { VeterinarioDetailsComponent } from './components/veterinario-details/veterinario-details.component';
+import { loginGuard } from './auth/login.guard';
 
 
 
@@ -30,6 +32,7 @@ export const routes: Routes = [
 {path: 'emergencia', component: EmergenciaComponent},
 {path: 'cadastro-usuario', component: CadastroUsuarioComponent},
 {path: 'buscar-chip', component: BuscarChipComponent} ,
+{path: 'veterinario-cadastro', component: VeterinarioDetailsComponent},
 
 {path:'principal', component: PrincipalComponent, 
     
@@ -40,7 +43,7 @@ export const routes: Routes = [
         {path:":id", component: AnimalDetailsComponent},
     ]},
 
-    {path: 'buscar-chip', component: BuscarChipComponent} ,
+    {path: 'buscar-chip', component: BuscarChipComponent, canActivate: [loginGuard]},
     {path: 'emergencia', component: EmergenciaComponent},
     {path: 'vacinas', component: VacinasComponent},
     {path: 'publicacoes', component: PublicacaoListComponent},

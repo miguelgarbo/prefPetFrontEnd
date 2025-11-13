@@ -15,6 +15,7 @@ import Swal from 'sweetalert2'
 import { LoginService } from '../../../services/login.service';
 import { Login } from '../../../models/login';
 import { Usuario } from '../../../models/usuario';
+import { MessageErrorComponent } from '../message-error/message-error.component';
 
 
 
@@ -28,6 +29,7 @@ import { Usuario } from '../../../models/usuario';
 export class LoginComponent {
 
 
+  deuErrado!: boolean;
   loginService = inject(LoginService);
   currentUser = new Usuario();
   loginData = new Login();
@@ -51,28 +53,21 @@ export class LoginComponent {
               console.log("usuario logado")
               
               console.log(this.currentUser.nome)
-              Swal.fire({
-                          title: `Seja Bem Vindo(a) ${this.currentUser.nome} !`,
-                          icon: "success",
-                          timer: 1500
-                             });
-                            }
-                            this.loginSucesso.emit()
+              this.deuErrado = false
+              this.router.navigate(['principal/animal']);
 
-                this.router.navigate(['/principal']);
-
-              },error:(err)=>{
+            }},
+              error:(err)=>{
               console.log(this.currentUser)
 
-                 Swal.fire({
-                               title: `Email Ou Senha Incorretos `,
-                               icon: "warning",
-                               timer: 1000
-                             });
+                
                 console.error(err)
+                this.deuErrado = true
+
               }
             })
   }
+
   cadastrarRota(){
     this.router.navigate(['cadastro-usuario']);
   }

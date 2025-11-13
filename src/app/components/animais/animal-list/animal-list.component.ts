@@ -10,6 +10,9 @@ import { TutorService } from '../../../services/tutor.service';
 import { AnimalDetailsComponent } from '../animal-details/animal-details.component';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { LoginService } from '../../../services/login.service';
+import { log } from 'node:util';
+import { Usuario } from '../../../models/usuario';
 
 @Component({
   selector: 'app-animal-list',
@@ -28,11 +31,12 @@ export class AnimalListComponent implements OnInit {
 
   animalService = inject(AnimalService);
   tutorService = inject(TutorService);
+  loginService = inject(LoginService)
   modalService = inject(MdbModalService);
   router = inject(Router);
 
   animais: Animal[] = [];
-  currentUser: Tutor = new Tutor();
+  currentUser: Usuario = this.loginService.getCurrentUser()
   animalSelecionado?: Animal;
 
   hoje: string = new Date().toISOString().split('T')[0];
@@ -55,24 +59,27 @@ export class AnimalListComponent implements OnInit {
   @ViewChild('addAnimalModal', { static: true }) modalTemplate: any;
 
   ngOnInit() {
-    this.getCurrentUser();
+    
   }
 
-  getCurrentUser() {
-    this.tutorService.getCurrentUser().subscribe({
-      next: (user) => {
-        console.log("Usuário logado:", user);
-        this.currentUser = user;
-        this.findByTutorId(user.id); // pega os animais do tutor logado
-      },
-      error: (err) => {
-        console.error("Nenhum usuário logado", err);
-      }
-    });
-  }
+  // getCurrentUser() {
 
-  findByTutorId(tutorId: number) {
-    this.animalService.findByTutorId(tutorId).subscribe({
+   
+
+  //   this.loginService.getCurrentUser().subscribe({
+  //     next: (usuario) => {
+  //       console.log("Usuário logado:", usuario);
+  //       this.currentUser = user;
+  //       this.findByTutorId(user.id); // pega os animais do tutor logado
+  //     },
+  //     error: (err) => {
+  //       console.error("Nenhum usuário logado", err);
+  //     }
+  //   });
+  // }
+
+  findByTutorId() {
+    this.animalService.findByTutorId(this.currentUser.id).subscribe({
       next: (dados) => {
         this.animais = dados;
       },
@@ -109,7 +116,7 @@ export class AnimalListComponent implements OnInit {
       naturalidade: this.novoAnimal.naturalidade!.trim(),
       imagemUrl: this.novoAnimal.imagemUrl?.trim() || '',
       aplicacoes: [],
-      tutor: this.currentUser, // 🔥 agora associa o animal ao user logado
+      usuario: this.currentUser, // 🔥 agora associa o animal ao user logado
       idade: undefined!
     }).subscribe({
       next: (animalSalvo) => {
@@ -122,7 +129,7 @@ export class AnimalListComponent implements OnInit {
           timer: 1000
         });
 
-        this.findByTutorId(this.currentUser.id);
+        this.findByTutorId();
 
         if (this.modalRef) {
           this.modalRef.close();

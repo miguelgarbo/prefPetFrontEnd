@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { TutorService } from '../../../services/tutor.service';
 import { Notificacao } from '../../../models/notificacao';
 import { NotificacaoService } from '../../../services/notificacao.service';
+import { Usuario } from '../../../models/usuario';
+import { LoginService } from '../../../services/login.service';
 
 
 @Component({
@@ -16,40 +18,22 @@ import { NotificacaoService } from '../../../services/notificacao.service';
 })
 export class Nav2Component {
 
-  tutor: Tutor = new Tutor();
   tutorService = inject(TutorService)
   router = inject(Router)
   notificacoes: Notificacao[] = []
   notificacaoService = inject(NotificacaoService)
-  currentUser: Tutor = new Tutor();
-
-  ngOnInit(){
-  this.getCurrentUser();
-}
-
-getCurrentUser() {
-  this.tutorService.getCurrentUser().subscribe({
-    next: (user) => {
-      console.log("Usuário logado:", user);
-      this.currentUser = user;
-
-      // só roda depois que currentUser for carregado
-      this.findById(this.currentUser.id);
-      this.buscarNotificacoesUsuario(this.currentUser.id);
-    },
-    error: (err) => {
-      console.error("Nenhum usuário logado", err);
-    }
-  });
-}
-
-
-  
+  loginService = inject(LoginService)
+  currentUser: Usuario = this.loginService.getCurrentUser();
 
   editarPerfil() {
-  if(this.tutor.id)
-    this.router.navigate(['/principal/cadastro-usuario', this.tutor.id]);
+  if(this.currentUser.id)
+    this.router.navigate(['/principal/cadastro-usuario', this.currentUser.id]);
 }
+
+// ngOnInit(){
+
+
+// }
 
     
     buscarNotificacoesUsuario(id: number){
@@ -62,16 +46,15 @@ getCurrentUser() {
           console.log("Erro ao Buscar Notificacoes", err)
         }
       })
-  
     }
 
 
-  findById(id:number){
-    this.tutorService.findById(id).subscribe({
+  findById(){
+    this.tutorService.findById(this.currentUser.id).subscribe({
         
       next:(value) => {
         console.log("Pessoa Encontrada",value);
-        this.tutor = value
+        this.currentUser = value
 
       },error(err) {
         console.log("Erro Ao pegar animal", err)

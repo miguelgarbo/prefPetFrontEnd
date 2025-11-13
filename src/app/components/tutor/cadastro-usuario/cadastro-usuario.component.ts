@@ -1,4 +1,4 @@
-import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
+import { Component, inject, Input, TemplateRef, VERSION, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MdbFormsModule } from "mdb-angular-ui-kit/forms";
@@ -7,7 +7,12 @@ import { Tutor } from '../../../models/tutor';
 import { HttpClient } from '@angular/common/http';
 import { TutorService } from '../../../services/tutor.service';
 import Swal from 'sweetalert2'
-import e from 'express';
+import { Usuario } from '../../../models/usuario';
+import { UsuarioService } from '../../../services/usuario.service';
+import { Entidade } from '../../../models/entidade';
+import { Veterinario } from '../../../models/veterinario';
+import { VeterinarioService } from '../../../services/veterinario.service';
+import { EntidadeService } from '../../../services/entidade.service';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -18,9 +23,25 @@ import e from 'express';
 })
 export class CadastroUsuarioComponent {
 
+  @Input() tipoCadastro: string = ""
+
+  title: string = 'Tutor';
+
+  usuario: Usuario = new Usuario()
+
+  veterinario: Veterinario = new Veterinario()
+
   tutor: Tutor = new Tutor()
-  tutorService = inject(TutorService)
-  usuario!: string;
+
+  entidade: Entidade = new Entidade()
+
+  usuarioService = inject(UsuarioService)
+
+  tutorServie = inject(TutorService)
+  veterinarioService = inject(VeterinarioService)
+  entidadeService = inject(EntidadeService)
+
+  usuarioEncontrado!: string;
   senha!: string;
   senha2!: string;
 
@@ -35,52 +56,65 @@ export class CadastroUsuarioComponent {
     }
   }
 
-  logout() {
-  this.tutorService.logout().subscribe({
-    next: (msg) => {
-      console.log(msg);
-      Swal.fire({
-        icon: 'success',
-        title: 'Logout realizado com sucesso!',
-        timer: 1500,
-        showConfirmButton: false
-      });
-      // Redirecionar para login
-      this.router.navigate(['/inicial']);
-    },
-    error: (err) => {
-      console.error('Erro ao fazer logout', err);
-      Swal.fire({
-        icon: 'error',
-        title: 'Erro ao fazer logout',
-        text: 'Tente novamente'
-      });
+  ngOnInit() {
+    this.changeTittle(); 
+  }
+  
+
+  changeTittle(){
+    if(this.tipoCadastro == "veterinario"){
+      this.title = "Veterinário"
+
+    }else if(this.tipoCadastro =="entidade"){
+      this.title = "Entidade"
     }
-  });
-}
+  }
+
+  logout() {
+
+  }
+//   this.usuarioService.logout().subscribe({
+//     next: (msg) => {
+//       console.log(msg);
+//       Swal.fire({
+//         icon: 'success',
+//         title: 'Logout realizado com sucesso!',
+//         timer: 1500,
+//         showConfirmButton: false
+//       });
+//       // Redirecionar para login
+//       this.router.navigate(['/inicial']);
+//     },
+//     error: (err) => {
+//       console.error('Erro ao fazer logout', err);
+//       Swal.fire({
+//         icon: 'error',
+//         title: 'Erro ao fazer logout',
+//         text: 'Tente novamente'
+//       });
+//     }
+//   });
+// }
 
 
   findById(id: number){
 
-    this.tutorService.findById(id).subscribe({
+    this.tutorServie.findById(id).subscribe({
 
-      next:(usuario)=> {
-          console.log("Editar Perfil de :", usuario)
-          this.tutor = usuario;
+      next:(usuarioEncontrado)=> {
+          console.log("Editar Perfil de :", usuarioEncontrado)
+          this.tutor = usuarioEncontrado;
 
       },
       error:(err)=> {
         console.error(err)
-    
       },
-
     })
-
   }
 
-  cadastrar() {
+  cadastrarTutor() {
     if (this.senha2 === this.tutor.senha) {
-      this.save();
+      this.saveTutor();
     } else {
       Swal.fire({
         icon: "error",
@@ -90,11 +124,11 @@ export class CadastroUsuarioComponent {
     }
   }
 
-  save() {
+  saveTutor() {
     if (this.tutor.id > 0) {
       // editar tutor
-      this.tutorService.update(this.tutor).subscribe({
-        next: () => {
+      this.tutorServie.update(this.tutor).subscribe({
+        next: (tutor) => {
           Swal.fire({
             title: "Usuário Editado com Sucesso!",
             icon: "success",
@@ -102,7 +136,7 @@ export class CadastroUsuarioComponent {
           });
           this.router.navigate(['/principal/animal']);
         },
-        error: erro => {
+        error: (erro) => {
           Swal.fire({
             icon: "error",
             title: "Erro ao Atualizar",
@@ -113,9 +147,9 @@ export class CadastroUsuarioComponent {
       });
     } else {
       // salvar novo tutor
-      this.tutorService.save(this.tutor).subscribe({
-        next: (value) => {
-          console.log("Cadastrou", value);
+      this.usuarioService.saveTutor(this.tutor).subscribe({
+        next: (tutor) => {
+          console.log("Cadastrou", tutor);
 
           Swal.fire({
             title: "Usuário Salvo com Sucesso!",
@@ -147,7 +181,7 @@ export class CadastroUsuarioComponent {
       showDenyButton: true
     }).then((response) => {
       if (response.isConfirmed) {
-        this.tutorService.deleteById(this.tutor.id).subscribe({
+        this.tutorServie.deleteById(this.tutor.id).subscribe({
           next: (value) => {
             console.log(value);
             Swal.fire({

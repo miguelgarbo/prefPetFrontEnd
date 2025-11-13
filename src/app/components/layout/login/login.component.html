@@ -18,6 +18,13 @@
           <button type="button" class="btn btn-rounded" mdbRipple (click)="login()">
             Acessar
           </button>
+
+        @if (deuErrado == true) {
+          <app-message-error 
+            [texto]="'Usuário ou senha incorretos!'" 
+            [mostrar]="true">
+          </app-message-error>
+        }
             <!-- Register buttons -->
             <div class="text-center">
               <p style="margin-top: 20px">
