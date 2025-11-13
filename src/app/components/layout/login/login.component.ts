@@ -22,7 +22,7 @@ import { MessageErrorComponent } from '../message-error/message-error.component'
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MdbFormsModule, FormsModule, RouterModule, MdbModalModule],
+  imports: [MdbFormsModule, FormsModule, RouterModule, MdbModalModule, MessageErrorComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })

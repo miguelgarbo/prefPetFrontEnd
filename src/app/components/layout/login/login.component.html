@@ -20,10 +20,12 @@
           </button>
 
         @if (deuErrado == true) {
-          <app-message-error 
+
+          <app-message-error>
             [texto]="'Usuário ou senha incorretos!'" 
             [mostrar]="true">
           </app-message-error>
+          
         }
             <!-- Register buttons -->
             <div class="text-center">
