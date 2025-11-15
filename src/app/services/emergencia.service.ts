@@ -17,18 +17,18 @@ export class EmergenciaService {
   }
 
   findById(id: number): Observable<Emergencia> {
-    return this.http.get<Emergencia>(`${this.baseUrl}/findById/${id}`);
+    return this.http.get<Emergencia>(`${this.baseUrl}/${id}`);
   }
 
   save(emergencia: Emergencia): Observable<Emergencia> {
-    return this.http.post<Emergencia>(`${this.baseUrl}/save`, emergencia);
+    return this.http.post<Emergencia>(`${this.baseUrl}`, emergencia);
   }
 
   update(id: number, emergencia: Emergencia): Observable<Emergencia> {
-    return this.http.put<Emergencia>(`${this.baseUrl}/update/${id}`, emergencia);
+    return this.http.put<Emergencia>(`${this.baseUrl}/${id}`, emergencia);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }

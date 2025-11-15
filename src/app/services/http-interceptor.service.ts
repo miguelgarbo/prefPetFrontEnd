@@ -10,14 +10,19 @@ export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
   let token = localStorage.getItem('token');
   let rotasPublicas = ['login', 'inicial', 'cadastro-usuario', 'emergencia'];
   
-  console.log('entrou aqui 1');
-
-  //parte importante que seta no header das requisições o token automaticamente
+  
   if (token && !router.url.includes('/login')) {
     request = request.clone({
-      setHeaders: { Authorization: 'Bearer ' + token },
+     setHeaders: { Authorization: 'Bearer ' + token },
     });
   }
+  
+  const rotaAtual = router.url.replace('/', '');
+  if (!rotasPublicas.includes(rotaAtual) && token) {
+  request = request.clone({
+    setHeaders: { Authorization: 'Bearer ' + token }
+  });
+}
 
   return next(request).pipe(
     catchError((err: any) => {
