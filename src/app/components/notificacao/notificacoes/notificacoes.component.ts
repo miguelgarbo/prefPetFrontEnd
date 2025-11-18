@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NotificacaoService } from '../../../services/notificacao.service';
 import { Tutor } from '../../../models/tutor';
 import { TutorService } from '../../../services/tutor.service';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-notificacoes',
@@ -18,24 +19,14 @@ export class NotificacoesComponent {
   router = inject(Router) 
   notificacaoService = inject(NotificacaoService)
   tutorService= inject(TutorService)
-  currentUser: Tutor = new Tutor();
+
+  loginService  = inject(LoginService)
+  currentUser = this.loginService.getCurrentUser()
 
   ngOnInit(){
-  this.getCurrentUser();
-}
 
-getCurrentUser() {
-  this.tutorService.getCurrentUser().subscribe({
-    next: (user) => {
-      console.log("Usuário logado:", user);
-      this.currentUser = user;
+    this.buscarNotificacoesUsuario(this.currentUser.id)
 
-      this.buscarNotificacoesUsuario(this.currentUser.id);
-    },
-    error: (err) => {
-      console.error("Nenhum usuário logado", err);
-    }
-  });
 }
 
 

@@ -29,24 +29,10 @@ export class VacinasComponent implements OnInit {
   currentUser: Usuario = this.loginService.getCurrentUser()
   
     ngOnInit(){
+
+      this.findAnimaisByTutorId(this.currentUser.id)
   }
   
-
-
-
-  // getCurrentUser() {
-  //   this.tutorService.getCurrentUser().subscribe({
-  //     next: (user) => {
-  //       console.log("Usuário logado:", user);
-  //       this.currentUser = user;
-  
-  //    this.findAnimaisByTutorId(this.currentUser.id);
-  //     },
-  //     error: (err) => {
-  //       console.error("Nenhum usuário logado", err);
-  //     }
-  //   });
-  // }
 
   findAnimaisByTutorId(id: number){
 

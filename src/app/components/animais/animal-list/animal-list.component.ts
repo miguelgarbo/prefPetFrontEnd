@@ -60,25 +60,13 @@ export class AnimalListComponent implements OnInit {
 
   ngOnInit() {
     
+    console.log("to aqui dentro do animais list");
+    console.log("usuario atual:" + this.currentUser.nome+ ", role: "+ this.currentUser.role)
+    this.findByAnimaisTutorId()
   }
 
-  // getCurrentUser() {
 
-   
-
-  //   this.loginService.getCurrentUser().subscribe({
-  //     next: (usuario) => {
-  //       console.log("Usuário logado:", usuario);
-  //       this.currentUser = user;
-  //       this.findByTutorId(user.id); // pega os animais do tutor logado
-  //     },
-  //     error: (err) => {
-  //       console.error("Nenhum usuário logado", err);
-  //     }
-  //   });
-  // }
-
-  findByTutorId() {
+  findByAnimaisTutorId() {
     this.animalService.findByTutorId(this.currentUser.id).subscribe({
       next: (dados) => {
         this.animais = dados;
@@ -129,7 +117,7 @@ export class AnimalListComponent implements OnInit {
           timer: 1000
         });
 
-        this.findByTutorId();
+        this.findByAnimaisTutorId();
 
         if (this.modalRef) {
           this.modalRef.close();

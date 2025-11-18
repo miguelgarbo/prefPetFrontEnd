@@ -16,7 +16,7 @@ import { ActivatedRoute } from '@angular/router';
   imports: [FormsModule, MdbFormsModule, CommonModule, MdbModalModule],
   styleUrls: ['./emergencia.component.scss']
 })
-export class EmergenciaComponent implements OnInit {
+export class EmergenciaComponent {
 
   emergencias: Emergencia[] = [];
   novaEmergencia = { nome: '' };
