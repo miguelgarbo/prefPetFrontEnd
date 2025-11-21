@@ -8,14 +8,14 @@ export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
 
   let router = inject(Router);
   let token = localStorage.getItem('token');
-  let rotasPublicas = ['login', 'inicial', 'cadastro-usuario', 'emergencia'];
+  let rotasPublicas = ['login', 'inicial', 'cadastro-usuario', 'emergencia','pricipal/emergencia'];
   
   
-  if (token && !router.url.includes('/login')) {
-    request = request.clone({
-     setHeaders: { Authorization: 'Bearer ' + token },
-    });
-  }
+  //if (token && !router.url.includes('/login')) {
+   // request = request.clone({
+   //  setHeaders: { Authorization: 'Bearer ' + token },
+    //});
+  //}
   
   const rotaAtual = router.url.replace('/', '');
   if (!rotasPublicas.includes(rotaAtual) && token) {

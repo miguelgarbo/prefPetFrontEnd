@@ -9,6 +9,7 @@ import { error } from 'console';
 import { ContatoService } from '../../services/contato.service';
 import { Contato } from '../../models/contato';
 import { ActivatedRoute } from '@angular/router';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-emergencia',
@@ -26,6 +27,7 @@ export class EmergenciaComponent {
   contatosSelecionadosIds: number[] = [];
   mostrarContatos = false;
   activedRouter = inject(ActivatedRoute)
+  loginService = inject(LoginService);
   
 
   constructor(
