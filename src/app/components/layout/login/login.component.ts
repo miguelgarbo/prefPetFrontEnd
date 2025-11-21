@@ -54,7 +54,10 @@ export class LoginComponent {
               
               console.log(this.currentUser.nome)
               this.deuErrado = false
+              this.loginSucesso.emit(); //devolve a requisição com sucesso e chama o  .close() para fechar o login automaticamente
               this.router.navigate(['principal/animal']);
+         
+              
 
             }},
               error:(err)=>{
