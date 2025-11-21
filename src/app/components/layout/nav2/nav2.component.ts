@@ -25,16 +25,17 @@ export class Nav2Component {
   loginService = inject(LoginService)
   currentUser: Usuario = this.loginService.getCurrentUser();
 
+  ngOnInit(){
+
+    console.log("usuario: "+ this.currentUser);
+    this.findById();
+
+  }
+
   editarPerfil() {
   if(this.currentUser.id)
     this.router.navigate(['/principal/cadastro-usuario', this.currentUser.id]);
 }
-
-// ngOnInit(){
-
-
-// }
-
     
     buscarNotificacoesUsuario(id: number){
       this.notificacaoService.findByTutorId(id).subscribe({
@@ -61,6 +62,7 @@ export class Nav2Component {
       },
     })
   }
+
    notificacoesTela(){
         this.router.navigate(['principal/notificacoes']);
         console.log("TESTE")

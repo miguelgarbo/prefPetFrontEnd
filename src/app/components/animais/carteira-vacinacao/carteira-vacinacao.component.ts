@@ -24,6 +24,7 @@ export class CarteiraVacinacaoComponent {
     let id = this.activedRoute.snapshot.params['id'];
     if (id > 0) {
       this.findById(id);
+      
     }
   }
 
@@ -31,7 +32,7 @@ export class CarteiraVacinacaoComponent {
     this.animalService.findById(id).subscribe({
       next: (animal) => {
         this.animal = animal;
-        this.findByAnimal()
+        this.findByAplicacoesAnimal()
       },
       error: (erro) => {
         console.error(erro);
@@ -39,8 +40,10 @@ export class CarteiraVacinacaoComponent {
     });
    }
 
-   findByAnimal(){
+   findByAplicacoesAnimal(){
 
+    console.log(this.animal);
+    
     this.aplicacaoService.findByAnimalId(this.animal.id).subscribe({
       next: (aplicacoes) =>{
         console.log(aplicacoes);
@@ -51,4 +54,8 @@ export class CarteiraVacinacaoComponent {
       },
     })
   }
+
+
+
+
 }

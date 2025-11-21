@@ -8,6 +8,7 @@ export class Entidade {
     email!: string;
     telefone!: string;
     cnpj!: string;
+    cpf!: string;
     tipoEntidade!:string;
     cep!: string;
     cidade!: string;

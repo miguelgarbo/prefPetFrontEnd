@@ -63,20 +63,6 @@ export class TutorService {
     })
   }
 
-  login(email: string, password: string): Observable<Boolean>{
-
-    return this.http.get<Boolean>(this.API+"/login", {
-      params: {email: email, senha: password}
-    })
-  }
-
-  getCurrentUser(): Observable<Tutor> {
-    return this.http.get<Tutor>(`${this.API}/current-user`);
-  }
-
-  logout(): Observable<string> {
-  return this.http.post(`${this.API}/logout`, '', { responseType: 'text' });
-}
 
 
   constructor() { }

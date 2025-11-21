@@ -19,7 +19,7 @@ import { Usuario } from '../../models/usuario';
 export class BuscarChipComponent {
 
   animal: Animal = new Animal();
-  usuario: Usuario = new Usuario();
+  tutor: Tutor = new Tutor();
   animalService = inject(AnimalService)
   router = inject(Router)
 
@@ -43,7 +43,7 @@ animalEncontrado: boolean | null = null;
                 });
          this.animalEncontrado = true
          this.animal = animal;
-         this.usuario = animal.usuario;
+         this.tutor = animal.tutor;
       },
       error: (err) => {
 

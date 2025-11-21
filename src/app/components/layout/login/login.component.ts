@@ -41,20 +41,26 @@ export class LoginComponent {
 
   router = inject(Router);
 
+
+  
+
   login(){
+
+    this.loginService.removeToken(); 
+
     this.loginService.logar(this.loginData).subscribe({
         next: (token) =>{
           if(token){
+
+            this.loginService.addToken(token)
+            console.log(token)
+
             this.currentUser = this.loginService.getCurrentUser()
 
-             console.log(token)
-             this.loginService.addToken(token)
-
-              console.log("usuario logado")
-              
-              console.log(this.currentUser.nome)
-              this.deuErrado = false
-              this.router.navigate(['principal/animal']);
+            console.log("usuario logado")              
+            console.log(this.currentUser.nome)
+            this.deuErrado = false
+            this.router.navigate(['principal/animal']);
 
             }},
               error:(err)=>{
@@ -72,13 +78,6 @@ export class LoginComponent {
     this.router.navigate(['cadastro-usuario']);
   }
 
-  // logar() {
-  //   if (this.usuario == 'admin' && this.senha == '12345') {
-  //     this.router.navigate(['principal']);
-  //   } else {
-  //     alert('USUÁRIO E/OU SENHA INCORRETOS!!!');
-  //   }
-  // }
-
+ 
   
 }

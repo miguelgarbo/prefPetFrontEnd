@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 import { LoginService } from '../../../services/login.service';
 import { log } from 'node:util';
 import { Usuario } from '../../../models/usuario';
+import { MessageErrorComponent } from '../../layout/message-error/message-error.component';
 
 @Component({
   selector: 'app-animal-list',
@@ -22,7 +23,8 @@ import { Usuario } from '../../../models/usuario';
     FormsModule,
     MdbModalModule,       
     MdbFormsModule,
-    AnimalDetailsComponent        
+    AnimalDetailsComponent,
+    MessageErrorComponent      
   ],
   templateUrl: './animal-list.component.html',
   styleUrls: ['./animal-list.component.scss']
@@ -34,10 +36,14 @@ export class AnimalListComponent implements OnInit {
   loginService = inject(LoginService)
   modalService = inject(MdbModalService);
   router = inject(Router);
+  donoDoAnimal = new Tutor();
+  mensagem: string = ""
 
   animais: Animal[] = [];
   currentUser: Usuario = this.loginService.getCurrentUser()
   animalSelecionado?: Animal;
+
+  deuCerto!: boolean
 
   hoje: string = new Date().toISOString().split('T')[0];
 
@@ -63,6 +69,7 @@ export class AnimalListComponent implements OnInit {
     console.log("to aqui dentro do animais list");
     console.log("usuario atual:" + this.currentUser.nome+ ", role: "+ this.currentUser.role)
     this.findByAnimaisTutorId()
+    this.getTutorByCurrentUserId(this.currentUser.id)
   }
 
 
@@ -89,7 +96,20 @@ export class AnimalListComponent implements OnInit {
     }
   }
 
+  getTutorByCurrentUserId(id: number){
+       this.tutorService.findById(id).subscribe({
+      next: (tutor) => {
+        this.donoDoAnimal = tutor;
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+
   save() {
+
+
     this.animalService.save({
       id: undefined!,
       nome: this.novoAnimal.nome!.trim(),
@@ -104,10 +124,12 @@ export class AnimalListComponent implements OnInit {
       naturalidade: this.novoAnimal.naturalidade!.trim(),
       imagemUrl: this.novoAnimal.imagemUrl?.trim() || '',
       aplicacoes: [],
-      usuario: this.currentUser, // 🔥 agora associa o animal ao user logado
+      tutor: this.donoDoAnimal, 
       idade: undefined!
     }).subscribe({
       next: (animalSalvo) => {
+        this.deuCerto=true
+
         console.log("Animal salvo com sucesso:", animalSalvo);
         Swal.fire({
           position: "center",
@@ -125,6 +147,9 @@ export class AnimalListComponent implements OnInit {
         this.resetForm();
       },
       error: (err) => {
+        this.mensagem = "Erro Ao Salvar Animal: "+err.message
+
+        this.deuCerto = false
         console.error('Erro ao salvar animal:', err);
       }
     });

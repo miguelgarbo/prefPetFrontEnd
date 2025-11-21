@@ -137,6 +137,11 @@ btn-close<div class="row">
         <button type="submit" class="btn btn-primary" [disabled]="!animalForm.valid">Salvar</button>
       </div>
     </form>
+
+    @if(deuCerto == false){
+    <app-message-error [texto]="mensagem" [mostrar]="true" ></app-message-error>
+    }
+ 
   </div>
 </ng-template>
 

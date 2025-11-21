@@ -7,6 +7,8 @@ import { jwtDecode, JwtPayload } from "jwt-decode";
 import { Tutor } from '../models/tutor';
 import { Usuario } from '../models/usuario';
 import { environment } from '../../environments/environment';
+import { Veterinario } from '../models/veterinario';
+import { Entidade } from '../models/entidade';
 
 
 @Injectable({
@@ -24,12 +26,13 @@ export class LoginService {
   }
 
   addToken(token: string){
-    this.removeToken()
     localStorage.setItem('token', token)
   }
 
   removeToken(){
-    localStorage.removeItem('token')
+    if(localStorage.getItem("token")){
+        localStorage.removeItem('token')
+    }
   }
 
   getToken(){
@@ -52,6 +55,7 @@ export class LoginService {
       return false
     }
   }
+ 
 
   getCurrentUser(){
     return this.jwtDecode() as Usuario

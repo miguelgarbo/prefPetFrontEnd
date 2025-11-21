@@ -12,6 +12,7 @@ import { LoginComponent } from '../layout/login/login.component';
 import { AnimalService } from '../../services/animal.service';
 import { Animal } from '../../models/animal';
 import Swal from 'sweetalert2'
+import { LoginService } from '../../services/login.service';
 
 
 
@@ -32,29 +33,18 @@ export class BuscarTutorComponent {
   activedRoute = inject(ActivatedRoute)
   animal_id: number = 0
 
+  loginService = inject(LoginService)
+
   notificacaoService = inject(NotificacaoService)
 
   tutorEncontrado: boolean | null = null;
 
-  currentUser: Tutor = new Tutor();
+  currentUser = this.loginService.getCurrentUser()
   
     ngOnInit(){
-    this.getCurrentUser();
     this.findAnimalById();
   }
   
-  getCurrentUser() {
-    this.tutorService.getCurrentUser().subscribe({
-      next: (user) => {
-        console.log("Usuário logado:", user);
-        this.currentUser = user;
-
-      },
-      error: (err) => {
-        console.error("Nenhum usuário logado", err);
-      }
-    });
-  }
 
 
   constructor() {

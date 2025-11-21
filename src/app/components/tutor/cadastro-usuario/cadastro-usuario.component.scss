@@ -9,6 +9,7 @@ h3{
 
 .card {
   box-shadow: none !important;
+  width: 100%;
 }
 .margin{
   margin-top: 10vh;
@@ -19,4 +20,54 @@ h3{
   display: flex;
   gap: 15px;
 
+}
+
+.container-forms{
+
+    display: flex;
+    gap: 1vw;
+ justify-content: center;
+ align-items: center;
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;   padding: 30px;
+
+
+ width:80vw;
+
+}
+
+.card-body{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+ 
+  width: 100%;
+
+}
+
+.display{
+
+  display: flex;
+  gap: 5px;
+}
+
+input{
+  width: 15vw;
+}
+
+.block-inputs{
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+}
+
+main{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 50vw;
 }
