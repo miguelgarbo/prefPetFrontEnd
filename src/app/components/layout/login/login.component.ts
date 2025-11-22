@@ -57,12 +57,11 @@ export class LoginComponent {
 
             this.currentUser = this.loginService.getCurrentUser()
 
-<<<<<<< HEAD
             console.log("usuario logado")              
             console.log(this.currentUser.nome)
             this.deuErrado = false
+            
             this.router.navigate(['principal/animal']);
-=======
              console.log(token)
              this.loginService.addToken(token)
 
@@ -74,7 +73,6 @@ export class LoginComponent {
               this.router.navigate(['principal/animal']);
          
               
->>>>>>> fdccc6c16825e08069420e07aca0b74be898b04f
 
             }},
               error:(err)=>{
