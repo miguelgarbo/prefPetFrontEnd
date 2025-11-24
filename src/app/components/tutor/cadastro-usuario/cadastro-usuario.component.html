@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-12 centralizar margin-cad">
+    <div class="col-lg-12 centralizar">
       <div class="card">
         <div class="card-body">
           <br>
@@ -47,7 +47,7 @@
                 <br />
 
 
-                  <!-- Email -->
+                <!-- Email -->
                 <mdb-form-control>
                   <input mdbInput type="email" id="email" class="form-control" [(ngModel)]="tutor.email" name="email"
                     required />
@@ -64,7 +64,7 @@
                 <!-- CEP -->
                 <mdb-form-control>
                   <input mdbInput type="text" id="cep" class="form-control" [(ngModel)]="tutor.cep" name="cep"
-                    (blur)="buscarCep()" required />
+                    (blur)="buscarCep('tutor')" required />
                   <label mdbLabel class="form-label" for="cep">CEP</label>
                 </mdb-form-control>
                 <br />
@@ -102,14 +102,14 @@
 
                 <div class="check-label">
                   <label for="checkboxNoLabel">CNPJ, caso seja abrigo</label>
-         <input class="form-check-input" type="checkbox" id="checkboxNoLabel"
-          value="" aria-label="..." [(ngModel)]="isAbrigo"/>
+                  <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="..."
+                    [(ngModel)]="isAbrigo" />
                 </div>
 
 
                 <!-- cnpj -->
 
-                  <mdb-form-control [class.hide]="isAbrigo === false">
+                <mdb-form-control [class.hide]="isAbrigo === false">
                   <input mdbInput type="text" id="cnpj" class="form-control" [(ngModel)]="tutor.cnpj" name="cnpj" />
                   <label mdbLabel class="form-label" for="cnpj">CNPJ (opcional)</label>
                 </mdb-form-control>
@@ -117,33 +117,27 @@
               </div>
 
 
-               
 
-                <div class="display">
-                  <!-- Senha -->
-                  <mdb-form-control [class.hide]="tutor.id">
-                    <input mdbInput type="password" id="senha" class="form-control" [(ngModel)]="tutor.senha"
-                      name="senha" required />
-                    <label mdbLabel class="form-label" for="senha">Senha</label>
-                  </mdb-form-control>
-                  <br />
 
-                  <!-- Confirmar senha -->
-                  <mdb-form-control [class.hide]="tutor.id">
-                    <input mdbInput type="password" id="senha2" class="form-control" [(ngModel)]="senha2" name="senha2"
-                      required />
-                    <label mdbLabel class="form-label" for="senha2">Confirmar Senha</label>
-                  </mdb-form-control>
-
-                </div>
-
+              <div class="display">
+                <!-- Senha -->
+                <mdb-form-control [class.hide]="tutor.id">
+                  <input mdbInput type="password" id="senha" class="form-control" [(ngModel)]="tutor.senha" name="senha"
+                    required />
+                  <label mdbLabel class="form-label" for="senha">Senha</label>
+                </mdb-form-control>
                 <br />
 
+                <!-- Confirmar senha -->
+                <mdb-form-control [class.hide]="tutor.id">
+                  <input mdbInput type="password" id="senha2" class="form-control" [(ngModel)]="senha2" name="senha2"
+                    required />
+                  <label mdbLabel class="form-label" for="senha2">Confirmar Senha</label>
+                </mdb-form-control>
               </div>
-
-
+              <br />
+            </div>
           </main>
-
           <br>
 
           <div class="couple-buttons">
@@ -172,119 +166,173 @@
             </p>
           </div>
           } }
+
+
+          <!-- FIMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM -->
           <!-- FIM CADASTRO USUARIO -->
 
           <!-- COMEÇO CADASTRO DE VET -->
+
+
+          <!--PEGANDO LAYOUT DO USUARIO -->
+
           @if(title=='Veterinário'){
-          <!-- Nome -->
-          <mdb-form-control>
-            <input mdbInput type="text" id="nome" class="form-control" [(ngModel)]="veterinario.nome" name="nome"
-              required />
-            <label mdbLabel class="form-label" for="nome">Nome</label>
-          </mdb-form-control>
-          <br />
+          <main>
+            <div class="container-forms">
+              <div class="img-block" [class.hide]="!veterinario.id">
+                <img [src]="veterinario.imagemUrlPerfil" class="me-2" height="100" alt="img perfil veterinario" />
+                <br>
+                <br>
 
-          <!-- Telefone -->
-          <mdb-form-control>
-            <input mdbInput type="text" id="telefone" class="form-control" [(ngModel)]="veterinario.telefone"
-              name="telefone" required />
-            <label mdbLabel class="form-label" for="telefone">Telefone</label>
-          </mdb-form-control>
-          <br />
+                <!-- Imagem de perfil -->
+                <mdb-form-control>
+                  <input mdbInput type="text" id="imagemUrlPerfil" class="form-control"
+                    [(ngModel)]="veterinario.imagemUrlPerfil" name="imagemUrlPerfil" />
+                  <label mdbLabel class="form-label" for="imagemUrlPerfil">URL da Imagem de Perfil</label>
+                </mdb-form-control>
+                <br />
 
-          <!-- CEP -->
-          <mdb-form-control>
-            <input mdbInput type="text" id="cep" class="form-control" [(ngModel)]="veterinario.cep" name="cep"
-              (blur)="buscarCep()" required />
-            <label mdbLabel class="form-label" for="cep">CEP</label>
-          </mdb-form-control>
-          <br />
+              </div>
 
-          <!-- CPF -->
-          <mdb-form-control>
-            <input mdbInput type="text" id="cpf" class="form-control" [(ngModel)]="veterinario.cpf" name="cpf"
-              required />
-            <label mdbLabel class="form-label" for="cpf">CPF</label>
-          </mdb-form-control>
-          <br />
+              <div class="block-inputs">
+                <!-- Nome -->
+                <mdb-form-control>
+                  <input mdbInput type="text" id="nome" class="form-control" [(ngModel)]="veterinario.nome" name="nome"
+                    required />
+                  <label mdbLabel class="form-label" for="nome">Nome</label>
+                </mdb-form-control>
+                <br />
 
-          <mdb-form-control>
-            <input mdbInput type="text" id="cnpj" class="form-control" [(ngModel)]="veterinario.cnpj" name="cnpj" />
-            <label mdbLabel class="form-label" for="cnpj">CNPJ (opcional)</label>
-          </mdb-form-control>
-          <br />
+                <!-- Telefone -->
+                <mdb-form-control>
+                  <input mdbInput type="text" id="telefone" class="form-control" [(ngModel)]="veterinario.telefone"
+                    name="telefone" required />
+                  <label mdbLabel class="form-label" for="telefone">Telefone</label>
+                </mdb-form-control>
+                <br />
 
-          <!-- Cidade -->
-          <mdb-form-control>
-            <input mdbInput type="text" id="cidade" class="form-control" [(ngModel)]="veterinario.cidade" name="cidade"
-              required />
-            <label mdbLabel class="form-label" for="cidade">Cidade</label>
-          </mdb-form-control>
-          <br />
 
-          <!-- Estado -->
-          <mdb-form-control>
-            <input mdbInput type="text" id="estado" class="form-control" [(ngModel)]="veterinario.estado" name="estado"
-              required />
-            <label mdbLabel class="form-label" for="estado">Estado</label>
-          </mdb-form-control>
-          <br />
+                <!-- Email -->
+                <mdb-form-control>
+                  <input mdbInput type="email" id="email" class="form-control" [(ngModel)]="veterinario.email"
+                    name="email" required />
+                  <label mdbLabel class="form-label" for="email">Email</label>
+                </mdb-form-control>
+                <br />
 
-          <!-- Email -->
-          <mdb-form-control>
-            <input mdbInput type="email" id="email" class="form-control" [(ngModel)]="veterinario.email" name="email"
-              required />
-            <label mdbLabel class="form-label" for="email">Email</label>
-          </mdb-form-control>
-          <br />
 
-          <!-- CRMV -->
-          <mdb-form-control>
-            <input mdbInput type="text" id="crmv" class="form-control" [(ngModel)]="veterinario.crmv" name="CRMV"
-              required />
-            <label mdbLabel class="form-label" for="CRMV">CRMV</label>
-          </mdb-form-control>
-          <br />
+              </div>
 
-          <!-- Senha -->
-          <mdb-form-control>
-            <input mdbInput type="password" id="senha" class="form-control" [(ngModel)]="veterinario.senha" name="senha"
-              required />
-            <label mdbLabel class="form-label" for="senha">Senha</label>
-          </mdb-form-control>
-          <br />
+              <!-- nova div flex 1 -->
+              <div class="block-inputs">
 
-          @if (veterinario.id == null) {
-          <!-- Confirmar senha -->
-          <mdb-form-control>
-            <input mdbInput type="password" id="senha2" class="form-control" [(ngModel)]="senha2" name="senha2"
-              required />
-            <label mdbLabel class="form-label" for="senha2">Confirmar Senha</label>
-          </mdb-form-control>
-          <br />
-          }
+                <!-- CEP -->
+                <mdb-form-control>
+                  <input mdbInput type="text" id="cep" class="form-control" [(ngModel)]="veterinario.cep" name="cep"
+                    (blur)="buscarCep('veterinario')" required />
+                  <label mdbLabel class="form-label" for="cep">CEP</label>
+                </mdb-form-control>
+                <br />
 
-          <!-- Imagem de perfil -->
-          <mdb-form-control>
-            <input mdbInput type="text" id="imagemUrlPerfil" class="form-control"
-              [(ngModel)]="veterinario.imagemUrlPerfil" name="imagemUrlPerfil" />
-            <label mdbLabel class="form-label" for="imagemUrlPerfil">URL da Imagem de Perfil</label>
-          </mdb-form-control>
-          <br />
+                <!-- Cidade -->
+                <mdb-form-control>
+                  <input mdbInput type="text" id="cidade" class="form-control" [(ngModel)]="veterinario.cidade"
+                    name="cidade" required />
+                  <label mdbLabel class="form-label" for="cidade">Cidade</label>
+                </mdb-form-control>
+                <br />
+
+                <!-- Estado -->
+                <mdb-form-control>
+                  <input mdbInput type="text" id="estado" class="form-control" [(ngModel)]="veterinario.estado"
+                    name="estado" required />
+                  <label mdbLabel class="form-label" for="estado">Estado</label>
+                </mdb-form-control>
+                <br />
+
+              </div>
+
+              <!-- nova div flex 1 -->
+              <div class="block-inputs">
+
+                <!-- CPF -->
+                <mdb-form-control>
+                  <input mdbInput type="text" id="cpf" class="form-control" [(ngModel)]="veterinario.cpf" name="cpf"
+                    required />
+                  <label mdbLabel class="form-label" for="cpf">CPF</label>
+                </mdb-form-control>
+                <br />
+
+
+                <!-- CRMV -->
+                <mdb-form-control>
+                  <input mdbInput type="text" id="crmv" class="form-control" [(ngModel)]="veterinario.crmv" name="CRMV"
+                    required />
+                  <label mdbLabel class="form-label" for="CRMV">CRMV</label>
+                </mdb-form-control>
+                <br />
+              </div>
+
+              <!-- 
+                <div class="check-label">
+                  <label for="checkboxNoLabel">CNPJ, caso queira</label>
+         <input class="form-check-input" type="checkbox" id="checkboxNoLabel"
+          value="" aria-label="..." [(ngModel)]="isAbrigo"/>
+                </div> -->
+
+
+              <!-- cnpj vet?? -->
+
+              <!-- <mdb-form-control [class.hide]="isAbrigo === false">
+                  <input mdbInput type="text" id="cnpj" class="form-control" [(ngModel)]="veterinario.cnpj" name="cnpj" />
+                  <label mdbLabel class="form-label" for="cnpj">CNPJ (opcional)</label>
+                </mdb-form-control>
+                <br />
+              </div> -->
+
+              <!-- <div class="block-inputs config-crmv"> -->
+              <!-- </div> -->
+
+              <div class="display">
+                <!-- Senha -->
+                <mdb-form-control [class.hide]="veterinario.id">
+                  <input mdbInput type="password" id="senha" class="form-control" [(ngModel)]="veterinario.senha"
+                    name="senha" required />
+                  <label mdbLabel class="form-label" for="senha">Senha</label>
+                </mdb-form-control>
+                <br />
+
+                <!-- Confirmar senha -->
+                <mdb-form-control [class.hide]="veterinario.id">
+                  <input mdbInput type="password" id="senha2" class="form-control" [(ngModel)]="senha2" name="senha2"
+                    required />
+                  <label mdbLabel class="form-label" for="senha2">Confirmar Senha</label>
+                </mdb-form-control>
+
+              </div>
+
+              <br />
+
+            </div>
+
+
+          </main>
+
+          <br>
 
           <div class="couple-buttons">
-            <button type="button" class="btn btn-rounded" mdbRipple (click)="saveVet()">
+            <button type="button" class="btn btn-rounded" mdbRipple (click)="cadastrarVet()">
               Salvar
             </button>
             <br />
 
             @if (veterinario.id >0) {
 
-            <button type="button" class="btn btn-warning" mdbRipple (click)="logout()">
+            <button type="button" class="btn btn-warning" mdbRipple (click)="logout()" [hidden]="tutor.id <= 0">
               Sair Da Conta
             </button>
 
-            <button type="button" class="btn btn-danger" mdbRipple (click)="deletarVet()">
+            <button type="button" class="btn btn-danger" mdbRipple (click)="deletarVet()" [hidden]="tutor.id <= 0">
               Deletar Conta
             </button>
 
@@ -299,126 +347,178 @@
           </div>
           } }
 
+          <!--fim pegando layout-->
           <!-- FIM CADASTRO DE VET -->
 
-          <!-- COMEÇO CADASTRO DE ENTIDADE -->
+          <!--COMEÇO PEGANDO LAYOUT USUARIO-->
 
           @if(title=='Entidade'){
-          <!-- Nome -->
-          <mdb-form-control>
-            <input mdbInput type="text" id="nome" class="form-control" [(ngModel)]="entidade.nome" name="nome"
-              required />
-            <label mdbLabel class="form-label" for="nome">Nome</label>
-          </mdb-form-control>
-          <br />
+          <main>
+            <div class="container-forms">
+              <div class="img-block" [class.hide]="!entidade.id">
+                <img [src]="entidade.imagemUrlPerfil" class="me-2" height="100" alt="img perfil usuario" />
+                <br>
+                <br>
 
-          <!-- Telefone -->
-          <mdb-form-control>
-            <input mdbInput type="text" id="telefone" class="form-control" [(ngModel)]="entidade.telefone"
-              name="telefone" required />
-            <label mdbLabel class="form-label" for="telefone">Telefone</label>
-          </mdb-form-control>
-          <br />
+                <!-- Imagem de perfil -->
+                <mdb-form-control>
+                  <input mdbInput type="text" id="imagemUrlPerfil" class="form-control"
+                    [(ngModel)]="entidade.imagemUrlPerfil" name="imagemUrlPerfil" />
+                  <label mdbLabel class="form-label" for="imagemUrlPerfil">URL da Imagem de Perfil</label>
+                </mdb-form-control>
+                <br />
 
-          <!-- CEP -->
-          <mdb-form-control>
-            <input mdbInput type="text" id="cep" class="form-control" [(ngModel)]="entidade.cep" name="cep"
-              (blur)="buscarCep()" required />
-            <label mdbLabel class="form-label" for="cep">CEP</label>
-          </mdb-form-control>
-          <br />
+              </div>
 
-          <!-- CPF -->
-          <mdb-form-control>
-            <input mdbInput type="text" id="cpf" class="form-control" [(ngModel)]="entidade.cpf" name="cpf" required />
-            <label mdbLabel class="form-label" for="cpf">CPF</label>
-          </mdb-form-control>
-          <br />
+              <div class="block-inputs">
+                <!-- Nome -->
+                <mdb-form-control>
+                  <input mdbInput type="text" id="nome" class="form-control" [(ngModel)]="entidade.nome" name="nome"
+                    required />
+                  <label mdbLabel class="form-label" for="nome">Nome</label>
+                </mdb-form-control>
+                <br />
 
-          <mdb-form-control>
-            <input mdbInput type="text" id="cnpj" class="form-control" [(ngModel)]="entidade.cnpj" name="cnpj" />
-            <label mdbLabel class="form-label" for="cnpj">CNPJ (opcional)</label>
-          </mdb-form-control>
-          <br />
-
-          <!-- Cidade -->
-          <mdb-form-control>
-            <input mdbInput type="text" id="cidade" class="form-control" [(ngModel)]="entidade.cidade" name="cidade"
-              required />
-            <label mdbLabel class="form-label" for="cidade">Cidade</label>
-          </mdb-form-control>
-          <br />
-
-          <!-- Estado -->
-          <mdb-form-control>
-            <input mdbInput type="text" id="estado" class="form-control" [(ngModel)]="entidade.estado" name="estado"
-              required />
-            <label mdbLabel class="form-label" for="estado">Estado</label>
-          </mdb-form-control>
-          <br />
-
-          <!-- Email -->
-          <mdb-form-control>
-            <input mdbInput type="email" id="email" class="form-control" [(ngModel)]="entidade.email" name="email"
-              required />
-            <label mdbLabel class="form-label" for="email">Email</label>
-          </mdb-form-control>
-          <br />
+                <!-- Telefone -->
+                <mdb-form-control>
+                  <input mdbInput type="text" id="telefone" class="form-control" [(ngModel)]="entidade.telefone"
+                    name="telefone" required />
+                  <label mdbLabel class="form-label" for="telefone">Telefone</label>
+                </mdb-form-control>
+                <br />
 
 
-          <div mdbDropdown class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" aria-expanded="false"
-              mdbDropdownToggle>
-              Dropdown button
-            </button>
-            <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a class="dropdown-item" href="#">PREFEITURA</a></li>
-              <li><a class="dropdown-item" href="#">UNIVERSIDADE</a></li>
-              <li><a class="dropdown-item" href="#">ONG</a></li>
-            </ul>
-          </div>
+                <!-- Email -->
+                <mdb-form-control>
+                  <input mdbInput type="email" id="email" class="form-control" [(ngModel)]="entidade.email" name="email"
+                    required />
+                  <label mdbLabel class="form-label" for="email">Email</label>
+                </mdb-form-control>
+                <br />
 
-          <br />
 
-          <!-- Senha -->
-          <mdb-form-control>
-            <input mdbInput type="password" id="senha" class="form-control" [(ngModel)]="veterinario.senha" name="senha"
-              required />
-            <label mdbLabel class="form-label" for="senha">Senha</label>
-          </mdb-form-control>
-          <br />
+              </div>
 
-          @if (entidade.id == null) {
-          <!-- Confirmar senha -->
-          <mdb-form-control>
-            <input mdbInput type="password" id="senha2" class="form-control" [(ngModel)]="senha2" name="senha2"
-              required />
-            <label mdbLabel class="form-label" for="senha2">Confirmar Senha</label>
-          </mdb-form-control>
-          <br />
-          }
+              <!-- nova div flex 1 -->
+              <div class="block-inputs">
 
-          <!-- Imagem de perfil -->
-          <mdb-form-control>
-            <input mdbInput type="text" id="imagemUrlPerfil" class="form-control" [(ngModel)]="entidade.imagemUrlPerfil"
-              name="imagemUrlPerfil" />
-            <label mdbLabel class="form-label" for="imagemUrlPerfil">URL da Imagem de Perfil</label>
-          </mdb-form-control>
-          <br />
+                <!-- CEP -->
+                <mdb-form-control>
+                  <input mdbInput type="text" id="cep" class="form-control" [(ngModel)]="entidade.cep" name="cep"
+                    (blur)="buscarCep('entidade')" required />
+                  <label mdbLabel class="form-label" for="cep">CEP</label>
+                </mdb-form-control>
+                <br />
+
+                <!-- Cidade -->
+                <mdb-form-control>
+                  <input mdbInput type="text" id="cidade" class="form-control" [(ngModel)]="entidade.cidade"
+                    name="cidade" required />
+                  <label mdbLabel class="form-label" for="cidade">Cidade</label>
+                </mdb-form-control>
+                <br />
+
+                <!-- Estado -->
+                <mdb-form-control>
+                  <input mdbInput type="text" id="estado" class="form-control" [(ngModel)]="entidade.estado"
+                    name="estado" required />
+                  <label mdbLabel class="form-label" for="estado">Estado</label>
+                </mdb-form-control>
+                <br />
+
+              </div>
+
+              <!-- nova div flex 1 -->
+              <div class="block-inputs">
+
+                <!-- CPF -->
+                <mdb-form-control>
+                  <input mdbInput type="text" id="cpf" class="form-control" [(ngModel)]="entidade.cpf" name="cpf"
+                    required />
+                  <label mdbLabel class="form-label" for="cpf">CPF</label>
+                </mdb-form-control>
+                <br />
+
+
+
+
+                <!-- cnpj -->
+
+                <mdb-form-control>
+                  <input mdbInput type="text" id="cnpj" class="form-control" [(ngModel)]="entidade.cnpj" name="cnpj"
+                    required />
+                  <label mdbLabel class="form-label" for="cnpj">CNPJ</label>
+                </mdb-form-control>
+                <br />
+
+            <!-- <div mdbDropdown class="dropdown">
+              <span class="dropdown-toggle-text" mdbDropdownToggle>
+                Tipo de Entidade ⌄
+              </span>
+
+              <ul mdbDropdownMenu class="dropdown-menu">
+                <li><a class="dropdown-item">PREFEITURA</a></li>
+                <li><a class="dropdown-item">UNIVERSIDADE</a></li>
+                <li><a class="dropdown-item">ONG</a></li>
+              </ul>
+         </div> -->
+
+    <mdb-form-control class="dropdown">
+    <select
+      mdbInput
+      id="tipoEntidade"
+      class="form-select"
+      required
+      [(ngModel)]="entidade.tipoEntidade"
+      name="tipoEntidade"
+    >
+      <option value="Tipo de Entidade" disabled selected>Tipo de entidade</option>
+      <option value="PREFEITURA">PREFEITURA</option>
+      <option value="UNIVERSIDADE">UNIVERSIDADE</option>
+      <option value="ONG">ONG</option>
+     
+    </select>
+  </mdb-form-control>
+
+
+              </div>
+
+              <div class="display">
+                <!-- Senha -->
+                <mdb-form-control [class.hide]="entidade.id">
+                  <input mdbInput type="password" id="senha" class="form-control" [(ngModel)]="entidade.senha"
+                    name="senha" required />
+                  <label mdbLabel class="form-label" for="senha">Senha</label>
+                </mdb-form-control>
+                <br />
+
+                <!-- Confirmar senha -->
+                <mdb-form-control [class.hide]="entidade.id">
+                  <input mdbInput type="password" id="senha2" class="form-control" [(ngModel)]="senha2" name="senha2"
+                    required />
+                  <label mdbLabel class="form-label" for="senha2">Confirmar Senha</label>
+                </mdb-form-control>
+
+              </div>
+              <br />
+            </div>
+          </main>
+
+          <br>
 
           <div class="couple-buttons">
-            <button type="button" class="btn btn-rounded" mdbRipple (click)="saveEnt()">
+            <button type="button" class="btn btn-rounded" mdbRipple (click)="cadastrarEnt()">
               Salvar
             </button>
             <br />
 
             @if (entidade.id >0) {
 
-            <button type="button" class="btn btn-warning" mdbRipple (click)="logout()">
+            <button type="button" class="btn btn-warning" mdbRipple (click)="logout()" [hidden]="entidade.id <= 0">
               Sair Da Conta
             </button>
 
-            <button type="button" class="btn btn-danger" mdbRipple (click)="deletarEnt()">
+            <button type="button" class="btn btn-danger" mdbRipple (click)="deletarEnt()" [hidden]="entidade.id <= 0">
               Deletar Conta
             </button>
 
@@ -432,6 +532,9 @@
             </p>
           </div>
           } }
+
+          <!--FIM PEGANDO LAYOUT USUARIO-->
+          <!-- COMEÇO CADASTRO DE ENTIDADE -->
 
           <!-- FIM CADASTRO DE ENTIDADE -->
         </div>

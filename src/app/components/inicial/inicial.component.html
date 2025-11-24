@@ -5,28 +5,27 @@
     <!-- Lado esquerdo: Texto -->
     <div class="home-left">
       <h2>Bem-vindo ao PrefPet</h2>
-      <p>
+      <!-- <p>
         Conectando tutores, pets e campanhas de vacinação e adoção.  
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
         Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p> -->
+      <p>
+        O PrefPet conecta tutores, veterinários e prefeituras para garantir mais cuidado,
+        segurança e bem-estar aos animais da sua cidade. Aqui você pode acessar campanhas de
+        vacinação, cadastrar seus pets, solicitar serviços, emitir documentos e acompanhar tudo
+        de forma rápida e prática.
+        Junte-se a nós nessa missão e ajude a transformar a vida dos nossos amigos de quatro patas.
       </p>
     </div>
 
     <!-- Lado direito: Botão de Login -->
     <div class="home-right d-flex justify-content-center align-items-center direction">
-      <button 
-        type="button" 
-        class="btn btn-rounded btn-home bgLaranja" 
-        mdbRipple 
-        (click)="loginNovo()">
+      <button type="button" class="btn btn-rounded btn-home bgLaranja" mdbRipple (click)="loginNovo()">
         Login
       </button>
 
-      <button 
-        type="button" 
-        class="btn btn-primary btn-rounded btn-home" 
-        mdbRipple 
-        (click)="cadastro()">
+      <button type="button" class="btn btn-primary btn-rounded btn-home" mdbRipple (click)="cadastro()">
         Cadastrar-se
       </button>
     </div>
@@ -34,39 +33,45 @@
 
   <!-- Retângulo 2: Emergência -->
   <div class="home-card home-card-small bg-danger block">
-    <button 
-      type="button" 
-      class="btn btn-light btn-rounded btn-home" 
-      mdbRipple 
-      (click)="acessarEmergencia()">
+    <button type="button" class="btn btn-light btn-rounded btn-home" mdbRipple (click)="acessarEmergencia()">
       Emergência
     </button>
   </div>
 
   <!-- Retângulo 3: Buscar Chip -->
   <div class="home-card home-card-small bg-success block">
-    <button 
-      type="button" 
-      class="btn btn-light btn-rounded btn-home" 
-      mdbRipple 
-      (click)="buscarChip()">
+    <button type="button" class="btn btn-light btn-rounded btn-home" mdbRipple (click)="buscarChip()">
       Buscar Animal Por Microchip
     </button>
   </div>
 
   <div class="home-card home-card-small vet-block">
 
-<p>Entrar Como Veterinário</p>
-  <button class="btn btn-rounded button-vet" (click)="vetCad()">
-          <i class="bi bi-heart-pulse"></i>
+    <p class="bold">Entrar Como Veterinário</p>
+    <button class="btn btn-rounded button-vet" (click)="vetCad()">
+      <i class="bi bi-heart-pulse"></i>
       Veterinario Cadastro
     </button>
 
-     <button class="btn btn-rounded button-vet">
-          <i class="bi bi-heart-pulse"></i>
+    <button class="btn btn-rounded button-vet" (click)="vetLogin()">
+      <i class="bi bi-heart-pulse"></i>
       Veterinario Login
     </button>
-</div>
+  </div>
+
+  <div class="home-card home-card-small vet-block">
+
+    <p class="bold">Entrar Como Entidade</p>
+    <button class="btn btn-rounded button-vet" (click)="entCad()">
+      <i class="bi bi-heart-pulse"></i>
+      Entidade Cadastro
+    </button>
+
+    <button class="btn btn-rounded button-vet" (click)="entLogin()">
+      <i class="bi bi-heart-pulse"></i>
+      Entidade Login
+    </button>
+  </div>
 
 </div>
 
@@ -76,7 +81,6 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
   </div>
   <div class="modal-body">
-  <app-login (loginSucesso)="close()"></app-login>
+    <app-login (loginSucesso)="close()" [tipoLogin]="tipoLoginValue"></app-login>
   </div>
 </ng-template>
-

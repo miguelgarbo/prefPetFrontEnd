@@ -17,8 +17,10 @@ export class InicialComponent {
   @ViewChild("modalLogin") modalLogin!: TemplateRef<any>;
   modalRef!: MdbModalRef<any>;
   private router = inject(Router);
+  tipoLoginValue!: string;
 
   loginNovo(){
+    this.tipoLoginValue = 'tutor'
     this.modalRef = this.modalService.open(this.modalLogin);
   }
 
@@ -39,8 +41,26 @@ export class InicialComponent {
   }
 
   vetCad(){
-    console.log("oi")
+    console.log("teste vet cad")
         this.router.navigate(['/veterinario-cadastro']);
   }
+
+  vetLogin(){
+    console.log("teste vet login")
+    this.tipoLoginValue = 'veterinario'
+    this.modalRef = this.modalService.open(this.modalLogin);
+  }
+
+  entCad(){
+    console.log("teste ent cad")
+        this.router.navigate(['/entidade-cadastro']);
+  }
+
+  entLogin(){
+    console.log("teste ent login")
+    this.tipoLoginValue = 'entidade'
+    this.modalRef = this.modalService.open(this.modalLogin);
+  }
+
 
 }
