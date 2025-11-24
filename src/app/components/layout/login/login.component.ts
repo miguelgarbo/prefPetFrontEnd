@@ -41,46 +41,40 @@ export class LoginComponent {
 
   router = inject(Router);
 
+  constructor(){
 
+    this.loginService.removeToken();
+  }
   
 
   login(){
-
-    this.loginService.removeToken(); 
 
     this.loginService.logar(this.loginData).subscribe({
         next: (token) =>{
           if(token){
 
             this.loginService.addToken(token)
-            console.log(token)
-
             this.currentUser = this.loginService.getCurrentUser()
 
-            console.log("usuario logado")              
+            console.log("usuario logado")     
             console.log(this.currentUser.nome)
+            console.log('token: ' + token)
+
             this.deuErrado = false
-            
+            this.loginSucesso.emit(); //devolve a requisição com sucesso e chama o  .close() para fechar o login automaticamente
             this.router.navigate(['principal/animal']);
-             console.log(token)
-             this.loginService.addToken(token)
-
-              console.log("usuario logado")
-              
-              console.log(this.currentUser.nome)
-              this.deuErrado = false
-              this.loginSucesso.emit(); //devolve a requisição com sucesso e chama o  .close() para fechar o login automaticamente
-              this.router.navigate(['principal/animal']);
          
-              
+            }else{
 
-            }},
+                this.deuErrado = true
+
+            }
+          
+          
+          },
               error:(err)=>{
               console.log(this.currentUser)
-
-                
                 console.error(err)
-                this.deuErrado = true
 
               }
             })

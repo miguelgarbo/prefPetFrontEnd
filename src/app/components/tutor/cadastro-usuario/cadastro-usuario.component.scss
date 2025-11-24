@@ -19,6 +19,7 @@ h3{
 
   display: flex;
   gap: 15px;
+  flex-wrap: wrap;
 
 }
 
@@ -29,6 +30,8 @@ h3{
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;   padding: 30px;
     width:80vw;
+    flex-wrap: wrap;
+    flex-direction: column !important;
 }
 
 .card-body{
@@ -42,8 +45,11 @@ h3{
 
 .display{
 
+  margin-top: 10px;
   display: flex;
-  gap: 5px;
+  flex-direction: column;
+      flex-wrap: wrap;
+
 }
 
 input{
@@ -52,9 +58,15 @@ input{
 
 .block-inputs{
   display: flex;
-  flex-direction: column;
-
+  justify-content: space-between !important;
   flex: 1;
+  gap: 1vw;
+}
+
+.form-check-input{
+
+  width: 20px !important;
+
 }
 
 main{
@@ -62,6 +74,38 @@ main{
   display: flex;
   justify-content: center;
   align-items: center;
+    flex-wrap: wrap;
 
-  width: 50vw;
+  width: 100vw;
+  height: 60vh;
 }
+
+
+.hide{
+
+  display: none !important;
+}
+
+.check-label{
+
+  display: flex;
+  width: 21vw;
+  gap: 1vw;
+  font-size: 12pt;
+  padding: 5px;
+}
+
+input{
+
+  width: 20vw !important;
+}
+
+
+.vazio{
+
+  width: 20vw;
+}
+
+@media (max-width: 428px) {
+      
+  }

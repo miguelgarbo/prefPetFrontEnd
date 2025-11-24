@@ -46,6 +46,8 @@ export class CadastroUsuarioComponent {
   senha!: string;
   senha2!: string;
 
+  isAbrigo: boolean = false
+
 
   actived = inject(ActivatedRoute)
   router = inject(Router);
@@ -153,8 +155,6 @@ export class CadastroUsuarioComponent {
     if (this.tutor.id > 0) {
       // editar tutor
 
-      
-
       this.tutorServie.update(this.tutor).subscribe({
         next: (tutor) => {
           Swal.fire({
@@ -185,7 +185,7 @@ export class CadastroUsuarioComponent {
             confirmButtonText: 'Ok'
           });
 
-          this.router.navigate(['/principal/animal']);
+          this.router.navigate(['/inicial']);
         },
         error: (err) => {
           console.error("Erro Ao Cadastrar", err);

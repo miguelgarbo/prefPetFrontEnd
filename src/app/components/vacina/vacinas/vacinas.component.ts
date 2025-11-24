@@ -9,6 +9,7 @@ import { TutorService } from '../../../services/tutor.service';
 import { Tutor } from '../../../models/tutor';
 import { LoginService } from '../../../services/login.service';
 import { Usuario } from '../../../models/usuario';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-vacinas',
@@ -86,7 +87,13 @@ export class VacinasComponent implements OnInit {
   if (this.animalIdCapturado) {
     this.router.navigate(['principal/carteira-vacinacao', this.animalIdCapturado]);
   } else {
-    alert('Selecione um animal primeiro!');
+
+
+     Swal.fire({
+                title: "Selecione um Animal Para Gerar o Pdf",
+                icon: "warning",
+                confirmButtonText: 'Ok'
+              });
   }
 }
 
