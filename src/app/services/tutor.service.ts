@@ -37,8 +37,8 @@ export class TutorService {
       { params: { nome: nome } });
   }
 
-  findByCpf(cpf:string): Observable<Tutor[]>{
-   return this.http.get<Tutor[]>(`${this.API}/findByCpf`, 
+  findByCpf(cpf:string): Observable<Tutor>{
+   return this.http.get<Tutor>(`${this.API}/findByCPF`, 
       { params: { cpf: cpf } });
   }
 

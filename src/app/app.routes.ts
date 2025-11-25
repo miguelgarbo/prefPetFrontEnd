@@ -20,6 +20,7 @@ import { BuscarTutorComponent } from './components/buscar-tutor/buscar-tutor.com
 import { VeterinarioDetailsComponent } from './components/veterinario-details/veterinario-details.component';
 import { loginGuard } from './auth/login.guard';
 import { EntidadeCadastroComponent } from './components/entidade-cadastro/entidade-cadastro.component';
+import { CadastroAplicacaoVacinaComponent } from './components/cadastro-aplicacao-vacina/cadastro-aplicacao-vacina.component';
 
 
 
@@ -35,6 +36,9 @@ export const routes: Routes = [
 {path: 'buscar-chip', component: BuscarChipComponent} ,
 {path: 'veterinario-cadastro', component: VeterinarioDetailsComponent},
 {path: 'entidade-cadastro', component: EntidadeCadastroComponent},
+{path: 'cadastro-aplicacao-vacina', component: CadastroAplicacaoVacinaComponent},
+
+
 
 
 {path:'principal', component: PrincipalComponent, 
