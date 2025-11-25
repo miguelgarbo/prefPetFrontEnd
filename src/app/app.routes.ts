@@ -19,6 +19,7 @@ import { NotificacoesComponent } from './components/notificacao/notificacoes/not
 import { BuscarTutorComponent } from './components/buscar-tutor/buscar-tutor.component';
 import { VeterinarioDetailsComponent } from './components/veterinario-details/veterinario-details.component';
 import { loginGuard } from './auth/login.guard';
+import { EntidadeCadastroComponent } from './components/entidade-cadastro/entidade-cadastro.component';
 
 
 
@@ -33,6 +34,8 @@ export const routes: Routes = [
 {path: 'cadastro-usuario', component: CadastroUsuarioComponent},
 {path: 'buscar-chip', component: BuscarChipComponent} ,
 {path: 'veterinario-cadastro', component: VeterinarioDetailsComponent},
+{path: 'entidade-cadastro', component: EntidadeCadastroComponent},
+
 
 {path:'principal', component: PrincipalComponent, 
     

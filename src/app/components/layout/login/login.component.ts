@@ -1,6 +1,6 @@
 
 
-import { Component, EventEmitter, Output, inject, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, inject, TemplateRef, ViewChild, Input } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
@@ -33,7 +33,9 @@ export class LoginComponent {
   loginService = inject(LoginService);
   currentUser = new Usuario();
   loginData = new Login();
+  @Input() tipoLogin!: string;
   @Output() loginSucesso = new EventEmitter<void>();
+
 
   modalService = inject(MdbModalService);
   @ViewChild('modalLogin') modalLogin!: TemplateRef<any>;
@@ -41,44 +43,51 @@ export class LoginComponent {
 
   router = inject(Router);
 
-  login(){
+  
 
-    this.loginService.removeToken(); 
-
-    this.loginService.logar(this.loginData).subscribe({
-        next: (token) =>{
-          if(token){
-
-            this.loginService.addToken(token)
-            console.log(token)
-
-            this.currentUser = this.loginService.getCurrentUser()
-
-             console.log(token)
-             this.loginService.addToken(token)
-
-              console.log("usuario logado")
-              
-              console.log(this.currentUser.nome)
-              this.deuErrado = false
-              this.loginSucesso.emit(); //devolve a requisição com sucesso e chama o  .close() para fechar o modal login automaticamente
-              this.router.navigate(['principal/animal']);
-         
-              }},
-              error:(err)=>{
-              console.log(this.currentUser)
-
-                console.error(err)
-                this.deuErrado = true
-
-              }
-            })
+  gerenciarTipoLogin() {
+    if (this.tipoLogin == 'veterinario') {
+      //implementar essa rota
+      this.router.navigate(['/veterinario/']);
+    } else if (this.tipoLogin == 'tutor') {
+      this.router.navigate(['principal/animal']);
+    } else if (this.tipoLogin == 'entidade') {
+      // implementar essa rota
+      this.router.navigate(['entidade/']);
+    }
   }
 
-  cadastrarRota(){
+
+  login() {
+    this.loginService.logar(this.loginData).subscribe({
+      next: (token) => {
+        if (token) {
+
+          this.loginService.addToken(token)
+          this.currentUser = this.loginService.getCurrentUser()
+
+          console.log("usuario logado")
+          console.log(this.currentUser.nome)
+          console.log('token: ' + token)
+
+          this.deuErrado = false
+          this.loginSucesso.emit();
+          //devolve a requisição com sucesso e chama o  .close() para fechar o login automaticamente
+          this.gerenciarTipoLogin() // manda pra uma pagina especifica a cada tipo de login
+
+        } else {
+          this.deuErrado = true
+        }
+
+      },
+      error: (err) => {
+        console.log(this.currentUser)
+        console.error(err)
+      }
+    })
+  }
+
+  cadastrarRota() {
     this.router.navigate(['cadastro-usuario']);
   }
-
- 
-  
 }

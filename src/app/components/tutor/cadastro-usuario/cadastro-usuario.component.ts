@@ -26,7 +26,7 @@ export class CadastroUsuarioComponent {
   @Input() tipoCadastro: string = ""
 
   title: string = 'Tutor';
-  tipoForm: string = 'Cadastro de '
+  tipoForm: string = 'Junte-se ao PrefPet como '
 
   usuario: Usuario = new Usuario()
 
@@ -46,12 +46,16 @@ export class CadastroUsuarioComponent {
   senha!: string;
   senha2!: string;
 
+  isAbrigo: boolean = false
+
 
   actived = inject(ActivatedRoute)
   router = inject(Router);
   http = inject(HttpClient)
 
    constructor() {
+    this.entidade.tipoEntidade = 'Tipo de Entidade';
+
     let id = this.actived.snapshot.params['id'];
     if (id > 0) {
       this.tipoForm = "Editar Perfil "
@@ -149,11 +153,34 @@ export class CadastroUsuarioComponent {
     }
   }
 
+
+  cadastrarVet(){
+    if (this.senha2 === this.veterinario.senha) {
+        this.saveVet()
+    }else{
+        Swal.fire({
+        icon: "error",
+        title: "Erro ao Cadastrar",
+        text: "As Senhas Devem Ser Iguais",
+      });
+    }
+
+  }
+
+  cadastrarEnt(){
+    if (this.senha2 === this.entidade.senha) {
+        this.saveEnt()
+    }else{
+        Swal.fire({
+        icon: "error",
+        title: "Erro ao Cadastrar",
+        text: "As Senhas Devem Ser Iguais",
+      });
+    }}
+
   saveTutor() {
     if (this.tutor.id > 0) {
       // editar tutor
-
-      
 
       this.tutorServie.update(this.tutor).subscribe({
         next: (tutor) => {
@@ -185,7 +212,7 @@ export class CadastroUsuarioComponent {
             confirmButtonText: 'Ok'
           });
 
-          this.router.navigate(['/principal/animal']);
+          this.router.navigate(['/inicial']);
         },
         error: (err) => {
           console.error("Erro Ao Cadastrar", err);
@@ -399,29 +426,51 @@ export class CadastroUsuarioComponent {
     });
   }
 
-  buscarCep() {
-    const cep = this.tutor.cep.replace(/\D/g, '');
-    if (cep.length === 8) {
-      this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`).subscribe(res => {
+  buscarCep(tipo: 'tutor' | 'veterinario' | 'entidade') {
+  let cep = '';
+
+  if (tipo === 'tutor') cep = this.tutor.cep;
+  if (tipo === 'veterinario') cep = this.veterinario.cep;
+  if (tipo === 'entidade') cep = this.entidade.cep;
+
+  cep = cep.replace(/\D/g, '');
+
+  if (cep.length === 8) {
+    this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`).subscribe({
+      next: (res) => {
         if (!res.erro) {
-          this.tutor.cidade = res.localidade;
-          this.tutor.estado = res.uf;
+
+          if (tipo === 'tutor') {
+            this.tutor.cidade = res.localidade;
+            this.tutor.estado = res.uf;
+          }
+
+          if (tipo === 'veterinario') {
+            this.veterinario.cidade = res.localidade;
+            this.veterinario.estado = res.uf;
+          }
+
+          if (tipo === 'entidade') {
+            this.entidade.cidade = res.localidade;
+            this.entidade.estado = res.uf;
+          }
+
         } else {
           Swal.fire({
             icon: "error",
             title: "CEP não encontrado!",
           });
-          this.tutor.cidade = '';
-          this.tutor.estado = '';
         }
-      }, err => {
-        console.error(err);
+      },
+      error: () => {
         Swal.fire({
           icon: "error",
           title: "Erro ao consultar CEP",
         });
-      });
-    }
+      },
+    });
   }
+}
+
 
 }
