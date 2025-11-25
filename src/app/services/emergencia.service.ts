@@ -31,4 +31,12 @@ export class EmergenciaService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+
+  unlinkContato(emergenciaId: number, contatoId: number): Observable<void> { //para desvincular a Emergencia do Contato, para poderem ser excluídas separadamentes
+  return this.http.delete<void>(
+    `${this.baseUrl}/${emergenciaId}/contato/${contatoId}`,
+    //{responseType: 'text' as 'json'}   aqui é se caso o back retorne um json, nesse caso retorna apenas um 204, um corpo sem resposta
+  );
+}
+
 }

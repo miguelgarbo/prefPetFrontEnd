@@ -8,7 +8,7 @@ import { Contato } from '../models/contato';
 })
 export class ContatoService {
 
-  private apiUrl = 'http://localhost:8080/contatos'; // ajuste se necessário
+  private apiUrl = 'http://localhost:8080/contatos'; 
 
   constructor(private http: HttpClient) {}
 
@@ -19,4 +19,12 @@ export class ContatoService {
   save(contato: Contato): Observable<Contato> {
     return this.http.post<Contato>(`${this.apiUrl}/save`, contato);
   } 
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+  }
+
+  update(id: number, contato: Contato): Observable<Contato> {
+      return this.http.put<Contato>(`${this.apiUrl}/update/${id}`, contato);
+    }
 }
