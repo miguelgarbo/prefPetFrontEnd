@@ -87,9 +87,47 @@ export class EmergenciaComponent {
       error: (err) => console.error('Erro ao salvar contato', err)
     });
   }
-  excluirContato(): void {
+
+
+  excluirContato(id: number): void {
+  if (!confirm("Tem certeza que deseja excluir este contato?")) return;
+
+  this.contatoService.delete(id).subscribe({
+    next: () => {
+      console.log("Contato excluído com sucesso!");
+      this.listarContato(); // atualiza lista de contatos
+    },
+    error: err => console.error("Erro ao excluir contato", err)
+  });
+}
+
+excluirEmergencia(emergencia: Emergencia): void {
+  if (!confirm("Tem certeza que deseja excluir esta emergência?")) return;
+
+  var contatos = emergencia.contatos?? [];
+   
+   if (contatos.length > 0) {
+    contatos.forEach(contato => {
+      this.emergenciaService.unlinkContato(emergencia.id!, contato.id!).subscribe({
+        next: () => console.log(`Desvinculado contato ${contato.id}`),
+        error: err => console.error("Erro ao desvincular contato", err)
+      });
+    });
+  }
+
+   this.emergenciaService.delete(emergencia.id!).subscribe({
+    next: () => {
+      console.log("Emergência excluída com sucesso!");
+      this.listarEmergencias(); // atualiza lista de emergências
+    },
+    error: err => console.error("Erro ao excluir emergência", err)
+  });
+}
+  editarEmergencia(){
 
   }
+
+
 }
 
   

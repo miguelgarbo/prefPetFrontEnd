@@ -43,9 +43,7 @@ export class LoginComponent {
 
   router = inject(Router);
 
-  constructor() {
-    this.loginService.removeToken();
-  }
+  
 
   gerenciarTipoLogin() {
     if (this.tipoLogin == 'veterinario') {
