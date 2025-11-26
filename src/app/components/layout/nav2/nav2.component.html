@@ -25,7 +25,11 @@
         role="group"
         aria-label="Basic example"
       >
+      @if(loginService.hasRole("ADMIN")){
+        <button type="button" class="btn" routerLink="animal" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Usuários</button>
+      }@else {
         <button type="button" class="btn" routerLink="animal" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Meus Animais</button>
+      }
         <button type="button" class="btn" routerLink="vacinas" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Vacinas</button>
         <button type="button" class="btn" routerLink="publicacoes" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Publicações</button>
         <button type="button" class="btn" routerLink="emergencia" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Emergências</button>

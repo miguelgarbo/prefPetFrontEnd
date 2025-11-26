@@ -14,6 +14,7 @@ import { LoginService } from '../../../services/login.service';
 import { log } from 'node:util';
 import { Usuario } from '../../../models/usuario';
 import { MessageErrorComponent } from '../../layout/message-error/message-error.component';
+import { UsuarioService } from '../../../services/usuario.service';
 
 @Component({
   selector: 'app-animal-list',
@@ -43,7 +44,13 @@ export class AnimalListComponent implements OnInit {
   currentUser: Usuario = this.loginService.getCurrentUser()
   animalSelecionado?: Animal;
 
+  tutorServie = inject(TutorService);
+  usuarioService = inject(UsuarioService);
+  
+
   deuCerto!: boolean
+
+  tutoresList: Tutor[] = [];
 
   hoje: string = new Date().toISOString().split('T')[0];
 
@@ -70,8 +77,23 @@ export class AnimalListComponent implements OnInit {
     console.log("usuario atual:" + this.currentUser.nome+ ", role: "+ this.currentUser.role)
     this.findByAnimaisTutorId()
     this.getTutorByCurrentUserId(this.currentUser.id)
-  }
 
+    if(this.loginService.hasRole("ADMIN")){
+      this.tutotesFindAll();
+    }
+
+  }
+   tutotesFindAll() {
+  this.tutorServie.findAll().subscribe({
+    next: (lista) => {
+      console.log("Tutores carregados:", lista);
+      this.tutoresList = lista;
+    },
+    error: (err) => {
+      console.error("Erro ao carregar tutores", err);
+    }
+  });
+}
 
   findByAnimaisTutorId() {
     this.animalService.findByTutorId(this.currentUser.id).subscribe({

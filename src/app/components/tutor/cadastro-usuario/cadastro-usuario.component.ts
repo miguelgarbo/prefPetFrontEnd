@@ -30,6 +30,8 @@ export class CadastroUsuarioComponent {
 
   usuario: Usuario = new Usuario()
 
+  tutoresList: Tutor[] = [];
+
   veterinario: Veterinario = new Veterinario()
 
   tutor: Tutor = new Tutor()
@@ -64,8 +66,21 @@ export class CadastroUsuarioComponent {
   }
 
   ngOnInit() {
-    this.changeTittle()
+    this.changeTittle();
   }
+
+  tutotesFindAll() {
+  this.tutorServie.findAll().subscribe({
+    next: (lista) => {
+      console.log("Tutores carregados:", lista);
+      this.tutoresList = lista;
+    },
+    error: (err) => {
+      console.error("Erro ao carregar tutores", err);
+    }
+  });
+}
+
  
 
   changeTittle(){

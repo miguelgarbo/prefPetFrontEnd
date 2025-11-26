@@ -157,5 +157,14 @@ btn-close<div class="row">
  
   </div>
 </ng-template>
-
+}
+@if(loginService.hasRole("ADMIN")){
+    <h3>Lista de Tutores</h3>
+    @for (tutores of tutoresList; track tutoresList){
+      <div>
+        <strong>{{ tutores.nome }}</strong><br>
+      <span>Telefone: {{ tutores.telefone }}</span><br>
+      <span>Cidade: {{ tutores.cidade }}</span>
+      </div>
+    }
 }

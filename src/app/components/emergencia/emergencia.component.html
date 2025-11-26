@@ -8,15 +8,18 @@
 
       <!-- Botões na lateral direita -->
       <div class="position-absolute" style="right: 10px; top: 10px;">
-        <button class="btn btn-sm btn-outline-primary me-1"
-                (click)="editarEmergencia()">
-          <i class="bi bi-pencil"></i>
-        </button>
+        @if(loginService.hasRole("ADMIN")){
+          <button class="btn btn-sm btn-outline-primary me-1"
+                  (click)="editarEmergencia()">
+            <i class="bi bi-pencil"></i>
+          </button>}
 
-        <button class="btn btn-sm btn-outline-danger"
-                (click)="excluirEmergencia(emergencia)">
-          <i class="bi bi-trash"></i>
-        </button>
+        @if(loginService.hasRole("ADMIN")){
+          <button class="btn btn-sm btn-outline-danger"
+                  (click)="excluirEmergencia(emergencia)">
+            <i class="bi bi-trash"></i>
+          </button>
+      }
       </div>
 
       <h4>{{ emergencia.nome }}</h4>
