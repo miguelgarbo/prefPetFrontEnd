@@ -12,8 +12,11 @@ export class VacinaService {
   API = "http://localhost:8080/vacinas"
 
   constructor() { }
-
-  findAll(): Observable<Vacina[]>{
+    findAll(): Observable<Vacina[]>{
     return this.http.get<Vacina[]>(this.API+"/findAll");
   }
+
+   save(vacina: Vacina): Observable<Vacina>{
+    return this.http.post<Vacina>(this.API+"/save", vacina);
+  } 
 }

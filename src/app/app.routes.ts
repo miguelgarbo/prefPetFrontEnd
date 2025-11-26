@@ -26,7 +26,7 @@ import { CadastroAplicacaoVacinaComponent } from './components/cadastro-aplicaca
 
 export const routes: Routes = [
 {path: '', redirectTo:'inicial', pathMatch:'full'},
-{path: "cadastro-publicacao", component: CadastroPublicacaoComponent},
+{path: "cadastro-publicacao", component: CadastroPublicacaoComponent, canActivate: [loginGuard]},
 {path:'login', component: LoginComponent},
 {path:'cadastro', component: CadastroUsuarioComponent},
 {path: 'inicial', component: InicialComponent},
@@ -36,7 +36,7 @@ export const routes: Routes = [
 {path: 'buscar-chip', component: BuscarChipComponent} ,
 {path: 'veterinario-cadastro', component: VeterinarioDetailsComponent},
 {path: 'entidade-cadastro', component: EntidadeCadastroComponent},
-{path: 'cadastro-aplicacao-vacina', component: CadastroAplicacaoVacinaComponent},
+{path: 'cadastro-aplicacao-vacina', component: CadastroAplicacaoVacinaComponent, canActivate: [loginGuard]},
 
 
 
@@ -50,7 +50,7 @@ export const routes: Routes = [
         {path:":id", component: AnimalDetailsComponent},
     ]},
 
-    {path: 'buscar-chip', component: BuscarChipComponent, canActivate: [loginGuard]},
+    {path: 'buscar-chip', component: BuscarChipComponent},
     {path: 'emergencia', component: EmergenciaComponent},
     {path: 'vacinas', component: VacinasComponent},
     {path: 'publicacoes', component: PublicacaoListComponent},

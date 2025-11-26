@@ -7,7 +7,7 @@ export class AplicacaoVacina {
     id!: number
     dataAplicacao!: string;
     dataValidade!: string;
-    numeroDose!: string
+    numeroDose!: number
     vacina!: Vacina;
     animal!: Animal;
     veterinario!:Veterinario;

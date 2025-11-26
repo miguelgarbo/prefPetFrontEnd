@@ -48,12 +48,12 @@ export class LoginComponent {
   gerenciarTipoLogin() {
     if (this.tipoLogin == 'veterinario') {
       //implementar essa rota
-      this.router.navigate(['/veterinario/']);
+      this.router.navigate(['/cadastro-aplicacao-vacina']);
     } else if (this.tipoLogin == 'tutor') {
-      this.router.navigate(['principal/animal']);
+      this.router.navigate(['/principal/animal']);
     } else if (this.tipoLogin == 'entidade') {
       // implementar essa rota
-      this.router.navigate(['entidade/']);
+      this.router.navigate(['/cadastro-publicacao/']);
     }
   }
 
