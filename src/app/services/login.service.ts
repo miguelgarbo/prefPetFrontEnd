@@ -55,7 +55,7 @@ export class LoginService {
       return false
     }
   }
- 
+
 
   getCurrentUser(){
     return this.jwtDecode() as Usuario

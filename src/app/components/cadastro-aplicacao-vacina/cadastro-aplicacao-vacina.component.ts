@@ -10,6 +10,7 @@ import { AnimalService } from '../../services/animal.service';
 import { Tutor } from '../../models/tutor';
 import { log } from 'node:console';
 import { Vacina } from '../../models/vacina';
+import { VacinaService } from '../../services/vacina.service';
 
 @Component({
   selector: 'app-cadastro-aplicacao-vacina',
@@ -26,8 +27,12 @@ export class CadastroAplicacaoVacinaComponent {
   aplicacaoVacinaService = inject(AplicacaoVacinaService)
   tutorService = inject(TutorService)
   animalService = inject(AnimalService)
+  vacinaService = inject(VacinaService)
 
-  vacinas: Vacina[]=[];
+  numeroDose!: number;
+
+
+  vacinas: Vacina[] = [];
 
   tutor!: Tutor;
 
@@ -35,16 +40,17 @@ export class CadastroAplicacaoVacinaComponent {
   cpfTutorBusca!: string;
 
 
-  constructor(){
-
-        this.aplicacaoVacina.animal = new Animal();
-
+  ngOnInit() {
+    this.aplicacaoVacina.animal = new Animal();
   }
 
-  getAnimaisByTutorId(id: number){
+  constructor() {
+  }
+
+  getAnimaisByTutorId(id: number) {
     this.animalService.findByTutorId(id).subscribe({
 
-      next:(animais) =>{
+      next: (animais) => {
         console.log("animais encontrados", animais);
         this.animaisDoTutor = animais
       },
@@ -55,58 +61,101 @@ export class CadastroAplicacaoVacinaComponent {
   }
 
 
-  getTutorByCpf(){
+  getTutorByCpf() {
+
+    if (this.cpfTutorBusca != null) {
+
       this.tutorService.findByCpf(this.cpfTutorBusca).subscribe({
-        next:(response)=> {
+        next: (response) => {
 
           console.log("opa deu certo ");
           console.log(response);
-          
-        this.tutor = response;
 
-        this.getAnimaisByTutorId(response.id);
+          this.tutor = response;
+
+          this.getVacinasCadastradas()
+          this.getAnimaisByTutorId(response.id);
 
         },
-        error:(err) =>{
-            
+        error: (err) => {
+
           console.log("erro ao buscar tutor");
           console.log(err);
-          
+
         },
       })
+    }
+
   }
 
   salvarAplicacao() {
 
-
     this.aplicacaoVacinaService.save(this.aplicacaoVacina, this.mesesParaValidade).subscribe({
 
-      next: (aplicacaoCadastrada)=> {
-        
-            Swal.fire({
-      icon: "success",
-      title: "Aplicação registrada com sucesso!"
-    });
+      next: (aplicacaoCadastrada) => {
 
-    console.log("aplicacao cadastrada: "+ aplicacaoCadastrada)
+        Swal.fire({
+          icon: "success",
+          title: "Aplicação registrada com sucesso!"
+        });
 
-      },error: (err)=> {
-        
-      console.log(err)
-      
-      Swal.fire({
-      icon: "error",
-      title: "Erro ao Registrar Aplicação"
-    });
+        console.log("aplicacao cadastrada: " + aplicacaoCadastrada)
 
+      }, error: (err) => {
+
+        console.log(err)
+
+        Swal.fire({
+          icon: "error",
+          title: "Erro ao Registrar Aplicação"
+        });
       },
-
     }
     )
-
-
-  
-
-   
   }
+
+  getVacinasCadastradas() {
+    this.vacinaService.findAll().subscribe({
+      next: (vacinas) => {
+        console.log(vacinas)
+        this.vacinas = vacinas;
+      },
+      error: (err) => {
+        console.error(err)
+      },
+    })
+  }
+
+  getAplicacaoVacinaAlreadyExists() {
+
+    this.aplicacaoVacinaService.findByAnimalId(this.aplicacaoVacina.animal.id).subscribe({
+
+      next: (aplicacoesDoAnimal) => {
+
+        if (aplicacoesDoAnimal) {
+
+          for (let i = 0; i < aplicacoesDoAnimal.length; i++) {
+            const aplicacaoVacinaIndex = aplicacoesDoAnimal[i];
+
+            if (aplicacaoVacinaIndex.vacina.nome == this.aplicacaoVacina.vacina.nome) {
+
+              this.numeroDose = aplicacaoVacinaIndex.numeroDose + 1
+              console.log(this.numeroDose)
+            }
+          }
+
+        } else {
+
+          console.log("erro ao buscar aplicacoes animal")
+        }
+
+
+      },
+      error: (err) => {
+
+
+      },
+    })
+  }
+
 }

@@ -4,7 +4,14 @@
     <h2 class="marginTop title">Emergências</h2>
     <br>
 
-    <div *ngFor="let emergencia of emergencias" class="card mb-3 p-2 card-emergencia position-relative">
+    @if(emergencias.length == 0){
+      
+    <h4 class="subtitle">Sem Emergencias, Por Enquanto</h4>
+
+    }@else {
+
+
+      <div *ngFor="let emergencia of emergencias" class="card mb-3 p-2 card-emergencia position-relative">
 
       <!-- Botões na lateral direita -->
       <div class="position-absolute" style="right: 10px; top: 10px;">
@@ -28,6 +35,9 @@
       </ul>
 
     </div>
+
+    }
+    
   </div>
 
 
