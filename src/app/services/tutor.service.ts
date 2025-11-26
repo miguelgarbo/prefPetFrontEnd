@@ -12,7 +12,7 @@ export class TutorService {
   private API = 'http://localhost:8080/tutores'
 
   findAll(): Observable<Tutor[]>{
-        return this.http.get<Tutor[]>(this.API+"/")
+        return this.http.get<Tutor[]>(this.API+"/findAll")
   }
 
   findById(id:number): Observable<Tutor>{

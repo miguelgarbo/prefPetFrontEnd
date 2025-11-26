@@ -44,7 +44,7 @@ export class AnimalListComponent implements OnInit {
   currentUser: Usuario = this.loginService.getCurrentUser()
   animalSelecionado?: Animal;
 
-  tutorServie = inject(TutorService);
+  //tutorService = inject(TutorService);
   usuarioService = inject(UsuarioService);
   
 
@@ -84,7 +84,7 @@ export class AnimalListComponent implements OnInit {
 
   }
    tutotesFindAll() {
-  this.tutorServie.findAll().subscribe({
+  this.tutorService.findAll().subscribe({
     next: (lista) => {
       console.log("Tutores carregados:", lista);
       this.tutoresList = lista;
