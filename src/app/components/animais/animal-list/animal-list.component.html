@@ -158,13 +158,32 @@ btn-close<div class="row">
   </div>
 </ng-template>
 }
-@if(loginService.hasRole("ADMIN")){
-    <h3>Lista de Tutores</h3>
-    @for (tutores of tutoresList; track tutoresList){
-      <div>
-        <strong>{{ tutores.nome }}</strong><br>
-      <span>Telefone: {{ tutores.telefone }}</span><br>
-      <span>Cidade: {{ tutores.cidade }}</span>
+@if (loginService.hasRole("ADMIN")) {
+  <h3 class="format-h3 mt-4">Lista de Tutores</h3>
+  <br><br><br>
+  @for (tutor of tutoresList; track tutor.id) {
+
+    <div class="tutor-card">
+
+      <div class="tutor-header">
+        <strong class="tutor-nome">{{ tutor.nome }}</strong>
+        <span class="tutor-role">{{ tutor.role }}</span>
       </div>
-    }
+
+      <div class="tutor-info">
+        <span><b>Telefone:</b> {{ tutor.telefone }}</span>
+        <span><b>Cidade:</b> {{ tutor.cidade }}</span>
+        <span><b>Animais cadastrados:</b> {{ tutor.animais?.length || 0 }}</span>
+      </div>
+
+      <button class="btn-excluir" (click)="deletarTutor(tutor.id)">
+        Excluir Tutor
+      </button>
+
+    </div>
+
+  }
+
 }
+
+

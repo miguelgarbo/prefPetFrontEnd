@@ -47,6 +47,20 @@ export class LoginService {
     return ""
   }
 
+  isTokenValid(): boolean {  //método para verificar se o token ainda é valido
+    const token = localStorage.getItem('token');
+    if (!token) return false; //se não tiver nada
+
+    try {
+      const decoded: any = jwtDecode(token);
+      const now = Date.now() / 1000;
+
+      return decoded.exp > now; // retorna true se ainda não expirou
+    } catch (e) {
+      return false;
+    }
+  }
+
   hasRole(role:string){
    let user = this.jwtDecode() as Usuario
     if(user.role == role){

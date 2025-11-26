@@ -93,7 +93,7 @@ export class CadastroUsuarioComponent {
   }
 
   logout() {
-
+    
   }
 
   findTutorById(id: number){

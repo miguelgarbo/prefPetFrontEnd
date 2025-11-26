@@ -79,11 +79,11 @@ export class AnimalListComponent implements OnInit {
     this.getTutorByCurrentUserId(this.currentUser.id)
 
     if(this.loginService.hasRole("ADMIN")){
-      this.tutotesFindAll();
+      this.tutotesFindAll(); //caso seja admin, mostra os tutores cadastrados
     }
 
   }
-   tutotesFindAll() {
+   tutotesFindAll() { //para mostrar a lista de tutores
   this.tutorService.findAll().subscribe({
     next: (lista) => {
       console.log("Tutores carregados:", lista);
@@ -93,6 +93,44 @@ export class AnimalListComponent implements OnInit {
       console.error("Erro ao carregar tutores", err);
     }
   });
+}
+  deletarTutor(id:number){
+    Swal.fire({
+    title: 'Tem certeza?',
+    text: 'Você realmente deseja excluir este tutor?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sim, excluir',
+    cancelButtonText: 'Cancelar',
+    reverseButtons: true
+  }).then((result) => {
+
+    if (result.isConfirmed) {
+
+      this.tutorService.deleteById(id).subscribe({
+        next: () => {
+          Swal.fire({
+            title: 'Excluído!',
+            text: 'Tutor removido com sucesso.',
+            icon: 'success',
+            timer: 1800,
+            showConfirmButton: false
+          });
+
+          // Atualiza a lista automaticamente sem recarregar a página
+          this.tutoresList = this.tutoresList.filter(t => t.id !== id);
+        },
+
+        error: () => {
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Não foi possível excluir o tutor.',
+            icon: 'error'
+          });
+        }
+      });
+    }
+  })
 }
 
   findByAnimaisTutorId() {
