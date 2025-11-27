@@ -42,7 +42,11 @@ export class CadastroAplicacaoVacinaComponent {
 
   ngOnInit() {
     this.aplicacaoVacina.animal = new Animal();
+
   }
+
+
+
 
   constructor() {
   }
@@ -89,9 +93,7 @@ export class CadastroAplicacaoVacinaComponent {
   }
 
   salvarAplicacao() {
-
     this.aplicacaoVacinaService.save(this.aplicacaoVacina, this.mesesParaValidade).subscribe({
-
       next: (aplicacaoCadastrada) => {
 
         Swal.fire({
@@ -102,9 +104,7 @@ export class CadastroAplicacaoVacinaComponent {
         console.log("aplicacao cadastrada: " + aplicacaoCadastrada)
 
       }, error: (err) => {
-
         console.log(err)
-
         Swal.fire({
           icon: "error",
           title: "Erro ao Registrar Aplicação"
@@ -127,11 +127,17 @@ export class CadastroAplicacaoVacinaComponent {
   }
 
   getAplicacaoVacinaAlreadyExists() {
+      console.log("Verificando doses...");
 
+      if (!this.aplicacaoVacina.animal?.id || !this.aplicacaoVacina.vacina?.nome) {
+    console.log("Faltam dados para calcular dose");
+    return;
+  }
+    
     this.aplicacaoVacinaService.findByAnimalId(this.aplicacaoVacina.animal.id).subscribe({
 
       next: (aplicacoesDoAnimal) => {
-
+        console.log(aplicacoesDoAnimal);
         if (aplicacoesDoAnimal) {
 
           for (let i = 0; i < aplicacoesDoAnimal.length; i++) {
@@ -140,7 +146,7 @@ export class CadastroAplicacaoVacinaComponent {
             if (aplicacaoVacinaIndex.vacina.nome == this.aplicacaoVacina.vacina.nome) {
 
               this.numeroDose = aplicacaoVacinaIndex.numeroDose + 1
-              console.log(this.numeroDose)
+              console.log("dose::", this.numeroDose)
             }
           }
 
@@ -153,9 +159,11 @@ export class CadastroAplicacaoVacinaComponent {
       },
       error: (err) => {
 
+          console.log(err)
 
       },
     })
   }
 
+  
 }

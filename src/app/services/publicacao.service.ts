@@ -33,5 +33,11 @@ export class PublicacaoService {
   }
 
 
+   findByTipoPublicacao(tipoPublicacao: string): Observable<Publicacao[]>{
+        return this.http.get<Publicacao[]>(this.API+"/byTipoPublicacao",      
+          { params: { tipoPublicacao: tipoPublicacao } });
+  }
+
+
   constructor() { }
 }

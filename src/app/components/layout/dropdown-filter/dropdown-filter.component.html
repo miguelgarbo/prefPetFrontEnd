@@ -8,13 +8,14 @@
   >
     Filtro
   </button>
-  <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <li><a class="dropdown-item" href="#">CAMPANHA DE CASTRAÇÃO</a></li>
-    <li><a class="dropdown-item" href="#">CAMPANHA DE VACINAÇÃO</a></li>
-    <li><a class="dropdown-item" href="#">CAMPANHA EDUCACIONAL</a></li>
-    <li><a class="dropdown-item" href="#">ESTUDO COM ANIMAIS</a></li>
-    <li><a class="dropdown-item" href="#">INFORMATIVO</a></li>
-    <li><a class="dropdown-item" href="#">OUTROS</a></li>
 
+  <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    @for (op of opcoes; track $index) {
+      <li>
+        <a class="dropdown-item" (click)="selecionarFiltro(op)">
+          {{ op }}
+        </a>
+      </li>
+    }
   </ul>
 </div>

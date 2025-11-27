@@ -16,6 +16,7 @@ import { LoginService } from '../../../services/login.service';
 import { Login } from '../../../models/login';
 import { Usuario } from '../../../models/usuario';
 import { MessageErrorComponent } from '../message-error/message-error.component';
+import { log } from 'node:console';
 
 
 
@@ -36,14 +37,11 @@ export class LoginComponent {
   @Input() tipoLogin!: string;
   @Output() loginSucesso = new EventEmitter<void>();
 
-
   modalService = inject(MdbModalService);
   @ViewChild('modalLogin') modalLogin!: TemplateRef<any>;
   modalRef!: MdbModalRef<any>;
 
   router = inject(Router);
-
-  
 
   gerenciarTipoLogin() {
     if (this.tipoLogin == 'veterinario') {
@@ -67,7 +65,7 @@ export class LoginComponent {
           this.currentUser = this.loginService.getCurrentUser()
 
           console.log("usuario logado")
-          console.log(this.currentUser.nome)
+          console.log(this.currentUser)
           console.log('token: ' + token)
 
           this.deuErrado = false
@@ -76,6 +74,8 @@ export class LoginComponent {
           this.gerenciarTipoLogin() // manda pra uma pagina especifica a cada tipo de login
 
         } else {
+          console.log("cai aq");
+          
           this.deuErrado = true
         }
 

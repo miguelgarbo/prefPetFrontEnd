@@ -16,6 +16,7 @@
     <p class="text-animais">Animais de {{tutor.nome}}:</p>
     <mdb-form-control class="mt-3">
       <select mdbInput class="form-select" name="animal" required [(ngModel)]="aplicacaoVacina.animal">
+>
         <option disabled selected>Selecione o animal</option>
         @for (animal of animaisDoTutor; track animal.id) {
         <option [ngValue]=animal>
@@ -32,40 +33,33 @@
 
     <!-- Vacina -->
     <mdb-form-control class="mt-3">
-      <select mdbInput class="form-select" name="vacina" required [(ngModel)]="aplicacaoVacina.vacina">
+      <select mdbInput class="form-select" name="vacina" 
+      required [(ngModel)]="aplicacaoVacina.vacina">
         <option disabled selected>Selecione a vacina</option>
 
         @for (v of vacinas; track v.id) {
-        <option>
+        <option [ngValue]="v">
           {{ v.nome }}
         </option>
         }
 
-      </select>
+      </select >
       <label class="form-label">Vacina</label>
     </mdb-form-control>
 
-    <!-- nao precisa definir a data pois o back define essa data por localdate.now() -->
-    <!-- Data da aplicação
-    <mdb-form-control class="mt-3">
+
+      <mdb-form-control class="mt-3">
       <input
         mdbInput
-        type="date"
+        type="number"
         class="form-control"
-        name="dataAplicacao"
+        name="mesesParaValidade"
         required
-        [(ngModel)]="aplicacaoVacina.dataAplicacao"
+        [(ngModel)]="mesesParaValidade"
       />
-      <label class="form-label">Data da Aplicação</label>
-    </mdb-form-control> -->
+      <label class="form-label">Meses</label>
+    </mdb-form-control> 
 
-    <!-- numero dose -->
-    <mdb-form-control class="mt-3">
-      <div class="card style-add">
-        <p>Numero Da Dose: {{aplicacaoVacina.numeroDose}}</p>
-      </div>
-      <label class="form-label">Numero da Dose: {{numeroDose}}*</label>
-    </mdb-form-control>
 
     <!-- Botão salvar -->
     <button type="submit" class="btn btn-success mt-4" [disabled]="formVacina.invalid">

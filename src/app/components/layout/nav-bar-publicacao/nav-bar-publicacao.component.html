@@ -7,5 +7,5 @@
           placeholder="Digite aqui"
           aria-label="Search"
         />
-            <app-dropdown-filter></app-dropdown-filter>
+            <app-dropdown-filter (filtroEscolhido)="receberFiltro($event)"></app-dropdown-filter>
       </form>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
 import { DropdownFilterComponent } from "../dropdown-filter/dropdown-filter.component";
 
@@ -10,4 +10,9 @@ import { DropdownFilterComponent } from "../dropdown-filter/dropdown-filter.comp
 })
 export class NavBarPublicacaoComponent {
 
+    @Output() filtroSelecionado = new EventEmitter<string>();
+
+    receberFiltro(opcao:string){
+      this.filtroSelecionado.emit(opcao)
+  }
 }
