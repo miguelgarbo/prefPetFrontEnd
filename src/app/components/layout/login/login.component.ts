@@ -43,13 +43,16 @@ export class LoginComponent {
 
   router = inject(Router);
 
-  gerenciarTipoLogin() {
-    if (this.tipoLogin == 'veterinario') {
+  gerenciarTipoLogin(currentUser:Usuario) {
+
+    if (currentUser.role == 'VETERINARIO') {
       //implementar essa rota
       this.router.navigate(['/cadastro-aplicacao-vacina']);
-    } else if (this.tipoLogin == 'tutor') {
+
+    } else if (currentUser.role == 'TUTOR' || currentUser.role=='ADMIN') {
+
       this.router.navigate(['/principal/animal']);
-    } else if (this.tipoLogin == 'entidade') {
+    } else if (currentUser.role == 'ENTIDADE') {
       // implementar essa rota
       this.router.navigate(['/cadastro-publicacao/']);
     }
@@ -64,6 +67,8 @@ export class LoginComponent {
           this.loginService.addToken(token)
           this.currentUser = this.loginService.getCurrentUser()
 
+
+
           console.log("usuario logado")
           console.log(this.currentUser)
           console.log('token: ' + token)
@@ -71,7 +76,7 @@ export class LoginComponent {
           this.deuErrado = false
           this.loginSucesso.emit();
           //devolve a requisição com sucesso e chama o  .close() para fechar o login automaticamente
-          this.gerenciarTipoLogin() // manda pra uma pagina especifica a cada tipo de login
+          this.gerenciarTipoLogin(this.currentUser) // manda pra uma pagina especifica a cada tipo de login
 
         } else {
           console.log("cai aq");

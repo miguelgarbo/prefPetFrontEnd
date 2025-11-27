@@ -19,9 +19,9 @@ export class AppComponent {
     private loginService: LoginService,
     private router: Router) {}
 
-  ngOnInit() {
-    if (this.loginService.isTokenValid()) { //ao iniciar o app, faz a verificação se o token esta valido
-      this.router.navigate(['/principal']);  // Página principal
-    }
-  }
+  // ngOnInit() {
+  //   if (this.loginService.isTokenValid()) { //ao iniciar o app, faz a verificação se o token esta valido
+  //     this.router.navigate(['/principal']);  // Página principal
+  //   }
+  // }
 }

@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Entidade } from '../models/entidade';
 import { Observable } from 'rxjs';
 import { ObjectEncodingOptions } from 'fs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { ObjectEncodingOptions } from 'fs';
 export class EntidadeService {
 
   private http = inject(HttpClient)
-  private API = 'http://localhost:8080/entidades'
+  private API = environment.SERVIDOR+'/entidades'
 
   findAll(): Observable<Entidade[]>{
         return this.http.get<Entidade[]>(this.API)

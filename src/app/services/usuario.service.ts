@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Veterinario } from '../models/veterinario';
 import { Tutor } from '../models/tutor';
 import { Entidade } from '../models/entidade';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { Entidade } from '../models/entidade';
 export class UsuarioService {
 
   private http = inject(HttpClient)
-  private API = 'http://localhost:8080/users'
+  private API = environment.SERVIDOR+'/users'
 
   findAll(): Observable<Usuario[]>{
         return this.http.get<Usuario[]>(this.API+"/findAll")

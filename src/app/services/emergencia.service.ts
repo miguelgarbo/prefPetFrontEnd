@@ -1,16 +1,19 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Emergencia } from '../models/emergencia';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmergenciaService {
 
-  private baseUrl = 'http://localhost:8080/emergencia';
+  private http = inject(HttpClient)
 
-  constructor(private http: HttpClient) { }
+  private baseUrl = environment.SERVIDOR+'/emergencia';
+
+  constructor() { }
 
   findAll(): Observable<Emergencia[]> {
     return this.http.get<Emergencia[]>(`${this.baseUrl}/findAll`);

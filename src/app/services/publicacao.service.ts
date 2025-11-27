@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Publicacao } from '../models/publicacao';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class PublicacaoService {
 
 
    private http = inject(HttpClient)
-   private API = 'http://localhost:8080/publicacao'
+   private API = environment.SERVIDOR+'/publicacao'
 
   findAll(): Observable<Publicacao[]>{
         return this.http.get<Publicacao[]>(this.API+"/findAll")

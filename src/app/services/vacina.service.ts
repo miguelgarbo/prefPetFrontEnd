@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Vacina } from '../models/vacina';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Vacina } from '../models/vacina';
 export class VacinaService {
 
   http = inject(HttpClient)
-  API = "http://localhost:8080/vacinas"
+  API = environment.SERVIDOR+"/vacinas"
 
   constructor() { }
     findAll(): Observable<Vacina[]>{

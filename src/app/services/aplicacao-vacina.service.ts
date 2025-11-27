@@ -2,13 +2,14 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AplicacaoVacina } from '../models/aplicacao-vacina';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AplicacaoVacinaService {
 
-  private apiUrl = 'http://localhost:8080/aplicacao';
+  private apiUrl = environment.SERVIDOR+'/aplicacao';
   private http = inject(HttpClient);
 
   constructor() {}
@@ -30,6 +31,10 @@ export class AplicacaoVacinaService {
 
   findAll(): Observable<AplicacaoVacina[]> {
     return this.http.get<AplicacaoVacina[]>(`${this.apiUrl}/findAll`);
+  }
+
+  findByVetId(id:number): Observable<AplicacaoVacina[]> {
+    return this.http.get<AplicacaoVacina[]>(`${this.apiUrl}/findByVeterinarioId/`+id);
   }
 
   update(id: number, aplicacao: AplicacaoVacina): Observable<AplicacaoVacina> {

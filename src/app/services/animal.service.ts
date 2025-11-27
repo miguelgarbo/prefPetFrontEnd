@@ -2,14 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Animal } from '../models/animal';
-import { Tutor } from '../models/tutor';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AnimalService {
-  private apiUrl = 'http://localhost:8080/animais';
+  private apiUrl = environment.SERVIDOR+'/animais';
 
   private http = inject(HttpClient);
 

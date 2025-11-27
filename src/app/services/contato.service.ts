@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Contato } from '../models/contato';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContatoService {
 
-  private apiUrl = 'http://localhost:8080/contatos'; 
+  private apiUrl = environment.SERVIDOR+'/contatos'; 
 
   constructor(private http: HttpClient) {}
 

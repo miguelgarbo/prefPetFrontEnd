@@ -34,9 +34,5 @@ export class VacinaslistComponent {
       error: () => alert('Erro ao carregar aplicações de  :c')
       
     })
-
-    
-
   }
-
 }

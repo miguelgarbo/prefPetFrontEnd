@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Veterinario } from '../models/veterinario';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Veterinario } from '../models/veterinario';
 export class VeterinarioService {
 
   private http = inject(HttpClient);
-  private API = 'http://localhost:8080/veterinarios';
+  private API = environment.SERVIDOR+'/veterinarios';
 
   constructor() {}
 

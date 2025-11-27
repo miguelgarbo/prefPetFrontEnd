@@ -21,6 +21,7 @@ import { VeterinarioDetailsComponent } from './components/veterinario-details/ve
 import { loginGuard } from './auth/login.guard';
 import { EntidadeCadastroComponent } from './components/entidade-cadastro/entidade-cadastro.component';
 import { CadastroAplicacaoVacinaComponent } from './components/cadastro-aplicacao-vacina/cadastro-aplicacao-vacina.component';
+import { HistoricoAplicacaoVacinaVetComponent } from './components/historico-aplicacao-vacina-vet/historico-aplicacao-vacina-vet.component';
 
 
 
@@ -37,19 +38,16 @@ export const routes: Routes = [
 {path: 'veterinario-cadastro', component: VeterinarioDetailsComponent},
 {path: 'entidade-cadastro', component: EntidadeCadastroComponent},
 {path: 'cadastro-aplicacao-vacina', component: CadastroAplicacaoVacinaComponent, canActivate: [loginGuard]},
-
-
-
-
+{path:"historico-aplicacoes", component: HistoricoAplicacaoVacinaVetComponent, canActivate:[loginGuard]},
 {path:'principal', component: PrincipalComponent, 
-    
     children:[
     { path: '', redirectTo: 'animal', pathMatch: 'full' }, 
     {path:'animal', component: AnimalListComponent,
     children:[
         {path:":id", component: AnimalDetailsComponent},
     ]},
-
+    // {path: 'cadastro-aplicacao-vacina', component: CadastroAplicacaoVacinaComponent, canActivate: [loginGuard]},
+    // {path: 'historico-aplicacoes', component: HistoricoAplicacaoVacinaVetComponent},
     {path: 'buscar-chip', component: BuscarChipComponent},
     {path: 'emergencia', component: EmergenciaComponent},
     {path: 'vacinas', component: VacinasComponent},
@@ -57,11 +55,8 @@ export const routes: Routes = [
     {path: "carteira-vacinacao/:id", component: CarteiraVacinacaoComponent},
     {path: 'notificacoes', component: NotificacoesComponent},
     {path: "buscar-tutor/:id", component: BuscarTutorComponent},
-    {path:"cadastro-usuario/:id", component: CadastroUsuarioComponent}
+    {path:"cadastro-usuario/:id", component: CadastroUsuarioComponent},
 
-    ], 
-
- 
+    ],  
 },
-
 ];

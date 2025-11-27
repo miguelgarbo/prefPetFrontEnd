@@ -56,7 +56,7 @@ export class CadastroUsuarioComponent {
   router = inject(Router);
   http = inject(HttpClient)
 
-   constructor() {
+  constructor() {
     this.entidade.tipoEntidade = 'Tipo de Entidade';
 
     let id = this.actived.snapshot.params['id'];
@@ -71,120 +71,151 @@ export class CadastroUsuarioComponent {
   }
 
   tutotesFindAll() {
-  this.tutorService.findAll().subscribe({
-    next: (lista) => {
-      console.log("Tutores carregados:", lista);
-      this.tutoresList = lista;
-    },
-    error: (err) => {
-      console.error("Erro ao carregar tutores", err);
-    }
-  });
-}
+    this.tutorService.findAll().subscribe({
+      next: (lista) => {
+        console.log("Tutores carregados:", lista);
+        this.tutoresList = lista;
+      },
+      error: (err) => {
+        console.error("Erro ao carregar tutores", err);
+      }
+    });
+  }
 
- 
 
-  changeTittle(){
-    if(this.tipoCadastro == "veterinario"){
+
+  changeTittle() {
+    if (this.tipoCadastro == "veterinario") {
       this.title = "Veterinário"
 
-    }else if(this.tipoCadastro =="entidade"){
+    } else if (this.tipoCadastro == "entidade") {
       this.title = "Entidade"
     }
   }
 
   logout() {
     Swal.fire({
-    title: 'Deseja realmente sair?',
-    text: 'Você será desconectado da sua conta.',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Sim, sair',
-    cancelButtonText: 'Cancelar',
-    confirmButtonColor: '#d33',
-    cancelButtonColor: '#3085d6'
-  }).then((result) => {
-    if (result.isConfirmed) {
+      title: 'Deseja realmente sair?',
+      text: 'Você será desconectado da sua conta.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, sair',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6'
+    }).then((result) => {
+      if (result.isConfirmed) {
 
-      // limpa tudão :)
-      this.loginService.logout();
-      this.router.navigate(['inicial']);
+        // limpa tudão :)
+        this.loginService.logout();
+        this.router.navigate(['inicial']);
 
-      Swal.fire({
-        title: 'Desconectado!',
-        text: 'Você saiu da sua conta.',
-        icon: 'success',
-        timer: 1500,
-        showConfirmButton: false
-      });
+        Swal.fire({
+          title: 'Desconectado!',
+          text: 'Você saiu da sua conta.',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        });
 
-    }
-  });
+      }
+    });
   }
 
-  findTutorById(id: number){
-      this.tutorService.findById(id).subscribe({
-      next:(tutorEncontrado)=> {
-          console.log("tutor encontrado: ", tutorEncontrado)
-           this.tutor = tutorEncontrado;
+  findTutorById(id: number) {
+    this.tutorService.findById(id).subscribe({
+      next: (tutorEncontrado) => {
+        console.log("tutor encontrado: ", tutorEncontrado)
+        this.tutor = tutorEncontrado;
       },
-      error:(err)=> {
+      error: (err) => {
         console.error(err)
       },
     })
 
   }
 
-  findVetById(id: number){
-      this.veterinarioService.findById(id).subscribe({
-      next:(vetEncontrado)=> {
-          console.log("vet encontrado: ", vetEncontrado)
-           this.veterinario = vetEncontrado;
+  findVetById(id: number) {
+    this.veterinarioService.findById(id).subscribe({
+      next: (vetEncontrado) => {
+        console.log("vet encontrado: ", vetEncontrado)
+        this.veterinario = vetEncontrado;
       },
-      error:(err)=> {
+      error: (err) => {
         console.error(err)
       },
     })
   }
 
-  findEntidadeById(id: number){
-      this.entidadeService.findById(id).subscribe({
-      next:(entidadeEncontrada)=> {
-          console.log("entidade encontrada: ", entidadeEncontrada)
-           this.entidade = entidadeEncontrada;
+  findEntidadeById(id: number) {
+    this.entidadeService.findById(id).subscribe({
+      next: (entidadeEncontrada) => {
+        console.log("entidade encontrada: ", entidadeEncontrada)
+        this.entidade = entidadeEncontrada;
       },
-      error:(err)=> {
+      error: (err) => {
         console.error(err)
       },
     })
   }
 
 
-  findById(id: number){
+  findById(id: number) {
     this.usuarioService.findById(id).subscribe({
-      next:(usuarioEncontrado)=> {
-          console.log("Editar Perfil de :", usuarioEncontrado)
+      next: (usuarioEncontrado) => {
+        console.log("Editar Perfil de :", usuarioEncontrado)
 
-          if(usuarioEncontrado.role == 'TUTOR'){
-           this.findTutorById(usuarioEncontrado.id)
-          }
+        if (usuarioEncontrado.role == 'TUTOR') {
+          this.findTutorById(usuarioEncontrado.id)
+        }
 
-          if(usuarioEncontrado.role == 'VETERINARIO'){
-           this.findVetById(usuarioEncontrado.id)
-          }
-           if(usuarioEncontrado.role == 'ENTIDADE'){
-           this.findEntidadeById(usuarioEncontrado.id)
-          }
+        if (usuarioEncontrado.role == 'VETERINARIO') {
+          this.findVetById(usuarioEncontrado.id)
+        }
+        if (usuarioEncontrado.role == 'ENTIDADE') {
+          this.findEntidadeById(usuarioEncontrado.id)
+        }
       },
-      error:(err)=> {
+      error: (err) => {
         console.error(err)
       },
     })
   }
 
   cadastrarTutor() {
-    if (this.senha2 === this.tutor.senha) {
+
+    if (this.tipoForm = "Editar Perfil ") {
+
       this.saveTutor();
+
+    } else {
+      if (this.senha2 === this.tutor.senha) {
+        this.saveTutor();
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Erro ao Cadastrar",
+          text: "As Senhas Devem Ser Iguais",
+        });
+      }
+
+    }
+
+
+
+  }
+
+
+  cadastrarVet() {
+
+      if (this.tipoForm = "Editar Perfil ") {
+
+      this.saveVet();
+
+    } else {
+
+    if (this.senha2 === this.veterinario.senha) {
+      this.saveVet()
     } else {
       Swal.fire({
         icon: "error",
@@ -194,30 +225,27 @@ export class CadastroUsuarioComponent {
     }
   }
 
+  }
 
-  cadastrarVet(){
-    if (this.senha2 === this.veterinario.senha) {
-        this.saveVet()
-    }else{
-        Swal.fire({
+  cadastrarEnt() {
+
+      if (this.tipoForm = "Editar Perfil ") {
+
+      this.saveEnt();
+
+    } else {
+
+    if (this.senha2 === this.entidade.senha) {
+      this.saveEnt()
+    } else {
+      Swal.fire({
         icon: "error",
         title: "Erro ao Cadastrar",
         text: "As Senhas Devem Ser Iguais",
       });
     }
-
   }
-
-  cadastrarEnt(){
-    if (this.senha2 === this.entidade.senha) {
-        this.saveEnt()
-    }else{
-        Swal.fire({
-        icon: "error",
-        title: "Erro ao Cadastrar",
-        text: "As Senhas Devem Ser Iguais",
-      });
-    }}
+  }
 
   saveTutor() {
     if (this.tutor.id > 0) {
@@ -317,7 +345,7 @@ export class CadastroUsuarioComponent {
   saveEnt() {
     if (this.entidade.id > 0) {
 
-      
+
 
       // editar vet
       this.entidadeService.update(this.entidade).subscribe({
@@ -384,7 +412,7 @@ export class CadastroUsuarioComponent {
               confirmButtonText: 'Ok',
               timer: 1000
             });
-            this.router.navigate(['/']); 
+            this.router.navigate(['/']);
           },
           error: (err) => {
             console.error("Erro AO Deletar", err);
@@ -418,7 +446,7 @@ export class CadastroUsuarioComponent {
               confirmButtonText: 'Ok',
               timer: 1000
             });
-            this.router.navigate(['/']); 
+            this.router.navigate(['/']);
           },
           error: (err) => {
             console.error("Erro AO Deletar", err);
@@ -468,50 +496,50 @@ export class CadastroUsuarioComponent {
   }
 
   buscarCep(tipo: 'tutor' | 'veterinario' | 'entidade') {
-  let cep = '';
+    let cep = '';
 
-  if (tipo === 'tutor') cep = this.tutor.cep;
-  if (tipo === 'veterinario') cep = this.veterinario.cep;
-  if (tipo === 'entidade') cep = this.entidade.cep;
+    if (tipo === 'tutor') cep = this.tutor.cep;
+    if (tipo === 'veterinario') cep = this.veterinario.cep;
+    if (tipo === 'entidade') cep = this.entidade.cep;
 
-  cep = cep.replace(/\D/g, '');
+    cep = cep.replace(/\D/g, '');
 
-  if (cep.length === 8) {
-    this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`).subscribe({
-      next: (res) => {
-        if (!res.erro) {
+    if (cep.length === 8) {
+      this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`).subscribe({
+        next: (res) => {
+          if (!res.erro) {
 
-          if (tipo === 'tutor') {
-            this.tutor.cidade = res.localidade;
-            this.tutor.estado = res.uf;
+            if (tipo === 'tutor') {
+              this.tutor.cidade = res.localidade;
+              this.tutor.estado = res.uf;
+            }
+
+            if (tipo === 'veterinario') {
+              this.veterinario.cidade = res.localidade;
+              this.veterinario.estado = res.uf;
+            }
+
+            if (tipo === 'entidade') {
+              this.entidade.cidade = res.localidade;
+              this.entidade.estado = res.uf;
+            }
+
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "CEP não encontrado!",
+            });
           }
-
-          if (tipo === 'veterinario') {
-            this.veterinario.cidade = res.localidade;
-            this.veterinario.estado = res.uf;
-          }
-
-          if (tipo === 'entidade') {
-            this.entidade.cidade = res.localidade;
-            this.entidade.estado = res.uf;
-          }
-
-        } else {
+        },
+        error: () => {
           Swal.fire({
             icon: "error",
-            title: "CEP não encontrado!",
+            title: "Erro ao consultar CEP",
           });
-        }
-      },
-      error: () => {
-        Swal.fire({
-          icon: "error",
-          title: "Erro ao consultar CEP",
-        });
-      },
-    });
+        },
+      });
+    }
   }
-}
 
 
 }

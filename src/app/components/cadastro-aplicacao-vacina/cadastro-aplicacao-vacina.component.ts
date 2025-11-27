@@ -11,6 +11,9 @@ import { Tutor } from '../../models/tutor';
 import { log } from 'node:console';
 import { Vacina } from '../../models/vacina';
 import { VacinaService } from '../../services/vacina.service';
+import { LoginService } from '../../services/login.service';
+import { Veterinario } from '../../models/veterinario';
+import { VeterinarioService } from '../../services/veterinario.service';
 
 @Component({
   selector: 'app-cadastro-aplicacao-vacina',
@@ -28,8 +31,14 @@ export class CadastroAplicacaoVacinaComponent {
   tutorService = inject(TutorService)
   animalService = inject(AnimalService)
   vacinaService = inject(VacinaService)
+  veterinarioService = inject(VeterinarioService)
 
+  loginService = inject(LoginService)
+
+  currentUser = this.loginService.getCurrentUser()
   numeroDose!: number;
+
+  veterinario!: Veterinario;
 
 
   vacinas: Vacina[] = [];
@@ -42,13 +51,27 @@ export class CadastroAplicacaoVacinaComponent {
 
   ngOnInit() {
     this.aplicacaoVacina.animal = new Animal();
+    this.getVetByUserId()
 
   }
 
-
-
-
   constructor() {
+  }
+
+  getVetByUserId() {
+
+    this.veterinarioService.findById(this.currentUser.id).subscribe({
+      next: (veterinario) => {
+        console.log(veterinario);
+        this.veterinario = veterinario;
+      },
+      error(err) {
+        console.log(err);
+      },
+
+
+    })
+
   }
 
   getAnimaisByTutorId(id: number) {
@@ -93,6 +116,8 @@ export class CadastroAplicacaoVacinaComponent {
   }
 
   salvarAplicacao() {
+
+    this.aplicacaoVacina.veterinario = this.veterinario;
     this.aplicacaoVacinaService.save(this.aplicacaoVacina, this.mesesParaValidade).subscribe({
       next: (aplicacaoCadastrada) => {
 
@@ -124,46 +149,6 @@ export class CadastroAplicacaoVacinaComponent {
         console.error(err)
       },
     })
-  }
+  }   
 
-  getAplicacaoVacinaAlreadyExists() {
-      console.log("Verificando doses...");
-
-      if (!this.aplicacaoVacina.animal?.id || !this.aplicacaoVacina.vacina?.nome) {
-    console.log("Faltam dados para calcular dose");
-    return;
-  }
-    
-    this.aplicacaoVacinaService.findByAnimalId(this.aplicacaoVacina.animal.id).subscribe({
-
-      next: (aplicacoesDoAnimal) => {
-        console.log(aplicacoesDoAnimal);
-        if (aplicacoesDoAnimal) {
-
-          for (let i = 0; i < aplicacoesDoAnimal.length; i++) {
-            const aplicacaoVacinaIndex = aplicacoesDoAnimal[i];
-
-            if (aplicacaoVacinaIndex.vacina.nome == this.aplicacaoVacina.vacina.nome) {
-
-              this.numeroDose = aplicacaoVacinaIndex.numeroDose + 1
-              console.log("dose::", this.numeroDose)
-            }
-          }
-
-        } else {
-
-          console.log("erro ao buscar aplicacoes animal")
-        }
-
-
-      },
-      error: (err) => {
-
-          console.log(err)
-
-      },
-    })
-  }
-
-  
 }

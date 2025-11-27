@@ -1,15 +1,14 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { EmergenciaService } from '../../services/emergencia.service';
+import { Component, inject } from '@angular/core';
 import { Emergencia } from '../../models/emergencia';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule} from 'mdb-angular-ui-kit/forms';
 import { MdbModalService, MdbModalModule } from 'mdb-angular-ui-kit/modal';
-import { error } from 'console';
 import { ContatoService } from '../../services/contato.service';
 import { Contato } from '../../models/contato';
 import { ActivatedRoute } from '@angular/router';
 import { LoginService } from '../../services/login.service';
+import { EmergenciaService } from '../../services/emergencia.service';
 
 @Component({
   selector: 'app-emergencia',
@@ -18,6 +17,10 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ['./emergencia.component.scss']
 })
 export class EmergenciaComponent {
+
+  emergenciaService = inject(EmergenciaService) 
+  contatoService = inject(ContatoService)
+  modalService = inject(MdbModalService);
 
   emergencias: Emergencia[] = [];
   novaEmergencia = { nome: '' };
@@ -30,28 +33,23 @@ export class EmergenciaComponent {
   loginService = inject(LoginService);
   
 
-  constructor(
-    private emergenciaService: EmergenciaService, 
-    private contatoService: ContatoService,
-    private modalService: MdbModalService) { }
-
-  ngOnInit(): void {
-    this.listarEmergencias();
-    this.listarContato();
-  }
-
   listarEmergencias() {
     this.emergenciaService.findAll().subscribe({
-      next: (data) => this.emergencias = data,
-      error: (err) => console.error('Erro ao carregar emergências', err)
+      next: (data) => {
+        console.log(data);
+        this.emergencias = data
+      },
+      error: (err) => {
+        console.error('Erro ao carregar emergências', err)
+      }
     });
   }
+  
   listarContato(){
     this.contatoService.findAll().subscribe({
       next: (data) => this.todosContatos = data,
       error: (err) => console.error('Erro ao carregar os contatos', err)
-    });
-  }
+    });}
 
   adicionarEmergencia(): void {
     const emergenciaParaSalvar = {
@@ -61,7 +59,7 @@ export class EmergenciaComponent {
     console.log("Enviando contato:", JSON.stringify(emergenciaParaSalvar));
     this.emergenciaService.save(emergenciaParaSalvar).subscribe({
       next: () => {
-        this.listarEmergencias();
+        // this.listarEmergencias();
         this.novaEmergencia.nome = '';
         this.contatosSelecionadosIds = [];
       },
@@ -81,7 +79,7 @@ export class EmergenciaComponent {
     this.contatoService.save(c).subscribe({
       next: (res) => {
         console.log('Contato salvo com sucesso:', res);
-        this.listarContato(); // já aproveita sua função existente
+        // this.listarContato(); // já aproveita sua função existente
         this.novoContato = { nomeOrgao: '', telefone: '', email: '', ativo: true}; // limpa form
       },
       error: (err) => console.error('Erro ao salvar contato', err)

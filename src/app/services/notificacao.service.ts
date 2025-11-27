@@ -2,13 +2,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Notificacao } from '../models/notificacao';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificacaoService {
 
-  api = 'http://localhost:8080/notificacoes'
+  api = environment.SERVIDOR+'/notificacoes'
 
   private http = inject(HttpClient)
 
