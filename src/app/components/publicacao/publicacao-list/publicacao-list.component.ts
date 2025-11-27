@@ -19,6 +19,7 @@ export class PublicacaoListComponent {
   router = inject(Router)
 
   filtroEscolhido!: string;
+  valorDaBarra!: string
 
   publicacaoService = inject(PublicacaoService)
   id: number = 0;
@@ -65,25 +66,47 @@ export class PublicacaoListComponent {
     this.setFilterPublicacoes()
   }
 
+  getTextBar(textBar: string) {
+
+    this.valorDaBarra = textBar
+    this.setTextValueBar()
+  }
+
+  setTextValueBar() {
+
+    console.log("to dentro do filtro de text");
+
+    this.listaFiltrada = this.publicacoes.filter(pub =>
+      pub.descricao.toLowerCase().includes(this.valorDaBarra.toLowerCase()));
+
+    console.log(this.listaFiltrada);
+
+    if (this.listaFiltrada.length === 0) {
+
+      this.listaFiltrada = this.publicacoes
+
+    }
+  }
+
 
   setFilterPublicacoes() {
     this.publicacaoService.findByTipoPublicacao(this.filtroEscolhido).subscribe({
       next: (listaFiltradaRetornada) => {
 
-        if(listaFiltradaRetornada.length ==0){
+        if (listaFiltradaRetornada.length == 0) {
 
           this.listaFiltrada = this.publicacoes
 
-            Swal.fire({
-                            position: "top-end",
-                            icon: "info",
-                            title: "Nenhuma Publicação com "+this.filtroEscolhido,
-                            showConfirmButton: false,
-                            timer: 1000
-                          });
+          Swal.fire({
+            position: "top-end",
+            icon: "info",
+            title: "Nenhuma Publicação com " + this.filtroEscolhido,
+            showConfirmButton: false,
+            timer: 1000
+          });
 
-        }else{
-        this.listaFiltrada = listaFiltradaRetornada;
+        } else {
+          this.listaFiltrada = listaFiltradaRetornada;
 
         }
 

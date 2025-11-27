@@ -5,10 +5,10 @@
 
 <div class="col-md-6 gap20 ">
   <div class="container-nav">
-    <app-nav-bar-publicacao (filtroSelecionado)="getFiltro($event)"></app-nav-bar-publicacao>
+    <app-nav-bar-publicacao (textoEmitido)="getTextBar($event)" (filtroSelecionado)="getFiltro($event)"></app-nav-bar-publicacao>
 </div>
 
-@if (filtroEscolhido) {
+@if (listaFiltrada.length > 0 && (filtroEscolhido || valorDaBarra)) {
   @for (post of listaFiltrada; track post.id) {
 <div class="card" (click)="findById(post.id)">
   <div class="card-body">

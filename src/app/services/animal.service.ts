@@ -27,7 +27,7 @@ export class AnimalService {
         params: {numeroMicrochip: numeroMicrochip}
       } )}
 
-    findById(id: number): Observable<Animal> {
+  findById(id: number): Observable<Animal> {
       return this.http.get<Animal>(`${this.apiUrl}/findById/${id}`)
     }
 
