@@ -2,6 +2,11 @@
 //@use 'mdb-angular-ui-kit/assets/scss/mdb' as *;
 @import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
 
+*{ margin: 0; 
+  padding: 0; 
+  box-sizing: border-box;
+}
+
 .centralizar{
     text-align: center;
 }
