@@ -8,14 +8,20 @@
         height="20"
         alt="MDB Logo"
       />
-      <div class="nome">
-        <small class="nome">{{currentUser.nome}}</small>
-        
-       <button type="button" (click)="editarPerfil()">
-  <i class="fa-solid fa-pen"></i>
-</button>
+     <div class="nome">
+        @if(loginService.hasRole("TUTOR")){
+          <small class="nome">{{currentUser.nome}}</small>
+          <button type="button" (click)="editarPerfil()">
+            <i class="fa-solid fa-pen"></i>
+          </button>
+        } @else if (loginService.hasRole("ADMIN")) {
+          <div class="admin-container">
+            <span class="admin-text">Administrador</span>
+            <button class="btn-logout" (click)="logout()">Sair</button>
+          </div>
+        }
+</div>
 
-      </div>
     </a>
 
 

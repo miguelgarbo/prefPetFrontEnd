@@ -45,3 +45,34 @@ i{
     background-color: rgb(255, 244, 209);
     color: rgb(162, 190, 149);
 }
+.admin-container {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem; /* espaço entre texto e botão */
+    padding: 0.3rem 0.4rem;
+    border-radius: 8px;
+    background-color: rgb(109, 131, 98); /* combina com navbar */
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.admin-text {
+    font-size: medium;
+    font-weight: bold;
+    color: rgb(255, 244, 209);
+}
+
+.btn-logout {
+    background-color: rgb(255, 244, 209);
+    color: rgb(162, 190, 149);
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-logout:hover {
+    background-color: rgb(162, 190, 149);
+    color: rgb(255, 244, 209);
+}

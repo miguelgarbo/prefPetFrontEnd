@@ -8,22 +8,34 @@ import { Notificacao } from '../../../models/notificacao';
 import { NotificacaoService } from '../../../services/notificacao.service';
 import { Usuario } from '../../../models/usuario';
 import { LoginService } from '../../../services/login.service';
+import { c } from "../../../../../node_modules/@angular/cdk/a11y-module.d-DBHGyKoh";
+import { UsuarioService } from '../../../services/usuario.service';
+import { VeterinarioService } from '../../../services/veterinario.service';
+import { EntidadeService } from '../../../services/entidade.service';
+import Swal from 'sweetalert2'
+import { CadastroUsuarioComponent } from '../../tutor/cadastro-usuario/cadastro-usuario.component';
+
 
 
 @Component({
   selector: 'app-nav2',
-  imports: [FormsModule, RouterLink, RouterModule],
+  imports: [FormsModule, RouterLink, RouterModule,],
   templateUrl: './nav2.component.html',
   styleUrl: './nav2.component.scss'
 })
 export class Nav2Component {
 
+  usuarioService = inject(UsuarioService)
   tutorService = inject(TutorService)
+  loginService = inject(LoginService)
+  veterinarioService = inject(VeterinarioService)
+  entidadeService = inject(EntidadeService)
   router = inject(Router)
   notificacoes: Notificacao[] = []
   notificacaoService = inject(NotificacaoService)
-  loginService = inject(LoginService)
   currentUser: Usuario = this.loginService.getCurrentUser();
+
+  
 
   ngOnInit(){
 
@@ -68,6 +80,32 @@ export class Nav2Component {
         console.log("TESTE")
   }
 
-
-
+  logout() {
+      Swal.fire({
+      title: 'Deseja realmente sair?',
+      text: 'Você será desconectado da sua conta.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, sair',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6'
+    }).then((result) => {
+      if (result.isConfirmed) {
+  
+        // limpa tudão :)
+        this.loginService.logout();
+        this.router.navigate(['inicial']);
+  
+        Swal.fire({
+          title: 'Desconectado!',
+          text: 'Você saiu da sua conta.',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        });
+  
+      }
+    });
+    }
 }

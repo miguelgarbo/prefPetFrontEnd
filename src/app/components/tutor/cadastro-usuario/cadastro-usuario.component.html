@@ -8,10 +8,11 @@
           <br>
           <br>
 
+          @if(title=='Tutor' && loginService.hasRole('TUTOR')){
           <h3>{{tipoForm}}{{ title }}</h3>
           <br />
 
-          @if(title=='Tutor'){
+          
           <main>
             <div class="container-forms">
               <div class="img-block" [class.hide]="!tutor.id">
@@ -165,7 +166,10 @@
               Já possui uma conta? <a href="#!">Entrar</a>
             </p>
           </div>
-          } }
+          } }@else if(loginService.hasRole("ADMIN")){
+            <div>Voce é ADMIN</div>
+            <button (click)="logout()">LogOut</button>
+          }
 
 
           <!-- FIMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM -->

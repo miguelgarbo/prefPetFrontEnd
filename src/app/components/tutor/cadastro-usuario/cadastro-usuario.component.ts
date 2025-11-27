@@ -13,6 +13,7 @@ import { Entidade } from '../../../models/entidade';
 import { Veterinario } from '../../../models/veterinario';
 import { VeterinarioService } from '../../../services/veterinario.service';
 import { EntidadeService } from '../../../services/entidade.service';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -39,8 +40,8 @@ export class CadastroUsuarioComponent {
   entidade: Entidade = new Entidade()
 
   usuarioService = inject(UsuarioService)
-
-  tutorServie = inject(TutorService)
+  tutorService = inject(TutorService)
+  loginService = inject(LoginService)
   veterinarioService = inject(VeterinarioService)
   entidadeService = inject(EntidadeService)
 
@@ -70,7 +71,7 @@ export class CadastroUsuarioComponent {
   }
 
   tutotesFindAll() {
-  this.tutorServie.findAll().subscribe({
+  this.tutorService.findAll().subscribe({
     next: (lista) => {
       console.log("Tutores carregados:", lista);
       this.tutoresList = lista;
@@ -93,11 +94,36 @@ export class CadastroUsuarioComponent {
   }
 
   logout() {
-    
+    Swal.fire({
+    title: 'Deseja realmente sair?',
+    text: 'Você será desconectado da sua conta.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sim, sair',
+    cancelButtonText: 'Cancelar',
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6'
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+      // limpa tudão :)
+      this.loginService.logout();
+      this.router.navigate(['inicial']);
+
+      Swal.fire({
+        title: 'Desconectado!',
+        text: 'Você saiu da sua conta.',
+        icon: 'success',
+        timer: 1500,
+        showConfirmButton: false
+      });
+
+    }
+  });
   }
 
   findTutorById(id: number){
-      this.tutorServie.findById(id).subscribe({
+      this.tutorService.findById(id).subscribe({
       next:(tutorEncontrado)=> {
           console.log("tutor encontrado: ", tutorEncontrado)
            this.tutor = tutorEncontrado;
@@ -197,7 +223,7 @@ export class CadastroUsuarioComponent {
     if (this.tutor.id > 0) {
       // editar tutor
 
-      this.tutorServie.update(this.tutor).subscribe({
+      this.tutorService.update(this.tutor).subscribe({
         next: (tutor) => {
           Swal.fire({
             title: "Usuário Editado com Sucesso!",
@@ -349,7 +375,7 @@ export class CadastroUsuarioComponent {
       showDenyButton: true
     }).then((response) => {
       if (response.isConfirmed) {
-        this.tutorServie.deleteById(this.tutor.id).subscribe({
+        this.tutorService.deleteById(this.tutor.id).subscribe({
           next: (value) => {
             console.log(value);
             Swal.fire({
