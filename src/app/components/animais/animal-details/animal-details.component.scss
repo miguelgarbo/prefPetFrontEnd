@@ -49,3 +49,40 @@
 .field select {
   text-align: left;    // garante alinhamento
 }
+
+// Estilo base para inputs e selects
+%base-field {
+  width: 100%;
+  max-width: 200px;
+  padding: 8px 12px;
+
+  background: #f4f4f4;
+  border: 1px solid #cfcfcf;
+  border-radius: 6px;
+
+  font-size: 15px;
+
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    background: #fff;
+    border-color: #4ca468;
+    box-shadow: 0 0 0 2px rgba(76, 164, 104, 0.3);
+    outline: none;
+  }
+}
+
+// aplica o estilo base
+.inputformat {
+  @extend %base-field;
+  text-align: left
+}
+
+.selectformat {
+  @extend %base-field;
+  cursor: pointer;
+}
+
+#selectmicrochip{
+  max-width: 3.5dvw !important;
+}

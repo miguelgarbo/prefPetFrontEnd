@@ -22,10 +22,10 @@ import { UsuarioService } from '../../../services/usuario.service';
   imports: [
     CommonModule,
     FormsModule,
-    MdbModalModule,       
+    MdbModalModule,
     MdbFormsModule,
     AnimalDetailsComponent,
-    MessageErrorComponent      
+    MessageErrorComponent
   ],
   templateUrl: './animal-list.component.html',
   styleUrls: ['./animal-list.component.scss']
@@ -46,7 +46,7 @@ export class AnimalListComponent implements OnInit {
 
   //tutorService = inject(TutorService);
   usuarioService = inject(UsuarioService);
-  
+
 
   deuCerto!: boolean
 
@@ -72,28 +72,28 @@ export class AnimalListComponent implements OnInit {
   @ViewChild('addAnimalModal', { static: true }) modalTemplate: any;
 
   ngOnInit() {
-    
+
     console.log("to aqui dentro do animais list");
-    console.log("usuario atual:" + this.currentUser.nome+ ", role: "+ this.currentUser.role)
+    console.log("usuario atual:" + this.currentUser.nome + ", role: " + this.currentUser.role)
     this.findByAnimaisTutorId()
     this.getTutorByCurrentUserId(this.currentUser.id)
 
-    if(this.loginService.hasRole("ADMIN")){
+    if (this.loginService.hasRole("ADMIN")) {
       this.tutotesFindAll();
     }
 
   }
-   tutotesFindAll() {
-  this.tutorService.findAll().subscribe({
-    next: (lista) => {
-      console.log("Tutores carregados:", lista);
-      this.tutoresList = lista;
-    },
-    error: (err) => {
-      console.error("Erro ao carregar tutores", err);
-    }
-  });
-}
+  tutotesFindAll() {
+    this.tutorService.findAll().subscribe({
+      next: (lista) => {
+        console.log("Tutores carregados:", lista);
+        this.tutoresList = lista;
+      },
+      error: (err) => {
+        console.error("Erro ao carregar tutores", err);
+      }
+    });
+  }
 
   findByAnimaisTutorId() {
     this.animalService.findByTutorId(this.currentUser.id).subscribe({
@@ -106,11 +106,11 @@ export class AnimalListComponent implements OnInit {
     });
   }
 
-  findById(id: number){
+  findById(id: number) {
     this.animalSelecionado = this.animais.find(animal => animal.id === id);
   }
 
-  transferirTutela(animalId: number){
+  transferirTutela(animalId: number) {
     if (animalId) {
       this.router.navigate(['principal/buscar-tutor', animalId]);
     } else {
@@ -118,8 +118,12 @@ export class AnimalListComponent implements OnInit {
     }
   }
 
-  getTutorByCurrentUserId(id: number){
-       this.tutorService.findById(id).subscribe({
+  informarObito(animalId: number) {
+
+  }
+
+  getTutorByCurrentUserId(id: number) {
+    this.tutorService.findById(id).subscribe({
       next: (tutor) => {
         this.donoDoAnimal = tutor;
       },
@@ -142,15 +146,15 @@ export class AnimalListComponent implements OnInit {
       castrado: this.novoAnimal.castrado!,
       microchip: this.novoAnimal.microchip ?? false,
       numeroMicrochip: this.novoAnimal.numeroMicrochip?.trim() || undefined,
-      dataNascimento: this.novoAnimal.dataNascimento!, 
+      dataNascimento: this.novoAnimal.dataNascimento!,
       naturalidade: this.novoAnimal.naturalidade!.trim(),
       imagemUrl: this.novoAnimal.imagemUrl?.trim() || '',
       aplicacoes: [],
-      tutor: this.donoDoAnimal, 
+      tutor: this.donoDoAnimal,
       idade: undefined!
     }).subscribe({
       next: (animalSalvo) => {
-        this.deuCerto=true
+        this.deuCerto = true
 
         console.log("Animal salvo com sucesso:", animalSalvo);
         Swal.fire({
@@ -169,7 +173,7 @@ export class AnimalListComponent implements OnInit {
         this.resetForm();
       },
       error: (err) => {
-        this.mensagem = "Erro Ao Salvar Animal: "+err.message
+        this.mensagem = "Erro Ao Salvar Animal: " + err.message
 
         this.deuCerto = false
         console.error('Erro ao salvar animal:', err);
@@ -204,8 +208,8 @@ export class AnimalListComponent implements OnInit {
       imagemUrl: ''
     };
   }
-  
-    onAnimalSaved() {
-    this.animalSelecionado = undefined;  // Limpar a seleção do animal
+
+  onAnimalSaved() {
+    this.animalSelecionado = undefined;
   }
 }
