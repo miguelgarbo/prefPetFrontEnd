@@ -1,0 +1,24 @@
+
+    <br>
+
+<div class="container-main">
+    <h2>Aplicacões De Vacina de {{currentVet.nome}}</h2>
+    <br>
+    <div class="container-vacinas">
+    <ul class="list-group list-group-light w-50">
+        @for (aplicacao of lista; track aplicacao.id) {
+        <li class="list-group-item text-center">
+            <div class="fw-bold">{{ aplicacao.vacina.nome }}</div>
+            <div class="fw-bold">Animal:{{ aplicacao.animal.nome }}, Tutor: {{ aplicacao.animal.tutor.nome }}</div>
+            <div class="fw-bold">Número Dose: {{ aplicacao.numeroDose }}º</div>
+
+            <div class="text-muted">Data de Aplicacao: {{ aplicacao.dataAplicacao }}</div>
+            <div class="text-muted">Data de Validade: {{ aplicacao.dataValidade }}</div>
+
+            <span class="badge rounded-pill badge-success mt-2">Aplicada</span>
+        </li>
+        }
+    </ul>
+    </div>
+    </div>
+

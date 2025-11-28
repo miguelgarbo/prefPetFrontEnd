@@ -1,0 +1,181 @@
+<div class="row marginTop">
+    <div class="col-md-3">
+        <img [src]="animal.imagemUrl" class="fotoPerfilAnimal">
+    </div>
+    <div class="col-md-3">
+
+        <div class="atributo-block">
+        <p class="titleAtributo">nome do animal</p>
+        <p>{{animal.nome}}</p>
+        </div>
+
+        <div class="atributo-block">
+        <p class="titleAtributo">registro do animal</p>
+        <p>{{animal.registroGeral}}</p>
+        </div>
+
+
+        @if(animal.castrado == true){
+
+             <div class="atributo-block">
+                <p class="titleAtributo">castrado</p>
+                <p>Sim</p>
+            </div>
+        }@else {
+
+             <div class="atributo-block">
+                <p class="titleAtributo">castrado</p>
+                <p>Não</p>
+            </div>
+        }
+       
+
+    </div>
+    <div class="col-md-3">
+
+         <div class="atributo-block">
+        <p class="titleAtributo">espécie</p>
+        <p>{{animal.especie}}</p>
+        </div>
+
+        <div class="atributo-block">
+        <p class="titleAtributo">cor</p>
+        <p>{{animal.cor}}</p>
+        </div>
+
+        <div class="atributo-block">
+        <p class="titleAtributo">sexo</p>
+        <p>{{animal.sexo}}</p>
+        </div>
+
+
+    </div>
+    <div class="col-md-3">
+
+        @if (animal.microchip == true) {
+       
+         <div class="atributo-block">
+        <p class="titleAtributo">microchip</p>
+        <p>{{animal.numeroMicrochip}}</p>
+        </div>
+    }@else{
+            <div class="atributo-block">
+        <p class="titleAtributo">microchip</p>
+        <p>Não Possui</p>
+        </div>
+
+    }
+
+        <div class="atributo-block">
+        <p class="titleAtributo">data nascimento</p>
+        <p>{{animal.dataNascimento}}</p>
+        </div>
+
+        <div class="atributo-block">
+        <p class="titleAtributo">naturalidade</p>
+        <p>{{animal.naturalidade}}</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="row topo">
+
+    <div class="col-md-3">
+        <div class="atributo-block">
+                <p class="titleAtributo">nome do usuario</p>
+                <p>{{animal.tutor.nome}}</p>
+         </div>
+
+
+    </div>
+    <div class="col-md-3">
+
+         <div class="atributo-block">
+                <p class="titleAtributo">cpf</p>
+                <p>{{animal.tutor.cpf}}</p>
+         </div>
+    </div>
+    <div class="col-md-3">
+
+        <div class="atributo-block">
+                <p class="titleAtributo">contato</p>
+                <p>{{animal.tutor.telefone}}</p>
+         </div>
+    </div>
+    <div class="col-md-3">
+
+         <div class="atributo-block">
+                <p class="titleAtributo">local</p>
+                <p>{{animal.tutor.cidade}}</p>
+         </div>
+    </div>
+
+
+</div>
+
+<div class="row topo">
+        <div class="atributo-block">
+            <p class="titleAtributo">vacinas aplicadas</p>
+        </div>
+</div>
+
+
+@if (aplicacoes.length === 0) {
+
+    <div class="row topo card-vacina">
+
+<h4>Não Possui Aplicação De Vacina Cadastrada</h4>
+</div>
+
+}@else {
+
+@for (aplicacao of aplicacoes; track aplicacao.id) {
+<div class="row topo card-vacina">
+
+        <div class="col-md-4">
+
+            <div class="atributo-block">
+                <p class="titleAtributo">nome da vacina</p>
+                <p>{{aplicacao.vacina.nome}}</p>
+         </div>
+        
+        </div>
+
+        <div class="col-md-4">
+
+             <div class="atributo-block">
+                <p class="titleAtributo">veterinário</p>
+                <p>{{aplicacao.veterinario.nome}}</p>
+         </div>
+            
+        </div>
+        <div class="col-md-4">
+
+             <div class="atributo-block">
+                <p class="titleAtributo">dose</p>
+                <p>{{aplicacao.numeroDose}}º</p>
+         </div>
+        </div>
+
+
+        <div class="col-md-4">
+             <div class="atributo-block">
+                <p class="titleAtributo">data de aplicação</p>
+                <p>{{aplicacao.dataAplicacao}}</p>
+         </div>
+
+        </div>
+        
+        <div class="col-md-4">
+
+            <div class="atributo-block">
+                <p class="titleAtributo">data de validade</p>
+                <p>{{aplicacao.dataValidade}}</p>
+         </div>
+        </div>        
+</div>
+}
+}
+
+

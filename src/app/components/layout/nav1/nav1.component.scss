@@ -1,0 +1,35 @@
+.me-2{
+    margin-left: 1vh;
+}
+
+.btn{
+    background: none;
+    border: none;
+    color: rgb(255, 244, 209);
+
+    &:hover {
+      color: rgb(217, 201, 150); // cor ao passar o mouse
+    }
+}
+
+.navbar{  
+  height: 6vh;
+  background-color: rgb(249, 136, 102);
+}
+
+
+.navbar-brand{
+
+  padding-top: 0 !important;
+}
+
+
+.patinha{
+  margin-left: 1vh;
+  color: rgb(255, 244, 209);
+}
+
+.titulo{
+  color: rgb(255, 244, 209);
+}
+

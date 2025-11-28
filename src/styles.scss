@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+//@use 'mdb-angular-ui-kit/assets/scss/mdb' as *;
+@import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
+
+*{ margin: 0; 
+  padding: 0; 
+  box-sizing: border-box;
+}
+
+.centralizar{
+    text-align: center;
+}
+
+.marginTop{
+    margin-top: 25vh;
+}
+
+.cursor{
+
+    cursor: pointer;
+}
+
+.titulo{
+  font-family: 'Trebuchet MS', sans-serif; 
+  font-weight: 900;
+}

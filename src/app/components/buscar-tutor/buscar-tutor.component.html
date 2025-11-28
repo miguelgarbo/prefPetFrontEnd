@@ -1,0 +1,53 @@
+<div class="row marginTop" >
+
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h2 class="above">Transfêrencia de Tutor</h2>
+        <h6  class="above">Com a transferência de tutor, você pode atualizar quem é o responsável pelo animal, garantindo que todas as informações fiquem corretas e seguras</h6>
+
+
+        @if(animal){
+          <div class="container-animal-selected">
+          <div class="combo-text">
+          <h4>Animal Selecionado:</h4>
+          <h4>{{animal.nome}}</h4>
+          </div>
+        <img [src]="animal.imagemUrl" alt="imagem do animal selecionado">
+        </div>
+        }
+
+        <br>
+
+
+  <mdb-form-control class="mb-4">
+    <input mdbInput type="text" id="nomeTutor" class="form-control" [(ngModel)]="tutor.nome"/>
+    <label mdbLabel class="form-label" for="nomeTutor" name="nomeTutor">Informe o Nome Do Tutor Destinatário</label>
+  </mdb-form-control>
+
+  <button mdbRipple type="button" class="btn btn-primary btn-block" (click)="findByNome()"
+>Procurar</button>
+
+<app-message-error [texto]="'Erro ao buscar Tutor !'" [mostrar]="tutorEncontrado == false"></app-message-error>
+
+    </div>
+    <div class="col-md-4"></div>
+
+    
+</div>
+<div class="marginTop hiddendiv"  *ngIf="tutorEncontrado">
+          <div class="container-info">
+          <div class="block-user">
+              <h4>Nome do Tutor: {{ tutor.nome }}</h4>
+              <h5>Contato: {{ tutor.telefone }}</h5>
+              </div>
+              
+          <div class="block-animal">
+           <button class="btn btn-primary" (click)="gerarConvite()">Enviar Convite</button>
+          </div>    
+        </div>
+        </div>
+
+
+
+
+

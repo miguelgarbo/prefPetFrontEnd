@@ -1,0 +1,48 @@
+.above{
+
+    margin-bottom: 10vh;
+}
+
+
+img{
+
+    width: 200px;
+    height: 200px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* sombra */
+  transition: box-shadow 0.3s ease; /* efeito suave ao hover, opcional */
+
+}
+
+.hiddendiv{
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-info{
+
+    display: flex;
+        gap: 100px;
+
+}
+
+img{
+    object-fit: cover;
+    
+    width: 120px;
+    height: 120px;
+}
+
+.container-animal-selected{
+
+    display: flex;
+    gap: 50px;
+}
+
+.combo-text{
+
+    display: flex;
+    flex-direction: column;
+
+}

@@ -1,0 +1,87 @@
+<div class="animal-container w-100">
+    <!-- Card de informações do animal -->
+    <div class="animal-info shadow">
+        <div class="nome-animal w-100 d-flex justify-content-center">
+            <h3 *ngIf="!editMode"><strong>{{ animal.nome }} | {{animal.especie}}</strong></h3>
+            @if (editMode) {
+                <h3><strong>Nome: </strong></h3>
+                <input [(ngModel)]="editedAnimal.nome" class="inputformat mb-2"/>
+            }
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="dark"
+                    class="bi bi-pencil-fill mb-2" viewBox="0 0 16 16" (click)="toggleEdit()" style="cursor: pointer">
+                    <path
+                        d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 d-flex justify-content-center flex-column">
+                <img src="{{animal.imagemUrl}}" alt="{{animal.nome}}" class="animal-photo ">
+            </div>
+            <div class="col-4">
+                <!-- Registro Geral -->
+                <div class="field">
+                    <label class="h5">Registro Geral:</label>
+                    <span class="h6" *ngIf="!editMode">{{ animal.registroGeral }}</span>
+                    <input *ngIf="editMode" [(ngModel)]="editedAnimal.registroGeral" class="inputformat" />
+                </div>
+
+                <!-- Sexo -->
+                <div class="field">
+                    <label class="h5">Sexo:</label>
+                    <span class="h6"*ngIf="!editMode">{{ animal.sexo }}</span>
+                    <select *ngIf="editMode" [(ngModel)]="editedAnimal.sexo" class="selectformat">
+                        <option value="Macho">Macho</option>
+                        <option value="Fêmea">Fêmea</option>
+                    </select>
+                </div>
+
+                <!-- Cor -->
+                <div class="field">
+                    <label class="h5">Cor:</label>
+                    <span class="h6"*ngIf="!editMode">{{ animal.cor }}</span>
+                    <input *ngIf="editMode" [(ngModel)]="editedAnimal.cor" class="inputformat"/>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <!-- Microchip -->
+                <div class="field">
+                    <label class="h5">Microchip:</label>
+                    <span class="h6"*ngIf="!editMode">
+                        {{ animal.microchip ? animal.numeroMicrochip || 'SEM MICROCHIP' : 'SEM MICROCHIP' }}
+                    </span>
+                    <div *ngIf="editMode" class="d-flex gap-2">
+                        <select [(ngModel)]="editedAnimal.microchip" class="selectformat" id="selectmicrochip">
+                            <option [ngValue]="true">Sim</option>
+                            <option [ngValue]="false">Não</option>
+                        </select>
+                        <input *ngIf="editedAnimal.microchip" [(ngModel)]="editedAnimal.numeroMicrochip" class="inputformat"
+                            [placeholder]="'Digite o número do microchip'"
+                            [value]="editedAnimal.numeroMicrochip || ''" />
+                    </div>
+                </div>
+
+
+                <!-- Castrado -->
+                <div class="field">
+                    <label class="h5">Castrado:</label>
+                    <span class="h6" *ngIf="!editMode">{{ animal.castrado ? 'SIM' : 'NÃO' }}</span>
+                    <select *ngIf="editMode" [(ngModel)]="editedAnimal.castrado" class="selectformat">
+                        <option [ngValue]="true">Sim</option>
+                        <option [ngValue]="false">Não</option>
+                    </select>
+                </div>
+                <!-- Botão Salvar -->
+                <div *ngIf="editMode" class="d-flex justify-content-end mt-3">
+                    <button class="btn btn-success" (click)="saveChanges()"
+                        [disabled]="editedAnimal.microchip && !editedAnimal.numeroMicrochip">
+                        Salvar
+                    </button>
+                </div>
+
+
+            </div>
+        </div>

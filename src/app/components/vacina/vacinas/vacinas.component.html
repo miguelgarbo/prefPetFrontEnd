@@ -1,0 +1,58 @@
+<div class="container-vacinas marginTop">
+  <br><br><br><br><br>
+    <h2>Vacinas</h2>
+
+   <div class="pets-carousel">
+        
+        @for (pet of pets; track pet.id) {
+            <div class="pet" (click)="findById(pet.id)">
+
+                <img [src]="pet.imagemUrl" [alt]="pet.nome"
+                [class.selected-shadow]="animalIdCapturado === pet.id">
+                <span class="nomeAnimal">{{ pet.nome }}</span>
+            </div>
+        }   
+    </div>
+        <br>
+          <div>    
+            <button type="button" class="btn btn-primary marginleft" (click)="gerarPdf()">Gerar PDF</button>
+</div>
+
+    <mdb-tabs class="tabs-vacinas">
+    <mdb-tab  title="Aplicadas">  
+        
+
+    <hr>
+    <br>
+    <br>
+
+    <div class="container-list">
+
+        <div class="container-vacinas2">
+  <ul class="list-group list-group-light w-50">
+  @if (aplicacoes.length === 0) {
+  <h2>Não Possui Aplicações De Vacinas Cadastradas</h2>
+} @else {
+  @for (aplicacao of aplicacoes; track aplicacao.id) {
+    <li class="list-group-item text-center">
+      <div class="fw-bold">{{ aplicacao.vacina.nome }}</div>
+      <div class="text-muted">Data de Aplicacao: {{ aplicacao.dataAplicacao }}</div>
+      <span class="badge rounded-pill badge-success mt-2">Aplicada</span>
+    </li>
+  }
+}
+  </ul>
+</div>
+
+
+
+        <!-- <app-vacinaslist></app-vacinaslist> -->
+    </div></mdb-tab>
+    <mdb-tab title="Pendentes">Tab content 2</mdb-tab>
+    <mdb-tab title="Proximas Vacinas">Tab content 3</mdb-tab>
+  
+    </mdb-tabs>
+</div>
+
+
+

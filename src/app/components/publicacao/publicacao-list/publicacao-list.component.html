@@ -1,0 +1,91 @@
+
+<div class="row margintop">
+  
+<div class="col-md-3"></div>
+
+<div class="col-md-6 gap20 ">
+  <div class="container-nav">
+    <app-nav-bar-publicacao (textoEmitido)="getTextBar($event)" (filtroSelecionado)="getFiltro($event)"></app-nav-bar-publicacao>
+</div>
+
+@if (listaFiltrada.length > 0 && (filtroEscolhido || valorDaBarra)) {
+  @for (post of listaFiltrada; track post.id) {
+<div class="card" (click)="findById(post.id)">
+  <div class="card-body">
+
+    <div class="container-info-user">
+      <div class="container-main-info">
+
+        <img [src]="post.entidade.imagemUrlPerfil"
+     class="rounded-circle shadow-4 "
+     alt="Avatar" />
+
+     <div class="details-publicacao">
+    <p class="nomeEntidade">{{post.entidade.nome}}</p>
+    <p class="dataPublicacao">{{post.dataCriacao}}</p>
+
+     <div class="container-tipos">
+      <p class="tipoPublicacao">{{post.tipoPublicacao}}</p>
+      <p class="tipoEntidade">{{post.entidade.tipoEntidade}}</p>
+    </div>
+    </div>
+    </div>
+    
+    </div>
+
+      <div class="container-descricao">
+        <p class="descricaoPublicacao">{{post.descricao}}</p>
+        <div class="container-img">
+          <img class="imgPublicacao" [src]="post.imagens[0].url" alt="" srcset="">
+        </div>
+      </div>
+
+    </div>
+    <!-- fim do card -->
+  </div>
+  }
+
+
+}@else {
+
+@for (post of publicacoes; track post.id) {
+<div class="card" (click)="findById(post.id)">
+  <div class="card-body">
+
+    <div class="container-info-user">
+      <div class="container-main-info">
+
+        <img [src]="post.entidade.imagemUrlPerfil"
+     class="rounded-circle shadow-4 "
+     alt="Avatar" />
+
+     <div class="details-publicacao">
+    <p class="nomeEntidade">{{post.entidade.nome}}</p>
+    <p class="dataPublicacao">{{post.dataCriacao}}</p>
+
+     <div class="container-tipos">
+      <p class="tipoPublicacao">{{post.tipoPublicacao}}</p>
+      <p class="tipoEntidade">{{post.entidade.tipoEntidade}}</p>
+    </div>
+    </div>
+    </div>
+    
+
+    </div>
+
+      <div class="container-descricao">
+        <p class="descricaoPublicacao">{{post.descricao}}</p>
+        <div class="container-img">
+          <img class="imgPublicacao" [src]="post.imagens[0].url" alt="" srcset="">
+        </div>
+      </div>
+
+    </div>
+    <!-- fim do card -->
+  </div>
+  }
+}
+</div>
+</div>
+
+<div class="col-md-3"></div>

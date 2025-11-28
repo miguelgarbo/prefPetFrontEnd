@@ -1,0 +1,134 @@
+<main>
+
+  <div class="container-emergencias">
+    <h2 class="marginTop title">Emergências</h2>
+    <br>
+
+    @if(emergencias.length == 0){
+      
+    <h4 class="subtitle">Sem Emergencias, Por Enquanto</h4>
+
+    }@else {
+
+
+      <div *ngFor="let emergencia of emergencias" class="card mb-3 p-2 card-emergencia position-relative">
+
+       Botões na lateral direita 
+      <div class="position-absolute" style="right: 10px; top: 10px;">
+        @if(loginService.hasRole("ADMIN")){
+          <button class="btn btn-sm btn-outline-primary me-1"
+                  (click)="editarEmergencia()">
+            <i class="bi bi-pencil"></i>
+          </button>}
+
+        @if(loginService.hasRole("ADMIN")){
+          <button class="btn btn-sm btn-outline-danger"
+                  (click)="excluirEmergencia(emergencia)">
+            <i class="bi bi-trash"></i>
+          </button>
+      }
+      </div>
+
+      <h4>{{ emergencia.nome }}</h4>
+
+      <ul class="list-unstyled mb-0">
+        <li *ngFor="let contato of emergencia.contatos || []">
+          <strong>{{ contato.nomeOrgao }}</strong> - Tel: {{ contato.telefone }} - Email: {{ contato.email }}
+        </li>
+      </ul>
+
+    </div>
+
+    }
+    
+  </div>
+
+
+
+  <div class="form-container d-flex gap-4 mt-4"> 
+    @if(loginService.hasRole("ADMIN")){
+    <div class="card p-3 flex-fill shadow-sm">
+      <h3 class="mb-3">Adicionar Emergência</h3>
+
+      <form (ngSubmit)="adicionarEmergencia()" #emergenciaForm="ngForm">
+
+        <div class="form-group mb-3">
+          <input type="text"
+                 placeholder="Nome da Emergência"
+                 name="nome"
+                 [(ngModel)]="novaEmergencia.nome"
+                 required
+                 class="form-control">
+        </div>
+
+        <div class="form-group mb-3">
+          <button type="button" class="btn btn-secondary w-100" (click)="mostrarContatos = !mostrarContatos">
+            {{ mostrarContatos ? 'Esconder Contatos' : 'Selecionar Contatos' }}
+          </button>
+        </div>
+
+        <div *ngIf="mostrarContatos" class="form-group mb-3">
+          <select multiple [(ngModel)]="contatosSelecionadosIds" name="contatos" class="form-control">
+            <option *ngFor="let contato of todosContatos" [value]="contato.id">
+              {{ contato.nomeOrgao }} - {{ contato.telefone }}
+            </option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Adicionar Emergência</button>
+
+        <button type="button"
+                class="btn btn-danger w-100 mt-2"
+                (click)="excluirEmergencia(novaEmergencia)">
+          Excluir Emergência
+        </button>
+
+      </form>
+    </div>
+
+    <div class="card p-3 flex-fill shadow-sm">
+      <h3 class="mb-3">Adicionar Contato</h3>
+
+      <form (ngSubmit)="adicionarContato()" #contatoForm="ngForm">
+
+        <div class="form-group mb-3">
+          <input type="text"
+                 placeholder="Nome do Órgão"
+                 name="nomeOrgao"
+                 [(ngModel)]="novoContato.nomeOrgao"
+                 required
+                 class="form-control">
+        </div>
+
+        <div class="form-group mb-3">
+          <input type="text"
+                 placeholder="Telefone"
+                 name="telefone"
+                 [(ngModel)]="novoContato.telefone"
+                 pattern="^\+?\d{10,15}$"
+                 required
+                 class="form-control">
+        </div>
+
+        <div class="form-group mb-3">
+          <input type="email"
+                 placeholder="Email"
+                 name="email"
+                 [(ngModel)]="novoContato.email"
+                 required
+                 class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">
+          Adicionar Contato
+        </button>
+
+        <button type="button" class="btn btn-danger w-100 mt-2">
+          Excluir Contato
+        </button>
+
+      </form>
+    </div>}
+  </div>
+
+</main>

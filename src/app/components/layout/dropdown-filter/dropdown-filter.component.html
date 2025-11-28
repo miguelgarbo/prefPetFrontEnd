@@ -1,0 +1,21 @@
+<div mdbDropdown class="dropdown">
+  <button
+    class="btn btn-primary dropdown-toggle"
+    type="button"
+    id="dropdownMenuButton"
+    aria-expanded="false"
+    mdbDropdownToggle
+  >
+    Filtro
+  </button>
+
+  <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    @for (op of opcoes; track $index) {
+      <li>
+        <a class="dropdown-item" (click)="selecionarFiltro(op)">
+          {{ op }}
+        </a>
+      </li>
+    }
+  </ul>
+</div>

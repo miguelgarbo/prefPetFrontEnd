@@ -1,0 +1,103 @@
+h2{
+    height: auto;       /* altura dinâmica */
+    padding: 1rem;      /* espaço interno */
+    margin: 0 auto;     /* centraliza horizontalmente */
+    text-align: center;
+}
+hr {
+  border: none;
+  border-top: 2px solid #3a3939;
+  margin: 0.5rem 0 1rem 0;
+  width: 100%;
+}
+
+.pets-carousel {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+  scroll-snap-type: x mandatory;
+  background-color: gray;
+  border-radius: 50px;
+}
+
+.pets-carousel .pet {
+  flex: 0 0 auto;
+  text-align: center;
+  scroll-snap-align: center;
+}
+
+.pets-carousel img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%; /* deixa redondo */
+  border: 2px solid #ccc;
+}
+
+
+.container-vacinas {
+    width: 100%;        /* largura total */
+  max-width: 1000px;  /* limita a largura */
+  height: auto;       /* altura dinâmica */
+  padding: 2rem 3rem;      /* espaço interno */
+    margin: 2rem auto;     /* centraliza horizontalmente */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+  background-color: #fff;   /* cor de fundo */
+  border: 1px solid #ddd;   /* borda leve */
+  border-radius: 8px;       /* cantos arredondados */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* sombra */
+}
+
+.container-list {
+  width: 100%;        /* largura total */
+  max-width: 1200px;  /* limita a largura */
+  height: auto;       /* altura dinâmica */
+  padding: 1rem;      /* espaço interno */
+  margin: 0 auto;     /* centraliza horizontalmente */
+  justify-content: center;
+  display: flex;
+
+  background-color: #fff;   /* cor de fundo */
+  border: 1px solid #ddd;   /* borda leve */
+  border-radius: 8px;       /* cantos arredondados */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* sombra */
+}
+
+.Tab-Apli{
+
+border-bottom: 1px solid #706c6c;
+
+}
+
+.container-vacinas2 {
+  display: flex;
+  justify-content: center; // centraliza a lista na tela
+}
+
+.container-vacinas2 ul {
+  text-align: center; // centraliza o conteúdo de cada li
+}
+
+.marginleft{
+
+  margin-left: 56vw;
+}
+
+.pet{
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.nomeAnimal{
+
+  color: white;
+}
+
+
+img.selected-shadow {
+  box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.7);
+  border-radius: 10px; 
+  transition: box-shadow 0.3s ease;
+}

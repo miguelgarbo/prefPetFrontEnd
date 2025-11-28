@@ -1,0 +1,88 @@
+.field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .5rem;
+}
+
+  label {
+    font-weight: 500;
+    color: black;
+  }
+
+  span, input, select {
+    flex: 1;
+    text-align: right;
+  }
+
+  input, select {
+    max-width: 200px; // não deixa "estourar" o layout
+  }
+
+.animal-info {
+  background: #608a76;
+  border-radius: 15px;
+  padding: 1.5rem;
+  position: relative;
+  z-index: 2;
+  color: black;
+}
+
+.nome-animal {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  color: black;
+}
+  input {
+    max-width: 150px;
+  }
+
+  .animal-photo {
+    width: 60%;
+    aspect-ratio: 1 / 1;
+    background-size: cover;
+    object-fit: cover;      
+}
+
+.field input,
+.field select {
+  text-align: left;    // garante alinhamento
+}
+
+// Estilo base para inputs e selects
+%base-field {
+  width: 100%;
+  max-width: 200px;
+  padding: 8px 12px;
+
+  background: #f4f4f4;
+  border: 1px solid #cfcfcf;
+  border-radius: 6px;
+
+  font-size: 15px;
+
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    background: #fff;
+    border-color: #4ca468;
+    box-shadow: 0 0 0 2px rgba(76, 164, 104, 0.3);
+    outline: none;
+  }
+}
+
+// aplica o estilo base
+.inputformat {
+  @extend %base-field;
+  text-align: left
+}
+
+.selectformat {
+  @extend %base-field;
+  cursor: pointer;
+}
+
+#selectmicrochip{
+  max-width: 3.5dvw !important;
+}

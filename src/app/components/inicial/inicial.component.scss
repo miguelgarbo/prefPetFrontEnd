@@ -1,0 +1,109 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  min-height: 100vh; /* ocupa altura total da tela */
+}
+
+.home-card {
+  width: 80%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  padding: 20px;
+  text-align: center;
+}
+
+.home-card-large {
+  flex: 2; /* ocupa mais espaço */
+  background-color: #f8f9fa;
+  min-height: 400px; /* altura mínima para textos maiores */
+}
+
+.home-card-small {
+  flex: 1; /* menor que o primeiro */
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.btn-home {
+  margin-top: 15px;
+  width: 200px;
+}
+.home-card-large {
+  flex: 2;
+  background-color: #f8f9fa;
+  min-height: 400px;
+  display: flex;
+  gap: 20px;
+}
+
+/* Lado esquerdo: Texto ocupa metade */
+.home-left {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+/* Lado direito: Botão ocupa metade */
+.home-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-home {
+  width: 180px;
+}
+.bgLaranja{
+  background-color: rgb(249, 136, 102);
+  color: rgb(255, 244, 209);
+}
+
+.block{
+
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.direction{
+  display: flex;
+  flex-direction: column;
+}
+
+.marginTop{
+
+  margin-top: 10vh;
+}
+
+
+.vet-block{
+
+  background-color: gray;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+}
+
+.bold{
+  font-weight: 700;
+}
+
+.button-vet{
+
+
+
+    color: white !important;
+    background-color: rgb(78, 78, 78) !important;
+
+}
