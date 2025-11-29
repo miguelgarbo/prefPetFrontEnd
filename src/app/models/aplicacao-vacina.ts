@@ -13,5 +13,5 @@ export class AplicacaoVacina {
     animal!: Animal;
     status?: "APLICADA" | "PENDENTE" | "PROXIMA";
 
-    veterinario!: Veterinario | null;
+    veterinario?: Veterinario | null;
 }
