@@ -33,17 +33,17 @@ btn-close<div class="row">
                 <h6 class="animal-microchip">microchip:<mark>SEM MICROCHIP</mark></h6>
                 }
               </div>
-              <div class="me-2">
-                <button type="button" class="button-icon" title="Transfêrencia de Tutela"
+              <div>
+                <button type="button" class="button-icon me-2" title="Transfêrencia de Tutela"
                   (click)="transferirTutela(animal.id)">
                   <i class="fas fa-exchange-alt"></i>
                 </button>
 
-                <button type="button" class="button-icon" title="Informar Óbito" (click)="transferirTutela(animal.id)">
+                <!-- <button type="button" class="button-icon" title="Informar Óbito" (click)="transferirTutela(animal.id)">
                   <i class="fa-solid fa-dove"></i>
-                </button>
+                </button> -->
 
-                <button type="button" class="button-icon" title="Excluir Animal" (click)="transferirTutela(animal.id)">
+                <button type="button" class="button-icon me-2" title="Excluir Animal" (click)="excluirAnimal(animal.id)">
                   <i class="bi bi-x-circle-fill"></i>
                 </button>
               </div>
