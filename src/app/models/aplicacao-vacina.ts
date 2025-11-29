@@ -1,5 +1,6 @@
 import { Animal } from "./animal";
 import { Vacina } from "./vacina";
+import { Veterinario } from "./veterinario";
 
 export class AplicacaoVacina {
 
@@ -12,4 +13,5 @@ export class AplicacaoVacina {
     animal!: Animal;
     status?: "APLICADA" | "PENDENTE" | "PROXIMA";
 
+    veterinario!: Veterinario | null;
 }
