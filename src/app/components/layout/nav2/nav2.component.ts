@@ -33,20 +33,25 @@ export class Nav2Component {
   router = inject(Router)
   notificacoes: Notificacao[] = []
   notificacaoService = inject(NotificacaoService)
-  currentUser: Usuario = this.loginService.getCurrentUser();
-
+  currentUser!: Usuario
   
 
   ngOnInit(){
 
-    console.log("usuario: "+ this.currentUser);
-    this.findById();
+    this.currentUser = this.loginService.getCurrentUser();
+
+    this.findById()
+
+    console.log("usuario logado no nav bar: ", this.currentUser);
 
   }
 
   editarPerfil() {
-  if(this.currentUser.id)
+  if(this.currentUser.id){
     this.router.navigate(['/principal/cadastro-usuario', this.currentUser.id]);
+
+
+  }
 }
     
     buscarNotificacoesUsuario(id: number){
@@ -66,8 +71,11 @@ export class Nav2Component {
     this.tutorService.findById(this.currentUser.id).subscribe({
         
       next:(value) => {
-        console.log("Pessoa Encontrada",value);
+        console.log("Pessoa Encontrada NO NAV BAR",value);
+        console.log("IMAGEM PROFILE:", this.currentUser.imagemUrlPerfil);
+
         this.currentUser = value
+        
 
       },error(err) {
         console.log("Erro Ao pegar animal", err)

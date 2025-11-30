@@ -23,6 +23,18 @@ export const loginGuard: CanActivateFn = (route, state) => {
     return false
   }
 
+  if(loginService.hasRole("ENTIDADE") && (state.url == '/cadastro-aplicacao-vacina')){
+
+
+     Swal.fire({
+      icon: "warning",
+      title: "Rota não permitida pro seu tipo de Usuário",
+    });
+
+    return false
+
+  }
+
 
 
   return true;

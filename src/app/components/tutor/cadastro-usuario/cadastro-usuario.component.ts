@@ -24,7 +24,7 @@ import { LoginService } from '../../../services/login.service';
 })
 export class CadastroUsuarioComponent {
 
-  @Input() tipoCadastro: string = ""
+  @Input() tipoCadastro: string = "tutor"
 
   title: string = 'Tutor';
   tipoForm: string = 'Junte-se ao PrefPet como '
@@ -56,19 +56,48 @@ export class CadastroUsuarioComponent {
   router = inject(Router);
   http = inject(HttpClient)
 
-  constructor() {
-    this.entidade.tipoEntidade = 'Tipo de Entidade';
-
-    let id = this.actived.snapshot.params['id'];
-    if (id > 0) {
-      this.tipoForm = "Editar Perfil "
-      this.findById(id);
-    }
-  }
 
   ngOnInit() {
+
     this.changeTittle();
+
+
+    console.log("titulo", this.title);
+    console.log("tipo de cadastro ou editar", this.tipoForm);
+    console.log("qual usuario", this.tipoCadastro);
+
+
+    
+
+  let id = this.actived.snapshot.params['id'];
+  if (id > 0) {
+    this.tipoForm = "Editar Perfil ";
+
+  if(this.loginService.hasRole("TUTOR")){
+      
+      this.title='Tutor';
+      this.findById(id);
+
   }
+
+    if(this.loginService.hasRole("ENTIDADE")){
+      
+      this.title='Entidade';
+      this.findById(id);
+
+  }
+
+   if(this.loginService.hasRole("VETERINARIO")){
+      
+      this.title='Veterinario';
+      this.findById(id);
+
+  }
+
+
+}
+}
+
 
   tutotesFindAll() {
     this.tutorService.findAll().subscribe({
@@ -85,10 +114,15 @@ export class CadastroUsuarioComponent {
 
 
   changeTittle() {
-    if (this.tipoCadastro == "veterinario") {
+
+    if(this.tipoCadastro === 'tutor'){
+      this.title = 'Tutor'
+    }
+
+    if (this.tipoCadastro === "veterinario") {
       this.title = "Veterinário"
 
-    } else if (this.tipoCadastro == "entidade") {
+    } else if (this.tipoCadastro === "entidade") {
       this.title = "Entidade"
     }
   }
@@ -184,7 +218,7 @@ export class CadastroUsuarioComponent {
 
   cadastrarTutor() {
 
-    if (this.tipoForm = "Editar Perfil ") {
+    if (this.tipoForm === "Editar Perfil ") {
 
       this.saveTutor();
 
@@ -208,7 +242,7 @@ export class CadastroUsuarioComponent {
 
   cadastrarVet() {
 
-      if (this.tipoForm = "Editar Perfil ") {
+      if (this.tipoForm === "Editar Perfil ") {
 
       this.saveVet();
 
@@ -228,9 +262,7 @@ export class CadastroUsuarioComponent {
   }
 
   cadastrarEnt() {
-
-      if (this.tipoForm = "Editar Perfil ") {
-
+      if (this.tipoForm === "Editar Perfil ") {
       this.saveEnt();
 
     } else {

@@ -11,8 +11,21 @@
 @if (listaFiltrada.length > 0 && (filtroEscolhido || valorDaBarra)) {
   @for (post of listaFiltrada; track post.id) {
 <div class="card" (click)="findById(post.id)">
-  <div class="card-body">
 
+  @if (loginService.hasRole("ADMIN") || loginService.hasRole("ENTIDADE")) {
+    <div class="lixo">
+
+      <i class="fa-solid fa-trash" (click)="deletePost(post.id)"></i>
+
+    </div>
+  }
+
+
+
+ 
+ 
+  <div class="card-body">
+  
     <div class="container-info-user">
       <div class="container-main-info">
 
@@ -50,6 +63,15 @@
 
 @for (post of publicacoes; track post.id) {
 <div class="card" (click)="findById(post.id)">
+
+  @if (loginService.hasRole("ADMIN")  || loginService.hasRole("ENTIDADE")) {
+    <div class="lixo">
+
+      <i class="fa-solid fa-trash" (click)="deletePost(post.id)"></i>
+
+    </div>
+  }
+
   <div class="card-body">
 
     <div class="container-info-user">

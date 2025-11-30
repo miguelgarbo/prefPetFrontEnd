@@ -9,7 +9,7 @@
         alt="MDB Logo"
       />
      <div class="nome">
-        @if(loginService.hasRole("TUTOR")){
+        @if(loginService.hasRole("TUTOR") || loginService.hasRole("ENTIDADE") || loginService.hasRole("VETERINARIO")){
           <small class="nome">{{currentUser.nome}}</small>
           <button type="button" (click)="editarPerfil()">
             <i class="fa-solid fa-pen"></i>

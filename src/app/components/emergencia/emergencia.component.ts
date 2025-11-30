@@ -31,6 +31,12 @@ export class EmergenciaComponent {
   mostrarContatos = false;
   activedRouter = inject(ActivatedRoute)
   loginService = inject(LoginService);
+
+
+  ngOnInit(){
+    this.listarEmergencias()
+    this.listarContato()
+  }
   
 
   listarEmergencias() {

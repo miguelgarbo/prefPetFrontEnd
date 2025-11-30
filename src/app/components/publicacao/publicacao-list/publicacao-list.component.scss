@@ -80,3 +80,18 @@ flex-direction: row;
     border: 1px solid  rgb(192, 192, 192);
  
 }
+
+.lixo{
+
+    display: flex;
+    justify-content: end;
+    gap: 5px;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+i{
+
+    cursor: pointer;
+
+}
