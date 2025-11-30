@@ -46,6 +46,9 @@ export class CadastroPublicacaoComponent {
     { label: 'OUTROS', valor: 'OUTROS' }
   ];
 
+  ngOnInit(){
+    this.findEntidadeByUserId()
+  }
 
 
 
@@ -55,7 +58,10 @@ export class CadastroPublicacaoComponent {
 
       next: (value) => {
 
+        
         this.entidade = value;
+            console.log(this.entidade.id);
+
       },
       error: (err) => {
 
@@ -69,10 +75,10 @@ export class CadastroPublicacaoComponent {
 
   salvar() {
 
-    console.log(this.publicacao.entidade);
+    console.log(this.entidade.id);
     
 
-    this.publicacao.entidade.id =6 ;
+    this.publicacao.entidade.id = this.entidade.id ;
 
     this.publicacaoService.save(this.publicacao).subscribe({
       next: (response) => {

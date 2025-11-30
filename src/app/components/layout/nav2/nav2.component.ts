@@ -68,7 +68,7 @@ export class Nav2Component {
 
 
   findById(){
-    this.tutorService.findById(this.currentUser.id).subscribe({
+    this.usuarioService.findById(this.currentUser.id).subscribe({
         
       next:(value) => {
         console.log("Pessoa Encontrada NO NAV BAR",value);
@@ -86,6 +86,11 @@ export class Nav2Component {
    notificacoesTela(){
         this.router.navigate(['principal/notificacoes']);
         console.log("TESTE")
+  }
+
+  cadastro_post(){
+
+    this.router.navigate(['/cadastro-publicacao'])
   }
 
   logout() {

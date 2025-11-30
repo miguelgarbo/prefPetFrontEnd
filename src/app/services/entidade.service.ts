@@ -26,7 +26,7 @@ export class EntidadeService {
   }
 
   update(entidade:Entidade): Observable<Entidade>{
-    return this.http.put<Entidade>(this.API+"/"+entidade.id, entidade)
+    return this.http.put<Entidade>(this.API+"/update/"+entidade.id, entidade)
   }
 
   save(entidade:Entidade): Observable<Entidade>{
