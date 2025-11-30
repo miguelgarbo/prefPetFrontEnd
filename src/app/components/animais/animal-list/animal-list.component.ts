@@ -22,10 +22,10 @@ import { UsuarioService } from '../../../services/usuario.service';
   imports: [
     CommonModule,
     FormsModule,
-    MdbModalModule,       
+    MdbModalModule,
     MdbFormsModule,
     AnimalDetailsComponent,
-    MessageErrorComponent      
+    MessageErrorComponent
   ],
   templateUrl: './animal-list.component.html',
   styleUrls: ['./animal-list.component.scss']
@@ -46,7 +46,7 @@ export class AnimalListComponent implements OnInit {
 
   //tutorService = inject(TutorService);
   usuarioService = inject(UsuarioService);
-  
+
 
   deuCerto!: boolean
 
@@ -72,66 +72,66 @@ export class AnimalListComponent implements OnInit {
   @ViewChild('addAnimalModal', { static: true }) modalTemplate: any;
 
   ngOnInit() {
-    
+
     console.log("to aqui dentro do animais list");
-    console.log("usuario atual:" + this.currentUser.nome+ ", role: "+ this.currentUser.role)
+    console.log("usuario atual:" + this.currentUser.nome + ", role: " + this.currentUser.role)
     this.findByAnimaisTutorId()
     this.getTutorByCurrentUserId(this.currentUser.id)
 
-    if(this.loginService.hasRole("ADMIN")){
+    if (this.loginService.hasRole("ADMIN")) {
       this.tutotesFindAll(); //caso seja admin, mostra os tutores cadastrados
     }
 
   }
-   tutotesFindAll() { //para mostrar a lista de tutores
-  this.tutorService.findAll().subscribe({
-    next: (lista) => {
-      console.log("Tutores carregados:", lista);
-      this.tutoresList = lista;
-    },
-    error: (err) => {
-      console.error("Erro ao carregar tutores", err);
-    }
-  });
-}
-  deletarTutor(id:number){
+  tutotesFindAll() { //para mostrar a lista de tutores
+    this.tutorService.findAll().subscribe({
+      next: (lista) => {
+        console.log("Tutores carregados:", lista);
+        this.tutoresList = lista;
+      },
+      error: (err) => {
+        console.error("Erro ao carregar tutores", err);
+      }
+    });
+  }
+  deletarTutor(id: number) {
     Swal.fire({
-    title: 'Tem certeza?',
-    text: 'Você realmente deseja excluir este tutor?',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Sim, excluir',
-    cancelButtonText: 'Cancelar',
-    reverseButtons: true
-  }).then((result) => {
+      title: 'Tem certeza?',
+      text: 'Você realmente deseja excluir este tutor?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then((result) => {
 
-    if (result.isConfirmed) {
+      if (result.isConfirmed) {
 
-      this.tutorService.deleteById(id).subscribe({
-        next: () => {
-          Swal.fire({
-            title: 'Excluído!',
-            text: 'Tutor removido com sucesso.',
-            icon: 'success',
-            timer: 1800,
-            showConfirmButton: false
-          });
+        this.tutorService.deleteById(id).subscribe({
+          next: () => {
+            Swal.fire({
+              title: 'Excluído!',
+              text: 'Tutor removido com sucesso.',
+              icon: 'success',
+              timer: 1800,
+              showConfirmButton: false
+            });
 
-          // Atualiza a lista automaticamente sem recarregar a página
-          this.tutoresList = this.tutoresList.filter(t => t.id !== id);
-        },
+            // Atualiza a lista automaticamente sem recarregar a página
+            this.tutoresList = this.tutoresList.filter(t => t.id !== id);
+          },
 
-        error: () => {
-          Swal.fire({
-            title: 'Erro!',
-            text: 'Não foi possível excluir o tutor.',
-            icon: 'error'
-          });
-        }
-      });
-    }
-  })
-}
+          error: () => {
+            Swal.fire({
+              title: 'Erro!',
+              text: 'Não foi possível excluir o tutor.',
+              icon: 'error'
+            });
+          }
+        });
+      }
+    })
+  }
 
   findByAnimaisTutorId() {
     this.animalService.findByTutorId(this.currentUser.id).subscribe({
@@ -144,11 +144,11 @@ export class AnimalListComponent implements OnInit {
     });
   }
 
-  findById(id: number){
+  findById(id: number) {
     this.animalSelecionado = this.animais.find(animal => animal.id === id);
   }
 
-  transferirTutela(animalId: number){
+  transferirTutela(animalId: number) {
     if (animalId) {
       this.router.navigate(['principal/buscar-tutor', animalId]);
     } else {
@@ -156,8 +156,38 @@ export class AnimalListComponent implements OnInit {
     }
   }
 
-  getTutorByCurrentUserId(id: number){
-       this.tutorService.findById(id).subscribe({
+  excluirAnimal(animalId: number) {
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: 'Você realmente deseja excluir este animal?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+
+        this.animalService.deleteById(animalId).subscribe({
+          next: () => {
+            window.location.reload();
+          },
+
+          error: () => {
+            Swal.fire({
+              title: 'Erro!',
+              text: 'Não foi possível excluir o animal.',
+              icon: 'error'
+            });
+          }
+        });
+      }
+    })
+  }
+
+  getTutorByCurrentUserId(id: number) {
+    this.tutorService.findById(id).subscribe({
       next: (tutor) => {
         this.donoDoAnimal = tutor;
       },
@@ -169,6 +199,21 @@ export class AnimalListComponent implements OnInit {
 
   save() {
 
+    // 1. Normaliza o campo imagem
+    const imagemTrim = this.novoAnimal.imagemUrl?.trim() || '';
+
+    const imgGenericaCanino = "https://media.istockphoto.com/id/1333497883/vector/vector-simple-isolated-dog-icon.jpg?s=612x612&w=0&k=20&c=BqjbpBW6t-MSkE9CLNmKALebxo2EFpKPmvBCVQZ3KqE=";
+    const imgGenericaFelino = "https://media.istockphoto.com/id/1300144006/vector/black-cat-silhouette-on-white-background.jpg?s=612x612&w=0&k=20&c=VW6-p5P-KfRkvXTK_Hax_SnbuLpwLHfGok9kxyjfbQw=";
+
+    let imagemFinal = imagemTrim;
+
+    if (imagemTrim === '') {
+      if (this.novoAnimal.especie?.toLowerCase() === 'canino') {
+        imagemFinal = imgGenericaCanino;
+      } else if (this.novoAnimal.especie?.toLowerCase() === 'felino') {
+        imagemFinal = imgGenericaFelino;
+      }
+    }
 
     this.animalService.save({
       id: undefined!,
@@ -180,15 +225,15 @@ export class AnimalListComponent implements OnInit {
       castrado: this.novoAnimal.castrado!,
       microchip: this.novoAnimal.microchip ?? false,
       numeroMicrochip: this.novoAnimal.numeroMicrochip?.trim() || undefined,
-      dataNascimento: this.novoAnimal.dataNascimento!, 
+      dataNascimento: this.novoAnimal.dataNascimento!,
       naturalidade: this.novoAnimal.naturalidade!.trim(),
-      imagemUrl: this.novoAnimal.imagemUrl?.trim() || '',
+      imagemUrl: imagemFinal,
       aplicacoes: [],
-      tutor: this.donoDoAnimal, 
+      tutor: this.donoDoAnimal,
       idade: undefined!
     }).subscribe({
       next: (animalSalvo) => {
-        this.deuCerto=true
+        this.deuCerto = true
 
         console.log("Animal salvo com sucesso:", animalSalvo);
         Swal.fire({
@@ -207,7 +252,7 @@ export class AnimalListComponent implements OnInit {
         this.resetForm();
       },
       error: (err) => {
-        this.mensagem = "Erro Ao Salvar Animal: "+err.message
+        this.mensagem = "Erro Ao Salvar Animal: " + err.message
 
         this.deuCerto = false
         console.error('Erro ao salvar animal:', err);
@@ -242,8 +287,8 @@ export class AnimalListComponent implements OnInit {
       imagemUrl: ''
     };
   }
-  
-    onAnimalSaved() {
-    this.animalSelecionado = undefined;  // Limpar a seleção do animal
+
+  onAnimalSaved() {
+    this.animalSelecionado = undefined;
   }
 }

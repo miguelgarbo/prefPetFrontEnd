@@ -9,14 +9,14 @@ import { environment } from '../../environments/environment';
 })
 export class AplicacaoVacinaService {
 
-  private apiUrl = environment.SERVIDOR+'/aplicacao';
+  private apiUrl = environment.SERVIDOR + '/aplicacao';
   private http = inject(HttpClient);
 
   constructor() {}
 
-  // ---------------------------
+  // --------------------------------------------------------------------
   // CRUD
-  // ---------------------------
+  // --------------------------------------------------------------------
 
   save(aplicacao: AplicacaoVacina, meses: number): Observable<AplicacaoVacina> {
     return this.http.post<AplicacaoVacina>(
@@ -33,8 +33,8 @@ export class AplicacaoVacinaService {
     return this.http.get<AplicacaoVacina[]>(`${this.apiUrl}/findAll`);
   }
 
-  findByVetId(id:number): Observable<AplicacaoVacina[]> {
-    return this.http.get<AplicacaoVacina[]>(`${this.apiUrl}/findByVeterinarioId/`+id);
+  findByVetId(id: number): Observable<AplicacaoVacina[]> {
+    return this.http.get<AplicacaoVacina[]>(`${this.apiUrl}/findByVeterinarioId/${id}`);
   }
 
   update(id: number, aplicacao: AplicacaoVacina): Observable<AplicacaoVacina> {
@@ -48,9 +48,9 @@ export class AplicacaoVacinaService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  // ---------------------------
+  // --------------------------------------------------------------------
   // CONSULTAS PERSONALIZADAS
-  // ---------------------------
+  // --------------------------------------------------------------------
 
   findByAnimalId(animalId: number): Observable<AplicacaoVacina[]> {
     return this.http.get<AplicacaoVacina[]>(

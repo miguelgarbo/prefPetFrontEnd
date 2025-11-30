@@ -2,100 +2,74 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MdbTabsModule } from 'mdb-angular-ui-kit/tabs';
 import { AnimalService } from '../../../services/animal.service';
 import { Animal } from '../../../models/animal';
-import { AplicacaoVacina } from '../../../models/aplicacao-vacina';
 import { AplicacaoVacinaService } from '../../../services/aplicacao-vacina.service';
 import { Router } from '@angular/router';
 import { TutorService } from '../../../services/tutor.service';
-import { Tutor } from '../../../models/tutor';
 import { LoginService } from '../../../services/login.service';
 import { Usuario } from '../../../models/usuario';
 import Swal from 'sweetalert2';
+import { VacinaslistComponent } from '../vacinaslist/vacinaslist.component';
 
 @Component({
   selector: 'app-vacinas',
-  imports: [ MdbTabsModule],
+  imports: [ MdbTabsModule, VacinaslistComponent ],
   templateUrl: './vacinas.component.html',
   styleUrl: './vacinas.component.scss'
 })
 export class VacinasComponent implements OnInit {
+
+  // Serviços
   animalService = inject(AnimalService);
-  pets: Animal[] = [];
-  animalIdCapturado: number = 0; 
-  aplicacoes: AplicacaoVacina[] = [];
   aplicacaoService = inject(AplicacaoVacinaService);
-  router = inject(Router)
+  tutorService = inject(TutorService);
+  loginService = inject(LoginService);
+  router = inject(Router);
 
-  tutorService= inject(TutorService)
-  loginService = inject(LoginService)
-  currentUser: Usuario = this.loginService.getCurrentUser()
-  
-    ngOnInit(){
+  // Dados
+  pets: Animal[] = [];
 
-      this.findAnimaisByTutorId(this.currentUser.id)
+  // ID do animal selecionado → usado no VacinaslistComponent
+  animalIdCapturado: number = 0;
+
+  // Usuário logado
+  currentUser: Usuario = this.loginService.getCurrentUser();
+
+  ngOnInit() {
+    this.findAnimaisByTutorId(this.currentUser.id);
   }
-  
 
-  findAnimaisByTutorId(id: number){
-
+  findAnimaisByTutorId(id: number) {
     this.animalService.findByTutorId(id).subscribe({
+      next: (animais) => {
+        this.pets = animais;
 
-      next: (animais) =>{
-          console.log("Animais Do tutor: ",animais)
-          this.pets = animais
-          
-          if (this.pets.length > 0) {
-        this.findById(this.pets[0].id);
-      }
-          
+        // Seleciona automaticamente o primeiro pet
+        if (this.pets.length > 0) {
+          this.findById(this.pets[0].id);
+        }
       },
-      error:(err)=> {
-          console.error(err)
-      }
-    })
+      error: err => console.error(err)
+    });
   }
 
-  
-
- findById(id:number){
+  findById(id: number) {
     this.animalService.findById(id).subscribe({
-      next:(value) => {
-        console.log("Aqui o Animal Selecionado",value);
-        this.animalIdCapturado = value.id;
-        this.findByAnimal()
-      },error(err) {
-        console.log("Erro Ao pegar animal", err)
+      next: (animal) => {
+        this.animalIdCapturado = animal.id;
       },
-    })
-  }
-
-  findByAnimal(){
-
-    this.aplicacaoService.findByAnimalId(this.animalIdCapturado).subscribe({
-      next: (aplicacoes) =>{
-        console.log(aplicacoes);
-        this.aplicacoes=aplicacoes;
-      },
-      error(err) {
-          console.error(err)
-      },
-
-    })
-
+      error: err => console.error("Erro ao pegar animal", err)
+    });
   }
 
   gerarPdf() {
-  if (this.animalIdCapturado) {
-    this.router.navigate(['principal/carteira-vacinacao', this.animalIdCapturado]);
-  } else {
-
-
-     Swal.fire({
-                title: "Selecione um Animal Para Gerar o Pdf",
-                icon: "warning",
-                confirmButtonText: 'Ok'
-              });
+    if (this.animalIdCapturado) {
+      this.router.navigate(['principal/carteira-vacinacao', this.animalIdCapturado]);
+    } else {
+      Swal.fire({
+        title: "Selecione um animal para gerar o PDF",
+        icon: "warning",
+        confirmButtonText: 'Ok'
+      });
+    }
   }
-}
-
-
 }

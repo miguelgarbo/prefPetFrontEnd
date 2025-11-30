@@ -1,11 +1,68 @@
-<div class="container-vacinas2">
-  <ul class="list-group list-group-light w-50">
-    @for (aplicacao of lista; track $index) {
-      <li class="list-group-item text-center">
-        <div class="fw-bold">{{ aplicacao.vacina.nome }}</div>
-        <div class="text-muted">Data de Aplicacao: {{ aplicacao.dataAplicacao }}</div>
-        <span class="badge rounded-pill badge-success mt-2">Aplicada</span>
-      </li>
+<mdb-tabs class="tabs-vacinas">
+
+  <!-- APLICADAS -->
+  <mdb-tab title="Aplicadas">
+
+    @if (aplicadas.length ===0) {
+      <h1>Nao ha vacinas cadastradas nesse Pet</h1>
+    } @else {
+      <div class="container-vacinas2">
+        <ul class="list-group list-group-light w-50">
+          @for (v of aplicadas; track trackById($index, v)) {
+            <li class="list-group-item text-center">
+              <div class="fw-bold">{{ v.vacina.nome }}</div>
+              <div class="text-muted">Data de Aplicacao: {{ v.dataAplicacao }}</div>
+              <span class="badge rounded-pill badge-success mt-2">Aplicada</span>
+            </li>
+          }
+        </ul>
+      </div>
     }
-  </ul>
-</div>
+
+  </mdb-tab>
+
+
+  <!-- PENDENTES -->
+  <mdb-tab title="Pendentes">
+
+    @if (pendentes.length === 0) {
+      <h1>Nao ha vacinas pendentes</h1>
+    } @else {
+      <div class="container-vacinas2">
+        <ul class="list-group list-group-light w-50">
+          @for (v of pendentes; track trackById($index, v)) {
+            <li class="list-group-item text-center">
+              <div class="fw-bold">{{ v.vacina.nome }}</div>
+              <div class="text-muted">Data Prevista: {{ v.dataPrevista || '—' }}</div>
+              <span class="badge rounded-pill badge-warning mt-2">Pendente</span>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+
+  </mdb-tab>
+
+
+  <!-- PRÓXIMAS -->
+  <mdb-tab title="Proximas Vacinas">
+
+    @if (proximas.length === 0) {
+      <h1>Nao ha proximas vacinas</h1>
+    } @else {
+      <div class="container-vacinas2">
+        <ul class="list-group list-group-light w-50">
+          @for (v of proximas; track trackById($index, v)) {
+            <li class="list-group-item text-center">
+              <div class="fw-bold">{{ v.vacina.nome }}</div>
+              <div class="text-muted">Data Prevista: {{ v.dataPrevista || '—' }}</div>
+              <span class="badge rounded-pill badge-info mt-2">Próxima</span>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+
+  </mdb-tab>
+
+</mdb-tabs>

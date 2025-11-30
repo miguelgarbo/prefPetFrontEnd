@@ -2,7 +2,11 @@
     <!-- Card de informações do animal -->
     <div class="animal-info shadow">
         <div class="nome-animal w-100 d-flex justify-content-center">
-            <h3><strong>{{ animal.nome }} | {{animal.especie}}</strong></h3>
+            <h3 *ngIf="!editMode"><strong>{{ animal.nome }} | {{animal.especie}}</strong></h3>
+            @if (editMode) {
+                <h3><strong>Nome: </strong></h3>
+                <input [(ngModel)]="editedAnimal.nome" class="inputformat mb-2"/>
+            }
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="dark"
                     class="bi bi-pencil-fill mb-2" viewBox="0 0 16 16" (click)="toggleEdit()" style="cursor: pointer">
@@ -19,16 +23,16 @@
             <div class="col-4">
                 <!-- Registro Geral -->
                 <div class="field">
-                    <label>Registro Geral:</label>
-                    <span *ngIf="!editMode">{{ animal.registroGeral }}</span>
-                    <input *ngIf="editMode" [(ngModel)]="editedAnimal.registroGeral" />
+                    <label class="h5">Registro Geral:</label>
+                    <span class="h6" *ngIf="!editMode">{{ animal.registroGeral }}</span>
+                    <input *ngIf="editMode" [(ngModel)]="editedAnimal.registroGeral" class="inputformat" />
                 </div>
 
                 <!-- Sexo -->
                 <div class="field">
-                    <label>Sexo:</label>
-                    <span *ngIf="!editMode">{{ animal.sexo }}</span>
-                    <select *ngIf="editMode" [(ngModel)]="editedAnimal.sexo">
+                    <label class="h5">Sexo:</label>
+                    <span class="h6"*ngIf="!editMode">{{ animal.sexo }}</span>
+                    <select *ngIf="editMode" [(ngModel)]="editedAnimal.sexo" class="selectformat">
                         <option value="Macho">Macho</option>
                         <option value="Fêmea">Fêmea</option>
                     </select>
@@ -36,25 +40,25 @@
 
                 <!-- Cor -->
                 <div class="field">
-                    <label>Cor:</label>
-                    <span *ngIf="!editMode">{{ animal.cor }}</span>
-                    <input *ngIf="editMode" [(ngModel)]="editedAnimal.cor" />
+                    <label class="h5">Cor:</label>
+                    <span class="h6"*ngIf="!editMode">{{ animal.cor }}</span>
+                    <input *ngIf="editMode" [(ngModel)]="editedAnimal.cor" class="inputformat"/>
                 </div>
             </div>
 
             <div class="col-4">
                 <!-- Microchip -->
                 <div class="field">
-                    <label>Microchip:</label>
-                    <span *ngIf="!editMode">
+                    <label class="h5">Microchip:</label>
+                    <span class="h6"*ngIf="!editMode">
                         {{ animal.microchip ? animal.numeroMicrochip || 'SEM MICROCHIP' : 'SEM MICROCHIP' }}
                     </span>
                     <div *ngIf="editMode" class="d-flex gap-2">
-                        <select [(ngModel)]="editedAnimal.microchip">
+                        <select [(ngModel)]="editedAnimal.microchip" class="selectformat" id="selectmicrochip">
                             <option [ngValue]="true">Sim</option>
                             <option [ngValue]="false">Não</option>
                         </select>
-                        <input *ngIf="editedAnimal.microchip" [(ngModel)]="editedAnimal.numeroMicrochip"
+                        <input *ngIf="editedAnimal.microchip" [(ngModel)]="editedAnimal.numeroMicrochip" class="inputformat"
                             [placeholder]="'Digite o número do microchip'"
                             [value]="editedAnimal.numeroMicrochip || ''" />
                     </div>
@@ -63,9 +67,9 @@
 
                 <!-- Castrado -->
                 <div class="field">
-                    <label>Castrado:</label>
-                    <span *ngIf="!editMode">{{ animal.castrado ? 'SIM' : 'NÃO' }}</span>
-                    <select *ngIf="editMode" [(ngModel)]="editedAnimal.castrado">
+                    <label class="h5">Castrado:</label>
+                    <span class="h6" *ngIf="!editMode">{{ animal.castrado ? 'SIM' : 'NÃO' }}</span>
+                    <select *ngIf="editMode" [(ngModel)]="editedAnimal.castrado" class="selectformat">
                         <option [ngValue]="true">Sim</option>
                         <option [ngValue]="false">Não</option>
                     </select>

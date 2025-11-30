@@ -4,12 +4,14 @@ import { Veterinario } from "./veterinario";
 
 export class AplicacaoVacina {
 
-    id!: number
+    id!: number;
+    dataPrevista!: string;
     dataAplicacao!: string;
     dataValidade!: string;
-    numeroDose!: number
+    numeroDose!: string
     vacina!: Vacina;
     animal!: Animal;
-    veterinario!:Veterinario;
+    status?: "APLICADA" | "PENDENTE" | "PROXIMA";
 
+    veterinario?: Veterinario | null;
 }
