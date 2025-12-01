@@ -31,19 +31,51 @@
     </div>
   </div>
 
-  <!-- Retângulo 2: Emergência -->
-  <div class="home-card home-card-small bg-danger block">
-    <button type="button" class="btn btn-light btn-rounded btn-home" mdbRipple (click)="acessarEmergencia()">
-      Emergência
-    </button>
-  </div>
+<!-- Cartão: Emergência -->
+<div class="home-card home-card-small block card-split card-emergencia">
+  <div class="d-flex align-items-center justify-content-between w-100">
 
-  <!-- Retângulo 3: Buscar Chip -->
-  <div class="home-card home-card-small bg-success block">
-    <button type="button" class="btn btn-light btn-rounded btn-home" mdbRipple (click)="buscarChip()">
-      Buscar Animal Por Microchip
+    <div class="left-content">
+      <div class="card-title">Emergência <i class="bi bi-exclamation-triangle-fill ms-2"></i> </div>
+      <div class="divider"></div>
+      <div class="card-desc">
+        Acessar rapidamente o módulo de emergência.
+      </div>
+    </div>
+
+    <button 
+      type="button" 
+      class="btn btn-light btn-rounded btn-home ms-3"
+      mdbRipple
+      (click)="acessarEmergencia()">
+      Acessar
     </button>
   </div>
+</div>
+
+
+<!-- Cartão: Buscar Animal por Microchip -->
+<div class="home-card home-card-small block card-split card-microchip">
+  <div class="d-flex align-items-center justify-content-between w-100">
+
+    <div class="left-content">
+      <div class="card-title">Buscar Animal por Microchip <i class="bi bi-search ms-2"> </i> </div>
+      <div class="divider"></div>
+      <div class="card-desc">
+        Localize um animal pelo número do microchip.
+      </div>
+    </div>
+
+    <button 
+      type="button" 
+      class="btn btn-light btn-rounded btn-home ms-3"
+      mdbRipple
+      (click)="buscarChip()">
+      Buscar
+    </button>
+  </div>
+</div>
+
 
   <div class="home-card home-card-small vet-block">
 
@@ -74,7 +106,6 @@
   </div>
 
 </div>
-
 <ng-template #modalLogin let-modal>
   <div class="modal-header">
     <h5 class="modal-title">Login</h5>
