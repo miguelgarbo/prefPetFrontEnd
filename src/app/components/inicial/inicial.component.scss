@@ -100,10 +100,53 @@
 }
 
 .button-vet{
-
-
-
     color: white !important;
     background-color: rgb(78, 78, 78) !important;
 
+}
+
+.card-split {
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+}
+
+.left-content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+  flex-grow: 1;
+}
+
+.card-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.divider {
+  height: 2px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.4);
+  margin: 4px 0 8px 0;
+}
+
+.card-desc {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  text-align: left;
+}
+
+.btn-home {
+  white-space: nowrap;
+  padding: 8px 22px;
+  border-radius: 20px;
+}
+
+.card-emergencia{
+  background-color: #d9443d;
+}
+
+.card-microchip{
+  background-color: #60bd3e;
 }
