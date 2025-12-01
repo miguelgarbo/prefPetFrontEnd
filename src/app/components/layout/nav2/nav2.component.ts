@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { Tutor } from '../../../models/tutor';
 import { FormsModule } from "@angular/forms";
 import { Router, RouterLink } from '@angular/router';
 import { RouterModule } from '@angular/router';
@@ -8,12 +7,10 @@ import { Notificacao } from '../../../models/notificacao';
 import { NotificacaoService } from '../../../services/notificacao.service';
 import { Usuario } from '../../../models/usuario';
 import { LoginService } from '../../../services/login.service';
-import { c } from "../../../../../node_modules/@angular/cdk/a11y-module.d-DBHGyKoh";
 import { UsuarioService } from '../../../services/usuario.service';
 import { VeterinarioService } from '../../../services/veterinario.service';
 import { EntidadeService } from '../../../services/entidade.service';
 import Swal from 'sweetalert2'
-import { CadastroUsuarioComponent } from '../../tutor/cadastro-usuario/cadastro-usuario.component';
 
 
 
@@ -92,6 +89,11 @@ export class Nav2Component {
 
     this.router.navigate(['/historico-aplicacoes'])
 
+  }
+
+  cadastro_aplicacao(){
+
+    this.router.navigate(['/cadastro-aplicacao-vacina'])
   }
 
   cadastro_post(){

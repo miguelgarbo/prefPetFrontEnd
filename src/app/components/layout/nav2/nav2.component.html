@@ -26,7 +26,6 @@
 
         @if (loginService.hasRole("ADMIN")) {
 
-        <!-- ADMIN vê Usuários -->
         <button type="button" class="btn" routerLink="animal" routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }">
           Usuários
@@ -42,6 +41,10 @@
 
         <button type="button" class="btn" (click)="historico_aplicacao()">
           Histórico Aplicações
+        </button>
+
+        <button type="button" class="btn" (click)="cadastro_aplicacacao()">
+          Cadastro Aplicação
         </button>
 
         <button type="button" class="btn" routerLink="vacinas" routerLinkActive="active-link"
