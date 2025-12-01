@@ -88,6 +88,12 @@ export class Nav2Component {
         console.log("TESTE")
   }
 
+  historico_aplicacao(){
+
+    this.router.navigate(['/historico-aplicacoes'])
+
+  }
+
   cadastro_post(){
 
     this.router.navigate(['/cadastro-publicacao'])
