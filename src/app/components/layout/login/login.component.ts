@@ -47,14 +47,14 @@ export class LoginComponent {
 
     if (currentUser.role == 'VETERINARIO') {
       //implementar essa rota
-      this.router.navigate(['/cadastro-aplicacao-vacina']);
+      this.router.navigate(['/principal/cadastro-aplicacao-vacina']);
 
     } else if (currentUser.role == 'TUTOR' || currentUser.role=='ADMIN') {
 
       this.router.navigate(['/principal/animal']);
     } else if (currentUser.role == 'ENTIDADE') {
       // implementar essa rota
-      this.router.navigate(['/cadastro-publicacao/']);
+      this.router.navigate(['principal/cadastro-publicacao']);
     }
   }
 

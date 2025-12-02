@@ -29,7 +29,7 @@
   <mdb-tabs class="tabs-vacinas">
 
     <!-- APLICADAS -->
-    <mdb-tab title="Aplicadas">
+    <mdb-tab title="">
       <hr><br><br>
       <div class="container-list">
         <app-vacinaslist 
@@ -39,27 +39,7 @@
       </div>
     </mdb-tab>
 
-    <!-- PENDENTES -->
-    <mdb-tab title="Pendentes">
-      <hr><br><br>
-      <div class="container-list">
-        <app-vacinaslist 
-            [animalId]="animalIdCapturado"
-            tab="pendentes">
-        </app-vacinaslist>
-      </div>
-    </mdb-tab>
-
-    <!-- PRÓXIMAS VACINAS -->
-    <mdb-tab title="Próximas Vacinas">
-      <hr><br><br>
-      <div class="container-list">
-        <app-vacinaslist 
-            [animalId]="animalIdCapturado"
-            tab="proximas">
-        </app-vacinaslist>
-      </div>
-    </mdb-tab>
+    
 
   </mdb-tabs>
 </div>

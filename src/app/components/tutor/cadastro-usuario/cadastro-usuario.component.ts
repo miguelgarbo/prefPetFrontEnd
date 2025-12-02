@@ -24,7 +24,7 @@ import { LoginService } from '../../../services/login.service';
 })
 export class CadastroUsuarioComponent {
 
-  @Input() tipoCadastro: string = "tutor"
+  @Input() tipoCadastro: string = ""
 
   title: string = 'Tutor';
   tipoForm: string = 'Junte-se ao PrefPet como '
@@ -59,6 +59,7 @@ export class CadastroUsuarioComponent {
 
   ngOnInit() {
 
+
     this.changeTittle();
 
 
@@ -76,21 +77,21 @@ export class CadastroUsuarioComponent {
   if(this.loginService.hasRole("TUTOR")){
       
       this.title='Tutor';
-      this.findById(id);
+      this.findTutorById(id);
 
   }
 
     if(this.loginService.hasRole("ENTIDADE")){
       
       this.title='Entidade';
-      this.findById(id);
+      this.findEntidadeById(id);
 
   }
 
    if(this.loginService.hasRole("VETERINARIO")){
       
-      this.title='Veterinario';
-      this.findById(id);
+      this.title='Veterinário';
+      this.findVetById(id);
 
   }
 
@@ -166,7 +167,6 @@ export class CadastroUsuarioComponent {
         console.error(err)
       },
     })
-
   }
 
   findVetById(id: number) {
@@ -313,7 +313,7 @@ export class CadastroUsuarioComponent {
             confirmButtonText: 'Ok'
           });
 
-          this.router.navigate(['/inicial']);
+          this.router.navigate(['/principal/animal']);
         },
         error: (err) => {
           console.error("Erro Ao Cadastrar", err);
@@ -337,7 +337,7 @@ export class CadastroUsuarioComponent {
             icon: "success",
             confirmButtonText: 'Ok'
           });
-          this.router.navigate(['/principal/animal']);
+          this.router.navigate(['/principal/historico-aplicacoes']);
         },
         error: (erro) => {
           Swal.fire({
@@ -360,7 +360,7 @@ export class CadastroUsuarioComponent {
             confirmButtonText: 'Ok'
           });
 
-          this.router.navigate(['/principal/animal']);
+          this.router.navigate(['/principal/historico-aplicacoes']);
         },
         error: (err) => {
           console.error("Erro Ao Cadastrar", err);
@@ -387,7 +387,7 @@ export class CadastroUsuarioComponent {
             icon: "success",
             confirmButtonText: 'Ok'
           });
-          this.router.navigate(['/principal/animal']);
+          this.router.navigate(['/principal/cadastro-publicacao']);
         },
         error: (erro) => {
           Swal.fire({
@@ -410,7 +410,7 @@ export class CadastroUsuarioComponent {
             confirmButtonText: 'Ok'
           });
 
-          this.router.navigate(['/principal/animal']);
+          this.router.navigate(['/principal/cadastro-publicacao']);
         },
         error: (err) => {
           console.error("Erro Ao Cadastrar", err);

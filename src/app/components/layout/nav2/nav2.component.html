@@ -33,22 +33,28 @@
 
         } @else if (loginService.hasRole("ENTIDADE")) {
 
-        <button type="button" class="btn" (click)="cadastro_post()">
+        <button type="button" class="btn" routerLink="cadastro-publicacao" routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }">
           Criar Publicação
         </button>
 
         }@else if(loginService.hasRole("VETERINARIO")){
 
-        <button type="button" class="btn" (click)="historico_aplicacao()">
-          Histórico Aplicações
+
+          <button type="button" class="btn" routerLink="historico-aplicacoes" routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }">
+          Histórico
         </button>
 
-        <button type="button" class="btn" (click)="cadastro_aplicacao()">
+
+         <button type="button" class="btn" routerLink="cadastro-aplicacao-vacina" routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }">
           Cadastro Aplicação
         </button>
 
-        <button type="button" class="btn" routerLink="vacinas" routerLinkActive="active-link"
-          [routerLinkActiveOptions]="{ exact: true }">Vacinas</button>
+
+        <!-- <button type="button" class="btn" routerLink="vacinas" routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }">Vacinas</button> -->
 
         } @else {
 
@@ -61,8 +67,8 @@
           [routerLinkActiveOptions]="{ exact: true }">Vacinas</button>
         }
        
-        <button type="button" class="btn" routerLink="publicacoes"
-          routerLinkActive="active-link"></button>
+        <!-- <button type="button" class="btn" routerLink="publicacoes"
+          routerLinkActive="active-link"></button> -->
 
 
 

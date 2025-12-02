@@ -46,8 +46,9 @@ export const routes: Routes = [
     children:[
         {path:":id", component: AnimalDetailsComponent},
     ]},
-    // {path: 'cadastro-aplicacao-vacina', component: CadastroAplicacaoVacinaComponent, canActivate: [loginGuard]},
-    // {path: 'historico-aplicacoes', component: HistoricoAplicacaoVacinaVetComponent},
+    {path: 'cadastro-aplicacao-vacina', component: CadastroAplicacaoVacinaComponent, canActivate: [loginGuard]},
+    {path: 'historico-aplicacoes', component: HistoricoAplicacaoVacinaVetComponent},
+    {path: "cadastro-publicacao", component: CadastroPublicacaoComponent, canActivate: [loginGuard]},
     {path: 'buscar-chip', component: BuscarChipComponent},
     {path: 'emergencia', component: EmergenciaComponent},
     {path: 'vacinas', component: VacinasComponent},
