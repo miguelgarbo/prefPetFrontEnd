@@ -12,8 +12,6 @@
 
 
       <div *ngFor="let emergencia of emergencias" class="card mb-3 p-2 card-emergencia position-relative">
-
-       Botões na lateral direita 
       <div class="position-absolute" style="right: 10px; top: 10px;">
         @if(loginService.hasRole("ADMIN")){
           <button class="btn btn-sm btn-outline-primary me-1"

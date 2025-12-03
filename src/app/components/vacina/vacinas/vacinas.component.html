@@ -24,22 +24,15 @@
       Gerar PDF
     </button>
   </div>
+    <br>
 
-  <!-- TABS DE VACINAS -->
-  <mdb-tabs class="tabs-vacinas">
 
-    <!-- APLICADAS -->
-    <mdb-tab title="">
-      <hr><br><br>
-      <div class="container-list">
-        <app-vacinaslist 
-            [animalId]="animalIdCapturado"
-            tab="aplicadas">
-        </app-vacinaslist>
-      </div>
-    </mdb-tab>
+  <!-- SEM TABS — SOMENTE O COMPONENTE -->
+  <div class="container-list">
+    <app-vacinaslist 
+      [animalId]="animalIdCapturado"
+      tab="aplicadas">
+    </app-vacinaslist>
+  </div>
 
-    
-
-  </mdb-tabs>
 </div>

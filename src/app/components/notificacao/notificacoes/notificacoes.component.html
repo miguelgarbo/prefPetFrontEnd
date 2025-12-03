@@ -12,7 +12,7 @@
             <h4>Sem Notificações, Por Enquanto</h4>
     }@else {
         @for (not of notificacoes; track not.id) {
-        <app-card-notificacao [notificacao]="not" [mostrar]="true"></app-card-notificacao>  
+        <app-card-notificacao [notificacao]="not" [mostrar]="true" (conviteAceitoEvent)="onConviteAceito()"></app-card-notificacao>  
         }      
         }
     </div>

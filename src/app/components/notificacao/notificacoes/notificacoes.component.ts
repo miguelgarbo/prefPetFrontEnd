@@ -28,7 +28,10 @@ export class NotificacoesComponent {
     this.buscarNotificacoesUsuario(this.currentUser.id)
 
 }
+ onConviteAceito(){
+    this.buscarNotificacoesUsuario(this.currentUser.id)
 
+ }
 
   buscarNotificacoesUsuario(id: number){
     this.notificacaoService.findByTutorId(id).subscribe({

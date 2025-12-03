@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, output, Output } from '@angular/core';
 import { Notificacao } from '../../../models/notificacao';
 import { NotificacaoService } from '../../../services/notificacao.service';
 import e from 'express';
@@ -14,7 +14,7 @@ export class CardNotificacaoComponent {
   public isButtonDisabled: boolean = false;
   @Input() notificacao!: Notificacao;
   @Input() mostrar: boolean = false;
-
+  @Output() conviteAceitoEvent: EventEmitter<void> = new EventEmitter<void>();
 
   notificacaoService = inject(NotificacaoService)
 
@@ -29,6 +29,7 @@ export class CardNotificacaoComponent {
       next: (mensagem)=>{
         console.log("Convite Aceito e Atualizado Com Sucesso Resposta:")
         console.log(mensagem)
+        this.conviteAceitoEvent.emit()
         this.isButtonDisabled = true;
       },
       error(err) {
