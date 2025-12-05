@@ -1,6 +1,6 @@
-#Projeto PrefPet Front End Repositório usando Angular 19
+# Projeto PrefPet Front End Repositório usando Angular 19
 
-##O PrefPet é um site que foca na digitalização da carteira de vacinação do pet e na organização/centralização de serviços disponíveis para animais domésticos que existem na internet.
+## O PrefPet é um site que foca na digitalização da carteira de vacinação do pet e na organização/centralização de serviços disponíveis para animais domésticos que existem na internet.
 
 Tipos de Usuários: Tutor, Veterinário, Entidade, Admin
 
