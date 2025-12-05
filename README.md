@@ -23,4 +23,4 @@ Step 2 - Rodar Servidor de Desenvolvimento - Porta 4200
 run: npm s -o
 
 
-Link Repositório Back End Usando Spring Boot = [https://github.com/miguelgarbo/PrefPet.git]([URL](https://github.com/miguelgarbo/PrefPet.git))
+Link Repositório Back End Usando Spring Boot = [https://github.com/miguelgarbo/PrefPet.git](https://github.com/miguelgarbo/PrefPet.git)
