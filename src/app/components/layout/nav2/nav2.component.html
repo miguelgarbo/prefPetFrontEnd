@@ -2,16 +2,19 @@
 <nav class="navbar fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand">
-      <img [src]="currentUser.imagemUrlPerfil" class="me-2" height="20" alt="MDB Logo" />
+
+      <img [src]="currentUser.imagemUrlPerfil" class="me-2"  height="20" alt="MDB Logo" />
+      
       <div class="nome">
-        @if (loginService.hasRole("TUTOR") || loginService.hasRole("ENTIDADE") || loginService.hasRole("VETERINARIO")) {
+        @if (isTutor || isEntidade || isVeterinario) {
         <small class="nome">{{ currentUser.nome }}</small>
-        <button type="button" (click)="editarPerfil()">
+        <button class="button-edit" type="button" (click)="editarPerfil()">
           <i class="fa-solid fa-pen"></i>
         </button>
-        } @else if (loginService.hasRole("ADMIN")) {
+        } @else if (isAdmin) {
 
         <small class="nome">{{ currentUser.nome }}</small>
+
         <button type="button" (click)="logout()">
           <i class="fa fa-sign-out"></i>
         </button>
@@ -22,23 +25,23 @@
     </a>
 
     <div class="opcoes mx-auto">
-      <div class="d-flex justify-content-center gap-5 btn-group-lg" role="group" aria-label="Basic example">
+      <div class="d-flex justify-content-center gap-5 btn-group-md" role="group" aria-label="Basic example">
 
-        @if (loginService.hasRole("ADMIN")) {
+        @if (isAdmin) {
 
         <button type="button" class="btn" routerLink="animal" routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }">
           Usuários
         </button>
 
-        } @else if (loginService.hasRole("ENTIDADE")) {
+        } @else if (isEntidade) {
 
         <button type="button" class="btn" routerLink="cadastro-publicacao" routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }">
           Criar Publicação
         </button>
 
-        }@else if(loginService.hasRole("VETERINARIO")){
+        }@else if(isVeterinario){
 
 
           <button type="button" class="btn" routerLink="historico-aplicacoes" routerLinkActive="active-link"

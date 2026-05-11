@@ -5,37 +5,56 @@ import { Animal } from '../../../models/animal';
 import { AplicacaoVacinaService } from '../../../services/aplicacao-vacina.service';
 import { Router } from '@angular/router';
 import { TutorService } from '../../../services/tutor.service';
-import { LoginService } from '../../../services/login.service';
-import { Usuario } from '../../../models/usuario';
 import Swal from 'sweetalert2';
 import { VacinaslistComponent } from '../vacinaslist/vacinaslist.component';
+import { getUser } from '../../../services/keycloak.service';
+import { UsuarioService } from '../../../services/usuario.service';
 
 @Component({
   selector: 'app-vacinas',
-  imports: [ MdbTabsModule, VacinaslistComponent ],
+  imports: [MdbTabsModule, VacinaslistComponent],
   templateUrl: './vacinas.component.html',
   styleUrl: './vacinas.component.scss'
 })
 export class VacinasComponent implements OnInit {
 
-  // Serviços
   animalService = inject(AnimalService);
   aplicacaoService = inject(AplicacaoVacinaService);
   tutorService = inject(TutorService);
-  loginService = inject(LoginService);
   router = inject(Router);
+  usuarioService = inject(UsuarioService)
 
-  // Dados
   pets: Animal[] = [];
 
-  // ID do animal selecionado → usado no VacinaslistComponent
   animalIdCapturado: number = 0;
 
-  // Usuário logado
-  currentUser: Usuario = this.loginService.getCurrentUser();
+  currentUser: any;
+  tutor: any;
 
   ngOnInit() {
-    this.findAnimaisByTutorId(this.currentUser.id);
+
+    this.currentUser = getUser();
+
+    const sub = this.currentUser.sub;
+
+    this.getTutorByKeycloak(sub);
+  }
+
+  // 🔥 Keycloak → Tutor → ID do banco
+  getTutorByKeycloak(sub: string) {
+
+    this.usuarioService.findTutorByKeycloakId(sub).subscribe({
+      next: (tutor) => {
+
+        this.tutor = tutor;
+
+        this.findAnimaisByTutorId(tutor.id);
+      },
+      error: (err) => {
+        console.error("Erro ao buscar tutor:", err);
+      }
+    });
+
   }
 
   findAnimaisByTutorId(id: number) {
@@ -43,7 +62,6 @@ export class VacinasComponent implements OnInit {
       next: (animais) => {
         this.pets = animais;
 
-        // Seleciona automaticamente o primeiro pet
         if (this.pets.length > 0) {
           this.findById(this.pets[0].id);
         }

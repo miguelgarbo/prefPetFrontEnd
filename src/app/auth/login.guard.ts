@@ -1,41 +1,40 @@
 import { CanActivateFn, Router } from '@angular/router';
-import { LoginService } from '../services/login.service';
 import { inject } from '@angular/core';
 import Swal from 'sweetalert2';
+import {hasRole} from '../services/keycloak.service'
 
 export const loginGuard: CanActivateFn = (route, state) => {
 
-  let loginService = inject(LoginService)
-  let router = inject(Router)
+  const router = inject(Router);
 
-  if (loginService.hasRole("TUTOR") && (state.url == '/cadastro-aplicacao-vacina' || state.url == '/cadastro-publicacao' || state.url == '/historico-aplicacoes')) {
-
-    console.log("cheguei aq")
-
+  if (
+    hasRole("TUTOR") &&
+    (
+      state.url === '/principal/cadastro-aplicacao-vacina' ||
+      state.url === '/cadastro-publicacao' ||
+      state.url === '/historico-aplicacoes'
+    )
+  ) {
     Swal.fire({
       icon: "warning",
       title: "Rota não permitida pro seu tipo de Usuário",
     });
 
     router.navigate(['principal/animal']);
-
-
-    return false
+    return false;
   }
 
-  if(loginService.hasRole("ENTIDADE") && (state.url == '/cadastro-aplicacao-vacina')){
-
-
-     Swal.fire({
+  if (
+    hasRole("ENTIDADE") &&
+    state.url === '/cadastro-aplicacao-vacina'
+  ) {
+    Swal.fire({
       icon: "warning",
       title: "Rota não permitida pro seu tipo de Usuário",
     });
 
-    return false
-
+    return false;
   }
-
-
 
   return true;
 };

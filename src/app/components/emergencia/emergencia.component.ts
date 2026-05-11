@@ -7,8 +7,10 @@ import { MdbModalService, MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { ContatoService } from '../../services/contato.service';
 import { Contato } from '../../models/contato';
 import { ActivatedRoute } from '@angular/router';
-import { LoginService } from '../../services/login.service';
+
 import { EmergenciaService } from '../../services/emergencia.service';
+
+import { login, getUser, hasRole } from '../../services/keycloak.service';
 
 @Component({
   selector: 'app-emergencia',
@@ -30,10 +32,14 @@ export class EmergenciaComponent {
   contatosSelecionadosIds: number[] = [];
   mostrarContatos = false;
   activedRouter = inject(ActivatedRoute)
-  loginService = inject(LoginService);
 
+  isTutor = false;
+  isAdmin = false;
 
   ngOnInit(){
+    this.isTutor = hasRole("TUTOR");
+    this.isAdmin = hasRole("ADMIN");
+
     this.listarEmergencias()
     this.listarContato()
   }

@@ -13,13 +13,13 @@
 
       <div *ngFor="let emergencia of emergencias" class="card mb-3 p-2 card-emergencia position-relative">
       <div class="position-absolute" style="right: 10px; top: 10px;">
-        @if(loginService.hasRole("ADMIN")){
+        @if(isTutor){
           <button class="btn btn-sm btn-outline-primary me-1"
                   (click)="editarEmergencia()">
             <i class="bi bi-pencil"></i>
           </button>}
 
-        @if(loginService.hasRole("ADMIN")){
+        @if(isAdmin){
           <button class="btn btn-sm btn-outline-danger"
                   (click)="excluirEmergencia(emergencia)">
             <i class="bi bi-trash"></i>
@@ -44,7 +44,7 @@
 
 
   <div class="form-container d-flex gap-4 mt-4"> 
-    @if(loginService.hasRole("ADMIN")){
+    @if(isAdmin){
     <div class="card p-3 flex-fill shadow-sm">
       <h3 class="mb-3">Adicionar Emergência</h3>
 

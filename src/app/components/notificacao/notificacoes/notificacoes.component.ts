@@ -3,9 +3,9 @@ import { CardNotificacaoComponent } from "../card-notificacao/card-notificacao.c
 import { Notificacao } from '../../../models/notificacao';
 import { Router } from '@angular/router';
 import { NotificacaoService } from '../../../services/notificacao.service';
-import { Tutor } from '../../../models/tutor';
 import { TutorService } from '../../../services/tutor.service';
-import { LoginService } from '../../../services/login.service';
+import { getUser } from '../../../services/keycloak.service';
+import { UsuarioService } from '../../../services/usuario.service';
 
 @Component({
   selector: 'app-notificacoes',
@@ -15,35 +15,54 @@ import { LoginService } from '../../../services/login.service';
 })
 export class NotificacoesComponent {
 
-  notificacoes: Notificacao[] = []
-  router = inject(Router) 
-  notificacaoService = inject(NotificacaoService)
-  tutorService= inject(TutorService)
+  notificacoes: Notificacao[] = [];
 
-  loginService  = inject(LoginService)
-  currentUser = this.loginService.getCurrentUser()
+  router = inject(Router);
+  notificacaoService = inject(NotificacaoService);
+  tutorService = inject(TutorService);
+  usuarioService = inject(UsuarioService)
 
-  ngOnInit(){
+  currentUser: any;
+  tutor: any;
 
-    this.buscarNotificacoesUsuario(this.currentUser.id)
+  ngOnInit() {
 
-}
- onConviteAceito(){
-    this.buscarNotificacoesUsuario(this.currentUser.id)
+    this.currentUser = getUser();
 
- }
+    const sub = this.currentUser.sub;
 
-  buscarNotificacoesUsuario(id: number){
-    this.notificacaoService.findByTutorId(id).subscribe({
-      next: (notificacoes) =>{
-        console.log(notificacoes)
-        this.notificacoes= notificacoes;
+    this.getTutorByKeycloak(sub);
+  }
+
+  // 🔥 passo obrigatório: Keycloak → Tutor
+  getTutorByKeycloak(sub: string) {
+
+    this.usuarioService.findTutorByKeycloakId(sub).subscribe({
+      next: (tutor) => {
+        this.tutor = tutor;
+
+        this.buscarNotificacoesUsuario(tutor.id);
       },
-      error: (err) =>{
-        console.log("Erro ao Buscar Notificacoes", err)
+      error: (err) => {
+        console.log("Erro ao buscar tutor:", err);
       }
-    })
+    });
 
+  }
+
+  onConviteAceito() {
+    this.buscarNotificacoesUsuario(this.tutor.id);
+  }
+
+  buscarNotificacoesUsuario(id: number) {
+    this.notificacaoService.findByTutorId(id).subscribe({
+      next: (notificacoes) => {
+        this.notificacoes = notificacoes;
+      },
+      error: (err) => {
+        console.log("Erro ao Buscar Notificacoes", err);
+      }
+    });
   }
 
 }

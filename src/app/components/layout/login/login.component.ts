@@ -1,95 +1,51 @@
+import { Component, EventEmitter, Output, inject, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
-
-import { Component, EventEmitter, Output, inject, TemplateRef, ViewChild, Input } from '@angular/core';
-
-import { FormsModule } from '@angular/forms';
-import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
-import { Router, Routes } from '@angular/router';
-import { MdbModalRef, MdbModalService, MdbModalModule } from 'mdb-angular-ui-kit/modal';
-import { TutorService } from '../../../services/tutor.service';
-import { Tutor } from '../../../models/tutor';
-
-import { RouterModule } from '@angular/router';
-
-import Swal from 'sweetalert2'
-import { LoginService } from '../../../services/login.service';
-import { Login } from '../../../models/login';
-import { Usuario } from '../../../models/usuario';
-import { MessageErrorComponent } from '../message-error/message-error.component';
-import { log } from 'node:console';
-
-
+import { login, getUser, hasRole , isLoggedIn} from '../../../services/keycloak.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MdbFormsModule, FormsModule, RouterModule, MdbModalModule, MessageErrorComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
 
-
-  deuErrado!: boolean;
-  loginService = inject(LoginService);
-  currentUser = new Usuario();
-  loginData = new Login();
   @Input() tipoLogin!: string;
   @Output() loginSucesso = new EventEmitter<void>();
 
-  modalService = inject(MdbModalService);
-  @ViewChild('modalLogin') modalLogin!: TemplateRef<any>;
-  modalRef!: MdbModalRef<any>;
-
   router = inject(Router);
 
-  gerenciarTipoLogin(currentUser:Usuario) {
-
-    if (currentUser.role == 'VETERINARIO') {
-      //implementar essa rota
-      this.router.navigate(['/principal/cadastro-aplicacao-vacina']);
-
-    } else if (currentUser.role == 'TUTOR' || currentUser.role=='ADMIN') {
-
-      this.router.navigate(['/principal/animal']);
-    } else if (currentUser.role == 'ENTIDADE') {
-      // implementar essa rota
-      this.router.navigate(['principal/cadastro-publicacao']);
-    }
+  ngOnInit() {
+    setTimeout(() => {
+      if (isLoggedIn()) {
+        this.verificarUsuario();
+      }
+    }, 300);
   }
 
 
   login() {
-    this.loginService.logar(this.loginData).subscribe({
-      next: (token) => {
-        if (token) {
-
-          this.loginService.addToken(token)
-          this.currentUser = this.loginService.getCurrentUser()
+    login();
+  }
 
 
+  verificarUsuario() {
+    const user = getUser();
+    console.log("USUARIO VERIFICANDO", user);
 
-          console.log("usuario logado")
-          console.log(this.currentUser)
-          console.log('token: ' + token)
+    if (!user) return;
 
-          this.deuErrado = false
-          this.loginSucesso.emit();
-          //devolve a requisição com sucesso e chama o  .close() para fechar o login automaticamente
-          this.gerenciarTipoLogin(this.currentUser) // manda pra uma pagina especifica a cada tipo de login
+    if (hasRole('VETERINARIO')) {
+      this.router.navigate(['/principal/cadastro-aplicacao-vacina']);
 
-        } else {
-          console.log("cai aq");
-          
-          this.deuErrado = true
-        }
+    } else if (hasRole('TUTOR') || hasRole('ADMIN')) {
+      this.router.navigate(['/principal/animal']);
 
-      },
-      error: (err) => {
-        console.log(this.currentUser)
-        console.error(err)
-      }
-    })
+    } else if (hasRole('ENTIDADE')) {
+      this.router.navigate(['/principal/cadastro-publicacao']);
+    }
   }
 
   cadastrarRota() {

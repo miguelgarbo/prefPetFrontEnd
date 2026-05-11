@@ -6,7 +6,9 @@ import { Router } from '@angular/router';
 import { NavBarPublicacaoComponent } from "../../layout/nav-bar-publicacao/nav-bar-publicacao.component";
 import { log } from 'node:console';
 import Swal from 'sweetalert2';
-import { LoginService } from '../../../services/login.service';
+import { login, getUser, hasRole } from '../../../services/keycloak.service';
+
+
 
 @Component({
   selector: 'app-publicacao-list',
@@ -25,9 +27,14 @@ export class PublicacaoListComponent {
   publicacaoService = inject(PublicacaoService)
   id: number = 0;
   listaFiltrada: Publicacao[] = []
-  loginService = inject(LoginService)
+
+  isEntidade = false
+  isAdmin = false
 
   ngOnInit() {
+    this.isEntidade = hasRole("ENTIDADE")
+    this.isAdmin = hasRole("ADMIN")
+
     this.findAll();
   }
 

@@ -13,14 +13,19 @@
 }
 
 .navbar{  
-  height: 6vh;
+  height: 35px;
   background-color: rgb(249, 136, 102);
+  display: flex;
+  align-items: center; 
 }
 
 
 .navbar-brand{
-
-  padding-top: 0 !important;
+  display: flex;           /* 🔥 ativa flex */
+  align-items: center;     /* 🔥 centraliza vertical */
+  padding: 0 !important;
+  margin: 0;
+  height: 100%;            /* 🔥 ocupa toda altura da navbar */
 }
 
 
@@ -29,7 +34,11 @@
   color: rgb(255, 244, 209);
 }
 
+
 .titulo{
   color: rgb(255, 244, 209);
+  display: flex;           /* 🔥 transforma em flex */
+  align-items: center;     /* 🔥 centraliza dentro dele */
+  margin: 0;
+  line-height: 1;          /* 🔥 remove “folga” vertical */
 }
-

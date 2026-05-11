@@ -13,7 +13,8 @@ import { Entidade } from '../../../models/entidade';
 import { Veterinario } from '../../../models/veterinario';
 import { VeterinarioService } from '../../../services/veterinario.service';
 import { EntidadeService } from '../../../services/entidade.service';
-import { LoginService } from '../../../services/login.service';
+import { login, getUser, hasRole, logout } from '../../../services/keycloak.service';
+
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -41,7 +42,6 @@ export class CadastroUsuarioComponent {
 
   usuarioService = inject(UsuarioService)
   tutorService = inject(TutorService)
-  loginService = inject(LoginService)
   veterinarioService = inject(VeterinarioService)
   entidadeService = inject(EntidadeService)
 
@@ -55,50 +55,48 @@ export class CadastroUsuarioComponent {
   actived = inject(ActivatedRoute)
   router = inject(Router);
   http = inject(HttpClient)
-
+  isTutor = false
+  isAdmin = false
+  isEntidade = false
+  isVeterinario = false
 
   ngOnInit() {
 
+    this.isAdmin = hasRole("ADMIN")
+    this.isEntidade = hasRole("ENTIDADE")
+    this.isVeterinario = hasRole("VETERINARIO")
+    this.isTutor = hasRole("TUTOR")
 
     this.changeTittle();
 
 
-    console.log("titulo", this.title);
-    console.log("tipo de cadastro ou editar", this.tipoForm);
-    console.log("qual usuario", this.tipoCadastro);
 
+    let id = this.actived.snapshot.params['id'];
+    if (id > 0) {
+      this.tipoForm = "Editar Perfil ";
 
-    
+    if(this.isTutor){
+        
+        this.title='Tutor';
+        this.findTutorById(id);
 
-  let id = this.actived.snapshot.params['id'];
-  if (id > 0) {
-    this.tipoForm = "Editar Perfil ";
+    }
 
-  if(this.loginService.hasRole("TUTOR")){
-      
-      this.title='Tutor';
-      this.findTutorById(id);
+      if(this.isEntidade){
+        
+        this.title='Entidade';
+        this.findEntidadeById(id);
 
-  }
+    }
 
-    if(this.loginService.hasRole("ENTIDADE")){
-      
-      this.title='Entidade';
-      this.findEntidadeById(id);
-
-  }
-
-   if(this.loginService.hasRole("VETERINARIO")){
-      
-      this.title='Veterinário';
-      this.findVetById(id);
+    if(this.isVeterinario){
+        
+        this.title='Veterinário';
+        this.findVetById(id);
+    }
 
   }
-
-
 }
-}
-
 
   tutotesFindAll() {
     this.tutorService.findAll().subscribe({
@@ -111,7 +109,6 @@ export class CadastroUsuarioComponent {
       }
     });
   }
-
 
 
   changeTittle() {
@@ -141,8 +138,7 @@ export class CadastroUsuarioComponent {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        // limpa tudão :)
-        this.loginService.logout();
+        logout();
         this.router.navigate(['inicial']);
 
         Swal.fire({
@@ -234,14 +230,9 @@ export class CadastroUsuarioComponent {
       }
 
     }
-
-
-
   }
 
-
   cadastrarVet() {
-
       if (this.tipoForm === "Editar Perfil ") {
 
       this.saveVet();
@@ -258,7 +249,6 @@ export class CadastroUsuarioComponent {
       });
     }
   }
-
   }
 
   cadastrarEnt() {

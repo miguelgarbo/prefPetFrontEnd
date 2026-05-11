@@ -12,18 +12,13 @@
   @for (post of listaFiltrada; track post.id) {
 <div class="card" (click)="findById(post.id)">
 
-  @if (loginService.hasRole("ADMIN") || loginService.hasRole("ENTIDADE")) {
+  @if (isAdmin || isEntidade) {
     <div class="lixo">
 
       <i class="fa-solid fa-trash" (click)="deletePost(post.id)"></i>
 
     </div>
   }
-
-
-
- 
- 
   <div class="card-body">
   
     <div class="container-info-user">
@@ -64,7 +59,7 @@
 @for (post of publicacoes; track post.id) {
 <div class="card" (click)="findById(post.id)">
 
-  @if (loginService.hasRole("ADMIN")  || loginService.hasRole("ENTIDADE")) {
+  @if (isAdmin  || isEntidade) {
     <div class="lixo">
 
       <i class="fa-solid fa-trash" (click)="deletePost(post.id)"></i>

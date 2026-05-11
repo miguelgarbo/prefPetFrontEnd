@@ -3,73 +3,56 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
+import { getToken } from './keycloak.service';
 
 export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
 
-  let router = inject(Router);
-  let token = localStorage.getItem('token');
-  let rotasPublicas = ['login', 'inicial', 'cadastro-usuario', 'emergencia','pricipal/emergencia'];
-  
-  
-  //if (token && !router.url.includes('/login')) {
-   // request = request.clone({
-   //  setHeaders: { Authorization: 'Bearer ' + token },
-    //});
-  //}
-  
-  const rotaAtual = router.url.replace('/', '');
-  if (!rotasPublicas.includes(rotaAtual) && token) {
-  request = request.clone({
-    setHeaders: { Authorization: 'Bearer ' + token }
-  });
-}
+  const router = inject(Router);
+
+  if (request.url.includes('/realms/')) {
+    return next(request);
+  }
+
+  const token = getToken();
+
+  if (token) {
+
+    console.log(token)
+    request = request.clone({
+      setHeaders: { Authorization: 'Bearer ' + token }
+    });
+  }
 
   return next(request).pipe(
     catchError((err: any) => {
+
       if (err instanceof HttpErrorResponse) {
-        console.log('entrou aqui 2');
-        
+
         if (err.status === 401) {
 
           Swal.fire({
-      icon: 'warning',
-      title: 'Acesso negado',
-      text: 'Você precisa estar autenticado para acessar esta página.',
-      confirmButtonText: 'Fazer login',
-      confirmButtonColor: '#3085d6',
-      showCancelButton: true,
-      cancelButtonText: 'Cancelar',
-      cancelButtonColor: '#d33'
-    }).then((result) => {
-      if (result.isConfirmed) {
-          router.navigate(['/inicial']);
-      }
-    });
+            icon: 'warning',
+            title: 'Acesso negado',
+            text: 'Você precisa estar autenticado.',
+            confirmButtonText: 'Fazer login'
+          }).then(() => {
+            router.navigate(['/inicial']);
+          });
 
-          // alert('401 - tratar aqui');
-          router.navigate(['/inicial']);
-        } else
-        if (err.status === 403) {
+        } else if (err.status === 403) {
 
-//sweet alert
- Swal.fire({
-      icon: 'warning',
-      title: 'Acesso negado',
-      text: 'Você não tem permissão para acessar esta página.',
-      confirmButtonColor: '#3085d6',
-      showCancelButton: true,
-      cancelButtonText: 'Cancelar',
-      cancelButtonColor: '#d33'
-    });
-    
-          // alert('403 - tratar aqui');
+          Swal.fire({
+            icon: 'warning',
+            title: 'Acesso negado',
+            text: 'Sem permissão.'
+          });
+
           router.navigate(['/inicial']);
+
         } else {
           console.error('HTTP error:', err);
         }
 
-      } else {
-        console.error('An error occurred:', err);
       }
 
       return throwError(() => err);

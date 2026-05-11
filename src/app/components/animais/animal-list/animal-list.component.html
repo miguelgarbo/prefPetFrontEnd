@@ -1,4 +1,4 @@
-@if(loginService.hasRole("TUTOR")){
+@if(isTutor){
 btn-close<div class="row">
   <div class="col"></div>
 
@@ -6,8 +6,6 @@ btn-close<div class="row">
     <h1>Meus Animais</h1>
     <app-animal-details *ngIf="animalSelecionado" [animal]="animalSelecionado" (animalSaved)="onAnimalSaved()">
     </app-animal-details>
-
-
 
 
     <div class="row g-3 w-100 my-3 animal-list">
@@ -170,7 +168,7 @@ btn-close<div class="row">
   </div>
 </ng-template>
 }
-@if (loginService.hasRole("ADMIN")) {
+@if (isAdmin) {
   <h3 class="format-h3 mt-4">Lista de Tutores</h3>
   <br><br><br>
   @for (tutor of tutoresList; track tutor.id) {

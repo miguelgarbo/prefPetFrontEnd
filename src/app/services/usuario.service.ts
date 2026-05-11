@@ -48,6 +48,17 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.API}/findByNome`, 
       { params: { nome: nome } });
   }
+  findTutorByKeycloakId(sub: string) {
+    return this.http.get<Tutor>(`${this.API}/tutor/keycloak/${sub}`);
+  }
+
+  findEntidadeByKeycloakId(sub: string) {
+  return this.http.get<Entidade>(`${this.API}/entidade/keycloak/${sub}`);
+}
+
+  findVeterinarioByKeycloakId(sub: string) {
+  return this.http.get<Veterinario>(`${this.API}/veterinario/keycloak/${sub}`);
+}
 
   findByCpf(cpf:string): Observable<Usuario[]>{
    return this.http.get<Usuario[]>(`${this.API}/findByCpf`, 

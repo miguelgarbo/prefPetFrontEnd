@@ -10,11 +10,10 @@ import { TutorService } from '../../../services/tutor.service';
 import { AnimalDetailsComponent } from '../animal-details/animal-details.component';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { LoginService } from '../../../services/login.service';
-import { log } from 'node:util';
-import { Usuario } from '../../../models/usuario';
-import { MessageErrorComponent } from '../../layout/message-error/message-error.component';
+
+import { getUser, hasRole } from '../../../services/keycloak.service';
 import { UsuarioService } from '../../../services/usuario.service';
+import { MessageErrorComponent } from '../../layout/message-error/message-error.component';
 
 @Component({
   selector: 'app-animal-list',
@@ -34,25 +33,27 @@ export class AnimalListComponent implements OnInit {
 
   animalService = inject(AnimalService);
   tutorService = inject(TutorService);
-  loginService = inject(LoginService)
+  usuarioService = inject(UsuarioService);
   modalService = inject(MdbModalService);
   router = inject(Router);
-  donoDoAnimal = new Tutor();
-  mensagem: string = ""
 
   animais: Animal[] = [];
-  currentUser: Usuario = this.loginService.getCurrentUser()
-  animalSelecionado?: Animal;
-
-  //tutorService = inject(TutorService);
-  usuarioService = inject(UsuarioService);
-
-
-  deuCerto!: boolean
-
   tutoresList: Tutor[] = [];
 
+  currentUser: any;
+  donoDoAnimal!: Tutor;
+  animalSelecionado?: Animal;
+
+  mensagem: string = "";
+  deuCerto!: boolean;
+
+  isTutor = false;
+  isAdmin = false;
+
   hoje: string = new Date().toISOString().split('T')[0];
+
+  modalRef?: MdbModalRef<any>;
+  @ViewChild('addAnimalModal', { static: true }) modalTemplate: any;
 
   novoAnimal: Partial<Animal> = {
     nome: '',
@@ -68,25 +69,54 @@ export class AnimalListComponent implements OnInit {
     imagemUrl: ''
   };
 
-  modalRef?: MdbModalRef<any>;
-  @ViewChild('addAnimalModal', { static: true }) modalTemplate: any;
-
   ngOnInit() {
 
-    console.log("to aqui dentro do animais list");
-    console.log("usuario atual:" + this.currentUser.nome + ", role: " + this.currentUser.role)
-    this.findByAnimaisTutorId()
-    this.getTutorByCurrentUserId(this.currentUser.id)
+    // 🔥 1 - pega usuário do Keycloak
+    this.currentUser = getUser();
+    const sub = this.currentUser.sub;
 
-    if (this.loginService.hasRole("ADMIN")) {
-      this.tutotesFindAll(); //caso seja admin, mostra os tutores cadastrados
+    this.isTutor = hasRole("TUTOR");
+    this.isAdmin = hasRole("ADMIN");
+
+    // 🔥 2 - busca tutor no backend usando sub
+    this.getTutorByKeycloak(sub);
+
+    if (this.isAdmin) {
+      this.tutotesFindAll();
     }
-
   }
-  tutotesFindAll() { //para mostrar a lista de tutores
+
+  // 🔥 BUSCA TUTOR PELO KEYCLOAK ID
+  getTutorByKeycloak(sub: string) {
+    this.usuarioService.findTutorByKeycloakId(sub).subscribe({
+      next: (tutor) => {
+        this.donoDoAnimal = tutor;
+
+        // 🔥 3 - agora SIM busca animais com ID do banco
+        this.findByAnimaisTutorId(tutor.id);
+      },
+      error: (err) => {
+        console.error("Erro ao buscar tutor:", err);
+      }
+    });
+  }
+
+  // 🔥 ANIMAIS DO TUTOR
+  findByAnimaisTutorId(tutorId: number) {
+    this.animalService.findByTutorId(tutorId).subscribe({
+      next: (dados) => {
+        this.animais = dados;
+      },
+      error: (err) => {
+        console.error("Erro ao buscar animais:", err);
+      }
+    });
+  }
+
+  // 🔥 ADMIN - listar tutores
+  tutotesFindAll() {
     this.tutorService.findAll().subscribe({
       next: (lista) => {
-        console.log("Tutores carregados:", lista);
         this.tutoresList = lista;
       },
       error: (err) => {
@@ -94,6 +124,7 @@ export class AnimalListComponent implements OnInit {
       }
     });
   }
+
   deletarTutor(id: number) {
     Swal.fire({
       title: 'Tem certeza?',
@@ -102,58 +133,27 @@ export class AnimalListComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Sim, excluir',
       cancelButtonText: 'Cancelar',
-      reverseButtons: true
     }).then((result) => {
 
       if (result.isConfirmed) {
-
         this.tutorService.deleteById(id).subscribe({
           next: () => {
-            Swal.fire({
-              title: 'Excluído!',
-              text: 'Tutor removido com sucesso.',
-              icon: 'success',
-              timer: 1800,
-              showConfirmButton: false
-            });
-
-            // Atualiza a lista automaticamente sem recarregar a página
             this.tutoresList = this.tutoresList.filter(t => t.id !== id);
           },
-
           error: () => {
-            Swal.fire({
-              title: 'Erro!',
-              text: 'Não foi possível excluir o tutor.',
-              icon: 'error'
-            });
+            Swal.fire('Erro!', 'Não foi possível excluir.', 'error');
           }
         });
-      }
-    })
-  }
-
-  findByAnimaisTutorId() {
-    this.animalService.findByTutorId(this.currentUser.id).subscribe({
-      next: (dados) => {
-        this.animais = dados;
-      },
-      error: (err) => {
-        console.error(err);
       }
     });
   }
 
   findById(id: number) {
-    this.animalSelecionado = this.animais.find(animal => animal.id === id);
+    this.animalSelecionado = this.animais.find(a => a.id === id);
   }
 
   transferirTutela(animalId: number) {
-    if (animalId) {
-      this.router.navigate(['principal/buscar-tutor', animalId]);
-    } else {
-      alert('Selecione um animal primeiro!');
-    }
+    this.router.navigate(['principal/buscar-tutor', animalId]);
   }
 
   excluirAnimal(animalId: number) {
@@ -161,101 +161,57 @@ export class AnimalListComponent implements OnInit {
       title: 'Tem certeza?',
       text: 'Você realmente deseja excluir este animal?',
       icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sim, excluir',
-      cancelButtonText: 'Cancelar',
-      reverseButtons: true
+      showCancelButton: true
     }).then((result) => {
 
       if (result.isConfirmed) {
-
         this.animalService.deleteById(animalId).subscribe({
           next: () => {
-            window.location.reload();
+            this.animais = this.animais.filter(a => a.id !== animalId);
           },
-
           error: () => {
-            Swal.fire({
-              title: 'Erro!',
-              text: 'Não foi possível excluir o animal.',
-              icon: 'error'
-            });
+            Swal.fire('Erro!', 'Não foi possível excluir.', 'error');
           }
         });
-      }
-    })
-  }
-
-  getTutorByCurrentUserId(id: number) {
-    this.tutorService.findById(id).subscribe({
-      next: (tutor) => {
-        this.donoDoAnimal = tutor;
-      },
-      error: (err) => {
-        console.error(err);
       }
     });
   }
 
   save() {
 
-    // 1. Normaliza o campo imagem
-    const imagemTrim = this.novoAnimal.imagemUrl?.trim() || '';
+    const imgGenericaCanino = "https://media.istockphoto.com/id/1333497883/vector/vector-simple-isolated-dog-icon.jpg";
+    const imgGenericaFelino = "https://media.istockphoto.com/id/1300144006/vector/black-cat-silhouette-on-white-background.jpg";
 
-    const imgGenericaCanino = "https://media.istockphoto.com/id/1333497883/vector/vector-simple-isolated-dog-icon.jpg?s=612x612&w=0&k=20&c=BqjbpBW6t-MSkE9CLNmKALebxo2EFpKPmvBCVQZ3KqE=";
-    const imgGenericaFelino = "https://media.istockphoto.com/id/1300144006/vector/black-cat-silhouette-on-white-background.jpg?s=612x612&w=0&k=20&c=VW6-p5P-KfRkvXTK_Hax_SnbuLpwLHfGok9kxyjfbQw=";
+    let imagemFinal = this.novoAnimal.imagemUrl?.trim() || '';
 
-    let imagemFinal = imagemTrim;
-
-    if (imagemTrim === '') {
-      if (this.novoAnimal.especie?.toLowerCase() === 'canino') {
-        imagemFinal = imgGenericaCanino;
-      } else if (this.novoAnimal.especie?.toLowerCase() === 'felino') {
-        imagemFinal = imgGenericaFelino;
-      }
+    if (!imagemFinal) {
+      imagemFinal = this.novoAnimal.especie?.toLowerCase() === 'canino'
+        ? imgGenericaCanino
+        : imgGenericaFelino;
     }
 
     this.animalService.save({
-      id: undefined!,
-      nome: this.novoAnimal.nome!.trim(),
-      especie: this.novoAnimal.especie!,
-      registroGeral: this.novoAnimal.registroGeral!.trim(),
-      cor: this.novoAnimal.cor!.trim(),
-      sexo: this.novoAnimal.sexo!,
-      castrado: this.novoAnimal.castrado!,
-      microchip: this.novoAnimal.microchip ?? false,
-      numeroMicrochip: this.novoAnimal.numeroMicrochip?.trim() || undefined,
-      dataNascimento: this.novoAnimal.dataNascimento!,
-      naturalidade: this.novoAnimal.naturalidade!.trim(),
+      ...this.novoAnimal,
       imagemUrl: imagemFinal,
-      aplicacoes: [],
-      tutor: this.donoDoAnimal,
-      idade: undefined!
-    }).subscribe({
-      next: (animalSalvo) => {
-        this.deuCerto = true
+      tutor: this.donoDoAnimal
+    } as Animal).subscribe({
+      next: () => {
 
-        console.log("Animal salvo com sucesso:", animalSalvo);
         Swal.fire({
-          position: "center",
           icon: "success",
-          title: "Animal salvo com sucesso !",
-          showConfirmButton: false,
-          timer: 1000
+          title: "Animal salvo!",
+          timer: 1000,
+          showConfirmButton: false
         });
 
-        this.findByAnimaisTutorId();
+        this.findByAnimaisTutorId(this.donoDoAnimal.id);
 
-        if (this.modalRef) {
-          this.modalRef.close();
-        }
+        this.closeModal();
         this.resetForm();
       },
       error: (err) => {
-        this.mensagem = "Erro Ao Salvar Animal: " + err.message
-
-        this.deuCerto = false
-        console.error('Erro ao salvar animal:', err);
+        this.mensagem = "Erro ao salvar: " + err.message;
+        this.deuCerto = false;
       }
     });
   }
@@ -265,11 +221,8 @@ export class AnimalListComponent implements OnInit {
   }
 
   closeModal() {
-    if (this.modalRef) {
-      this.resetForm();
-      this.modalRef.close();
-      this.modalRef = undefined;
-    }
+    this.modalRef?.close();
+    this.resetForm();
   }
 
   resetForm() {

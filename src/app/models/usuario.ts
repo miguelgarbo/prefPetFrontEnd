@@ -9,6 +9,7 @@ export class Usuario {
   cnpj?: string;
   cidade?: string;
   estado?: string;
-  senha?: string;
   imagemUrlPerfil?: string;
+
+  keycloakId?: string; 
 }

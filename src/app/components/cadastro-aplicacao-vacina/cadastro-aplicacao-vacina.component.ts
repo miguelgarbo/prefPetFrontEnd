@@ -2,18 +2,19 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import Swal from 'sweetalert2';
+
 import { AplicacaoVacina } from '../../models/aplicacao-vacina';
 import { AplicacaoVacinaService } from '../../services/aplicacao-vacina.service';
 import { Animal } from '../../models/animal';
 import { TutorService } from '../../services/tutor.service';
 import { AnimalService } from '../../services/animal.service';
-import { Tutor } from '../../models/tutor';
-import { log } from 'node:console';
 import { Vacina } from '../../models/vacina';
 import { VacinaService } from '../../services/vacina.service';
-import { LoginService } from '../../services/login.service';
 import { Veterinario } from '../../models/veterinario';
 import { VeterinarioService } from '../../services/veterinario.service';
+
+import { getUser } from '../../services/keycloak.service';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-cadastro-aplicacao-vacina',
@@ -27,90 +28,76 @@ export class CadastroAplicacaoVacinaComponent {
   aplicacaoVacina = new AplicacaoVacina();
 
   animaisDoTutor: Animal[] = [];
-  aplicacaoVacinaService = inject(AplicacaoVacinaService)
-  tutorService = inject(TutorService)
-  animalService = inject(AnimalService)
-  vacinaService = inject(VacinaService)
-  veterinarioService = inject(VeterinarioService)
-
-  loginService = inject(LoginService)
-
-  currentUser = this.loginService.getCurrentUser()
-  numeroDose!: number;
-
-  veterinario!: Veterinario;
-
-
   vacinas: Vacina[] = [];
 
-  tutor!: Tutor;
+  aplicacaoVacinaService = inject(AplicacaoVacinaService);
+  tutorService = inject(TutorService);
+  animalService = inject(AnimalService);
+  vacinaService = inject(VacinaService);
+  usuarioService = inject(UsuarioService)
+  veterinarioService = inject(VeterinarioService);
 
-  mesesParaValidade!: number
+  currentUser: any;
+
+  veterinario!: Veterinario;
+  tutor!: any;
+
+  numeroDose!: number;
+  mesesParaValidade!: number;
   cpfTutorBusca!: string;
 
-
   ngOnInit() {
+    this.currentUser = getUser();
+
     this.aplicacaoVacina.animal = new Animal();
-    this.getVetByUserId()
 
+    this.getVetByUserId();
   }
 
-  constructor() {
-  }
-
+  // 🔥 CORRIGIDO: agora usa Keycloak sub → backend
   getVetByUserId() {
 
-    this.veterinarioService.findById(this.currentUser.id).subscribe({
+    const sub = this.currentUser.sub;
+
+    this.usuarioService.findVeterinarioByKeycloakId(sub).subscribe({
       next: (veterinario) => {
-        console.log(veterinario);
+        console.log("Veterinário logado:", veterinario);
         this.veterinario = veterinario;
       },
-      error(err) {
-        console.log(err);
-      },
-
-
-    })
+      error: (err) => {
+        console.log("Erro ao buscar veterinário:", err);
+      }
+    });
 
   }
 
   getAnimaisByTutorId(id: number) {
     this.animalService.findByTutorId(id).subscribe({
-
       next: (animais) => {
-        console.log("animais encontrados", animais);
-        this.animaisDoTutor = animais
+        this.animaisDoTutor = animais;
       },
-      error(err) {
-        console.log(err);
-      },
-    })
+      error: (err) => console.log(err)
+    });
   }
-
 
   getTutorByCpf() {
 
-    if (this.cpfTutorBusca != null) {
+    if (this.cpfTutorBusca) {
 
       this.tutorService.findByCpf(this.cpfTutorBusca).subscribe({
         next: (response) => {
 
-          console.log("opa deu certo ");
-          console.log(response);
-
           this.tutor = response;
 
-          this.getVacinasCadastradas()
+          this.getVacinasCadastradas();
           this.getAnimaisByTutorId(response.id);
 
         },
         error: (err) => {
+          console.log("Erro ao buscar tutor:", err);
+        }
+      });
 
-          console.log("erro ao buscar tutor");
-          console.log(err);
-
-        },
-      })
     }
 
   }
@@ -118,6 +105,7 @@ export class CadastroAplicacaoVacinaComponent {
   salvarAplicacao() {
 
     this.aplicacaoVacina.veterinario = this.veterinario;
+
     this.aplicacaoVacinaService.save(this.aplicacaoVacina, this.mesesParaValidade).subscribe({
       next: (aplicacaoCadastrada) => {
 
@@ -126,29 +114,29 @@ export class CadastroAplicacaoVacinaComponent {
           title: "Aplicação registrada com sucesso!"
         });
 
-        console.log("aplicacao cadastrada: " + aplicacaoCadastrada)
+        console.log("Aplicação cadastrada:", aplicacaoCadastrada);
 
-      }, error: (err) => {
-        console.log(err)
+      },
+      error: (err) => {
+
+        console.log(err);
+
         Swal.fire({
           icon: "error",
-          title: "Erro ao Registrar Aplicação"
+          title: "Erro ao registrar aplicação"
         });
-      },
-    }
-    )
+
+      }
+    });
+
   }
 
   getVacinasCadastradas() {
     this.vacinaService.findAll().subscribe({
       next: (vacinas) => {
-        console.log(vacinas)
         this.vacinas = vacinas;
       },
-      error: (err) => {
-        console.error(err)
-      },
-    })
-  }   
-
+      error: (err) => console.error(err)
+    });
+  }
 }
