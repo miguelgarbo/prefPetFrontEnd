@@ -8,7 +8,6 @@ const keycloak = new Keycloak({
   clientId: 'prefpet'
 });
 
-
 export function initKeycloak(platformId: Object) {
   return () => {
     if (isPlatformBrowser(platformId)) {
@@ -45,7 +44,7 @@ export function getUser() {
 }
 
 export function getRoles(): string[] {
-  return keycloak.tokenParsed?.realm_access?.roles || [];
+  return keycloak.tokenParsed?.resource_access?.['prefpet']?.roles || [];
 }
 
 export function hasRole(role: string): boolean {
