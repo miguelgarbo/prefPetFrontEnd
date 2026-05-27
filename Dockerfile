@@ -1,15 +1,12 @@
-FROM node:alpine AS build
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-
-RUN npm run build --prod
-
 FROM nginx:alpine
 
-COPY --from=build /app/dist/pref-pet-angular/ /usr/share/nginx/html
+COPY dist/pref-pet-angular/browser /usr/share/nginx/html
 
-EXPOSE 80
+COPY prefpet.conf /etc/nginx/conf.d/default.conf
+
+COPY certs/fullchain.crt /etc/nginx/certs/fullchain.crt
+COPY certs/wildcard.key /etc/nginx/certs/wildcard.key
+
+EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]
